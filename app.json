@@ -1,19 +1,23 @@
 {
   "expo": {
-    "name": "react-native-daily-horoscope",
-    "slug": "react-native-daily-horoscope",
+    "name": "Deus Daily Horoscope",
+    "slug": "deus-daily-horoscope",
+    "description": "@todo",
+    "sdkVersion": "37.0.0",
+    "privacy": "public",
     "platforms": [
       "ios",
       "android",
       "web"
     ],
-    "version": "1.0.0",
+    "version": "0.0.1",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/images/icon.png",
+    "primaryColor": "#ffad2e",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#ffad2e"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -21,8 +25,35 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "scheme": "deusdailyhoroscope",
+    "facebookAppId": "223904012006064",
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "josep.deusdailyhoroscope",
+      "buildNumber": "1.0.0",
+      "supportsTablet": true,
+      "icon": "./assets/images/logo-ios.png",
+      "usesAppleSignIn": true,
+      "infoPlist": {
+      }
+    },
+    "android": {
+      "package": "josep.deusdailyhoroscope",
+      "versionCode": 1,
+      "permissions": [
+        "CAMERA",
+        "MANAGE_DOCUMENTS"
+      ]
+    },
+    "androidStatusBar": {
+      "hidden": false,
+      "translucent": true,
+      "barStyle": "light-content",
+      "backgroundColor": "#ffad2e"
+    },
+    "notification": {
+      "icon": "./assets/images/icon-notification.png",
+      "color": "#ffad2e",
+      "iosDisplayInForeground": true
     }
   }
 }

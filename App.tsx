@@ -1,10 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import Logo from "./src/svgs/Logo";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
+      <Logo/>
+      <Text>Hola mediavida!</Text>
     </View>
   );
 }
