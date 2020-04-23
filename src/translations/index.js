@@ -3,11 +3,6 @@ import custom from "./custom";
 import forms from "./forms";
 
 const Translations = {
-    ca: {
-        ...common.ca,
-        ...custom.ca,
-        ...forms.ca
-    },
     es: {
         ...common.es,
         ...custom.es,
@@ -18,7 +13,6 @@ const Translations = {
         ...common.en,
         ...custom.en,
         ...forms.en
-
     },
 };
 

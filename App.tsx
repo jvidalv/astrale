@@ -1,21 +1,26 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Logo from "./src/svgs/Logo";
+import Main from "./src/Main";
+import {initialState, reducer, StateProvider} from "./src/contexts/Global";
+import i18n from 'i18n-js';
+import * as Localization from 'expo-localization';
+import Translations from "./src/translations";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Logo/>
-      <Text>Hola mediavida!</Text>
-    </View>
-  );
+/**
+ * Language
+ */
+i18n.translations = Translations;
+i18n.locale = Localization.locale;
+i18n.fallbacks = true;
+
+/**
+ * @constructor
+ */
+function App() {
+    return (
+        <StateProvider initialState={initialState} reducer={reducer}>
+            <Main/>
+        </StateProvider>
+    );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;

@@ -2,10 +2,17 @@ import React from "react";
 import PropTypes from "prop-types";
 import Svg, {Circle, Path} from "react-native-svg";
 
-function Logo({height, width}) {
+/**
+ * @param height {number}
+ * @param width {number}
+ * @param style {object}
+ * @returns {*}
+ * @constructor
+ */
+function Logo({height, width, style}) {
 
     return (
-        <Svg height={height} width={width} viewBox="0 0 512 512">
+        <Svg height={height} width={width} viewBox="0 0 512 512" style={style}>
             <Circle cx={256} cy={256} r={256} fill="#ffb84d"/>
             <Path
                 d="M512 256c0-31.561-5.726-61.781-16.171-89.698l-56.002-56.657a25.227 25.227 0 00-13.086-7.877l-27.416-6.555-18.159-18.257c-4.575-4.426-10.794-7.161-17.624-7.161h-70.533L201.973 48.03c-13.591-3.249-27.369 5.212-30.619 18.803l-.708 2.962h-38.207c-13.974 0-25.407 11.433-25.407 25.407v240.67l-10.458 43.741c-2.515 10.521 1.99 21.15 10.458 26.925v10.26c0 6.832 2.734 13.055 7.161 17.632l66.974 66.444C204.838 508.101 229.962 512 256 512c141.385 0 256-114.615 256-256z"
@@ -57,7 +64,8 @@ Logo.defaultProps = {
 
 Logo.propTypes = {
     height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-    width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired
+    width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+    style : PropTypes.object
 };
 
 export default Logo

@@ -13,11 +13,11 @@
     "version": "0.0.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "primaryColor": "#ffad2e",
+    "primaryColor": "#192f6a",
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffad2e"
+      "backgroundColor": "#192f6a"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -31,7 +31,7 @@
       "bundleIdentifier": "josep.deusdailyhoroscope",
       "buildNumber": "1.0.0",
       "supportsTablet": true,
-      "icon": "./assets/images/logo-ios.png",
+      "icon": "./assets/images/icon-ios.png",
       "usesAppleSignIn": true,
       "infoPlist": {
       }
@@ -48,11 +48,11 @@
       "hidden": false,
       "translucent": true,
       "barStyle": "light-content",
-      "backgroundColor": "#ffad2e"
+      "backgroundColor": "#192f6a"
     },
     "notification": {
       "icon": "./assets/images/icon-notification.png",
-      "color": "#ffad2e",
+      "color": "#192f6a",
       "iosDisplayInForeground": true
     }
   }

@@ -18,7 +18,10 @@
     "expo": "~37.0.3",
     "expo-asset": "^8.1.4",
     "expo-constants": "^9.0.0",
+    "expo-facebook": "^8.1.0",
+    "expo-google-app-auth": "^8.1.0",
     "expo-image-picker": "~8.1.0",
+    "expo-linear-gradient": "^8.1.0",
     "expo-local-authentication": "~9.0.0",
     "expo-localization": "~8.1.0",
     "i18n-js": "^3.5.1",
@@ -34,8 +37,7 @@
     "react-native-screens": "~2.2.0",
     "react-native-svg": "^11.0.1",
     "react-native-web": "~0.11.7",
-    "expo-facebook": "^8.1.0",
-    "expo-google-app-auth": "^8.1.0"
+    "@react-native-community/datetimepicker": "2.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",

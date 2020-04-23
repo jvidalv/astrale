@@ -16,6 +16,8 @@ const themes = {
         colors: {
             ...NavigationDarkTheme.colors,
             ...PaperDarkTheme.colors,
+            background : '#192f6a',
+            primary : '#ffb942'
         },
     }
 };

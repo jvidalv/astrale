@@ -3,13 +3,6 @@
  * All kind of strings that are very used and shown in multiple apps
  */
 const forms = {
-    ca: {
-        "Username is invalid": "L'usuari és incorrecte",
-        "Password is invalid": "La contrasenya és incorrecta.",
-        "Username or password is invalid": "L'usuari o la contrasenya és incorrecte.",
-        "Username or password is wrong": "L'usuari o la contrasenya és incorrecte.",
-        "There is no account associated with the mail provided": "No hi ha cap compte associat al correu facilitat."
-    },
     es: {
         "Username is invalid": "El usuario es incorrecto.",
         "Password is invalid": "La contraseña es incorrecta.",
