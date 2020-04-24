@@ -1,10 +1,12 @@
 import React from "react";
 import {StyleSheet, View} from "react-native";
-import {Button, Headline, Text, TextInput} from "react-native-paper";
+import {Button, Headline, Text} from "react-native-paper";
 import {DefaultView} from "../../components/containers";
-import Logo from "../../svgs/Logo";
 import Constellation from "../../svgs/Constellation";
-import DateTimePicker from '@react-native-community/datetimepicker';
+import Scorpio from "../../svgs/Scorpio";
+import {DateUtils, Platform} from "../../utils";
+import RNDateTimePicker from "@react-native-community/datetimepicker";
+import Logo from "../../svgs/Logo";
 
 /**
  * @param navigation
@@ -12,54 +14,58 @@ import DateTimePicker from '@react-native-community/datetimepicker';
  * @constructor
  */
 function BirthDateScreen({navigation}) {
-    const [date, setDate] = React.useState(new Date(1598051730000));
-    const [mode, setMode] = React.useState('date');
-    const [show, setShow] = React.useState(false);
+    const [date, setDate] = React.useState(new Date());
+    const [show, setShow] = React.useState(true);
 
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
-        setShow(Platform.OS === 'ios');
+        setShow(Platform.isIos);
         setDate(currentDate);
     };
 
-    const showMode = currentMode => {
+    const showDatePicker = () => {
         setShow(true);
-        setMode(currentMode);
     };
 
-    const showDatepicker = () => {
-        showMode('date');
-    };
-
-    const showTimepicker = () => {
-        showMode('time');
-    };
     return (
-        <DefaultView style={{zIndex: 1}}>
+        <DefaultView>
+            <Scorpio width={80} height={80} style={styles.scorpio}/>
             <Constellation height={250} width={250} style={styles.constellation}/>
             <View style={styles.counterContainer}>
-                <Text style={styles.counterText}>1/5</Text>
+                <View style={styles.counterView}>
+                    <Text style={styles.counterText}>2/5</Text>
+                </View>
             </View>
             <View style={{flex: 1}}/>
             <View style={styles.textContainer}>
-                <Headline style={styles.textHeadline}>What is your name?</Headline>
-                <Text style={styles.textText}>To give you a precise personal prediction please
+                <Headline style={styles.textHeadline}>Your birthdate</Headline>
+                <Text style={styles.textText}>Josep, to give you a precise personal prediction please
                     let us know some info about you.</Text>
             </View>
-
-            <View style={styles.inputContainer}>
-                <DateTimePicker
-                    testID="dateTimePicker"
-                    timeZoneOffsetInMinutes={0}
+            <View style={styles.logoContainer}>
+                <Logo width={70} height={70}/>
+            </View>
+            <View style={styles.dateContainer}>
+                {Platform.isAndroid && <Button style={{alignSelf: 'center'}} onPress={showDatePicker}>Click to change</Button>}
+                {show && <RNDateTimePicker
                     value={date}
-                    mode={mode}
-                    is24Hour={true}
-                    display="default"
+                    display="spinner"
                     onChange={onChange}
-                />
+                    minimumDate={new Date(1930, 0, 0)}
+                    maximumDate={new Date(2010, 0, 0)}
+                    style={{height: 50}}
+                    textColor={'#ffffff'}
+                />}
+                {
+                    Platform.isAndroid && (
+                        <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                            <Text style={{fontSize: 40}} >{DateUtils.toEuropean(date)}</Text>
+                        </View>
+                    )
+                }
             </View>
             <View style={styles.buttonContainer}>
-                <Button mode="contained" disabled={!date} onPress={() => navigation.push('BirthDate')}>Continue</Button>
+                <Button mode="contained" disabled={!date} onPress={() => navigation.push('Sex')}>Continue</Button>
             </View>
         </DefaultView>
     );
@@ -67,15 +73,25 @@ function BirthDateScreen({navigation}) {
 
 const styles = StyleSheet.create({
     constellation: {
-        zIndex: 0, position: 'absolute', bottom: 20, left: 20, opacity: 0.5
+        zIndex: 0, position: 'absolute', bottom: 20, left: 20, opacity: 0.1
     },
-    counterContainer: {position: 'absolute', top: 20, left: 20},
-    counterText: {padding: 5, backgroundColor: '#00000050', borderRadius: 5},
+    scorpio: {
+        zIndex: 0, position: 'absolute', top: 20, right: 20, opacity: 0.2
+    },
+    counterContainer: {
+        position: 'absolute', top: 20, left: 20
+    },
+    counterView: {
+        padding: 5, borderRadius: 5, backgroundColor: '#00000050'
+    },
+    counterText: {
+        letterSpacing: 2
+    },
     textContainer: {
         flex: 1, alignSelf: 'center', paddingHorizontal: 20
     },
     textHeadline: {
-        textAlign: 'center', textTransform: 'uppercase'
+        textAlign: 'center', textTransform: 'uppercase', fontWeight: 'bold'
     },
     textText: {
         textAlign: 'center', paddingVertical: 5
@@ -83,12 +99,11 @@ const styles = StyleSheet.create({
     logoContainer: {
         flex: 1, alignSelf: 'center', paddingVertical: 25, zIndex: 1
     },
-    inputContainer: {
-        flex: 1, paddingHorizontal: 20, opacity: 0.9
+    dateContainer: {
+        flex: Platform.isIos ? 2 : 0, marginHorizontal: 20, paddingVertical: 10,  backgroundColor: '#FFFFFF1A', borderRadius: 5
     },
-    inputStyle: {borderRadius: 5, textAlign: 'center'},
     buttonContainer: {
-        flex: 1, paddingHorizontal: 20, paddingTop: 35
+        flex: 1, paddingHorizontal: 20, paddingTop: 35, justifyContent : 'flex-end', marginBottom: 20
     }
 })
 

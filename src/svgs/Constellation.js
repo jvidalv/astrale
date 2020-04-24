@@ -32,7 +32,7 @@ function Constellation({height, width, style}) {
 
 Constellation.defaultProps = {
     height: 120,
-    width: 100,
+    width: 120,
 };
 
 Constellation.propTypes = {

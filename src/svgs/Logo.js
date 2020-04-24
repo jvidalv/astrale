@@ -59,7 +59,7 @@ function Logo({height, width, style}) {
 
 Logo.defaultProps = {
     height: 120,
-    width: 100,
+    width: 120,
 };
 
 Logo.propTypes = {
