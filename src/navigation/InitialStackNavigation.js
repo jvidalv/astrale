@@ -10,6 +10,7 @@ import RelationshipScreen from "../screens/initials/RelationshipScreen";
 import NumberScreen from "../screens/initials/NumberScreen";
 import PalmistryScreen from "../screens/initials/PalmistryScreen";
 import PalmistryScanScreen from "../screens/initials/PalmistryScanScreen";
+import LoadingScreen from "../screens/initials/LoadingScreen";
 
 const Header = ({scene, previous, navigation, colors}) => {
     const {options} = scene.descriptor;
@@ -49,7 +50,7 @@ function InitialStackNavigation() {
 
     return (
         <Stack.Navigator
-            initialRouteName="Name"
+            initialRouteName="PalmistryScan"
             headerMode="screen"
             screenOptions={{
                 header: ({scene, previous, navigation}) => (
@@ -63,7 +64,8 @@ function InitialStackNavigation() {
             <Stack.Screen name="Relationship" component={RelationshipScreen} options={{headerShown: false}}/>
             <Stack.Screen name="Number" component={NumberScreen} options={{headerShown: false}}/>
             <Stack.Screen name="Palmistry" component={PalmistryScreen} options={{headerShown: false}}/>
-            <Stack.Screen name="PalmistryScan" component={PalmistryScanScreen} options={{headerTitle: 'Left hand', cardStyle : {backgroundColor: colors.background}}} />
+            <Stack.Screen name="PalmistryScan" component={PalmistryScanScreen} options={{headerTitle: 'Palmistry', cardStyle : {backgroundColor: colors.background}}} />
+            <Stack.Screen name="Loading" component={LoadingScreen} options={{headerShown: false}}/>
 
         </Stack.Navigator>
     )

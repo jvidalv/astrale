@@ -35,7 +35,7 @@ function PalmistryScreen({navigation}) {
             <View style={styles.buttonContainer}>
                 <Button mode="contained" onPress={() => navigation.push('PalmistryScan')}>Continue</Button>
                 <View style={{flex : .1}}/>
-                <Button onPress={() => navigation.push('BirthDate')}>Skip</Button>
+                <Button onPress={() => navigation.replace('LoadingScreen')}>Skip</Button>
             </View>
         </DefaultView>
     );

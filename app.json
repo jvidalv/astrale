@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Deus Daily Horoscope",
-    "slug": "deus-daily-horoscope",
+    "name": "Astral Daily Horoscope 2020",
+    "slug": "astral-daily-horoscope-2020",
     "description": "@todo",
     "sdkVersion": "37.0.0",
     "privacy": "public",
@@ -10,7 +10,7 @@
       "android",
       "web"
     ],
-    "version": "0.0.1",
+    "version": "0.0.2",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "primaryColor": "#192f6a",
@@ -25,19 +25,20 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "scheme": "deusdailyhoroscope",
+    "scheme": "astraldailyhoroscope",
     "facebookAppId": "223904012006064",
     "ios": {
-      "bundleIdentifier": "josep.deusdailyhoroscope",
+      "bundleIdentifier": "josep.astraldailyhoroscope",
       "buildNumber": "1.0.0",
       "supportsTablet": true,
       "icon": "./assets/images/icon-ios.png",
       "usesAppleSignIn": true,
       "infoPlist": {
+        "NSCameraUsageDescription": "This application uses the camera to scan your hand and read your lifelines"
       }
     },
     "android": {
-      "package": "josep.deusdailyhoroscope",
+      "package": "josep.astraldailyhoroscope",
       "versionCode": 1,
       "permissions": [
         "CAMERA",
@@ -55,5 +56,6 @@
       "color": "#192f6a",
       "iosDisplayInForeground": true
     }
-  }
+  },
+
 }

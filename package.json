@@ -16,6 +16,7 @@
     "@react-navigation/native": "^5.1.5",
     "@react-navigation/stack": "^5.2.10",
     "@use-expo/font": "^2.0.0",
+    "clarifai": "^2.9.1",
     "expo": "~37.0.3",
     "expo-asset": "^8.1.4",
     "expo-camera": "^8.2.0",

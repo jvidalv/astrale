@@ -15,7 +15,7 @@ function Aquarius({color, height, width, style}) {
 Aquarius.defaultProps = {
     height: 120,
     width: 120,
-    color : 'white'
+    color : '#FFFFFFFF'
 };
 
 Aquarius.propTypes = {

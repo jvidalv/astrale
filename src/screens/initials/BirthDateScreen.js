@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
         flex: 1, alignSelf: 'center', paddingVertical: 25, zIndex: 1
     },
     dateContainer: {
-        flex: Platform.isIos ? 2 : 0, marginHorizontal: 20, paddingVertical: 10,  backgroundColor: '#FFFFFF1A', borderRadius: 5
+        flex: Platform.isIos ? 2 : 0, marginHorizontal: 20, paddingVertical: 10,  backgroundColor: '#FFFFFF3D', borderRadius: 5
     },
     buttonContainer: {
         flex: 1, paddingHorizontal: 20, paddingTop: 35, justifyContent : 'flex-end', marginBottom: 20
