@@ -9,6 +9,7 @@ import Cool from "../../svgs/Cool";
 import InLove from "../../svgs/InLove";
 import ItsDifficult from "../../svgs/ItsDifficult";
 import Taurus from "../../svgs/Taurus";
+import i18n from "i18n-js";
 
 /**
  * @param navigation
@@ -29,23 +30,23 @@ function RelationshipScreen({navigation}) {
             </View>
             <View style={{flex: .4}}/>
             <View style={styles.textContainer}>
-                <Headline style={styles.textHeadline}>What is your relationship status?</Headline>
-                <Text style={styles.textText}>Josep, to give you a precise personal prediction please
-                    let us know some info about you.</Text>
+                <Headline style={styles.textHeadline}>{i18n.t('What is your relationship status')}</Headline>
+                <Text
+                    style={styles.textText}>{i18n.t("{name}, to give you accurate and personal information we need to know some info", {name: 'Josep'})}</Text>
             </View>
             <View style={styles.sexContainer}>
                 <TouchableRipple onPress={() => setRelationshipStatus('married')} rippleColor="rgba(0, 0, 0, .1)">
                     <View>
                         <Married width={100} style={{opacity: relationshipStatus === 'married' ? 1 : 0.5}}/>
                         <Text
-                            style={{textAlign: 'center', textTransform: 'uppercase', fontWeight: 'bold'}}>Married</Text>
+                            style={styles.sexText}>{i18n.t('Married')}</Text>
                     </View>
                 </TouchableRipple>
                 <TouchableRipple onPress={() => setRelationshipStatus('single')} rippleColor="rgba(0, 0, 0, .1)">
                     <View>
                         <Cool width={100} style={{opacity: relationshipStatus === 'single' ? 1 : 0.5}}/>
                         <Text
-                            style={{textAlign: 'center', textTransform: 'uppercase', fontWeight: 'bold'}}>Single</Text>
+                            style={styles.sexText}>{i18n.t('Single')}</Text>
                     </View>
                 </TouchableRipple>
             </View>
@@ -54,21 +55,19 @@ function RelationshipScreen({navigation}) {
                 <TouchableRipple onPress={() => setRelationshipStatus('in love')} rippleColor="rgba(0, 0, 0, .1)">
                     <View>
                         <InLove width={100} style={{opacity: relationshipStatus === 'in love' ? 1 : 0.5}}/>
-                        <Text style={{textAlign: 'center', textTransform: 'uppercase', fontWeight: 'bold'}}>In
-                            love</Text>
+                        <Text style={styles.sexText}>{i18n.t('In love')}</Text>
                     </View>
                 </TouchableRipple>
                 <TouchableRipple onPress={() => setRelationshipStatus('its difficult')} rippleColor="rgba(0, 0, 0, .1)">
                     <View>
                         <ItsDifficult width={100} style={{opacity: relationshipStatus === 'its difficult' ? 1 : 0.5}}/>
-                        <Text style={{textAlign: 'center', textTransform: 'uppercase', fontWeight: 'bold'}}>It's
-                            difficult</Text>
+                        <Text style={styles.sexText}>{i18n.t('It\'s difficult')}</Text>
                     </View>
                 </TouchableRipple>
             </View>
             <View style={styles.buttonContainer}>
                 <Button mode="contained" disabled={buttonDisabled}
-                        onPress={() => navigation.push('Number')}>Continue</Button>
+                        onPress={() => navigation.push('Number')}>{i18n.t('Continue')}</Button>
             </View>
         </DefaultView>
     );
@@ -104,6 +103,9 @@ const styles = StyleSheet.create({
     },
     sexContainer: {
         flex: 1, paddingHorizontal: 60, flexDirection: 'row', justifyContent: 'space-between'
+    },
+    sexText: {
+        textAlign: 'center', textTransform: 'uppercase', fontWeight: 'bold'
     },
     buttonContainer: {
         flex: .5, paddingHorizontal: 20, paddingTop: 35, justifyContent: 'flex-end', marginBottom: 20

@@ -38,6 +38,15 @@ const common = {
         "Balance": "Saldo",
         "Your favorites": "Tus favoritos",
         "Log out": "Cerrar la sesión",
+        "Continue" : "Continuar",
+        "Press to change" : "Pulsa para continuar",
+        "Male" : "Hombre",
+        "Female" : "Mujer",
+        "Married" : "Casad@",
+        "Single" : "Solter@",
+        "Skip" : "Saltar",
+        "Progress" : "Progreso",
+        "There's no permission to use the camera" : "No hay permisos para utilizar la camara."
     },
     en: {
         "Ok": "Ok",
@@ -74,6 +83,16 @@ const common = {
         "Balance": "Balance",
         "Your favorites": "Your favorites",
         "Log out": "Log out",
+        "Continue" : "Continue",
+        "Press to change" : "Press to change",
+        "Male" : "Male",
+        "Female" : "Woman",
+        "Married" : "Married",
+        "Single" : "Single",
+        "Skip" : "Skip",
+        "Progress" : "Progress",
+        "There's no permission to use the camera" : "There's no permission to use the camera."
+
     },
 };
 

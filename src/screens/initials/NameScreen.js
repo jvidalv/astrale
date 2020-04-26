@@ -1,10 +1,11 @@
 import React from "react";
-import {StyleSheet, View, TextInput} from "react-native";
+import {StyleSheet, TextInput, View} from "react-native";
 import {Button, Headline, Text, TextInput as PaperTextInput} from "react-native-paper";
 import {DefaultView} from "../../components/containers";
 import Logo from "../../svgs/Logo";
 import Constellation from "../../svgs/Constellation";
 import Aquarius from "../../svgs/Aquarius";
+import i18n from "i18n-js";
 
 /**
  * @param navigation
@@ -25,9 +26,9 @@ function NameScreen({navigation}) {
             </View>
             <View style={{flex: 1}}/>
             <View style={styles.textContainer}>
-                <Headline style={styles.textHeadline}>What is your name?</Headline>
-                <Text style={styles.textText}>To give you a precise personal prediction please
-                    let us know some info about you.</Text>
+                <Headline style={styles.textHeadline}>{i18n.t('What\'s your name?')}</Headline>
+                <Text
+                    style={styles.textText}>{i18n.t("In order to give you accurate and personal information we need to know some info")}</Text>
             </View>
             <View style={styles.logoContainer}>
                 <Logo width={70} height={70}/>
@@ -36,18 +37,14 @@ function NameScreen({navigation}) {
                 <PaperTextInput
                     value={name}
                     onChangeText={(text) => setName(text)}
-                    style={styles.inputStyle}
+                    style={styles.input}
                     underlineColor='#ffffff00'
-                    render={props => <TextInput {...props} style={{
-                        textAlign: 'center',
-                        marginTop: 10,
-                        color: 'white',
-                        fontSize: 30
-                    }}/>}
+                    render={props => <TextInput {...props} style={styles.inputCustom}/>}
                 />
             </View>
             <View style={styles.buttonContainer}>
-                <Button mode="contained" disabled={buttonDisabled} onPress={() => navigation.push('BirthDate')}>Continue</Button>
+                <Button mode="contained" disabled={buttonDisabled}
+                        onPress={() => navigation.push('BirthDate')}>{i18n.t('Continue')}</Button>
             </View>
         </DefaultView>
     );
@@ -64,9 +61,9 @@ const styles = StyleSheet.create({
         position: 'absolute', top: 20, left: 20
     },
     counterView: {
-        padding: 5, borderRadius : 5, backgroundColor: '#00000050'
+        padding: 5, borderRadius: 5, backgroundColor: '#00000050'
     },
-    counterText : {
+    counterText: {
         letterSpacing: 2
     },
     textContainer: {
@@ -84,11 +81,17 @@ const styles = StyleSheet.create({
     inputContainer: {
         flex: 1, paddingHorizontal: 20, opacity: 0.9
     },
-    inputStyle: {
-        borderRadius: 5,  fontSize: 30, textAlign: 'center',
+    input: {
+        borderRadius: 5, fontSize: 30, textAlign: 'center',
+    },
+    inputCustom: {
+        textAlign: 'center',
+        marginTop: 10,
+        color: 'white',
+        fontSize: 30
     },
     buttonContainer: {
-        flex: 1, paddingHorizontal: 20, paddingTop: 35, justifyContent : 'flex-end', marginBottom: 20
+        flex: 1, paddingHorizontal: 20, paddingTop: 35, justifyContent: 'flex-end', marginBottom: 20
     }
 })
 

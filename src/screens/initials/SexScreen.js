@@ -3,11 +3,11 @@ import {StyleSheet, View} from "react-native";
 import {Button, Headline, Text} from "react-native-paper";
 import {DefaultView} from "../../components/containers";
 import Constellation from "../../svgs/Constellation";
-import Aquarius from "../../svgs/Aquarius";
 import Male from "../../svgs/Male";
 import Female from "../../svgs/Female";
 import TouchableRipple from "react-native-paper/src/components/TouchableRipple/index";
 import Leo from "../../svgs/Leo";
+import i18n from "i18n-js";
 
 /**
  * @param navigation
@@ -28,28 +28,28 @@ function SexScreen({navigation}) {
             </View>
             <View style={{flex: 1}}/>
             <View style={styles.textContainer}>
-                <Headline style={styles.textHeadline}>Your gender</Headline>
-                <Text style={styles.textText}>Josep, to give you a precise personal prediction please
-                    let us know some info about you.</Text>
+                <Headline style={styles.textHeadline}>{i18n.t('Your gender')}</Headline>
+                <Text
+                    style={styles.textText}>{i18n.t("{name}, to give you accurate and personal information we need to know some info", {name: 'Josep'})}</Text>
             </View>
             <View style={styles.sexContainer}>
                 <TouchableRipple onPress={() => setSex('male')} rippleColor="rgba(0, 0, 0, .1)">
                     <View>
                         <Male style={{opacity: sex === 'male' ? 1 : 0.5}}/>
-                        <Text style={{textAlign: 'center', textTransform: 'uppercase', fontWeight: 'bold'}}>Male</Text>
+                        <Text style={styles.sexText}>{i18n.t('Male')}</Text>
                     </View>
                 </TouchableRipple>
                 <TouchableRipple onPress={() => setSex('female')} rippleColor="rgba(0, 0, 0, .1)">
-                <View>
-                    <Female style={{opacity: sex === 'female' ? 1 : 0.5}}/>
-                    <Text style={{textAlign: 'center', textTransform: 'uppercase', fontWeight: 'bold'}}>Female</Text>
-                </View>
+                    <View>
+                        <Female style={{opacity: sex === 'Female' ? 1 : 0.5}}/>
+                        <Text style={styles.sexText}>{i18n.t('Female')}</Text>
+                    </View>
                 </TouchableRipple>
 
             </View>
             <View style={styles.buttonContainer}>
                 <Button mode="contained" disabled={buttonDisabled}
-                        onPress={() => navigation.push('Relationship')}>Continue</Button>
+                        onPress={() => navigation.push('Relationship')}>{i18n.t('Continue')}</Button>
             </View>
         </DefaultView>
     );
@@ -84,10 +84,13 @@ const styles = StyleSheet.create({
         flex: 1, alignSelf: 'center', paddingVertical: 25, zIndex: 1
     },
     sexContainer: {
-        flex: 1, paddingHorizontal: 60, flexDirection: 'row', justifyContent: 'space-between'
+        flex: 1, paddingHorizontal: 50, flexDirection: 'row', justifyContent: 'space-between'
+    },
+    sexText: {
+        textAlign: 'center', textTransform: 'uppercase', fontWeight: 'bold'
     },
     buttonContainer: {
-        flex: 1, paddingHorizontal: 20, paddingTop: 35, justifyContent : 'flex-end', marginBottom: 20
+        flex: 1, paddingHorizontal: 20, paddingTop: 35, justifyContent: 'flex-end', marginBottom: 20
     }
 })
 

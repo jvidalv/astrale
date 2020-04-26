@@ -1,11 +1,11 @@
 import React from "react";
-import {StyleSheet, TextInput, View} from "react-native";
-import {Button, Headline, Text, TextInput as PaperTextInput} from "react-native-paper";
+import {StyleSheet, View} from "react-native";
+import {Button, Headline, Text} from "react-native-paper";
 import {DefaultView} from "../../components/containers";
 import Constellation from "../../svgs/Constellation";
 import Aquarius from "../../svgs/Aquarius";
-import Dices from "../../svgs/Dices";
 import Palmistry from "../../svgs/Palmistry";
+import i18n from "i18n-js";
 
 /**
  * @param navigation
@@ -13,8 +13,6 @@ import Palmistry from "../../svgs/Palmistry";
  * @constructor
  */
 function PalmistryScreen({navigation}) {
-    const [step, setStep] = React.useState(1);
-
     return (
         <DefaultView>
             <Aquarius width={80} height={80} style={styles.aquarius}/>
@@ -26,16 +24,20 @@ function PalmistryScreen({navigation}) {
             </View>
             <View style={{flex: .5}}/>
             <View style={styles.textContainer}>
-                <Headline style={styles.textHeadline}>Palmistry</Headline>
-                <Text style={styles.textText}>Josep, to receive your palmistry readings please follow the instructions on the screen.</Text>
+                <Headline style={styles.textHeadline}>{i18n.t('Palmistry')}</Headline>
+                <Text
+                    style={styles.textText}>{i18n.t('{name}, in order to offer you the reading of your lifelines we need to scan both hands', {name: 'Josep'})}</Text>
             </View>
             <View style={styles.palmistryContainer}>
-                <Palmistry />
+                <Palmistry/>
             </View>
             <View style={styles.buttonContainer}>
-                <Button mode="contained" onPress={() => navigation.push('PalmistryScan')}>Continue</Button>
-                <View style={{flex : .1}}/>
-                <Button onPress={() => navigation.replace('LoadingScreen')}>Skip</Button>
+                <Button mode="contained" onPress={() => navigation.push('PalmistryScan')}>{i18n.t('Continue')}</Button>
+                <View style={{flex: .1}}/>
+                <Button onPress={() => navigation.reset({
+                    index: 0,
+                    routes: [{name: 'Loading'}],
+                })}>{i18n.t('Skip')}</Button>
             </View>
         </DefaultView>
     );
@@ -68,12 +70,6 @@ const styles = StyleSheet.create({
     },
     palmistryContainer: {
         alignSelf: 'center', zIndex: 1, borderWidth: 2, padding: 20, borderRadius: 50, borderColor: '#FFFFFF50'
-    },
-    inputContainer: {
-        flex: 1, paddingHorizontal: 20, opacity: 0.9, zIndex: 2
-    },
-    inputStyle: {
-        borderRadius: 5, textAlign: 'center',
     },
     buttonContainer: {
         flex: 1, paddingHorizontal: 20, paddingTop: 35, justifyContent: 'flex-end', marginBottom: 20

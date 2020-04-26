@@ -7,6 +7,7 @@ import themes from "./constants/themes";
 import {AppLoading} from "expo";
 import {Asset} from 'expo-asset';
 import InitialStackNavigation from "./navigation/InitialStackNavigation";
+import MainStackNavigation from "./navigation/MainStackNavigation";
 
 /**
  * Gets active theme dark/light
@@ -85,7 +86,9 @@ function Main() {
                     AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
                 }
                 theme={useTheme()}>
-                <InitialStackNavigation/>
+
+                <MainStackNavigation />
+               {/*<InitialStackNavigation/>*/}
             </NavigationContainer>
         </PaperProvider>
     );

@@ -50,7 +50,7 @@ function InitialStackNavigation() {
 
     return (
         <Stack.Navigator
-            initialRouteName="PalmistryScan"
+            initialRouteName="Name"
             headerMode="screen"
             screenOptions={{
                 header: ({scene, previous, navigation}) => (
@@ -64,7 +64,7 @@ function InitialStackNavigation() {
             <Stack.Screen name="Relationship" component={RelationshipScreen} options={{headerShown: false}}/>
             <Stack.Screen name="Number" component={NumberScreen} options={{headerShown: false}}/>
             <Stack.Screen name="Palmistry" component={PalmistryScreen} options={{headerShown: false}}/>
-            <Stack.Screen name="PalmistryScan" component={PalmistryScanScreen} options={{headerTitle: 'Palmistry', cardStyle : {backgroundColor: colors.background}}} />
+            <Stack.Screen name="PalmistryScan" component={PalmistryScanScreen}  options={{headerShown: false}} />
             <Stack.Screen name="Loading" component={LoadingScreen} options={{headerShown: false}}/>
 
         </Stack.Navigator>

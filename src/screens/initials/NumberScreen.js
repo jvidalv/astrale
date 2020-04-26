@@ -5,6 +5,7 @@ import {DefaultView} from "../../components/containers";
 import Constellation from "../../svgs/Constellation";
 import Aquarius from "../../svgs/Aquarius";
 import Dices from "../../svgs/Dices";
+import i18n from "i18n-js";
 
 /**
  * @param navigation
@@ -25,9 +26,9 @@ function NumberScreen({navigation}) {
             </View>
             <View style={{flex: .5}}/>
             <View style={styles.textContainer}>
-                <Headline style={styles.textHeadline}>Your favorite number</Headline>
-                <Text style={styles.textText}>To give you a precise personal prediction please
-                    let us know some info about you.</Text>
+                <Headline style={styles.textHeadline}>{i18n.t('Your favorite number')}</Headline>
+                <Text
+                    style={styles.textText}>{i18n.t("{name}, to give you accurate and personal information we need to know some info", {name: 'Josep'})}</Text>
             </View>
             <View style={styles.logoContainer}>
                 <Dices height={80}/>
@@ -40,17 +41,12 @@ function NumberScreen({navigation}) {
                     underlineColor='#ffffff00'
                     keyboardType="number-pad"
                     enablesReturnKeyAutomatically={true}
-                    render={props => <TextInput {...props} style={{
-                        textAlign: 'center',
-                        marginTop: 10,
-                        color: 'white',
-                        fontSize: 30
-                    }}/>}
+                    render={props => <TextInput {...props} style={styles.inputCustom}/>}
                 />
             </View>
             <View style={styles.buttonContainer}>
                 <Button mode="contained" disabled={buttonDisabled}
-                        onPress={() => navigation.push('Palmistry')}>Continue</Button>
+                        onPress={() => navigation.push('Palmistry')}>{i18n.t('Continue')}</Button>
             </View>
         </DefaultView>
     );
@@ -89,6 +85,12 @@ const styles = StyleSheet.create({
     },
     inputStyle: {
         borderRadius: 5, textAlign: 'center',
+    },
+    inputCustom: {
+        textAlign: 'center',
+        marginTop: 10,
+        color: 'white',
+        fontSize: 30
     },
     buttonContainer: {
         flex: 1, paddingHorizontal: 20, paddingTop: 35, justifyContent: 'flex-end', marginBottom: 20

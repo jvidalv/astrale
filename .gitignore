@@ -14,4 +14,5 @@ web-report/
 .DS_Store
 
 # credentials
-./src/credentials/*
+src/credentials/
+

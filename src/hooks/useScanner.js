@@ -23,7 +23,8 @@ const app = new Clarifai.App({
 const takePicture = async (camera) => {
     return await camera.takePictureAsync({
         base64: true,
-        quality: .8
+        quality: .5,
+
     }).then((response) => response.base64).catch(() => Date.now().toString());
 
 }

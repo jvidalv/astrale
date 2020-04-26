@@ -7,6 +7,7 @@ import Scorpio from "../../svgs/Scorpio";
 import {DateUtils, Platform} from "../../utils";
 import RNDateTimePicker from "@react-native-community/datetimepicker";
 import Logo from "../../svgs/Logo";
+import i18n from "i18n-js";
 
 /**
  * @param navigation
@@ -38,15 +39,16 @@ function BirthDateScreen({navigation}) {
             </View>
             <View style={{flex: 1}}/>
             <View style={styles.textContainer}>
-                <Headline style={styles.textHeadline}>Your birthdate</Headline>
-                <Text style={styles.textText}>Josep, to give you a precise personal prediction please
-                    let us know some info about you.</Text>
+                <Headline style={styles.textHeadline}>{i18n.t('Your date of birth')}</Headline>
+                <Text
+                    style={styles.textText}>{i18n.t("{name}, to give you accurate and personal information we need to know some info", {name: 'Josep'})}</Text>
             </View>
             <View style={styles.logoContainer}>
                 <Logo width={70} height={70}/>
             </View>
             <View style={styles.dateContainer}>
-                {Platform.isAndroid && <Button style={{alignSelf: 'center'}} onPress={showDatePicker}>Click to change</Button>}
+                {Platform.isAndroid &&
+                <Button style={{alignSelf: 'center'}} onPress={showDatePicker}>{i18n.t('Press to change')}</Button>}
                 {show && <RNDateTimePicker
                     value={date}
                     display="spinner"
@@ -59,13 +61,14 @@ function BirthDateScreen({navigation}) {
                 {
                     Platform.isAndroid && (
                         <View style={{justifyContent: 'center', alignItems: 'center'}}>
-                            <Text style={{fontSize: 40}} >{DateUtils.toEuropean(date)}</Text>
+                            <Text style={{fontSize: 40}}>{DateUtils.toEuropean(date)}</Text>
                         </View>
                     )
                 }
             </View>
             <View style={styles.buttonContainer}>
-                <Button mode="contained" disabled={!date} onPress={() => navigation.push('Sex')}>Continue</Button>
+                <Button mode="contained" disabled={!date}
+                        onPress={() => navigation.push('Sex')}>{i18n.t('Continue')}</Button>
             </View>
         </DefaultView>
     );
@@ -100,10 +103,14 @@ const styles = StyleSheet.create({
         flex: 1, alignSelf: 'center', paddingVertical: 25, zIndex: 1
     },
     dateContainer: {
-        flex: Platform.isIos ? 2 : 0, marginHorizontal: 20, paddingVertical: 10,  backgroundColor: '#FFFFFF3D', borderRadius: 5
+        flex: Platform.isIos ? 2 : 0,
+        marginHorizontal: 20,
+        paddingVertical: 10,
+        backgroundColor: '#FFFFFF3D',
+        borderRadius: 5
     },
     buttonContainer: {
-        flex: 1, paddingHorizontal: 20, paddingTop: 35, justifyContent : 'flex-end', marginBottom: 20
+        flex: 1, paddingHorizontal: 20, paddingTop: 35, justifyContent: 'flex-end', marginBottom: 20
     }
 })
 
