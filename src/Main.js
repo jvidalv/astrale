@@ -86,7 +86,6 @@ function Main() {
                     AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
                 }
                 theme={useTheme()}>
-
                 <MainStackNavigation />
                {/*<InitialStackNavigation/>*/}
             </NavigationContainer>

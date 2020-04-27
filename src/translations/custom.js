@@ -30,6 +30,7 @@ const basic = {
         "Analyzing relationship status":  "Analizando estado civíl...",
         "Analyzing favourite number": "Analizando número favorito...",
         "Concluding analysis": "Concluyendo análisis...",
+        "Zodiac signs" : "Símbolos del Zodiaco"
     },
     en: {
         "What's your name?" : "What's your name?",
@@ -55,6 +56,8 @@ const basic = {
         "Analyzing relationship status": "Analyzing relationship status...",
         "Analyzing favourite number": "Analyzing favourite number...",
         "Concluding analysis": "Concluding analysis...",
+        "Zodiac signs" : "Zodiac signs"
+
     },
 };
 

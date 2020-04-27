@@ -1,6 +1,7 @@
 import React from 'react';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import DailyHoroscope from "../screens/main/DailyHoroscope";
+import DailyScreen from "../screens/main/DailyScreen";
+import ZodiacScreen from "../screens/main/ZodiacScreen";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -12,7 +13,7 @@ function MainStackNavigation() {
         >
             <Tab.Screen
                 name="symbol"
-                component={DailyHoroscope}
+                component={ZodiacScreen}
                 options={{
                     tabBarIcon: 'zodiac-aquarius',
                     tabBarColor: 'red',
@@ -21,7 +22,7 @@ function MainStackNavigation() {
             />
             <Tab.Screen
                 name="Horoscope"
-                component={DailyHoroscope}
+                component={DailyScreen}
                 options={{
                     tabBarIcon: 'calendar-text',
                     tabBarColor: 'orange',
@@ -30,7 +31,7 @@ function MainStackNavigation() {
             />
             <Tab.Screen
                 name="Compatibility"
-                component={DailyHoroscope}
+                component={DailyScreen}
                 options={{
                     tabBarIcon: 'heart-multiple',
                     tabBarColor: 'brown',
@@ -40,7 +41,7 @@ function MainStackNavigation() {
             />
             <Tab.Screen
                 name="Palmistry"
-                component={DailyHoroscope}
+                component={DailyScreen}
                 options={{
                     tabBarIcon: 'hand',
                     tabBarColor: 'black',
@@ -50,7 +51,7 @@ function MainStackNavigation() {
             />
             <Tab.Screen
                 name="Settings"
-                component={DailyHoroscope}
+                component={DailyScreen}
                 options={{
                     tabBarIcon: 'tune',
                     tabBarColor: 'green',

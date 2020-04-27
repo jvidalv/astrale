@@ -12,7 +12,7 @@ import i18n from "i18n-js";
  * @returns {*}
  * @constructor
  */
-function DailyHoroscope({navigation}) {
+function DailyScreen({navigation}) {
     return (
         <DefaultScrollView>
            <Text>Holaaa</Text>
@@ -66,4 +66,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default DailyHoroscope;
+export default DailyScreen;
