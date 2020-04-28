@@ -2,10 +2,13 @@ import React from 'react';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import DailyScreen from "../screens/main/DailyScreen";
 import ZodiacScreen from "../screens/main/ZodiacScreen";
+import ProfileScreen from "../screens/main/ProfileScreen";
+import {useGlobals} from "../contexts/Global";
 
 const Tab = createMaterialBottomTabNavigator();
 
 function MainStackNavigation() {
+
     return (
         <Tab.Navigator
             initialRouteName="Feed"
@@ -19,15 +22,6 @@ function MainStackNavigation() {
                     tabBarColor: 'red',
                     title : 'Aquarius'
                 }}
-            />
-            <Tab.Screen
-                name="Horoscope"
-                component={DailyScreen}
-                options={{
-                    tabBarIcon: 'calendar-text',
-                    tabBarColor: 'orange',
-                    title : 'Horoscope'
-                 }}
             />
             <Tab.Screen
                 name="Compatibility"
@@ -50,12 +44,12 @@ function MainStackNavigation() {
                 }}
             />
             <Tab.Screen
-                name="Settings"
-                component={DailyScreen}
+                name="Profile"
+                component={ProfileScreen}
                 options={{
                     tabBarIcon: 'tune',
-                    tabBarColor: 'green',
-                    title : 'Settings',
+                    tabBarColor: 'account-circle',
+                    title : 'Profile',
 
                 }}
             />
