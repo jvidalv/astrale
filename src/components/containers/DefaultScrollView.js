@@ -1,11 +1,10 @@
 import React from "react";
 import {KeyboardAvoidingView, Platform, SafeAreaView, ScrollView, StatusBar} from "react-native";
-import {withTheme} from 'react-native-paper';
+import {useTheme} from 'react-native-paper';
 import PropTypes from "prop-types";
 
 /**
  * @param children
- * @param theme react-native-paper theme
  * @param background
  * @param barStyle
  * @param keyboardAvoidView
@@ -13,11 +12,11 @@ import PropTypes from "prop-types";
  * @returns {*}
  * @constructor
  */
-function DefaultScrollView({children, theme, background, barStyle, keyboardAvoidView, styleScrollView}) {
-    const {colors} = theme;
+function DefaultScrollView({children, background, barStyle, keyboardAvoidView, styleScrollView}) {
+    const {colors} = useTheme();
     return (
         <SafeAreaView style={{flex: 1}}>
-            <StatusBar barStyle={barStyle} backgroundColor={background || colors.primary}/>
+            <StatusBar barStyle={barStyle} backgroundColor={background || colors.primary} animated/>
             <KeyboardAvoidingView style={{flex: 1}} behavior={Platform.OS === "ios" ? "padding" : null}
                                   enabled={keyboardAvoidView}>
                 <ScrollView style={[{flex: 1}, {backgroundColor: background || colors.background}, styleScrollView]}>
@@ -39,4 +38,4 @@ DefaultScrollView.defaultProps = {
     barStyle: "light-content"
 };
 
-export default withTheme(DefaultScrollView);
+export default DefaultScrollView;

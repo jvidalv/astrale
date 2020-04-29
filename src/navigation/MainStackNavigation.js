@@ -16,7 +16,7 @@ function MainStackNavigation() {
         >
             <Tab.Screen
                 name="symbol"
-                component={ZodiacScreen}
+                component={DailyScreen}
                 options={{
                     tabBarIcon: 'zodiac-aquarius',
                     tabBarColor: 'red',

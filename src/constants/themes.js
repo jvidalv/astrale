@@ -18,7 +18,8 @@ const themes = {
             ...PaperDarkTheme.colors,
             background : '#192f6a',
             primary : '#ffb942',
-            accent : '#415bea'
+            accent : '#415bea',
+            surface : '#12265c',
         },
     }
 };
