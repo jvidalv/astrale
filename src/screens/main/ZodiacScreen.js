@@ -4,6 +4,8 @@ import {Caption, Subheading, Text} from "react-native-paper";
 import {DefaultView} from "../../components/containers";
 import i18n from "i18n-js";
 import {Zodiac} from "../../svgs";
+import HoroscopeSigns from "../../constants/zodiac_signs";
+import {Sign} from "../../components/zodiac";
 
 /**
  * @param navigation
@@ -70,6 +72,7 @@ function ZodiacScreen({navigation}) {
                 alignItems: 'center',
                 paddingHorizontal: 10
             }}>
+
                 <View style={{alignItems: 'center'}}>
                     <Zodiac.Libra height={70}/>
                     <Text  style={{marginTop: 3}}>Libra</Text>

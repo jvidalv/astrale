@@ -71,4 +71,4 @@ function InitialStackNavigation() {
     )
 }
 
-export default withTheme(InitialStackNavigation);
+export default InitialStackNavigation;

@@ -59,4 +59,4 @@ InLove.propTypes = {
     color: PropTypes.string
 };
 
-export default withTheme(InLove)
+export default InLove;

@@ -35,4 +35,4 @@ Male.propTypes = {
     color: PropTypes.string
 };
 
-export default withTheme(Male)
+export default Male

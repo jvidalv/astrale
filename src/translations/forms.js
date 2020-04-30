@@ -9,7 +9,6 @@ const forms = {
         "Username or password is invalid": "El usuario o la contraseña es incorrecto.",
         "Username or password is wrong": "El usuario o la contraseña es incorrecto.",
         "There is no account associated with the mail provided": "No hay ninguna cuenta asociada al correo facilitado."
-
     },
     en: {
         "Username is invalid": "Username is invalid.",

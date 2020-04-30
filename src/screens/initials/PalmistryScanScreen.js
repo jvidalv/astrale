@@ -211,4 +211,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default withTheme(PalmistryScanScreen);
+export default PalmistryScanScreen;

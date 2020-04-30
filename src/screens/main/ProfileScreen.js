@@ -1,6 +1,6 @@
 import React from "react";
 import {StyleSheet, View} from "react-native";
-import {Button, Caption, Divider, Headline, Subheading, Title, useTheme, withTheme, Switch, Text} from "react-native-paper";
+import {Button, Caption, Divider, Headline, Subheading, Switch, Title, useTheme, withTheme} from "react-native-paper";
 import {DefaultScrollView} from "../../components/containers";
 import {Zodiac} from "../../svgs";
 import {useGlobals} from "../../contexts/Global";
@@ -11,8 +11,8 @@ function ProfileScreen({navigation}) {
     const [{theme}, dispatch] = useGlobals();
     const _handleDarkThemeChange = () => {
         dispatch({
-            'type' : 'switchTheme',
-             'theme' : theme === 'dark' ? 'light' : 'dark',
+            'type': 'switchTheme',
+            'theme': theme === 'dark' ? 'light' : 'dark',
         })
     }
 
@@ -30,16 +30,19 @@ function ProfileScreen({navigation}) {
             <Divider style={{marginTop: 25}}/>
             <View style={{marginHorizontal: 20, justifyContent: 'flex-start', marginTop: 25}}>
 
-                <Button icon="cake-variant" style={{alignItems: 'flex-start'}} labelStyle={{marginLeft: 23, fontSize: 20}}
+                <Button icon="cake-variant" style={{alignItems: 'flex-start'}}
+                        labelStyle={{marginLeft: 23, fontSize: 20}}
                         theme={{colors: {primary: colors.text}}}>
                     03/02/1994
                 </Button>
-                <Button icon="gender-transgender" style={{alignItems: 'flex-start'}} labelStyle={{marginLeft: 23, fontSize: 20}}
+                <Button icon="gender-transgender" style={{alignItems: 'flex-start'}}
+                        labelStyle={{marginLeft: 23, fontSize: 20}}
                         uppercase={false}
                         theme={{colors: {primary: colors.text}}}>
                     Male
                 </Button>
-                <Button icon="heart-circle" style={{alignItems: 'flex-start'}} labelStyle={{marginLeft: 23, fontSize: 20}}
+                <Button icon="heart-circle" style={{alignItems: 'flex-start'}}
+                        labelStyle={{marginLeft: 23, fontSize: 20}}
                         uppercase={false}
                         theme={{colors: {primary: colors.text}}}>
                     Its complicated
@@ -73,9 +76,10 @@ function ProfileScreen({navigation}) {
             </View>
             <Divider style={{marginTop: 25}}/>
             <View style={{marginHorizontal: 20, justifyContent: 'flex-start', marginTop: 25, marginBottom: 25}}>
-                <View style={{flexDirection : 'row',justifyContent : 'space-between', alignItems : 'center'}}>
+                <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
                     <Button icon="brightness-6" style={{alignItems: 'flex-start', marginTop: 10,}}
-                            labelStyle={{marginLeft: 23, fontSize: 22}} uppercase={false} theme={{colors: {primary: colors.text}}}>
+                            labelStyle={{marginLeft: 23, fontSize: 22}} uppercase={false}
+                            theme={{colors: {primary: colors.text}}}>
                         Dark theme
                     </Button>
                     <Switch
@@ -103,4 +107,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default withTheme(ProfileScreen);
+export default ProfileScreen;

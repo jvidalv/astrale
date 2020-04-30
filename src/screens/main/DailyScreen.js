@@ -1,6 +1,6 @@
 import React from "react";
 import {StyleSheet, View} from "react-native";
-import {Button, Headline, Paragraph, Subheading, Surface, Text, Title} from "react-native-paper";
+import {Button, Headline, Paragraph, Subheading, Surface, Title} from "react-native-paper";
 import {DefaultScrollView} from "../../components/containers";
 import {Backgrounds, Zodiac} from "../../svgs";
 import {useGlobals} from "../../contexts/Global";
@@ -15,22 +15,22 @@ function DailyScreen({navigation}) {
     const [{theme}] = useGlobals();
     return (
         <React.Fragment>
-            <Backgrounds.Stars style={{zIndex: 5, position: 'absolute', top: 20, right: 20, opacity: 0.2}}/>
+            <Backgrounds.Stars style={styles.backgroundStars}/>
             <DefaultScrollView barStyle={ThemeUtils.isDark(theme) ? 'light-content' : 'dark-content'}>
-                <View style={{alignItems: 'center', justifyContent: 'center', marginHorizontal: 20}}>
+                <View style={styles.headerContainer}>
                     <Zodiac.Aquarius width={80}/>
-                    <Headline style={{fontWeight: 'bold', fontSize: 30}}>
+                    <Headline style={styles.headerHeadline}>
                         Aquarius
                     </Headline>
                     <Subheading>
                         Wednesday, 29 april, 2020
                     </Subheading>
                 </View>
-                <View style={{marginTop: 20, marginHorizontal: 20}}>
-                    <Surface style={{padding: 20, borderRadius: 10}}>
-                        <Button icon="heart" style={{marginTop: -5, marginBottom: 10}}
-                                labelStyle={{fontSize: 20, fontWeight: 'bold', letterSpacing: 4}}>Love</Button>
-                        <Paragraph style={{fontSize: 15, lineHeight: 22, letterSpacing: 1}}>
+                <View style={styles.surfaceContainer}>
+                    <Surface style={styles.surfaceSurface}>
+                        <Button icon="heart" style={styles.surfaceButton}
+                                labelStyle={styles.surfaceButtonLabel}>Love</Button>
+                        <Paragraph style={styles.surfaceParagraph}>
                             Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece
                             of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock,
                             a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure
@@ -39,11 +39,11 @@ function DailyScreen({navigation}) {
                         </Paragraph>
                     </Surface>
                 </View>
-                <View style={{marginTop: 20, marginHorizontal: 20}}>
-                    <Surface style={{padding: 20, borderRadius: 10}}>
-                        <Button icon="briefcase" style={{marginTop: -5, marginBottom: 10}}
-                                labelStyle={{fontSize: 20, fontWeight: 'bold', letterSpacing: 4}}>Work</Button>
-                        <Paragraph style={{fontSize: 15, lineHeight: 22, letterSpacing: 1}}>
+                <View style={styles.surfaceContainer}>
+                    <Surface style={styles.surfaceSurface}>
+                        <Button icon="briefcase" style={styles.surfaceButton}
+                                labelStyle={styles.surfaceButtonLabel}>Work</Button>
+                        <Paragraph style={styles.surfaceParagraph}>
                             It has roots in a piece
                             of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock,
                             a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure
@@ -52,22 +52,23 @@ function DailyScreen({navigation}) {
                         </Paragraph>
                     </Surface>
                 </View>
-                <View style={{marginTop: 20, marginHorizontal: 20}}>
-                    <Surface style={{padding: 20, borderRadius: 10}}>
-                        <Button icon="briefcase" style={{marginTop: -5, marginBottom: 10}}
-                                labelStyle={{fontSize: 20, fontWeight: 'bold', letterSpacing: 4}}>Health</Button>
-                        <Paragraph style={{fontSize: 15, lineHeight: 22, letterSpacing: 1}}>
+                <View style={styles.surfaceContainer}>
+                    <Surface style={styles.surfaceSurface}>
+                        <Button icon="food-apple" style={styles.surfaceButton}
+                                labelStyle={styles.surfaceButtonLabel}>Health</Button>
+                        <Paragraph style={styles.surfaceParagraph}>
                             Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece
                             of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock,
                             a Latin professor at Hampden-Sydney College in Virginia.
                         </Paragraph>
                     </Surface>
                 </View>
-                <View style={{marginTop: 20, marginHorizontal: 20}}>
-                    <Surface style={{padding: 20, borderRadius: 10}}>
-                        <Button  style={{marginTop: -5, marginBottom: 10}}
-                                labelStyle={{fontSize: 20, fontWeight: 'bold', letterSpacing: 4}}>Today you love</Button>
-                        <View style={{flexDirection:'row', justifyContent : 'space-around'}}>
+                <View style={styles.surfaceContainer}>
+                    <Surface style={styles.surfaceSurface}>
+                        <Button style={styles.surfaceButton}
+                                labelStyle={styles.surfaceButtonLabel}>Today you
+                            love</Button>
+                        <View style={styles.bottomThreeContainer}>
                             <View style={{alignItems: 'center'}}>
                                 <Zodiac.Scorpio width={100}/>
                                 <Title>Scorpio</Title>
@@ -79,11 +80,12 @@ function DailyScreen({navigation}) {
                         </View>
                     </Surface>
                 </View>
-                <View style={{marginTop: 20, marginHorizontal: 20}}>
-                    <Surface style={{padding: 20, borderRadius: 10}}>
-                        <Button  style={{marginTop: -5, marginBottom: 10}}
-                                 labelStyle={{fontSize: 20, fontWeight: 'bold', letterSpacing: 4}}>Today you hate</Button>
-                        <View style={{flexDirection:'row', justifyContent : 'space-around'}}>
+                <View style={styles.surfaceContainer}>
+                    <Surface style={styles.surfaceSurface}>
+                        <Button style={styles.surfaceButton}
+                                labelStyle={styles.surfaceButtonLabel}>Today you
+                            hate</Button>
+                        <View style={styles.bottomThreeContainer}>
                             <View style={{alignItems: 'center'}}>
                                 <Zodiac.Libra width={100}/>
                                 <Title>Libra</Title>
@@ -95,11 +97,11 @@ function DailyScreen({navigation}) {
                         </View>
                     </Surface>
                 </View>
-                <View style={{marginTop: 20, marginHorizontal: 20, marginBottom: 20}}>
-                    <Surface style={{padding: 20, borderRadius: 10}}>
-                        <Button  style={{marginTop: -5, marginBottom: 10}}
-                                 labelStyle={{fontSize: 18, fontWeight: 'bold', letterSpacing: 3}}>Lucky numbers</Button>
-                        <View style={{flexDirection:'row', justifyContent : 'space-around', marginTop: 5}}>
+                <View style={styles.surfaceContainer}>
+                    <Surface style={styles.surfaceSurface}>
+                        <Button style={styles.surfaceButton}
+                                labelStyle={styles.surfaceButtonLabel}>Lucky numbers</Button>
+                        <View style={styles.bottomThreeContainer}>
                             <View style={{alignItems: 'center'}}>
                                 <Title style={{fontSize: 30}}>25</Title>
                             </View>
@@ -119,48 +121,33 @@ function DailyScreen({navigation}) {
 }
 
 const styles = StyleSheet.create({
-    constellation: {
-        zIndex: 0, position: 'absolute', bottom: 20, left: 20, opacity: 0.1
-    },
-    aquarius: {
+    backgroundStars: {
         zIndex: 0, position: 'absolute', top: 20, right: 20, opacity: 0.2
     },
-    counterContainer: {
-        position: 'absolute', top: 20, left: 20
+    headerContainer: {
+        alignItems: 'center', justifyContent: 'center', marginHorizontal: 20
     },
-    counterView: {
-        padding: 5, borderRadius: 5, backgroundColor: '#00000050'
+    headerHeadline: {
+        fontWeight: 'bold', fontSize: 30
     },
-    counterText: {
-        letterSpacing: 2
+    surfaceContainer: {
+        marginTop: 20, marginHorizontal: 20
     },
-    textContainer: {
-        flex: 1, alignSelf: 'center', paddingHorizontal: 20
+    surfaceSurface: {
+        padding: 20, borderRadius: 10
     },
-    textHeadline: {
-        textAlign: 'center', textTransform: 'uppercase', fontWeight: 'bold'
+    surfaceButton: {
+        marginTop: -5, marginBottom: 10
     },
-    textText: {
-        textAlign: 'center', paddingVertical: 5
+    surfaceButtonLabel: {
+        fontSize: 20, fontWeight: 'bold', letterSpacing: 4
     },
-    logoContainer: {
-        flex: 1, alignSelf: 'center', paddingVertical: 40, zIndex: 1
+    surfaceParagraph: {
+        fontSize: 15, lineHeight: 22, letterSpacing: 1,
     },
-    inputContainer: {
-        flex: 1, paddingHorizontal: 20, opacity: 0.9
+    bottomThreeContainer: {
+        flexDirection: 'row', justifyContent: 'space-around'
     },
-    input: {
-        borderRadius: 5, fontSize: 30, textAlign: 'center',
-    },
-    inputCustom: {
-        textAlign: 'center',
-        marginTop: 10,
-        color: 'white',
-        fontSize: 30
-    },
-    buttonContainer: {
-        flex: 1, paddingHorizontal: 20, paddingTop: 35, justifyContent: 'flex-end', marginBottom: 20
-    }
 })
 
 

@@ -42,4 +42,4 @@ Married.propTypes = {
     color: PropTypes.string
 };
 
-export default withTheme(Married)
+export default Married;

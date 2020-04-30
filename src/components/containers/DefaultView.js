@@ -45,4 +45,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default withTheme(DefaultView);
+export default DefaultView;

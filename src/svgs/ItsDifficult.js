@@ -61,4 +61,4 @@ ItsDifficult.propTypes = {
     color: PropTypes.string
 };
 
-export default withTheme(ItsDifficult)
+export default ItsDifficult;

@@ -4,6 +4,7 @@ import DailyScreen from "../screens/main/DailyScreen";
 import ZodiacScreen from "../screens/main/ZodiacScreen";
 import ProfileScreen from "../screens/main/ProfileScreen";
 import {useGlobals} from "../contexts/Global";
+import CompatibilityScreen from "../screens/main/CompatibilityScreen";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -25,7 +26,7 @@ function MainStackNavigation() {
             />
             <Tab.Screen
                 name="Compatibility"
-                component={DailyScreen}
+                component={CompatibilityScreen}
                 options={{
                     tabBarIcon: 'heart-multiple',
                     tabBarColor: 'brown',

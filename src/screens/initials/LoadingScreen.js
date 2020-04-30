@@ -84,4 +84,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default withTheme(LoadingScreen);
+export default LoadingScreen;

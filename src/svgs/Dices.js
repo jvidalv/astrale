@@ -128,4 +128,4 @@ Dices.propTypes = {
     color: PropTypes.string
 };
 
-export default withTheme(Dices)
+export default Dices;

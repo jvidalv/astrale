@@ -1,10 +1,8 @@
 import * as React from "react"
 import Svg, {Circle, Ellipse, G, Path} from "react-native-svg"
 import PropTypes from "prop-types";
-import {useTheme, withTheme} from "react-native-paper";
 
-function Cool({color, height, width, style}) {
-    const {colors} = useTheme();
+function Cool({height, width, style}) {
     return (
         <Svg height={height} width={width} viewBox="0 0 512 512" style={style}>
             <Circle cx={256} cy={256} r={256} fill="#ffd93b"/>
@@ -52,14 +50,12 @@ function Cool({color, height, width, style}) {
 Cool.defaultProps = {
     height: 120,
     width: 120,
-    color: 'white'
 };
 
 Cool.propTypes = {
     height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
     style: PropTypes.object,
-    color: PropTypes.string
 };
 
-export default withTheme(Cool)
+export default Cool;

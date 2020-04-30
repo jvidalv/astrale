@@ -36,4 +36,4 @@ Female.propTypes = {
     color: PropTypes.string
 };
 
-export default withTheme(Female)
+export default Female;
