@@ -2,7 +2,7 @@ import React from "react";
 import {StyleSheet, View} from "react-native";
 import {Button, Headline, Text} from "react-native-paper";
 import {DefaultView} from "../../components/containers";
-import Constellation from "../../svgs/Constellation";
+import {Backgrounds} from "../../svgs";
 import Scorpio from "../../svgs/Scorpio";
 import {DateUtils, Platform} from "../../utils";
 import RNDateTimePicker from "@react-native-community/datetimepicker";
@@ -31,7 +31,7 @@ function BirthDateScreen({navigation}) {
     return (
         <DefaultView>
             <Scorpio width={80} height={80} style={styles.scorpio}/>
-            <Constellation height={250} width={250} style={styles.constellation}/>
+            <Backgrounds.Constellation height={250} width={250} style={styles.constellation}/>
             <View style={styles.counterContainer}>
                 <View style={styles.counterView}>
                     <Text style={styles.counterText}>2/5</Text>

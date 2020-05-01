@@ -16,7 +16,7 @@ function DefaultScrollView({children, background, barStyle, keyboardAvoidView, s
     const {colors} = useTheme();
     return (
         <SafeAreaView style={{flex: 1}}>
-            <StatusBar barStyle={barStyle} backgroundColor={background || colors.primary} animated/>
+            <StatusBar barStyle={barStyle} backgroundColor={background || colors.background} animated/>
             <KeyboardAvoidingView style={{flex: 1}} behavior={Platform.OS === "ios" ? "padding" : null}
                                   enabled={keyboardAvoidView}>
                 <ScrollView style={[{flex: 1}, {backgroundColor: background || colors.background}, styleScrollView]}>

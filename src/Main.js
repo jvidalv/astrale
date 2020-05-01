@@ -8,6 +8,7 @@ import {AppLoading} from "expo";
 import {Asset} from 'expo-asset';
 import InitialStackNavigation from "./navigation/InitialStackNavigation";
 import MainStackNavigation from "./navigation/MainStackNavigation";
+import * as Font from 'expo-font';
 
 /**
  * Gets active theme dark/light
@@ -33,6 +34,14 @@ const cacheImages = (images) => {
     });
 }
 
+const fetchFonts = () => Font.loadAsync({
+        'poppins_light': require('../assets/fonts/Poppins-Light.ttf'),
+        'poppins_medium': require('../assets/fonts/Poppins-Medium.ttf'),
+        'poppins_regular': require('../assets/fonts/Poppins-Regular.ttf'),
+        'poppins_thin': require('../assets/fonts/Poppins-Thin.ttf'),
+        'poppins_bold': require('../assets/fonts/Poppins-Bold.ttf')
+});
+
 const PERSISTENCE_KEY = 'NAVIGATION_STATE';
 
 /**
@@ -43,6 +52,7 @@ function Main() {
     const [isReady, setIsReady] = React.useState(true);
     const [initialState, setInitialState] = React.useState();
     const [imagesLoaded, setImagesLoaded] = React.useState(true);
+    const [fontsLoaded, setFontsLoaded] = React.useState(false);
 
     const imageAssets = cacheImages([]);
 
@@ -52,6 +62,17 @@ function Main() {
                 await Promise.all([...imageAssets]);
             } finally {
                 setImagesLoaded(true);
+            }
+        };
+        restoreState();
+    });
+
+    React.useEffect(() => {
+        const restoreState = async () => {
+            try {
+                await fetchFonts();
+            } finally {
+                setFontsLoaded(true);
             }
         };
         restoreState();
@@ -74,10 +95,9 @@ function Main() {
         }
     }, [isReady]);
 
-    if (!isReady || !imagesLoaded) {
+    if (!isReady || !imagesLoaded || !fontsLoaded) {
         return <AppLoading/>;
     }
-
     return (
         <PaperProvider theme={useTheme()}>
             <NavigationContainer

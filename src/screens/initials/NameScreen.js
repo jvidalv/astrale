@@ -3,7 +3,7 @@ import {StyleSheet, TextInput, View} from "react-native";
 import {Button, Headline, Text, TextInput as PaperTextInput} from "react-native-paper";
 import {DefaultView} from "../../components/containers";
 import Logo from "../../svgs/Logo";
-import Constellation from "../../svgs/Constellation";
+import {Backgrounds} from "../../svgs";
 import Aquarius from "../../svgs/Aquarius";
 import i18n from "i18n-js";
 
@@ -18,7 +18,7 @@ function NameScreen({navigation}) {
     return (
         <DefaultView>
             <Aquarius width={80} height={80} style={styles.aquarius}/>
-            <Constellation height={250} width={250} style={styles.constellation}/>
+            <Backgrounds.Constellation height={250} width={250} style={styles.constellation}/>
             <View style={styles.counterContainer}>
                 <View style={styles.counterView}>
                     <Text style={styles.counterText}>1/5</Text>

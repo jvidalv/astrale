@@ -16,6 +16,9 @@ const horoscope = {
         "Scorpio": "Escorpio",
         "Taurus": "Tauro",
         "Virgo": "Virgo",
+        "Love line" : "Línea del corazón",
+        "Fate line" : "Línea del destino",
+        "Life line" : "Línea de la vida",
     },
     en: {
         "Aquarius": "Aquarius",
@@ -30,6 +33,9 @@ const horoscope = {
         "Scorpio": "Scorpio",
         "Taurus": "Taurus",
         "Virgo": "Virgo",
+        "Love line" : "Love line",
+        "Fate line" : "Fate line",
+        "Life line" : "Life line",
     },
 };
 

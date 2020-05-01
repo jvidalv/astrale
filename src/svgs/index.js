@@ -11,11 +11,13 @@ import Scorpio from "./zodiac/Scorpio";
 import Taurus from "./zodiac/Taurus";
 import Virgo from "./zodiac/Virgo";
 import Stars from "./backgrounds/Stars";
+import Constellation from "./backgrounds/Constellation";
+import Telescope from "./backgrounds/Telescope";
 
 export const Zodiac = {
     Aquarius, Aries, Cancer, Capricorn, Gemini, Leo, Libra, Pisces, Sagittarius, Scorpio, Taurus, Virgo
 }
 
 export const Backgrounds = {
-    Stars
+    Stars, Constellation, Telescope
 }

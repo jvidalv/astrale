@@ -5,6 +5,7 @@ import ZodiacScreen from "../screens/main/ZodiacScreen";
 import ProfileScreen from "../screens/main/ProfileScreen";
 import {useGlobals} from "../contexts/Global";
 import CompatibilityScreen from "../screens/main/CompatibilityScreen";
+import PalmistryScreen from "../screens/main/PalmistryScreen";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -20,7 +21,6 @@ function MainStackNavigation() {
                 component={DailyScreen}
                 options={{
                     tabBarIcon: 'zodiac-aquarius',
-                    tabBarColor: 'red',
                     title : 'Aquarius'
                 }}
             />
@@ -29,17 +29,15 @@ function MainStackNavigation() {
                 component={CompatibilityScreen}
                 options={{
                     tabBarIcon: 'heart-multiple',
-                    tabBarColor: 'brown',
                     title : 'Compatibility',
 
                 }}
             />
             <Tab.Screen
                 name="Palmistry"
-                component={DailyScreen}
+                component={PalmistryScreen}
                 options={{
                     tabBarIcon: 'hand',
-                    tabBarColor: 'black',
                     title : 'Palmistry',
 
                 }}
@@ -48,10 +46,8 @@ function MainStackNavigation() {
                 name="Profile"
                 component={ProfileScreen}
                 options={{
-                    tabBarIcon: 'tune',
-                    tabBarColor: 'account-circle',
+                    tabBarIcon: 'account-box',
                     title : 'Profile',
-
                 }}
             />
         </Tab.Navigator>

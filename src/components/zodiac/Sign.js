@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {View, StyleSheet} from "react-native";
 import {Zodiac} from "../../svgs";
-import {Caption, Subheading, TouchableRipple} from "react-native-paper";
+import {Caption, Subheading, TouchableRipple, useTheme} from "react-native-paper";
 import i18n from "i18n-js";
 
 const _signs = {
@@ -35,17 +36,41 @@ const _signs = {
  */
 function Sign({sign, title, showTitle, subtitle, onPress, style, signHeight, signWidth, styleTitle, styleSubtitle}) {
     const ParsedSign = _signs[sign];
-    console.log(title, sign)
+    const {colors} = useTheme();
     return (
-        <TouchableRipple onPress={() => onPress(sign)} style={[{alignItems: 'center'}, style]}>
+        <TouchableRipple onPress={() => onPress(sign)}
+                         style={[{alignItems: 'center', justifyContent: 'center'}, style]}>
             <React.Fragment>
-                <ParsedSign width={signHeight} height={signWidth}/>
+                <View style={[{
+                    shadowColor: colors.shadow,
+                    width: signWidth,
+                    height: signHeight
+                }, styles.signContainer, styles.signShadow]}>
+                    <ParsedSign width={signHeight} height={signWidth}/>
+                </View>
                 {showTitle && <Subheading style={styleTitle}>{title ?? i18n.t(sign)}</Subheading>}
                 {subtitle && <Caption style={styleSubtitle}>{subtitle}</Caption>}
             </React.Fragment>
         </TouchableRipple>
     )
 }
+
+const styles = StyleSheet.create({
+    signShadow: {
+        shadowOffset: {
+            width: 0,
+            height: 6,
+        },
+        shadowOpacity: 0.3,
+        shadowRadius: 10,
+        elevation: 10,
+    },
+    signContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 100
+    }
+})
 
 Sign.defaultProps = {
     height: 120,
@@ -60,8 +85,8 @@ Sign.propTypes = {
     subtitle: PropTypes.string,
     onPress: PropTypes.func,
     style: PropTypes.object,
-    styleTitle : PropTypes.object,
-    styleSubtitle : PropTypes.object,
+    styleTitle: PropTypes.object,
+    styleSubtitle: PropTypes.object,
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
     height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
 };

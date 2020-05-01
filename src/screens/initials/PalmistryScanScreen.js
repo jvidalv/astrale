@@ -7,7 +7,7 @@ import {Scanner} from "../../components/animations";
 import ActivityIndicator from "react-native-paper/src/components/ActivityIndicator";
 import sleep from "../../utils/Sleep";
 import Aquarius from "../../svgs/Aquarius";
-import Constellation from "../../svgs/Constellation";
+import {Backgrounds} from "../../svgs";
 import useScanner from "../../hooks/useScanner";
 import PlatformUtils from "../../utils/Platform";
 import i18n from "i18n-js";
@@ -88,7 +88,7 @@ function PalmistryScanScreen({navigation}) {
     return (
         <DefaultView>
             <Aquarius width={80} height={80} style={styles.aquarius}/>
-            <Constellation height={250} width={250} style={styles.constellation}/>
+            <Backgrounds.Constellation height={250} width={250} style={styles.constellation}/>
             <View style={styles.counterContainer}>
                 <View style={styles.counterView}>
                     <Text style={styles.counterText}>5/5</Text>

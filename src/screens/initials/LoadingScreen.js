@@ -2,7 +2,7 @@ import React from "react";
 import {StyleSheet, View} from "react-native";
 import {Subheading, Text, useTheme, withTheme} from "react-native-paper";
 import {DefaultView} from "../../components/containers";
-import Constellation from "../../svgs/Constellation";
+import {Backgrounds} from "../../svgs";
 import SolarSystem from "../../svgs/SolarSystem";
 import Rotation from "../../components/animations/Rotation";
 import Leo from "../../svgs/Leo";
@@ -47,7 +47,7 @@ function LoadingScreen({navigation}) {
     return (
         <DefaultView>
             <Leo width={80} height={80} style={styles.leo}/>
-            <Constellation height={250} width={250} style={styles.constellation}/>
+            <Backgrounds.Constellation height={250} width={250} style={styles.constellation}/>
             <View style={{flex: 1}}/>
             <View style={styles.loadingContainer}>
                 <Rotation style={{opacity: .7}} rotate={true}>
