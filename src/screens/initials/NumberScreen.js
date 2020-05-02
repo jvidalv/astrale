@@ -6,6 +6,7 @@ import {Backgrounds} from "../../svgs";
 import Aquarius from "../../svgs/Aquarius";
 import Dices from "../../svgs/Dices";
 import i18n from "i18n-js";
+import {useGlobals} from "../../contexts/Global";
 
 /**
  * @param navigation
@@ -13,18 +14,22 @@ import i18n from "i18n-js";
  * @constructor
  */
 function NumberScreen({navigation}) {
-    const [name, setName] = React.useState();
-    const buttonDisabled = !name;
+    const [{}, dispatch] = useGlobals();
+    const [number, setNumber] = React.useState();
+    const buttonDisabled = !number;
+    const _handleContinue = () => {
+        dispatch({
+            type : 'setSession',
+            fields : {number : number}
+        })
+        navigation.push('Palmistry')
+    };
+
     return (
         <DefaultView>
             <Aquarius width={80} height={80} style={styles.aquarius}/>
             <Backgrounds.Constellation height={250} width={250} style={styles.constellation}/>
-            <View style={styles.counterContainer}>
-                <View style={styles.counterView}>
-                    <Text style={styles.counterText}>4/5</Text>
-                </View>
-            </View>
-            <View style={{flex: .5}}/>
+            <View style={{flex: .3}}/>
             <View style={styles.textContainer}>
                 <Headline style={styles.textHeadline}>{i18n.t('Your favorite number')}</Headline>
                 <Text
@@ -35,8 +40,8 @@ function NumberScreen({navigation}) {
             </View>
             <View style={styles.inputContainer}>
                 <PaperTextInput
-                    value={name}
-                    onChangeText={(text) => setName(text)}
+                    value={number}
+                    onChangeText={(text) => setNumber(text)}
                     style={styles.inputStyle}
                     underlineColor='#ffffff00'
                     keyboardType="number-pad"
@@ -46,7 +51,7 @@ function NumberScreen({navigation}) {
             </View>
             <View style={styles.buttonContainer}>
                 <Button mode="contained" disabled={buttonDisabled}
-                        onPress={() => navigation.push('Palmistry')}>{i18n.t('Continue')}</Button>
+                        onPress={_handleContinue}>{i18n.t('Continue')}</Button>
             </View>
         </DefaultView>
     );
@@ -58,15 +63,6 @@ const styles = StyleSheet.create({
     },
     aquarius: {
         zIndex: 0, position: 'absolute', top: 20, right: 20, opacity: 0.2
-    },
-    counterContainer: {
-        position: 'absolute', top: 20, left: 20
-    },
-    counterView: {
-        padding: 5, borderRadius: 5, backgroundColor: '#00000050'
-    },
-    counterText: {
-        letterSpacing: 2
     },
     textContainer: {
         flex: 1, alignSelf: 'center', paddingHorizontal: 20

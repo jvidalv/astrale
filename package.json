@@ -28,6 +28,7 @@
     "expo-linear-gradient": "^8.1.0",
     "expo-local-authentication": "~9.0.0",
     "expo-localization": "~8.1.0",
+    "expo-store-review": "^2.1.0",
     "i18n-js": "^3.5.1",
     "prop-types": "latest",
     "react": "~16.9.0",

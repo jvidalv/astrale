@@ -1,16 +1,17 @@
 import React from "react";
 import {Alert, StyleSheet, View} from "react-native";
-import {Button, Headline, ProgressBar, Text, Title, useTheme, withTheme} from "react-native-paper";
+import {Button, Headline, ProgressBar, Text, Title, useTheme} from "react-native-paper";
 import {DefaultView} from "../../components/containers";
 import {Camera} from 'expo-camera';
 import {Scanner} from "../../components/animations";
 import ActivityIndicator from "react-native-paper/src/components/ActivityIndicator";
-import sleep from "../../utils/Sleep";
+import Sleep from "../../utils/Sleep";
 import Aquarius from "../../svgs/Aquarius";
 import {Backgrounds} from "../../svgs";
 import useScanner from "../../hooks/useScanner";
 import PlatformUtils from "../../utils/Platform";
 import i18n from "i18n-js";
+import {useGlobals} from "../../contexts/Global";
 
 /**
  * @param navigation
@@ -18,6 +19,7 @@ import i18n from "i18n-js";
  * @constructor
  */
 function PalmistryScanScreen({navigation}) {
+    const [{}, dispatch] = useGlobals();
     const {colors} = useTheme();
     const [hand, setHand] = React.useState('left');
     const [scan, setScan] = React.useState(false);
@@ -56,10 +58,14 @@ function PalmistryScanScreen({navigation}) {
                 Alert.alert(i18n.t('Now place your right hand in front of the camera'),
                     null,
                     [
-                        {text: i18n.t('Ok'), onPress: () => sleep(2000).then(() => setScan(true))}
+                        {text: i18n.t('Ok'), onPress: () => Sleep(2000).then(() => setScan(true))}
                     ]
                 );
             } else {
+                dispatch({
+                    type: 'setSession',
+                    fields: {palmistry: true}
+                })
                 navigation.reset({
                     index: 0,
                     routes: [{name: 'Loading'}],
@@ -89,11 +95,6 @@ function PalmistryScanScreen({navigation}) {
         <DefaultView>
             <Aquarius width={80} height={80} style={styles.aquarius}/>
             <Backgrounds.Constellation height={250} width={250} style={styles.constellation}/>
-            <View style={styles.counterContainer}>
-                <View style={styles.counterView}>
-                    <Text style={styles.counterText}>5/5</Text>
-                </View>
-            </View>
             <View style={{flex: .2}}/>
             <View style={styles.textContainer}>
                 <Headline style={styles.textHeadline}>{i18n.t('Palmistry')}</Headline>
@@ -101,27 +102,31 @@ function PalmistryScanScreen({navigation}) {
                     style={styles.textText}>{i18n.t('{name}, to receive your palmistry readings please follow the instructions on the screen', {name: 'Josep'})}</Text>
             </View>
             {
-                !hasPermission ? <View
-                    styles={styles.cameraContainer}><Text>{i18n.t('There\'s no permission to use the camera')}</Text></View> : (
-                    <Camera pictureSize={pictureSize} onCameraReady={_handleCameraReady}
-                            ref={ref => setRefCamera(ref)}
-                            style={[styles.cameraContainer, {
-                                borderColor: colors.accent,
-                            }]} type={Camera.Constants.Type.back}>
-                        <View style={styles.cameraView}>
-                            {handDetected && scan ? <Scanner start={true} style={{
-                                borderTopWidth: 3,
-                                borderBottomWidth: 3,
-                                borderColor: colors.accent,
-                                opacity: .7
-                            }}/> : handDetected === false &&
-                                <View style={styles.cameraNoHand}>
-                                    <Title>{i18n.t('No hand')}</Title>
-                                </View>
-                            }
-                        </View>
-                    </Camera>
-                )
+                !hasPermission ? (
+                        <View
+                            styles={styles.cameraContainer}>
+                            <Text>{i18n.t('There\'s no permission to use the camera')}</Text>
+                        </View>)
+                    : (
+                        <Camera pictureSize={pictureSize} onCameraReady={_handleCameraReady}
+                                ref={ref => setRefCamera(ref)}
+                                style={[styles.cameraContainer, {
+                                    borderColor: colors.accent,
+                                }]} type={Camera.Constants.Type.back}>
+                            <View style={styles.cameraView}>
+                                {handDetected && scan ? <Scanner start={true} style={{
+                                    borderTopWidth: 3,
+                                    borderBottomWidth: 3,
+                                    borderColor: colors.accent,
+                                    opacity: .7
+                                }}/> : handDetected === false &&
+                                    <View style={styles.cameraNoHand}>
+                                        <Title>{i18n.t('No hand')}</Title>
+                                    </View>
+                                }
+                            </View>
+                        </Camera>
+                    )
             }
             <View style={styles.progressContainer}>
                 <View style={styles.progressBarContainer}>
@@ -152,15 +157,6 @@ const styles = StyleSheet.create({
     aquarius: {
         zIndex: 0, position: 'absolute', top: 20, right: 20, opacity: 0.2
     },
-    counterContainer: {
-        position: 'absolute', top: 20, left: 20
-    },
-    counterView: {
-        padding: 5, borderRadius: 5, backgroundColor: '#00000050'
-    },
-    counterText: {
-        letterSpacing: 2
-    },
     textContainer: {
         flex: .5, alignSelf: 'center', paddingHorizontal: 20
     },
@@ -187,9 +183,6 @@ const styles = StyleSheet.create({
     },
     cameraNoHand: {
         flex: 1, justifyContent: 'center', alignItems: 'center'
-    },
-    inputStyle: {
-        borderRadius: 5, textAlign: 'center',
     },
     buttonContainer: {
         flex: 1, paddingHorizontal: 20, paddingTop: 35, justifyContent: 'flex-end', marginBottom: 20

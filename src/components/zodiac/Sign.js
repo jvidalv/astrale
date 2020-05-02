@@ -39,10 +39,11 @@ function Sign({sign, title, showTitle, subtitle, onPress, style, signHeight, sig
     const {colors} = useTheme();
     return (
         <TouchableRipple onPress={() => onPress(sign)}
+                         underlayColor="#ffffff00" rippleColor="#ffffff00"
                          style={[{alignItems: 'center', justifyContent: 'center'}, style]}>
             <React.Fragment>
                 <View style={[{
-                    shadowColor: colors.shadow,
+                    shadowColor: '#000000',
                     width: signWidth,
                     height: signHeight
                 }, styles.signContainer, styles.signShadow]}>

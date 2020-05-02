@@ -1,14 +1,15 @@
 import React from "react";
 import {StyleSheet, View} from "react-native";
-import {Button, Headline, Paragraph, Subheading, Surface, Title} from "react-native-paper";
+import {ActivityIndicator, Button, FAB, Paragraph, Subheading, Surface, Title, useTheme} from "react-native-paper";
 import {DefaultScrollView} from "../../components/containers";
-import {Backgrounds, Zodiac} from "../../svgs";
-import {useGlobals} from "../../contexts/Global";
-import {ThemeUtils} from "../../utils";
+import {Backgrounds} from "../../svgs";
 import {Sign} from "../../components/zodiac";
 import ShadowHeadline from "../../components/paper/ShadowHeadline";
 import {useIsDark} from "../../hooks/useTheme";
 import i18n from "i18n-js";
+import useFetch from "../../hooks/useFetch";
+import ShowFromTop from "../../components/animations/ShowFromTop";
+import {useGlobals} from "../../contexts/Global";
 
 /**
  * @param navigation
@@ -16,97 +17,143 @@ import i18n from "i18n-js";
  * @constructor
  */
 function DailyScreen({navigation}) {
+    const [{session}] = useGlobals();
+    console.log(session)
+
+    const [fabOpen, setFabOpen] = React.useState(false);
+    const {data, loading, error} = useFetch();
+    const {colors} = useTheme();
     return (
         <React.Fragment>
             <DefaultScrollView barStyle={useIsDark() ? 'light-content' : 'dark-content'}>
                 <Backgrounds.Stars style={styles.backgroundStars}/>
                 <View style={styles.headerContainer}>
-                    <Sign sign="Aquarius" showTitle={false} signWidth={80} signHeight={80}/>
+                    <Sign sign={session.sign} showTitle={false} signWidth={80} signHeight={80}/>
                     <ShadowHeadline style={styles.headerHeadline}>
-                        {i18n.t('Aquarius')}
+                        {i18n.t(session.sign)}
                     </ShadowHeadline>
                     <Subheading>
                         Wednesday, 29 april, 2020
                     </Subheading>
                 </View>
-                <View style={styles.surfaceContainer}>
-                    <Surface style={styles.surfaceSurface}>
-                        <Button icon="heart" style={styles.surfaceButton}
-                                labelStyle={styles.surfaceButtonLabel}>{i18n.t('Love')}</Button>
-                        <Paragraph style={styles.surfaceParagraph}>
-                            Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece
-                            of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock,
-                            a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure
-                            Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the
-                            word in classical literature, discovered the undoubtable source
-                        </Paragraph>
-                    </Surface>
-                </View>
-                <View style={styles.surfaceContainer}>
-                    <Surface style={styles.surfaceSurface}>
-                        <Button icon="briefcase" style={styles.surfaceButton}
-                                labelStyle={styles.surfaceButtonLabel}>{i18n.t('Work')}</Button>
-                        <Paragraph style={styles.surfaceParagraph}>
-                            It has roots in a piece
-                            of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock,
-                            a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure
-                            Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the
-                            word in classical literature, discovered the undoubtable source
-                        </Paragraph>
-                    </Surface>
-                </View>
-                <View style={styles.surfaceContainer}>
-                    <Surface style={styles.surfaceSurface}>
-                        <Button icon="food-apple" style={styles.surfaceButton}
-                                labelStyle={styles.surfaceButtonLabel}>{i18n.t('Health')}</Button>
-                        <Paragraph style={styles.surfaceParagraph}>
-                            Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece
-                            of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock,
-                            a Latin professor at Hampden-Sydney College in Virginia.
-                        </Paragraph>
-                    </Surface>
-                </View>
-                <View style={styles.surfaceContainer}>
-                    <Surface style={styles.surfaceSurface}>
-                        <Button style={styles.surfaceButton}
-                                labelStyle={styles.surfaceButtonLabel}>{i18n.t('Today you love')}</Button>
-                        <View style={styles.bottomThreeContainer}>
-                            <Sign sign={'Scorpio'} signHeight={100} styleTitle={{fontSize: 20, marginTop: 15}}/>
-                            <Sign sign={'Taurus'} signHeight={100} styleTitle={{fontSize: 20, marginTop: 15}}/>
-                        </View>
-                    </Surface>
-                </View>
-                <View style={styles.surfaceContainer}>
-                    <Surface style={styles.surfaceSurface}>
-                        <Button style={styles.surfaceButton}
-                                labelStyle={styles.surfaceButtonLabel}>{i18n.t('Today you hate')}</Button>
-                        <View style={styles.bottomThreeContainer}>
-                            <Sign sign={'Libra'} signHeight={100} styleTitle={{fontSize: 20, marginTop: 15}}/>
-                            <Sign sign={'Leo'} signHeight={100} styleTitle={{fontSize: 20, marginTop: 15}}/>
-                        </View>
-                    </Surface>
-                </View>
-                <View style={styles.surfaceContainer}>
-                    <Surface style={styles.surfaceSurface}>
-                        <Button style={styles.surfaceButton}
-                                labelStyle={styles.surfaceButtonLabel}>{i18n.t('Lucky numbers')}</Button>
-                        <View style={styles.bottomThreeContainer}>
-                            <View style={{alignItems: 'center'}}>
-                                <Title style={{fontSize: 26}}>25</Title>
-                            </View>
-                            <View style={{alignItems: 'center'}}>
-                                <Title style={{fontSize: 26}}>6</Title>
-                            </View>
-                            <View style={{alignItems: 'center'}}>
-                                <Title style={{fontSize: 26}}>32</Title>
-                            </View>
-                        </View>
-                    </Surface>
-                </View>
-                <View style={{height: 20}}/>
+                {
+                    loading ? <ActivityIndicator size="large" style={{flex: 1, height: 400}}/>
+                        : (
+                            <ShowFromTop>
+                                <View style={styles.surfaceContainer}>
+                                    <Surface style={styles.surfaceSurface}>
+                                        <Button icon="heart" style={styles.surfaceButton}
+                                                labelStyle={styles.surfaceButtonLabel}>{i18n.t('Love')}</Button>
+                                        <Paragraph style={styles.surfaceParagraph}>
+                                            Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots
+                                            in a
+                                            piece
+                                            of classical Latin literature from 45 BC, making it over 2000 years old. Richard
+                                            McClintock,
+                                            a Latin professor at Hampden-Sydney College in Virginia, looked up one of the
+                                            more
+                                            obscure
+                                            Latin words, consectetur, from a Lorem Ipsum passage, and going through the
+                                            cites of
+                                            the
+                                            word in classical literature, discovered the undoubtable source
+                                        </Paragraph>
+                                    </Surface>
+                                </View>
+                                <View style={styles.surfaceContainer}>
+                                    <Surface style={styles.surfaceSurface}>
+                                        <Button icon="briefcase" style={styles.surfaceButton}
+                                                labelStyle={styles.surfaceButtonLabel}>{i18n.t('Work')}</Button>
+                                        <Paragraph style={styles.surfaceParagraph}>
+                                            It has roots in a piece
+                                            of classical Latin literature from 45 BC, making it over 2000 years old. Richard
+                                            McClintock,
+                                            a Latin professor at Hampden-Sydney College in Virginia, looked up one of the
+                                            more obscure
+                                            Latin words, consectetur, from a Lorem Ipsum passage, and going through the
+                                            cites of the
+                                            word in classical literature, discovered the undoubtable source
+                                        </Paragraph>
+                                    </Surface>
+                                </View>
+                                <View style={styles.surfaceContainer}>
+                                    <Surface style={styles.surfaceSurface}>
+                                        <Button icon="food-apple" style={styles.surfaceButton}
+                                                labelStyle={styles.surfaceButtonLabel}>{i18n.t('Health')}</Button>
+                                        <Paragraph style={styles.surfaceParagraph}>
+                                            Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots
+                                            in a piece
+                                            of classical Latin literature from 45 BC, making it over 2000 years old. Richard
+                                            McClintock,
+                                            a Latin professor at Hampden-Sydney College in Virginia.
+                                        </Paragraph>
+                                    </Surface>
+                                </View>
+                                <View style={styles.surfaceContainer}>
+                                    <Surface style={styles.surfaceSurface}>
+                                        <Button style={styles.surfaceButton}
+                                                labelStyle={styles.surfaceButtonLabel}>{i18n.t('Today you love')}</Button>
+                                        <View style={styles.bottomThreeContainer}>
+                                            <Sign sign={'Scorpio'} signHeight={100}
+                                                  styleTitle={{fontSize: 20, marginTop: 15}}/>
+                                            <Sign sign={'Taurus'} signHeight={100}
+                                                  styleTitle={{fontSize: 20, marginTop: 15}}/>
+                                        </View>
+                                    </Surface>
+                                </View>
+                                <View style={styles.surfaceContainer}>
+                                    <Surface style={styles.surfaceSurface}>
+                                        <Button style={styles.surfaceButton}
+                                                labelStyle={styles.surfaceButtonLabel}>{i18n.t('Today you hate')}</Button>
+                                        <View style={styles.bottomThreeContainer}>
+                                            <Sign sign={'Libra'} signHeight={100}
+                                                  styleTitle={{fontSize: 20, marginTop: 15}}/>
+                                            <Sign sign={'Leo'} signHeight={100} styleTitle={{fontSize: 20, marginTop: 15}}/>
+                                        </View>
+                                    </Surface>
+                                </View>
+                                <View style={styles.surfaceContainer}>
+                                    <Surface style={styles.surfaceSurface}>
+                                        <Button style={styles.surfaceButton}
+                                                labelStyle={styles.surfaceButtonLabel}>{i18n.t('Lucky numbers')}</Button>
+                                        <View style={styles.bottomThreeContainer}>
+                                            <View style={{alignItems: 'center'}}>
+                                                <Title style={styles.luckyNumbersTitle}>25</Title>
+                                            </View>
+                                            <View style={{alignItems: 'center'}}>
+                                                <Title style={styles.luckyNumbersTitle}>6</Title>
+                                            </View>
+                                            <View style={{alignItems: 'center'}}>
+                                                <Title style={styles.luckyNumbersTitle}>32</Title>
+                                            </View>
+                                        </View>
+                                    </Surface>
+                                </View>
+                                <View style={{height: 20}}/>
+                            </ShowFromTop>
+                        )
+                }
             </DefaultScrollView>
+            <FAB.Group
+                open={fabOpen}
+                icon={fabOpen ? 'arrow-up-circle' : 'plus-circle'}
+                actions={[
+                    {
+                        style: {backgroundColor: colors.primary},
+                        icon: 'share',
+                        label: i18n.t('Share'),
+                        onPress: () => console.log('Pressed share')
+                    },
+                    {
+                        icon: 'swap-horizontal',
+                        label: i18n.t('Check other signs'),
+                        onPress: () => navigation.navigate('Signs')
+                    },
+                ]}
+                onStateChange={() => null}
+                onPress={() => setFabOpen(fabOpen => !fabOpen)}
+            />
         </React.Fragment>
-
     );
 }
 
@@ -118,7 +165,7 @@ const styles = StyleSheet.create({
         alignItems: 'center', justifyContent: 'center', marginHorizontal: 20, marginVertical: 20
     },
     headerHeadline: {
-        fontWeight: 'bold', fontSize: 30, lineHeight: 34, marginTop: 10
+        fontWeight: 'bold', fontSize: 30, lineHeight: 34, marginTop: 20
     },
     surfaceContainer: {
         marginTop: 20, marginHorizontal: 20
@@ -138,6 +185,9 @@ const styles = StyleSheet.create({
     bottomThreeContainer: {
         flexDirection: 'row', justifyContent: 'space-around'
     },
+    luckyNumbersTitle: {
+        fontSize: 26
+    }
 })
 
 

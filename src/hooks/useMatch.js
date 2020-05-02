@@ -1,5 +1,5 @@
 import React from "react";
-import sleep from "../utils/Sleep";
+import Sleep from "../utils/Sleep";
 
 const _matches = [
     {name: 'Intimate', icon: 'account-multiple-plus-outline', start: 0, end: 91},
@@ -15,7 +15,7 @@ const useMatch = () => {
 
     React.useEffect(() => {
         const increase = async (values) => {
-            await sleep(.0001);
+            await Sleep(.0001);
             let end = 0;
             return {
                 matches: values.map((val) => {

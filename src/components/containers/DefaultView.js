@@ -1,6 +1,6 @@
 import React from "react";
-import {KeyboardAvoidingView, Platform, SafeAreaView, StatusBar, StyleSheet, View} from "react-native";
-import {withTheme} from 'react-native-paper';
+import {KeyboardAvoidingView, Platform, SafeAreaView, StatusBar, View} from "react-native";
+import {useTheme} from 'react-native-paper';
 import PropTypes from "prop-types";
 
 /**
@@ -13,14 +13,14 @@ import PropTypes from "prop-types";
  * @returns {*}
  * @constructor
  */
-function DefaultView({children, theme, background, barStyle, keyboardAvoidView, styleView}) {
-    const {colors} = theme;
+function DefaultView({children, background, barStyle, keyboardAvoidView, styleView}) {
+    const {colors} = useTheme();
     return (
         <SafeAreaView style={{flex: 1}}>
-            <StatusBar barStyle={barStyle} backgroundColor={background || colors.primary}/>
+            <StatusBar barStyle={barStyle} backgroundColor={background || colors.background} animated/>
             <KeyboardAvoidingView style={{flex: 1}} behavior={Platform.OS === "ios" ? "padding" : null}
                                   enabled={keyboardAvoidView}>
-                <View style={[styles.view, {backgroundColor: background || colors.background}, styleView]}>
+                <View style={[{flex: 1}, {backgroundColor: background || colors.background}, styleView]}>
                     {children}
                 </View>
             </KeyboardAvoidingView>
@@ -35,14 +35,8 @@ DefaultView.propTypes = {
 };
 
 DefaultView.defaultProps = {
-    barStyle: "light-content",
     keyboardAvoidView: true,
+    barStyle: "light-content",
 };
-
-const styles = StyleSheet.create({
-    view: {
-        flex: 1,
-    },
-});
 
 export default DefaultView;

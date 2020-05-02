@@ -1,7 +1,7 @@
 import React from "react";
 import {StyleSheet, View} from "react-native";
 import {DefaultScrollView} from "../../components/containers";
-import {Button, Paragraph, ProgressBar, Surface, Text, useTheme} from "react-native-paper";
+import {ActivityIndicator, Button, Paragraph, ProgressBar, Surface, Text, useTheme} from "react-native-paper";
 import {Backgrounds} from "../../svgs";
 import HoroscopeSigns from "../../constants/zodiac_signs";
 import {Sign} from "../../components/zodiac";
@@ -9,6 +9,8 @@ import ShadowHeadline from "../../components/paper/ShadowHeadline";
 import useMatch from "../../hooks/useMatch";
 import {useIsDark} from "../../hooks/useTheme";
 import i18n from "i18n-js";
+import useFetch from "../../hooks/useFetch";
+import ShowFromTop from "../../components/animations/ShowFromTop";
 
 /**
  * Progress bars from match
@@ -22,11 +24,11 @@ const Bars = ({start, name, icon}) => {
     const {colors} = useTheme();
     return (
         <React.Fragment>
-            <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-                <Button theme={{colors: {primary: colors.text}}} icon={icon}>{name}</Button>
+            <View style={styles.mathProgressText}>
+                <Button theme={{colors: {primary: colors.text}}} icon={icon}>{i18n.t(name)}</Button>
                 <Text>{start}%</Text>
             </View>
-            <ProgressBar progress={start / 100} style={{borderRadius: 10, height: 5, marginBottom: 3}}/>
+            <ProgressBar progress={start / 100} style={styles.matchProgressBar}/>
         </React.Fragment>
     )
 };
@@ -38,32 +40,43 @@ const Bars = ({start, name, icon}) => {
  */
 const MatchContent = () => {
     const matches = useMatch();
+    const {data, loading, error} = useFetch();
 
     return (
         <View style={styles.surfaceContainer}>
-            <Surface style={styles.surfaceSurface}>
-                <Paragraph style={styles.surfaceParagraph}>
-                    Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece
-                    of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock,
-                    a Latin professor at Hampden-Sydney College in Virginia.
-                    Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece
-                    of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock,
-                    a Latin professor at Hampden-Sydney College in Virginia.
-                </Paragraph>
-            </Surface>
-            <View style={{marginVertical: 20}}>
-                {
-                    matches.map((props, index) => <Bars key={index} {...props}/>)
-                }
-
-            </View>
+            {loading ? <React.Fragment><ActivityIndicator size="large" style={{flex: 1, height: 200}}/><View
+                    style={{height: 500}}/></React.Fragment> :
+                (
+                    <ShowFromTop>
+                        <Surface style={styles.surfaceSurface}>
+                            <Paragraph style={styles.surfaceParagraph}>
+                                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a
+                                piece
+                                of classical Latin literature from 45 BC, making it over 2000 years old. Richard
+                                McClintock,
+                                a Latin professor at Hampden-Sydney College in Virginia.
+                                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a
+                                piece
+                                of classical Latin literature from 45 BC, making it over 2000 years old. Richard
+                                McClintock,
+                                a Latin professor at Hampden-Sydney College in Virginia.
+                            </Paragraph>
+                        </Surface>
+                        <View style={{marginVertical: 20}}>
+                            {
+                                matches.map((props, index) => <Bars key={index} {...props}/>)
+                            }
+                        </View>
+                    </ShowFromTop>
+                )
+            }
         </View>
     )
 };
 
 /**
  * Each sign on body
- * @param onPress
+ * @param onPress {func}
  * @returns {*}
  * @constructor
  */
@@ -104,12 +117,17 @@ function CompatibilityScreen({navigation}) {
                 </View>
                 <View style={styles.matchCirclesContainer}>
                     {
-                        selectedSigns[0] ?
-                            <Sign sign={selectedSigns[0]} onPress={_handleSignTopPress} showTitle={false}
-                                  signHeight={100}
-                                  signWidth={100}/> :
+                        selectedSigns[0] ? (
+                                <Sign sign={selectedSigns[0]}
+                                      onPress={_handleSignTopPress}
+                                      showTitle={false}
+                                      signHeight={100}
+                                      signWidth={100}
+                                />
+                            )
+                            :
                             <View style={[styles.matchCircle, {
-                                shadowColor: colors.shadow,
+                                shadowColor: '#000000',
                                 backgroundColor: colors.surface,
                                 borderColor: colors.text,
                             }]}>
@@ -118,14 +136,22 @@ function CompatibilityScreen({navigation}) {
                                 </Text>
                             </View>
                     }
-                    <View style={{justifyContent: 'center', flex: .3, alignItems: 'center'}}><Text
-                        style={{fontSize: 22}}>🔥</Text></View>
+                    <View style={styles.matchSeparator}>
+                        <Text style={{fontSize: 22}}>🔥</Text>
+                    </View>
                     {
-                        selectedSigns[1] ?
-                            <Sign onPress={_handleSignTopPress} sign={selectedSigns[1]} showTitle={false}
-                                  signHeight={100} signWidth={100}/> :
+                        selectedSigns[1] ? (
+                                <Sign
+                                    onPress={_handleSignTopPress}
+                                    sign={selectedSigns[1]}
+                                    showTitle={false}
+                                    signHeight={100}
+                                    signWidth={100}
+                                />
+                            )
+                            :
                             <View style={[styles.matchCircle, {
-                                shadowColor: colors.shadow,
+                                shadowColor: '#000000',
                                 backgroundColor: colors.surface,
                                 borderColor: colors.text,
 
@@ -139,10 +165,11 @@ function CompatibilityScreen({navigation}) {
                 {
                     selectedSigns.length === 2 ? <MatchContent/> : <SignsContent onPress={_handleSignPress}/>
                 }
-                <Backgrounds.Constellation height={450} width={450} color={colors.text} dotColor={colors.primary}
-                                           style={styles.constellation}/>
+                <Backgrounds.Constellation
+                    height={450} width={450}
+                    color={colors.text} dotColor={colors.primary}
+                    style={styles.constellation}/>
             </DefaultScrollView>
-
         </React.Fragment>
     );
 }
@@ -197,6 +224,15 @@ const styles = StyleSheet.create({
     surfaceParagraph: {
         fontSize: 14, lineHeight: 22, letterSpacing: 1,
     },
+    mathProgressText: {
+        flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'
+    },
+    matchProgressBar: {
+        borderRadius: 10, height: 5, marginBottom: 3
+    },
+    matchSeparator: {
+        justifyContent: 'center', flex: .3, alignItems: 'center'
+    }
 })
 
 export default CompatibilityScreen;

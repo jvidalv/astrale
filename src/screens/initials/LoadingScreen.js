@@ -1,12 +1,15 @@
 import React from "react";
 import {StyleSheet, View} from "react-native";
-import {Subheading, Text, useTheme, withTheme} from "react-native-paper";
+import {Subheading, Text, useTheme} from "react-native-paper";
 import {DefaultView} from "../../components/containers";
 import {Backgrounds} from "../../svgs";
 import SolarSystem from "../../svgs/SolarSystem";
 import Rotation from "../../components/animations/Rotation";
 import Leo from "../../svgs/Leo";
 import i18n from "i18n-js";
+import {useGlobals} from "../../contexts/Global";
+import Storer from "../../utils/Storer";
+import {SESSION_KEY} from "../../constants/session";
 
 /**
  * @param navigation
@@ -14,6 +17,7 @@ import i18n from "i18n-js";
  * @constructor
  */
 function LoadingScreen({navigation}) {
+    const [{session}, dispatch] = useGlobals();
     const {colors} = useTheme();
     const [phrase, setPhrase] = React.useState(0);
     const [number, setNumber] = React.useState(1);
@@ -31,6 +35,10 @@ function LoadingScreen({navigation}) {
             if (number < 100) {
                 setNumber(number => number + 1);
             } else {
+                const preSession = {...session, ...{days: 1, daysRow: 1}}
+                Storer.set(SESSION_KEY, preSession).then(() => {
+                    dispatch({type: 'setIsNew'})
+                });
                 clearInterval(intervalNumber);
             }
             if (number % 15 === 0 && phrase < 5) {

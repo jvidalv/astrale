@@ -8,6 +8,7 @@ import {DateUtils, Platform} from "../../utils";
 import RNDateTimePicker from "@react-native-community/datetimepicker";
 import Logo from "../../svgs/Logo";
 import i18n from "i18n-js";
+import {useGlobals} from "../../contexts/Global";
 
 /**
  * @param navigation
@@ -15,28 +16,29 @@ import i18n from "i18n-js";
  * @constructor
  */
 function BirthDateScreen({navigation}) {
+    const [{}, dispatch] = useGlobals();
     const [date, setDate] = React.useState(new Date());
     const [show, setShow] = React.useState(true);
-
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
         setShow(Platform.isIos);
         setDate(currentDate);
     };
-
     const showDatePicker = () => {
         setShow(true);
+    };
+    const _handleContinue = () => {
+        dispatch({
+            type : 'setSession',
+            fields : {birthDate : date.getTime()}
+        })
+        navigation.push('Sex')
     };
 
     return (
         <DefaultView>
             <Scorpio width={80} height={80} style={styles.scorpio}/>
             <Backgrounds.Constellation height={250} width={250} style={styles.constellation}/>
-            <View style={styles.counterContainer}>
-                <View style={styles.counterView}>
-                    <Text style={styles.counterText}>2/5</Text>
-                </View>
-            </View>
             <View style={{flex: 1}}/>
             <View style={styles.textContainer}>
                 <Headline style={styles.textHeadline}>{i18n.t('Your date of birth')}</Headline>
@@ -68,7 +70,7 @@ function BirthDateScreen({navigation}) {
             </View>
             <View style={styles.buttonContainer}>
                 <Button mode="contained" disabled={!date}
-                        onPress={() => navigation.push('Sex')}>{i18n.t('Continue')}</Button>
+                        onPress={_handleContinue}>{i18n.t('Continue')}</Button>
             </View>
         </DefaultView>
     );
@@ -80,15 +82,6 @@ const styles = StyleSheet.create({
     },
     scorpio: {
         zIndex: 0, position: 'absolute', top: 20, right: 20, opacity: 0.2
-    },
-    counterContainer: {
-        position: 'absolute', top: 20, left: 20
-    },
-    counterView: {
-        padding: 5, borderRadius: 5, backgroundColor: '#00000050'
-    },
-    counterText: {
-        letterSpacing: 2
     },
     textContainer: {
         flex: 1, alignSelf: 'center', paddingHorizontal: 20

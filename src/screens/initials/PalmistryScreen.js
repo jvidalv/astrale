@@ -17,11 +17,6 @@ function PalmistryScreen({navigation}) {
         <DefaultView>
             <Aquarius width={80} height={80} style={styles.aquarius}/>
             <Backgrounds.Constellation height={250} width={250} style={styles.constellation}/>
-            <View style={styles.counterContainer}>
-                <View style={styles.counterView}>
-                    <Text style={styles.counterText}>5/5</Text>
-                </View>
-            </View>
             <View style={{flex: .5}}/>
             <View style={styles.textContainer}>
                 <Headline style={styles.textHeadline}>{i18n.t('Palmistry')}</Headline>
@@ -49,15 +44,6 @@ const styles = StyleSheet.create({
     },
     aquarius: {
         zIndex: 0, position: 'absolute', top: 20, right: 20, opacity: 0.2
-    },
-    counterContainer: {
-        position: 'absolute', top: 20, left: 20
-    },
-    counterView: {
-        padding: 5, borderRadius: 5, backgroundColor: '#00000050'
-    },
-    counterText: {
-        letterSpacing: 2
     },
     textContainer: {
         flex: 1, alignSelf: 'center', paddingHorizontal: 20

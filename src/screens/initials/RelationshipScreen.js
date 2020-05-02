@@ -10,6 +10,7 @@ import InLove from "../../svgs/InLove";
 import ItsDifficult from "../../svgs/ItsDifficult";
 import Taurus from "../../svgs/Taurus";
 import i18n from "i18n-js";
+import {useGlobals} from "../../contexts/Global";
 
 /**
  * @param navigation
@@ -17,17 +18,21 @@ import i18n from "i18n-js";
  * @constructor
  */
 function RelationshipScreen({navigation}) {
+    const [{}, dispatch] = useGlobals();
     const [relationshipStatus, setRelationshipStatus] = React.useState('');
     const buttonDisabled = !relationshipStatus;
+    const _handleContinue = () => {
+        dispatch({
+            type : 'setSession',
+            fields : {relationship : relationshipStatus}
+        })
+        navigation.push('Number')
+    };
+
     return (
         <DefaultView>
             <Taurus width={80} height={80} style={styles.taurus}/>
             <Backgrounds.Constellation height={250} width={250} style={styles.constellation}/>
-            <View style={styles.counterContainer}>
-                <View style={styles.counterView}>
-                    <Text style={styles.counterText}>3/5</Text>
-                </View>
-            </View>
             <View style={{flex: .4}}/>
             <View style={styles.textContainer}>
                 <Headline style={styles.textHeadline}>{i18n.t('What is your relationship status')}</Headline>
@@ -35,16 +40,16 @@ function RelationshipScreen({navigation}) {
                     style={styles.textText}>{i18n.t("{name}, to give you accurate and personal information we need to know some info", {name: 'Josep'})}</Text>
             </View>
             <View style={styles.sexContainer}>
-                <TouchableRipple onPress={() => setRelationshipStatus('married')} rippleColor="rgba(0, 0, 0, .1)">
+                <TouchableRipple onPress={() => setRelationshipStatus('married')} rippleColor="rgba(0,0,0,0)">
                     <View>
-                        <Married width={100} style={{opacity: relationshipStatus === 'married' ? 1 : 0.5}}/>
+                        <Married width={100} style={{opacity: relationshipStatus === 'Married' ? 1 : 0.5}}/>
                         <Text
                             style={styles.sexText}>{i18n.t('Married')}</Text>
                     </View>
                 </TouchableRipple>
-                <TouchableRipple onPress={() => setRelationshipStatus('single')} rippleColor="rgba(0, 0, 0, .1)">
+                <TouchableRipple onPress={() => setRelationshipStatus('Single')} rippleColor="rgba(0,0,0,0)">
                     <View>
-                        <Cool width={100} style={{opacity: relationshipStatus === 'single' ? 1 : 0.5}}/>
+                        <Cool width={100} style={{opacity: relationshipStatus === 'Single' ? 1 : 0.5}}/>
                         <Text
                             style={styles.sexText}>{i18n.t('Single')}</Text>
                     </View>
@@ -52,22 +57,22 @@ function RelationshipScreen({navigation}) {
             </View>
             <View style={{flex: .1}}/>
             <View style={styles.sexContainer}>
-                <TouchableRipple onPress={() => setRelationshipStatus('in love')} rippleColor="rgba(0, 0, 0, .1)">
+                <TouchableRipple onPress={() => setRelationshipStatus('In love')} rippleColor="rgba(0,0,0,0)">
                     <View>
-                        <InLove width={100} style={{opacity: relationshipStatus === 'in love' ? 1 : 0.5}}/>
+                        <InLove width={100} style={{opacity: relationshipStatus === 'In love' ? 1 : 0.5}}/>
                         <Text style={styles.sexText}>{i18n.t('In love')}</Text>
                     </View>
                 </TouchableRipple>
-                <TouchableRipple onPress={() => setRelationshipStatus('its difficult')} rippleColor="rgba(0, 0, 0, .1)">
+                <TouchableRipple onPress={() => setRelationshipStatus('It\'s difficult')} rippleColor="rgba(0,0,0,0)">
                     <View>
-                        <ItsDifficult width={100} style={{opacity: relationshipStatus === 'its difficult' ? 1 : 0.5}}/>
+                        <ItsDifficult width={100} style={{opacity: relationshipStatus === 'It\'s difficult' ? 1 : 0.5}}/>
                         <Text style={styles.sexText}>{i18n.t('It\'s difficult')}</Text>
                     </View>
                 </TouchableRipple>
             </View>
             <View style={styles.buttonContainer}>
                 <Button mode="contained" disabled={buttonDisabled}
-                        onPress={() => navigation.push('Number')}>{i18n.t('Continue')}</Button>
+                        onPress={_handleContinue}>{i18n.t('Continue')}</Button>
             </View>
         </DefaultView>
     );
@@ -79,15 +84,6 @@ const styles = StyleSheet.create({
     },
     taurus: {
         zIndex: 0, position: 'absolute', top: 20, right: 20, opacity: 0.2
-    },
-    counterContainer: {
-        position: 'absolute', top: 20, left: 20
-    },
-    counterView: {
-        padding: 5, borderRadius: 5, backgroundColor: '#00000050'
-    },
-    counterText: {
-        letterSpacing: 2
     },
     textContainer: {
         flex: 1, alignSelf: 'center', paddingHorizontal: 20

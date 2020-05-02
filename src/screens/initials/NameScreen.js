@@ -1,11 +1,12 @@
 import React from "react";
 import {StyleSheet, TextInput, View} from "react-native";
-import {Button, Headline, Text, TextInput as PaperTextInput} from "react-native-paper";
+import {Button, Headline, Text, TextInput as PaperTextInput, useTheme} from "react-native-paper";
 import {DefaultView} from "../../components/containers";
 import Logo from "../../svgs/Logo";
 import {Backgrounds} from "../../svgs";
 import Aquarius from "../../svgs/Aquarius";
 import i18n from "i18n-js";
+import {useGlobals} from "../../contexts/Global";
 
 /**
  * @param navigation
@@ -13,17 +14,21 @@ import i18n from "i18n-js";
  * @constructor
  */
 function NameScreen({navigation}) {
+    const [{}, dispatch] = useGlobals();
     const [name, setName] = React.useState();
     const buttonDisabled = !name || name.length < 2;
+    const _handleContinue = () => {
+        dispatch({
+            type : 'setSession',
+            fields : {name : name}
+        })
+        navigation.push('BirthDate')
+    }
+
     return (
         <DefaultView>
             <Aquarius width={80} height={80} style={styles.aquarius}/>
             <Backgrounds.Constellation height={250} width={250} style={styles.constellation}/>
-            <View style={styles.counterContainer}>
-                <View style={styles.counterView}>
-                    <Text style={styles.counterText}>1/5</Text>
-                </View>
-            </View>
             <View style={{flex: 1}}/>
             <View style={styles.textContainer}>
                 <Headline style={styles.textHeadline}>{i18n.t('What\'s your name?')}</Headline>
@@ -44,7 +49,7 @@ function NameScreen({navigation}) {
             </View>
             <View style={styles.buttonContainer}>
                 <Button mode="contained" disabled={buttonDisabled}
-                        onPress={() => navigation.push('BirthDate')}>{i18n.t('Continue')}</Button>
+                        onPress={_handleContinue}>{i18n.t('Continue')}</Button>
             </View>
         </DefaultView>
     );
@@ -56,15 +61,6 @@ const styles = StyleSheet.create({
     },
     aquarius: {
         zIndex: 0, position: 'absolute', top: 20, right: 20, opacity: 0.2
-    },
-    counterContainer: {
-        position: 'absolute', top: 20, left: 20
-    },
-    counterView: {
-        padding: 5, borderRadius: 5, backgroundColor: '#00000050'
-    },
-    counterText: {
-        letterSpacing: 2
     },
     textContainer: {
         flex: 1, alignSelf: 'center', paddingHorizontal: 20

@@ -7,6 +7,11 @@ import ShadowHeadline from "../../components/paper/ShadowHeadline";
 import i18n from "i18n-js";
 import {useIsDark} from "../../hooks/useTheme";
 import {Backgrounds} from "../../svgs";
+import useRate from "../../hooks/useRate";
+import useShare from "../../hooks/useShare";
+import {DateUtils} from "../../utils";
+import Storer from "../../utils/Storer";
+import {SESSION_KEY} from "../../constants/session";
 
 /**
  * @param navigation
@@ -14,26 +19,39 @@ import {Backgrounds} from "../../svgs";
  * @constructor
  */
 function ProfileScreen({navigation}) {
+    const [{session}, dispatch] = useGlobals();
+    const {name, sign, birthDate, number, relationship, sex, days, daysRow} = session;
     const {colors} = useTheme();
-    const [{theme}, dispatch] = useGlobals();
+    const {setRate} = useRate();
+    const {setStartShare} = useShare('Proba', 'https://proba.com');
+
+    const isDark = useIsDark();
     const _handleDarkThemeChange = () => {
         dispatch({
             'type': 'switchTheme',
-            'theme': theme === 'dark' ? 'light' : 'dark',
+            'theme': isDark ? 'light' : 'dark',
         })
     };
-    const _handleNotificationsChange = () => {
-
+    const _handleLogOut = async () => {
+        await Storer.delete(SESSION_KEY);
+        dispatch({ type: 'setLogOut'});
+        navigation.navigate('Name')
     };
+    const _handleNotificationsChange = () => {
+        //todo
+    };
+    const _handleRatePress = async () => setRate(true);
+    const _handleSharePress = async () => setStartShare(true);
+
     return (
         <DefaultScrollView barStyle={useIsDark() ? 'light-content' : 'dark-content'}>
             <Backgrounds.Telescope color={colors.text} style={styles.telescope}/>
             <View style={styles.headerContainer}>
                 <ShadowHeadline style={styles.headerHeadline}>
-                    Josep
+                    {name}
                 </ShadowHeadline>
                 <Subheading>
-                    {i18n.t('Aquarius')}
+                    {i18n.t(sign)}
                 </Subheading>
             </View>
             <Divider style={{marginTop: 25}}/>
@@ -41,48 +59,59 @@ function ProfileScreen({navigation}) {
                 <Button icon="cake-variant" style={{alignItems: 'flex-start'}}
                         labelStyle={styles.detailsLabel}
                         theme={{colors: {primary: colors.text}}}>
-                    03/02/1994
+                    {DateUtils.toEuropean((new Date(birthDate)))}
                 </Button>
                 <Button icon="gender-transgender" style={{alignItems: 'flex-start'}}
                         labelStyle={styles.detailsLabel}
                         uppercase={false}
                         theme={{colors: {primary: colors.text}}}>
-                    {i18n.t('Male')}
+                    {i18n.t(sex)}
                 </Button>
                 <Button icon="heart-circle" style={{alignItems: 'flex-start'}}
                         labelStyle={styles.detailsLabel}
                         uppercase={false}
                         theme={{colors: {primary: colors.text}}}>
-                    {i18n.t('It\'s difficult')}
+                    {i18n.t(relationship)}
                 </Button>
                 <Button icon="dice-6" style={{alignItems: 'flex-start'}}
                         labelStyle={styles.detailsLabel}
                         uppercase={false}
                         theme={{colors: {primary: colors.text}}}>
-                        25
+                    {number}
                 </Button>
             </View>
             <Divider style={{marginTop: 25}}/>
             <View style={styles.featuredContainer}>
                 <View style={styles.featuredView}>
-                    <Title>321</Title>
+                    <Title>{days}</Title>
                     <Caption>{i18n.t('Days visited')}</Caption>
                 </View>
                 <View style={styles.featuredView}>
-                    <Title>38</Title>
+                    <Title>{daysRow}</Title>
                     <Caption>{i18n.t('Consecutive days')}</Caption>
                 </View>
             </View>
             <Divider/>
             <View style={styles.buttonsContainer}>
-                <Button icon="account-multiple" style={{alignItems: 'flex-start', marginTop: 10}}
-                        labelStyle={styles.buttonsLabel} uppercase={false}>
+                <Button onPress={_handleSharePress} icon="account-multiple" style={{marginTop: 10}}
+                        labelStyle={styles.buttonsLabel} uppercase={false}
+                        contentStyle={{justifyContent: 'flex-start'}}
+                >
                     {i18n.t('Share with your friends')}
                 </Button>
-                <Button icon="message-draw" style={{alignItems: 'flex-start', marginTop: 10}}
-                        labelStyle={styles.buttonsLabel} uppercase={false}>
+                <Button onPress={_handleRatePress} icon="message-draw" style={{marginTop: 10}}
+                        labelStyle={styles.buttonsLabel} uppercase={false}
+                        contentStyle={{justifyContent: 'flex-start'}}>
                     {i18n.t('Rate the app')}
                 </Button>
+                {__DEV__ && (
+                    <Button onPress={_handleLogOut} icon="restart" style={{marginTop: 10}}
+                            labelStyle={styles.buttonsLabel} uppercase={false}
+                            contentStyle={{justifyContent: 'flex-start'}}>
+                        {i18n.t('Restart')}
+                    </Button>
+                )
+                }
             </View>
             <Divider style={{marginTop: 25}}/>
             <View style={styles.optionsContainer}>
@@ -94,7 +123,7 @@ function ProfileScreen({navigation}) {
                     </Button>
                     <Switch
                         onChange={_handleDarkThemeChange}
-                        value={theme === 'dark'}
+                        value={isDark}
                     />
                 </View>
                 <View style={styles.optionsOption}>
@@ -105,7 +134,7 @@ function ProfileScreen({navigation}) {
                     </Button>
                     <Switch
                         onChange={_handleNotificationsChange}
-                        value={theme === 'dark'}
+                        value={isDark}
                     />
                 </View>
             </View>
@@ -114,7 +143,7 @@ function ProfileScreen({navigation}) {
 }
 
 const styles = StyleSheet.create({
-    telescope : {
+    telescope: {
         zIndex: 0, position: 'absolute', top: 170, right: 20, opacity: 0.1
     },
     headerContainer: {
@@ -136,21 +165,21 @@ const styles = StyleSheet.create({
         alignItems: 'center', flex: 1, paddingVertical: 25
     },
     buttonsContainer: {
-        marginHorizontal: 20, justifyContent: 'flex-start', marginTop: 25
+        marginHorizontal: 20, justifyContent: 'flex-start', marginTop: 25,
     },
     buttonsLabel: {
         marginLeft: 23, fontSize: 18
     },
-    optionsContainer : {
-marginHorizontal: 20, justifyContent: 'flex-start', marginTop: 25, marginBottom: 25
+    optionsContainer: {
+        marginHorizontal: 20, justifyContent: 'flex-start', marginTop: 25, marginBottom: 25
     },
-    optionsOption : {
-flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'
+    optionsOption: {
+        flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'
     },
-    optionsButton : {
-alignItems: 'flex-start', marginTop: 10
+    optionsButton: {
+        alignItems: 'flex-start', marginTop: 10
     },
-    optionsLabel : {
+    optionsLabel: {
         marginLeft: 23, fontSize: 18
     }
 });

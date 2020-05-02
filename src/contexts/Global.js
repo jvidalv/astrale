@@ -17,10 +17,21 @@ export const reducer = (state, action) => {
                 ...state,
                 isAuthenticated: true,
             };
-        case "logout":
+        case "setIsNew":
             return {
-                ...initialState,
-                theme: state.theme,
+                ...state,
+                isNew: false,
+            };
+        case "setLogOut":
+            return {
+                ...state,
+                session: null,
+                isNew: true,
+            };
+        case "setSession":
+            return {
+                ...state,
+                session: {...state.session, ...action.fields},
             };
         default:
             return {
@@ -34,6 +45,8 @@ export const reducer = (state, action) => {
  */
 export const initialState = {
     theme: 'dark',
+    session: null,
+    isNew : true,
 };
 
 /**

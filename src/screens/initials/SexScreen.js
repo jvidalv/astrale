@@ -8,6 +8,7 @@ import Female from "../../svgs/Female";
 import TouchableRipple from "react-native-paper/src/components/TouchableRipple/index";
 import Leo from "../../svgs/Leo";
 import i18n from "i18n-js";
+import {useGlobals} from "../../contexts/Global";
 
 /**
  * @param navigation
@@ -15,17 +16,21 @@ import i18n from "i18n-js";
  * @constructor
  */
 function SexScreen({navigation}) {
+    const [{}, dispatch] = useGlobals();
     const [sex, setSex] = React.useState('');
     const buttonDisabled = !sex;
+    const _handleContinue = () => {
+        dispatch({
+            type : 'setSession',
+            fields : {sex : sex}
+        })
+        navigation.push('Relationship')
+    };
+
     return (
         <DefaultView>
             <Leo width={80} height={80} style={styles.leo}/>
             <Backgrounds.Constellation height={250} width={250} style={styles.constellation}/>
-            <View style={styles.counterContainer}>
-                <View style={styles.counterView}>
-                    <Text style={styles.counterText}>3/5</Text>
-                </View>
-            </View>
             <View style={{flex: 1}}/>
             <View style={styles.textContainer}>
                 <Headline style={styles.textHeadline}>{i18n.t('Your gender')}</Headline>
@@ -33,13 +38,13 @@ function SexScreen({navigation}) {
                     style={styles.textText}>{i18n.t("{name}, to give you accurate and personal information we need to know some info", {name: 'Josep'})}</Text>
             </View>
             <View style={styles.sexContainer}>
-                <TouchableRipple onPress={() => setSex('male')} rippleColor="rgba(0, 0, 0, .1)">
+                <TouchableRipple onPress={() => setSex('Male')} rippleColor="rgba(0,0,0,0)">
                     <View>
-                        <Male style={{opacity: sex === 'male' ? 1 : 0.5}}/>
+                        <Male style={{opacity: sex === 'Male' ? 1 : 0.5}}/>
                         <Text style={styles.sexText}>{i18n.t('Male')}</Text>
                     </View>
                 </TouchableRipple>
-                <TouchableRipple onPress={() => setSex('female')} rippleColor="rgba(0, 0, 0, .1)">
+                <TouchableRipple onPress={() => setSex('Female')} rippleColor="rgba(0,0,0,0)">
                     <View>
                         <Female style={{opacity: sex === 'Female' ? 1 : 0.5}}/>
                         <Text style={styles.sexText}>{i18n.t('Female')}</Text>
@@ -49,7 +54,7 @@ function SexScreen({navigation}) {
             </View>
             <View style={styles.buttonContainer}>
                 <Button mode="contained" disabled={buttonDisabled}
-                        onPress={() => navigation.push('Relationship')}>{i18n.t('Continue')}</Button>
+                        onPress={_handleContinue}>{i18n.t('Continue')}</Button>
             </View>
         </DefaultView>
     );
@@ -61,15 +66,6 @@ const styles = StyleSheet.create({
     },
     leo: {
         zIndex: 0, position: 'absolute', top: 20, right: 20, opacity: 0.2
-    },
-    counterContainer: {
-        position: 'absolute', top: 20, left: 20
-    },
-    counterView: {
-        padding: 5, borderRadius: 5, backgroundColor: '#00000050'
-    },
-    counterText: {
-        letterSpacing: 2
     },
     textContainer: {
         flex: 1, alignSelf: 'center', paddingHorizontal: 20

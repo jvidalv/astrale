@@ -1,12 +1,29 @@
 import React from 'react';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import DailyScreen from "../screens/main/DailyScreen";
 import ZodiacScreen from "../screens/main/ZodiacScreen";
 import ProfileScreen from "../screens/main/ProfileScreen";
-import {useGlobals} from "../contexts/Global";
 import CompatibilityScreen from "../screens/main/CompatibilityScreen";
 import PalmistryScreen from "../screens/main/PalmistryScreen";
+import {createStackNavigator} from "@react-navigation/stack";
 
+const DailyStack = createStackNavigator();
+
+/**
+ * @returns {*}
+ * @constructor
+ */
+function DailyStackNavigation() {
+    return (
+        <DailyStack.Navigator
+            initialRouteName="Daily"
+            headerMode="screen"
+        >
+            <DailyStack.Screen name="Daily" component={DailyScreen} options={{headerShown: false}}/>
+            <DailyStack.Screen name="Signs" component={ZodiacScreen} options={{headerShown: false}}/>
+        </DailyStack.Navigator>
+    )
+}
 const Tab = createMaterialBottomTabNavigator();
 
 function MainStackNavigation() {
@@ -18,19 +35,10 @@ function MainStackNavigation() {
         >
             <Tab.Screen
                 name="symbol"
-                component={DailyScreen}
+                component={DailyStackNavigation}
                 options={{
                     tabBarIcon: 'zodiac-aquarius',
                     title : 'Aquarius'
-                }}
-            />
-            <Tab.Screen
-                name="Compatibility"
-                component={CompatibilityScreen}
-                options={{
-                    tabBarIcon: 'heart-multiple',
-                    title : 'Compatibility',
-
                 }}
             />
             <Tab.Screen
@@ -39,6 +47,15 @@ function MainStackNavigation() {
                 options={{
                     tabBarIcon: 'hand',
                     title : 'Palmistry',
+
+                }}
+            />
+            <Tab.Screen
+                name="Compatibility"
+                component={CompatibilityScreen}
+                options={{
+                    tabBarIcon: 'heart-multiple',
+                    title : 'Compatibility',
 
                 }}
             />

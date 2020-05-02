@@ -30,7 +30,8 @@ const basic = {
         "Analyzing relationship status":  "Analizando estado civíl...",
         "Analyzing favourite number": "Analizando número favorito...",
         "Concluding analysis": "Concluyendo análisis...",
-        "Zodiac signs" : "Símbolos del Zodiaco"
+        "Zodiac signs" : "Símbolos del Zodiaco",
+        "The best and most accurate Horoscope on the market, Astral Daily Horoscope 2020" : "El mejor y mas preciso Horoscope del mercado, Astral Daily Horoscope 2020",
     },
     en: {
         "What's your name?" : "What's your name?",
@@ -56,7 +57,8 @@ const basic = {
         "Analyzing relationship status": "Analyzing relationship status...",
         "Analyzing favourite number": "Analyzing favourite number...",
         "Concluding analysis": "Concluding analysis...",
-        "Zodiac signs" : "Zodiac signs"
+        "Zodiac signs" : "Zodiac signs",
+        "The best and most accurate Horoscope on the market, Astral Daily Horoscope 2020" : "The best and most accurate Horoscope on the market, Astral Daily Horoscope 2020",
 
     },
 };
