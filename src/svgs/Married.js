@@ -1,7 +1,7 @@
 import * as React from "react"
-import Svg, {Circle, G, Path} from "react-native-svg"
+import Svg, {Circle, Path} from "react-native-svg"
 import PropTypes from "prop-types";
-import {withTheme, useTheme} from "react-native-paper";
+import {useTheme} from "react-native-paper";
 
 function Married({color, height, width, style}) {
     const {colors} = useTheme();

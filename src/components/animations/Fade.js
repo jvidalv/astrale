@@ -23,7 +23,7 @@ function Fade({children, show}) {
     return (
         <Animated.View style={[{
             flex: 1,
-            paddingVertical : 10,
+            paddingVertical: 10,
             opacity: fadeAnim,
         }]}>
             {children}

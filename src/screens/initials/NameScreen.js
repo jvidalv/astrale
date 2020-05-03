@@ -16,11 +16,12 @@ import {useGlobals} from "../../contexts/Global";
 function NameScreen({navigation}) {
     const [{}, dispatch] = useGlobals();
     const [name, setName] = React.useState();
+    const {colors} = useTheme();
     const buttonDisabled = !name || name.length < 2;
     const _handleContinue = () => {
         dispatch({
-            type : 'setSession',
-            fields : {name : name}
+            type: 'setSession',
+            fields: {name: name}
         })
         navigation.push('BirthDate')
     }
@@ -28,7 +29,8 @@ function NameScreen({navigation}) {
     return (
         <DefaultView>
             <Aquarius width={80} height={80} style={styles.aquarius}/>
-            <Backgrounds.Constellation height={250} width={250} style={styles.constellation}/>
+            <Backgrounds.Constellation color={colors.text} dotColor={colors.primary} height={250} width={250}
+                                       style={styles.constellation}/>
             <View style={{flex: 1}}/>
             <View style={styles.textContainer}>
                 <Headline style={styles.textHeadline}>{i18n.t('What\'s your name?')}</Headline>

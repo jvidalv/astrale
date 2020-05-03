@@ -1,5 +1,5 @@
 import * as React from "react"
-import Svg, {Circle, Path, G} from "react-native-svg"
+import Svg, {Circle, G, Path} from "react-native-svg"
 import PropTypes from "prop-types";
 
 function Taurus({color, height, width, style}) {

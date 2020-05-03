@@ -1,6 +1,6 @@
 import React from "react";
 import {StyleSheet, TextInput, View} from "react-native";
-import {Button, Headline, Text, TextInput as PaperTextInput} from "react-native-paper";
+import {Button, Headline, Text, TextInput as PaperTextInput, useTheme} from "react-native-paper";
 import {DefaultView} from "../../components/containers";
 import {Backgrounds} from "../../svgs";
 import Aquarius from "../../svgs/Aquarius";
@@ -15,12 +15,13 @@ import {useGlobals} from "../../contexts/Global";
  */
 function NumberScreen({navigation}) {
     const [{}, dispatch] = useGlobals();
+    const {colors} = useTheme();
     const [number, setNumber] = React.useState();
     const buttonDisabled = !number;
     const _handleContinue = () => {
         dispatch({
-            type : 'setSession',
-            fields : {number : number}
+            type: 'setSession',
+            fields: {number: number}
         })
         navigation.push('Palmistry')
     };
@@ -28,7 +29,8 @@ function NumberScreen({navigation}) {
     return (
         <DefaultView>
             <Aquarius width={80} height={80} style={styles.aquarius}/>
-            <Backgrounds.Constellation height={250} width={250} style={styles.constellation}/>
+            <Backgrounds.Constellation color={colors.text} dotColor={colors.primary} height={250} width={250}
+                                       style={styles.constellation}/>
             <View style={{flex: .3}}/>
             <View style={styles.textContainer}>
                 <Headline style={styles.textHeadline}>{i18n.t('Your favorite number')}</Headline>
@@ -46,7 +48,7 @@ function NumberScreen({navigation}) {
                     underlineColor='#ffffff00'
                     keyboardType="number-pad"
                     enablesReturnKeyAutomatically={true}
-                    render={props => <TextInput {...props} style={styles.inputCustom}/>}
+                    render={props => <TextInput {...props} style={styles.inputCustom} maxLength={5}/>}
                 />
             </View>
             <View style={styles.buttonContainer}>

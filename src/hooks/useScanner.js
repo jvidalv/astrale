@@ -43,7 +43,7 @@ const checkPicture = async (data) => {
 /**
  * @param camera {object}
  * @param scan {boolean}
- * @returns {{match: number}}
+ * @returns {{match: boolean}}
  */
 const useScanner = (camera, scan) => {
     const [match, setMatch] = React.useState(false);

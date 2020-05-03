@@ -9,5 +9,9 @@ const default_session = {
     number: null,
     palmistry: false,
     days: 0,
-    daysRow : 0,
+    daysRow: 0,
+    basicsDone: false,
+    notifications: false,
 }
+
+export default default_session;

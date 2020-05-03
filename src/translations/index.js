@@ -8,7 +8,7 @@ const Translations = {
         ...common.es,
         ...custom.es,
         ...forms.es,
-            ...horoscope.es,
+        ...horoscope.es,
     },
     en: {
         ...common.en,

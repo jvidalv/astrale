@@ -12,14 +12,19 @@ import useScanner from "../../hooks/useScanner";
 import PlatformUtils from "../../utils/Platform";
 import i18n from "i18n-js";
 import {useGlobals} from "../../contexts/Global";
+import Storer from "../../utils/Storer";
+import {SESSION_KEY} from "../../constants/session";
+import {useIsDark} from "../../hooks/useTheme";
 
 /**
  * @param navigation
  * @returns {*}
  * @constructor
  */
-function PalmistryScanScreen({navigation}) {
-    const [{}, dispatch] = useGlobals();
+function PalmistryScanScreen({navigation, route}) {
+    // Screen is reused in main navigation
+    const isMain = route.params?.main;
+    const [{session}, dispatch] = useGlobals();
     const {colors} = useTheme();
     const [hand, setHand] = React.useState('left');
     const [scan, setScan] = React.useState(false);
@@ -62,14 +67,16 @@ function PalmistryScanScreen({navigation}) {
                     ]
                 );
             } else {
-                dispatch({
-                    type: 'setSession',
-                    fields: {palmistry: true}
+                Storer.set(SESSION_KEY, {...session, palmistry: true}).then(() => {
+                    dispatch({
+                        type: 'setSession',
+                        fields: {palmistry: true}
+                    })
+                    !isMain && navigation.reset({
+                        index: 0,
+                        routes: [{name: 'Loading'}],
+                    });
                 })
-                navigation.reset({
-                    index: 0,
-                    routes: [{name: 'Loading'}],
-                });
             }
         }
     }, [steps])
@@ -92,8 +99,8 @@ function PalmistryScanScreen({navigation}) {
     }
 
     return (
-        <DefaultView>
-            <Aquarius width={80} height={80} style={styles.aquarius}/>
+        <DefaultView barStyle={useIsDark() ? 'light-content' : 'dark-content'}>
+            <Aquarius color={colors.text} width={80} height={80} style={styles.aquarius}/>
             <Backgrounds.Constellation height={250} width={250} style={styles.constellation}/>
             <View style={{flex: .2}}/>
             <View style={styles.textContainer}>
@@ -104,8 +111,8 @@ function PalmistryScanScreen({navigation}) {
             {
                 !hasPermission ? (
                         <View
-                            styles={styles.cameraContainer}>
-                            <Text>{i18n.t('There\'s no permission to use the camera')}</Text>
+                            style={styles.cameraContainer}>
+                            <Text style={{color: colors.error}}>{i18n.t('There\'s no permission to use the camera')}</Text>
                         </View>)
                     : (
                         <Camera pictureSize={pictureSize} onCameraReady={_handleCameraReady}
@@ -117,7 +124,6 @@ function PalmistryScanScreen({navigation}) {
                                 {handDetected && scan ? <Scanner start={true} style={{
                                     borderTopWidth: 3,
                                     borderBottomWidth: 3,
-                                    borderColor: colors.accent,
                                     opacity: .7
                                 }}/> : handDetected === false &&
                                     <View style={styles.cameraNoHand}>
@@ -138,8 +144,8 @@ function PalmistryScanScreen({navigation}) {
                              style={styles.progressBar}/>
                 <Button onPress={() => navigation.reset({
                     index: 0,
-                    routes: [{name: 'Loading'}],
-                })}>Skip</Button>
+                    routes: [{name: isMain ? 'Palmistry' : 'Loading'}],
+                })}>{i18n.t(isMain ? 'Back' : 'Skip')}</Button>
             </View>
         </DefaultView>
     );

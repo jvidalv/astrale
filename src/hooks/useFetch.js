@@ -12,11 +12,14 @@ const useFetch = () => {
             return Sleep(1500);
         }
 
-        if(loading){
-            fetch().then(() => {setData(true); setLoading(false)}).catch(() => setError(true))
+        if (loading) {
+            fetch().then(() => {
+                setData(true);
+                setLoading(false)
+            }).catch(() => setError(true))
         }
 
-    },[loading])
+    }, [loading])
 
     return {data, loading, error, setLoading}
 }

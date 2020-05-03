@@ -10,6 +10,10 @@ import i18n from "i18n-js";
 import useFetch from "../../hooks/useFetch";
 import ShowFromTop from "../../components/animations/ShowFromTop";
 import {useGlobals} from "../../contexts/Global";
+import Storer from "../../utils/Storer";
+import {SESSION_KEY} from "../../constants/session";
+import {DateUtils} from "../../utils";
+import registerForPushNotificationsAsync from "../../utils/Notifications";
 
 /**
  * @param navigation
@@ -17,23 +21,44 @@ import {useGlobals} from "../../contexts/Global";
  * @constructor
  */
 function DailyScreen({navigation}) {
-    const [{session}] = useGlobals();
-    console.log(session)
-
+    const [{session}, dispatch] = useGlobals();
     const [fabOpen, setFabOpen] = React.useState(false);
-    const {data, loading, error} = useFetch();
+    const {data, loading, error, setLoading} = useFetch();
     const {colors} = useTheme();
+
+    if (!session?.sign) {
+        Storer.delete(SESSION_KEY).then(() => dispatch({type: 'setLogOut'}));
+    }
+
+    React.useEffect(() => {
+        if (!session.notifications) {
+            registerForPushNotificationsAsync().then((res) => {
+                dispatch({
+                    type: 'setAndStoreSession',
+                    fields: {notifications: res}
+                })
+            })
+        }
+    }, [])
+
+    React.useEffect(() => {
+        if (!loading) {
+            setLoading(true)
+        }
+    }, [session.sign])
+
     return (
         <React.Fragment>
             <DefaultScrollView barStyle={useIsDark() ? 'light-content' : 'dark-content'}>
-                <Backgrounds.Stars style={styles.backgroundStars}/>
+                <Backgrounds.ConstellationSimple color={colors.text} dotColor={colors.primary}
+                                                 style={styles.backgroundConstellation} width={500} height={500}/>
                 <View style={styles.headerContainer}>
                     <Sign sign={session.sign} showTitle={false} signWidth={80} signHeight={80}/>
                     <ShadowHeadline style={styles.headerHeadline}>
                         {i18n.t(session.sign)}
                     </ShadowHeadline>
                     <Subheading>
-                        Wednesday, 29 april, 2020
+                        {DateUtils.toEuropean((new Date()))}
                     </Subheading>
                 </View>
                 {
@@ -142,12 +167,12 @@ function DailyScreen({navigation}) {
                         style: {backgroundColor: colors.primary},
                         icon: 'share',
                         label: i18n.t('Share'),
-                        onPress: () => console.log('Pressed share')
+                        onPress: () => setFabOpen(false)
                     },
                     {
                         icon: 'swap-horizontal',
-                        label: i18n.t('Check other signs'),
-                        onPress: () => navigation.navigate('Signs')
+                        label: i18n.t('Switch sign'),
+                        onPress: () => navigation.navigate('Signs') | setFabOpen(false)
                     },
                 ]}
                 onStateChange={() => null}
@@ -158,8 +183,8 @@ function DailyScreen({navigation}) {
 }
 
 const styles = StyleSheet.create({
-    backgroundStars: {
-        zIndex: 1, position: 'absolute', top: 20, right: 20, opacity: 0.15
+    backgroundConstellation: {
+        zIndex: 1, position: 'absolute', top: 300, left: 20, opacity: .05
     },
     headerContainer: {
         alignItems: 'center', justifyContent: 'center', marginHorizontal: 20, marginVertical: 20

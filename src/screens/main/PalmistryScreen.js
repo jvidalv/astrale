@@ -1,11 +1,7 @@
 import React from "react";
 import {StyleSheet, View} from "react-native";
-import {Button, Headline, Paragraph, Subheading, Surface, Title, useTheme} from "react-native-paper";
+import {Button, Paragraph, Surface, useTheme} from "react-native-paper";
 import {DefaultScrollView} from "../../components/containers";
-import {Backgrounds, Zodiac} from "../../svgs";
-import {useGlobals} from "../../contexts/Global";
-import {ThemeUtils} from "../../utils";
-import {Sign} from "../../components/zodiac";
 import ShadowHeadline from "../../components/paper/ShadowHeadline";
 import Palmistry from "../../svgs/Palmistry";
 import {useIsDark} from "../../hooks/useTheme";
@@ -30,7 +26,7 @@ function PalmistryScreen({navigation}) {
                 </View>
                 <View style={styles.surfaceContainer}>
                     <Surface style={styles.surfaceSurface}>
-                        <Button  style={styles.surfaceButton}
+                        <Button style={styles.surfaceButton}
                                 labelStyle={styles.surfaceButtonLabel}>✋ {i18n.t('Life line')}</Button>
                         <Paragraph style={styles.surfaceParagraph}>
                             Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece

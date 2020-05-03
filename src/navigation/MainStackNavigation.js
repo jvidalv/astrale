@@ -6,6 +6,30 @@ import ProfileScreen from "../screens/main/ProfileScreen";
 import CompatibilityScreen from "../screens/main/CompatibilityScreen";
 import PalmistryScreen from "../screens/main/PalmistryScreen";
 import {createStackNavigator} from "@react-navigation/stack";
+import PalmistryPreScanScreen from "../screens/initials/PalmistryPreScanScreen";
+import PalmistryScanScreen from "../screens/initials/PalmistryScanScreen";
+import {useGlobals} from "../contexts/Global";
+import i18n from "i18n-js";
+
+const PalmistryStack = createStackNavigator();
+
+/**
+ * @returns {*}
+ * @constructor
+ */
+function PalmistryStackNavigation() {
+    return (
+        <PalmistryStack.Navigator
+            initialRouteName="Daily"
+            headerMode="screen"
+        >
+            <PalmistryStack.Screen name="Palmistry" initialParams={{main: true}} component={PalmistryPreScanScreen}
+                                   options={{headerShown: false}}/>
+            <PalmistryStack.Screen name="PalmistryScan" initialParams={{main: true}} component={PalmistryScanScreen}
+                                   options={{headerShown: false}}/>
+        </PalmistryStack.Navigator>
+    )
+}
 
 const DailyStack = createStackNavigator();
 
@@ -24,30 +48,29 @@ function DailyStackNavigation() {
         </DailyStack.Navigator>
     )
 }
+
 const Tab = createMaterialBottomTabNavigator();
 
 function MainStackNavigation() {
-
+    const [{session}] = useGlobals();
     return (
         <Tab.Navigator
-            initialRouteName="Feed"
             shifting={false}
         >
             <Tab.Screen
                 name="symbol"
                 component={DailyStackNavigation}
                 options={{
-                    tabBarIcon: 'zodiac-aquarius',
-                    title : 'Aquarius'
+                    tabBarIcon: `zodiac-${session.sign.toLowerCase()}`,
+                    title: i18n.t(session.sign)
                 }}
             />
             <Tab.Screen
                 name="Palmistry"
-                component={PalmistryScreen}
+                component={session.palmistry ? PalmistryScreen : PalmistryStackNavigation}
                 options={{
                     tabBarIcon: 'hand',
-                    title : 'Palmistry',
-
+                    title: i18n.t('Palmistry')
                 }}
             />
             <Tab.Screen
@@ -55,7 +78,7 @@ function MainStackNavigation() {
                 component={CompatibilityScreen}
                 options={{
                     tabBarIcon: 'heart-multiple',
-                    title : 'Compatibility',
+                    title: i18n.t('Compatibility2'),
 
                 }}
             />
@@ -64,7 +87,8 @@ function MainStackNavigation() {
                 component={ProfileScreen}
                 options={{
                     tabBarIcon: 'account-box',
-                    title : 'Profile',
+                    title: i18n.t('Profile'),
+
                 }}
             />
         </Tab.Navigator>

@@ -65,7 +65,7 @@ Logo.defaultProps = {
 Logo.propTypes = {
     height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-    style : PropTypes.object
+    style: PropTypes.object
 };
 
 export default Logo

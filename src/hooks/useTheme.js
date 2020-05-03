@@ -9,7 +9,7 @@ export const useIsDark = () => {
     return theme === THEME_DARK;
 }
 
-export const useIsLight= () => {
+export const useIsLight = () => {
     const [{theme}] = useGlobals();
     return theme === THEME_LIGHT;
 }

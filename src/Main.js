@@ -11,7 +11,6 @@ import InitialStackNavigation from "./navigation/InitialStackNavigation";
 import * as Font from 'expo-font';
 import Storer from "./utils/Storer";
 import {SESSION_KEY} from "./constants/session";
-import ZodiacCalculator from "./utils/ZodiacCalculator";
 
 /**
  * Gets active theme dark/light
@@ -56,9 +55,8 @@ const PERSISTENCE_KEY = 'NAVIGATION_STATE';
  * @constructor
  */
 function Main() {
-    const [{session, isNew}, dispatch] = useGlobals();
-    const [hasSession, setHasSession] = React.useState(null);
-    const [isReady, setIsReady] = React.useState(true);
+    const [{session}, dispatch] = useGlobals();
+    const [isReady, setIsReady] = React.useState(false);
     const [initialState, setInitialState] = React.useState();
     const [fontsLoaded, setFontsLoaded] = React.useState(false);
 
@@ -70,44 +68,31 @@ function Main() {
                 setFontsLoaded(true);
             }
         })()
-    });
-
-    React.useEffect(() => {
-        const restoreState = async () => {
-            try {
-                const savedStateString = await AsyncStorage.getItem(PERSISTENCE_KEY);
-                const state = JSON.parse(savedStateString);
-
-                setInitialState(state);
-            } finally {
-                setIsReady(true);
-            }
-        };
-
-        if (!isReady) {
-            restoreState();
-        }
-    }, [isReady]);
+    }, []);
 
     /**
      * Session set, from physical to app state
      */
     React.useEffect(() => {
         (async () => {
-            const session = await Storer.delete(SESSION_KEY);
-            if(session){
-                const date = new Date(session.birthDate);
-                const sign = ZodiacCalculator(date.getDate(), date.getFullYear() + 1);
-                dispatch({
-                    type : 'setSession',
-                    fields : {...session, sign : sign},
-                })
-            }
-            setHasSession(session);
-        })()
-    }, [isNew])
+            try {
+                const state = await Storer.get(PERSISTENCE_KEY);
+                //setInitialState(state);
 
-    if (typeof hasSession == null || !isReady || !fontsLoaded) {
+                const session = await Storer.get(SESSION_KEY);
+                if (session) {
+                    dispatch({
+                        type: 'setSession',
+                        fields: {...session},
+                    })
+                }
+            } finally {
+                setIsReady(true)
+            }
+        })()
+    }, [])
+
+    if (!isReady || !fontsLoaded) {
         return <AppLoading/>;
     }
 
@@ -120,7 +105,7 @@ function Main() {
                 }
                 theme={useTheme()}>
                 {
-                    hasSession ? <MainStackNavigation/> : <InitialStackNavigation/>
+                    session.basicsDone ? <MainStackNavigation/> : <InitialStackNavigation/>
                 }
             </NavigationContainer>
         </PaperProvider>

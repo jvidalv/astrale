@@ -1,5 +1,5 @@
 import React from "react";
-import {StyleSheet, View} from "react-native";
+import {Alert, StyleSheet, View} from "react-native";
 import {Button, Caption, Divider, Subheading, Switch, Title, useTheme} from "react-native-paper";
 import {DefaultScrollView} from "../../components/containers";
 import {useGlobals} from "../../contexts/Global";
@@ -12,6 +12,7 @@ import useShare from "../../hooks/useShare";
 import {DateUtils} from "../../utils";
 import Storer from "../../utils/Storer";
 import {SESSION_KEY} from "../../constants/session";
+import registerForPushNotificationsAsync from "../../utils/Notifications";
 
 /**
  * @param navigation
@@ -20,7 +21,7 @@ import {SESSION_KEY} from "../../constants/session";
  */
 function ProfileScreen({navigation}) {
     const [{session}, dispatch] = useGlobals();
-    const {name, sign, birthDate, number, relationship, sex, days, daysRow} = session;
+    const {name, sign, birthDate, number, relationship, sex, days, daysRow, notifications} = session;
     const {colors} = useTheme();
     const {setRate} = useRate();
     const {setStartShare} = useShare('Proba', 'https://proba.com');
@@ -34,11 +35,28 @@ function ProfileScreen({navigation}) {
     };
     const _handleLogOut = async () => {
         await Storer.delete(SESSION_KEY);
-        dispatch({ type: 'setLogOut'});
-        navigation.navigate('Name')
+        dispatch({type: 'setLogOut'});
     };
     const _handleNotificationsChange = () => {
-        //todo
+        if (notifications) {
+            Alert.alert(i18n.t('This will disable daily notifications'), i18n.t('Are you sure?'), [{
+                text: i18n.t('Yes'),
+                onPress: () => {
+                    //@todo delete from api
+                    dispatch({
+                        type: 'setAndStoreSession',
+                        fields: {notifications: false}
+                    })
+                }
+            }])
+        } else {
+            registerForPushNotificationsAsync().then((res) => {
+                dispatch({
+                    type: 'setAndStoreSession',
+                    fields: {notifications: res}
+                })
+            })
+        }
     };
     const _handleRatePress = async () => setRate(true);
     const _handleSharePress = async () => setStartShare(true);
@@ -134,7 +152,7 @@ function ProfileScreen({navigation}) {
                     </Button>
                     <Switch
                         onChange={_handleNotificationsChange}
-                        value={isDark}
+                        value={notifications}
                     />
                 </View>
             </View>

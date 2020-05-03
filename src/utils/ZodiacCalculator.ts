@@ -4,7 +4,7 @@
  * @param month {string}
  * @return {string} name of zodiac sign
  */
-function ZodiacCalculator(day: number, month: number) : string {
+function ZodiacCalculator(day: number, month: number): string {
 
     const signs = {
         'Capricorn': 'Capricorn',

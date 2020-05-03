@@ -1,7 +1,5 @@
 import React from "react";
 import * as StoreReview from 'expo-store-review';
-import {Alert} from "react-native";
-import i18n from "i18n-js";
 
 const useRate = () => {
     const [rate, setRate] = React.useState(false);
@@ -10,17 +8,17 @@ const useRate = () => {
 
     React.useEffect(() => {
         const startRate = async () => {
-            if(await StoreReview.isAvailableAsync()){
+            if (await StoreReview.isAvailableAsync()) {
                 await StoreReview.requestReview().then(() => setRated(true));
             }
             return true;
         }
 
-        if(rate){
+        if (rate) {
             startRate().catch(() => setError(true))
         }
 
-    },[rate])
+    }, [rate])
 
     return {setRate, rated}
 }

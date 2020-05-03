@@ -1,6 +1,6 @@
 import React from "react";
 import {StyleSheet, View} from "react-native";
-import {Button, Headline, Text} from "react-native-paper";
+import {Button, Headline, Text, useTheme} from "react-native-paper";
 import {DefaultView} from "../../components/containers";
 import {Backgrounds} from "../../svgs";
 import TouchableRipple from "react-native-paper/src/components/TouchableRipple/index";
@@ -19,12 +19,13 @@ import {useGlobals} from "../../contexts/Global";
  */
 function RelationshipScreen({navigation}) {
     const [{}, dispatch] = useGlobals();
+    const {colors} = useTheme();
     const [relationshipStatus, setRelationshipStatus] = React.useState('');
     const buttonDisabled = !relationshipStatus;
     const _handleContinue = () => {
         dispatch({
-            type : 'setSession',
-            fields : {relationship : relationshipStatus}
+            type: 'setSession',
+            fields: {relationship: relationshipStatus}
         })
         navigation.push('Number')
     };
@@ -32,7 +33,8 @@ function RelationshipScreen({navigation}) {
     return (
         <DefaultView>
             <Taurus width={80} height={80} style={styles.taurus}/>
-            <Backgrounds.Constellation height={250} width={250} style={styles.constellation}/>
+            <Backgrounds.Constellation color={colors.text} dotColor={colors.primary} height={250} width={250}
+                                       style={styles.constellation}/>
             <View style={{flex: .4}}/>
             <View style={styles.textContainer}>
                 <Headline style={styles.textHeadline}>{i18n.t('What is your relationship status')}</Headline>
@@ -40,7 +42,7 @@ function RelationshipScreen({navigation}) {
                     style={styles.textText}>{i18n.t("{name}, to give you accurate and personal information we need to know some info", {name: 'Josep'})}</Text>
             </View>
             <View style={styles.sexContainer}>
-                <TouchableRipple onPress={() => setRelationshipStatus('married')} rippleColor="rgba(0,0,0,0)">
+                <TouchableRipple onPress={() => setRelationshipStatus('Married')} rippleColor="rgba(0,0,0,0)">
                     <View>
                         <Married width={100} style={{opacity: relationshipStatus === 'Married' ? 1 : 0.5}}/>
                         <Text
@@ -65,7 +67,8 @@ function RelationshipScreen({navigation}) {
                 </TouchableRipple>
                 <TouchableRipple onPress={() => setRelationshipStatus('It\'s difficult')} rippleColor="rgba(0,0,0,0)">
                     <View>
-                        <ItsDifficult width={100} style={{opacity: relationshipStatus === 'It\'s difficult' ? 1 : 0.5}}/>
+                        <ItsDifficult width={100}
+                                      style={{opacity: relationshipStatus === 'It\'s difficult' ? 1 : 0.5}}/>
                         <Text style={styles.sexText}>{i18n.t('It\'s difficult')}</Text>
                     </View>
                 </TouchableRipple>

@@ -23,8 +23,8 @@ function convertDate(format: string, date: Date): string {
 }
 
 const DateUtils = {
-    toEuropean: (date : Date) : string => convertDate(FORMAT_EUROPEAN, date),
-    toAmerican: (date : Date) : string => convertDate(FORMAT_EUROPEAN, date),
+    toEuropean: (date: Date): string => convertDate(FORMAT_EUROPEAN, date),
+    toAmerican: (date: Date): string => convertDate(FORMAT_EUROPEAN, date),
 }
 
 export default DateUtils;

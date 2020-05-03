@@ -1,4 +1,6 @@
 import React, {createContext, useContext, useReducer} from "react";
+import default_session, {SESSION_KEY} from "../constants/session";
+import Storer from "../utils/Storer";
 
 /**
  * @param state
@@ -12,23 +14,18 @@ export const reducer = (state, action) => {
                 ...state,
                 theme: action.theme,
             };
-        case "setAuthenticated":
-            return {
-                ...state,
-                isAuthenticated: true,
-            };
-        case "setIsNew":
-            return {
-                ...state,
-                isNew: false,
-            };
         case "setLogOut":
             return {
                 ...state,
-                session: null,
-                isNew: true,
+                session: default_session,
             };
         case "setSession":
+            return {
+                ...state,
+                session: {...state.session, ...action.fields},
+            };
+        case "setAndStoreSession":
+            Storer.set(SESSION_KEY, {...state.session, ...action.fields});
             return {
                 ...state,
                 session: {...state.session, ...action.fields},
@@ -45,8 +42,8 @@ export const reducer = (state, action) => {
  */
 export const initialState = {
     theme: 'dark',
-    session: null,
-    isNew : true,
+    session: default_session,
+    notifications: false,
 };
 
 /**

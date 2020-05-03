@@ -1,6 +1,6 @@
 import React from "react";
 import {StyleSheet, View} from "react-native";
-import {Button, Headline, Text} from "react-native-paper";
+import {Button, Headline, Text, useTheme} from "react-native-paper";
 import {DefaultView} from "../../components/containers";
 import {Backgrounds} from "../../svgs";
 import Male from "../../svgs/Male";
@@ -17,12 +17,13 @@ import {useGlobals} from "../../contexts/Global";
  */
 function SexScreen({navigation}) {
     const [{}, dispatch] = useGlobals();
+    const {colors} = useTheme();
     const [sex, setSex] = React.useState('');
     const buttonDisabled = !sex;
     const _handleContinue = () => {
         dispatch({
-            type : 'setSession',
-            fields : {sex : sex}
+            type: 'setSession',
+            fields: {sex: sex}
         })
         navigation.push('Relationship')
     };
@@ -30,7 +31,8 @@ function SexScreen({navigation}) {
     return (
         <DefaultView>
             <Leo width={80} height={80} style={styles.leo}/>
-            <Backgrounds.Constellation height={250} width={250} style={styles.constellation}/>
+            <Backgrounds.Constellation color={colors.text} dotColor={colors.primary} height={250} width={250}
+                                       style={styles.constellation}/>
             <View style={{flex: 1}}/>
             <View style={styles.textContainer}>
                 <Headline style={styles.textHeadline}>{i18n.t('Your gender')}</Headline>

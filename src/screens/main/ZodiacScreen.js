@@ -1,14 +1,16 @@
 import React from "react";
 import {StyleSheet, View} from "react-native";
-import {Subheading, useTheme, FAB} from "react-native-paper";
+import {FAB, useTheme} from "react-native-paper";
 import i18n from "i18n-js";
 import DefaultScrollView from "../../components/containers/DefaultScrollView";
 import {Sign} from "../../components/zodiac";
 import ShadowHeadline from "../../components/paper/ShadowHeadline";
 import SolarSystem from "../../svgs/SolarSystem";
-import HoroscopeSigns from "../../constants/zodiac_signs";
+import HoroscopeSigns, {HoroscopeDates} from "../../constants/zodiac_signs";
 import {Backgrounds} from "../../svgs";
 import {useIsDark} from "../../hooks/useTheme";
+import * as Localization from "expo-localization";
+import {useGlobals} from "../../contexts/Global";
 
 /**
  * @param navigation
@@ -16,7 +18,18 @@ import {useIsDark} from "../../hooks/useTheme";
  * @constructor
  */
 function ZodiacScreen({navigation}) {
+    const [{}, dispatch] = useGlobals();
     const {colors} = useTheme();
+    const locales = ['es', 'en']
+    const cut_locale = Localization.locale.substring(0, 2);
+    const locale = locales.includes(cut_locale) ? cut_locale : 'en';
+    const _handleSignPress = (sign) => {
+        dispatch({
+            type: 'setAndStoreSession',
+            fields: {sign: sign}
+        })
+        navigation.pop();
+    }
 
     return (
         <React.Fragment>
@@ -26,9 +39,6 @@ function ZodiacScreen({navigation}) {
                     <ShadowHeadline style={styles.headerHeadline}>
                         {i18n.t('Zodiac signs')}
                     </ShadowHeadline>
-                    <Subheading>
-                        {i18n.t('Choose one')}
-                    </Subheading>
                 </View>
                 <View style={styles.signsContainer}>
                     {
@@ -38,10 +48,10 @@ function ZodiacScreen({navigation}) {
                             sign={sign}
                             signHeight={80}
                             signWidth={90}
-                            onPress={() => false}
+                            onPress={() => _handleSignPress(sign)}
                             style={{marginBottom: 10, padding: 3}}
                             styleTitle={{marginTop: 10}}
-                            subtitle="13 mar - 15 may"
+                            subtitle={HoroscopeDates[sign][locale]}
                         />)
                     }
                 </View>
@@ -63,7 +73,7 @@ function ZodiacScreen({navigation}) {
 
 const styles = StyleSheet.create({
     headerContainer: {
-        alignItems: 'center', justifyContent: 'center', marginHorizontal: 20, marginVertical: 20
+        alignItems: 'center', justifyContent: 'center', marginHorizontal: 20, marginVertical: 30
     },
     headerHeadline: {
         fontWeight: 'bold', fontSize: 30, lineHeight: 34, marginTop: 20
@@ -74,7 +84,7 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         justifyContent: 'space-between',
         paddingHorizontal: 20,
-        marginBottom: 20,
+        marginBottom: 60,
         flex: 1
     },
     constellation: {

@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {View, StyleSheet} from "react-native";
+import {StyleSheet, View} from "react-native";
 import {Zodiac} from "../../svgs";
 import {Caption, Subheading, TouchableRipple, useTheme} from "react-native-paper";
 import i18n from "i18n-js";

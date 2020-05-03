@@ -1,14 +1,11 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import {Appbar, withTheme, useTheme} from 'react-native-paper';
-import {Platform, StatusBar} from 'react-native';
 import NameScreen from "../screens/initials/NameScreen";
-import i18n from "i18n-js";
 import BirthDateScreen from "../screens/initials/BirthDateScreen";
 import SexScreen from "../screens/initials/SexScreen";
 import RelationshipScreen from "../screens/initials/RelationshipScreen";
 import NumberScreen from "../screens/initials/NumberScreen";
-import PalmistryScreen from "../screens/initials/PalmistryScreen";
+import PalmistryPreScanScreen from "../screens/initials/PalmistryPreScanScreen";
 import PalmistryScanScreen from "../screens/initials/PalmistryScanScreen";
 import LoadingScreen from "../screens/initials/LoadingScreen";
 
@@ -29,8 +26,8 @@ function InitialStackNavigation() {
             <Stack.Screen name="Sex" component={SexScreen} options={{headerShown: false}}/>
             <Stack.Screen name="Relationship" component={RelationshipScreen} options={{headerShown: false}}/>
             <Stack.Screen name="Number" component={NumberScreen} options={{headerShown: false}}/>
-            <Stack.Screen name="Palmistry" component={PalmistryScreen} options={{headerShown: false}}/>
-            <Stack.Screen name="PalmistryScan" component={PalmistryScanScreen}  options={{headerShown: false}} />
+            <Stack.Screen name="Palmistry" component={PalmistryPreScanScreen} options={{headerShown: false}}/>
+            <Stack.Screen name="PalmistryScan" component={PalmistryScanScreen} options={{headerShown: false}}/>
             <Stack.Screen name="Loading" component={LoadingScreen} options={{headerShown: false}}/>
         </Stack.Navigator>
     )

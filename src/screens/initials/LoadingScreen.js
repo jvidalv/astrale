@@ -1,6 +1,6 @@
 import React from "react";
 import {StyleSheet, View} from "react-native";
-import {Subheading, Text, useTheme} from "react-native-paper";
+import {Subheading, useTheme} from "react-native-paper";
 import {DefaultView} from "../../components/containers";
 import {Backgrounds} from "../../svgs";
 import SolarSystem from "../../svgs/SolarSystem";
@@ -20,7 +20,6 @@ function LoadingScreen({navigation}) {
     const [{session}, dispatch] = useGlobals();
     const {colors} = useTheme();
     const [phrase, setPhrase] = React.useState(0);
-    const [number, setNumber] = React.useState(1);
     const phrases = [
         i18n.t('Analyzing name'),
         i18n.t('Analyzing birth date'),
@@ -32,30 +31,27 @@ function LoadingScreen({navigation}) {
 
     React.useEffect(() => {
         const intervalNumber = setInterval(() => {
-            if (number < 100) {
-                setNumber(number => number + 1);
-            } else {
-                const preSession = {...session, ...{days: 1, daysRow: 1}}
-                Storer.set(SESSION_KEY, preSession).then(() => {
-                    dispatch({type: 'setIsNew'})
-                });
-                clearInterval(intervalNumber);
-            }
-            if (number % 15 === 0 && phrase < 5) {
+            if (phrase < 5) {
                 setPhrase(phrase + 1);
+            } else {
+                clearInterval(intervalNumber);
+                const preSession = {...session, ...{days: 1, daysRow: 1, basicsDone: true}}
+                Storer.set(SESSION_KEY, preSession).then(() => {
+                    dispatch({
+                        type: 'setSession',
+                        fields: preSession
+                    })
+                });
             }
-        }, 350)
+        }, 3000)
         return () => clearInterval(intervalNumber);
     })
-
-    React.useEffect(() => {
-        number === 100 && false;
-    }, [number])
 
     return (
         <DefaultView>
             <Leo width={80} height={80} style={styles.leo}/>
-            <Backgrounds.Constellation height={250} width={250} style={styles.constellation}/>
+            <Backgrounds.Constellation color={colors.text} dotColor={colors.primary} height={250} width={250}
+                                       style={styles.constellation}/>
             <View style={{flex: 1}}/>
             <View style={styles.loadingContainer}>
                 <Rotation style={{opacity: .7}} rotate={true}>
@@ -63,7 +59,6 @@ function LoadingScreen({navigation}) {
                 </Rotation>
             </View>
             <View style={{flex: 3}}>
-                <Text style={styles.textText}>{number}%</Text>
                 <Subheading style={[styles.textSubheading, {color: colors.primary}]}>{phrases[phrase]}</Subheading>
             </View>
         </DefaultView>
@@ -83,11 +78,8 @@ const styles = StyleSheet.create({
     loadingContainer: {
         flex: 1, alignSelf: 'center', paddingTop: 40, zIndex: 1
     },
-    textText: {
-        textAlign: 'center', marginTop: 20
-    },
     textSubheading: {
-        textAlign: 'center'
+        textAlign: 'center', marginTop: 20
     },
 })
 

@@ -1,6 +1,6 @@
 import React from "react";
 import {StyleSheet, View} from "react-native";
-import {Button, Headline, Text} from "react-native-paper";
+import {Button, Headline, Text, useTheme} from "react-native-paper";
 import {DefaultView} from "../../components/containers";
 import {Backgrounds} from "../../svgs";
 import Scorpio from "../../svgs/Scorpio";
@@ -9,14 +9,16 @@ import RNDateTimePicker from "@react-native-community/datetimepicker";
 import Logo from "../../svgs/Logo";
 import i18n from "i18n-js";
 import {useGlobals} from "../../contexts/Global";
+import ZodiacCalculator from "../../utils/ZodiacCalculator";
 
 /**
  * @param navigation
  * @returns {*}
  * @constructor
  */
-function BirthDateScreen({navigation}) {
+function BirthDateScreen({navigation, theme}) {
     const [{}, dispatch] = useGlobals();
+    const {colors} = useTheme();
     const [date, setDate] = React.useState(new Date());
     const [show, setShow] = React.useState(true);
     const onChange = (event, selectedDate) => {
@@ -28,9 +30,10 @@ function BirthDateScreen({navigation}) {
         setShow(true);
     };
     const _handleContinue = () => {
+        const sign = ZodiacCalculator(date.getDate(), date.getMonth() + 1);
         dispatch({
-            type : 'setSession',
-            fields : {birthDate : date.getTime()}
+            type: 'setSession',
+            fields: {birthDate: date.getTime(), sign: sign}
         })
         navigation.push('Sex')
     };
@@ -38,7 +41,8 @@ function BirthDateScreen({navigation}) {
     return (
         <DefaultView>
             <Scorpio width={80} height={80} style={styles.scorpio}/>
-            <Backgrounds.Constellation height={250} width={250} style={styles.constellation}/>
+            <Backgrounds.Constellation color={colors.text} dotColor={colors.primary} height={250} width={250}
+                                       style={styles.constellation}/>
             <View style={{flex: 1}}/>
             <View style={styles.textContainer}>
                 <Headline style={styles.textHeadline}>{i18n.t('Your date of birth')}</Headline>
