@@ -29,8 +29,12 @@ function NumberScreen({navigation}) {
     return (
         <DefaultView>
             <Aquarius width={80} height={80} style={styles.aquarius}/>
-            <Backgrounds.Constellation color={colors.text} dotColor={colors.primary} height={250} width={250}
-                                       style={styles.constellation}/>
+            <Backgrounds.Constellation
+                color={colors.text}
+                dotColor={colors.primary}
+                height={250} width={250}
+                style={styles.constellation}
+            />
             <View style={{flex: .3}}/>
             <View style={styles.textContainer}>
                 <Headline style={styles.textHeadline}>{i18n.t('Your favorite number')}</Headline>

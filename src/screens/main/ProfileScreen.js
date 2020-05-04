@@ -74,27 +74,39 @@ function ProfileScreen({navigation}) {
             </View>
             <Divider style={{marginTop: 25}}/>
             <View style={styles.detailsContainer}>
-                <Button icon="cake-variant" style={{alignItems: 'flex-start'}}
-                        labelStyle={styles.detailsLabel}
-                        theme={{colors: {primary: colors.text}}}>
+                <Button
+                    icon="cake-variant"
+                    style={{alignItems: 'flex-start'}}
+                    labelStyle={styles.detailsLabel}
+                    theme={{colors: {primary: colors.text}}}
+                >
                     {DateUtils.toEuropean((new Date(birthDate)))}
                 </Button>
-                <Button icon="gender-transgender" style={{alignItems: 'flex-start'}}
-                        labelStyle={styles.detailsLabel}
-                        uppercase={false}
-                        theme={{colors: {primary: colors.text}}}>
+                <Button
+                    icon="gender-transgender"
+                    style={{alignItems: 'flex-start'}}
+                    labelStyle={styles.detailsLabel}
+                    uppercase={false}
+                    theme={{colors: {primary: colors.text}}}
+                >
                     {i18n.t(sex)}
                 </Button>
-                <Button icon="heart-circle" style={{alignItems: 'flex-start'}}
-                        labelStyle={styles.detailsLabel}
-                        uppercase={false}
-                        theme={{colors: {primary: colors.text}}}>
+                <Button
+                    icon="heart-circle"
+                    style={{alignItems: 'flex-start'}}
+                    labelStyle={styles.detailsLabel}
+                    uppercase={false}
+                    theme={{colors: {primary: colors.text}}}
+                >
                     {i18n.t(relationship)}
                 </Button>
-                <Button icon="dice-6" style={{alignItems: 'flex-start'}}
-                        labelStyle={styles.detailsLabel}
-                        uppercase={false}
-                        theme={{colors: {primary: colors.text}}}>
+                <Button
+                    icon="dice-6"
+                    style={{alignItems: 'flex-start'}}
+                    labelStyle={styles.detailsLabel}
+                    uppercase={false}
+                    theme={{colors: {primary: colors.text}}}
+                >
                     {number}
                 </Button>
             </View>

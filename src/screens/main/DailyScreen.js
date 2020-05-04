@@ -50,8 +50,12 @@ function DailyScreen({navigation}) {
     return (
         <React.Fragment>
             <DefaultScrollView barStyle={useIsDark() ? 'light-content' : 'dark-content'}>
-                <Backgrounds.ConstellationSimple color={colors.text} dotColor={colors.primary}
-                                                 style={styles.backgroundConstellation} width={500} height={500}/>
+                <Backgrounds.ConstellationSimple
+                    color={colors.text}
+                    dotColor={colors.primary}
+                    style={styles.backgroundConstellation}
+                    width={500} height={500}
+                />
                 <View style={styles.headerContainer}>
                     <Sign sign={session.sign} showTitle={false} signWidth={80} signHeight={80}/>
                     <ShadowHeadline style={styles.headerHeadline}>
@@ -67,8 +71,12 @@ function DailyScreen({navigation}) {
                             <ShowFromTop>
                                 <View style={styles.surfaceContainer}>
                                     <Surface style={styles.surfaceSurface}>
-                                        <Button icon="heart" style={styles.surfaceButton}
-                                                labelStyle={styles.surfaceButtonLabel}>{i18n.t('Love')}</Button>
+                                        <Button icon="heart"
+                                                style={styles.surfaceButton}
+                                                labelStyle={styles.surfaceButtonLabel}
+                                        >
+                                            {i18n.t('Love')}
+                                        </Button>
                                         <Paragraph style={styles.surfaceParagraph}>
                                             Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots
                                             in a
