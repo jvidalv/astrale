@@ -6,7 +6,7 @@ const horoscope = {
     es: {
         "Aquarius": "Acuario",
         "Aries": "Aries",
-        "Cancer": "Cancer",
+        "Cancer": "Cáncer",
         "Capricorn": "Capricornio",
         "Gemini": "Géminis",
         "Leo": "Leo",
@@ -23,6 +23,7 @@ const horoscope = {
         "Zodiac signs": "Signos del Zodiaco",
         "Compatibility2": "Compatibi.",
         "Switch sign": "Cambiar de signo",
+        "Astrologers" : "Astrólogos"
     },
     en: {
         "Aquarius": "Aquarius",
@@ -44,6 +45,7 @@ const horoscope = {
         "Zodiac signs": "Zodiac signs",
         "Compatibility2": "Compatibility",
         "Switch sign": "Switch sign",
+        "Astrologers" : "Astrologers"
     },
 };
 

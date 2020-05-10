@@ -101,7 +101,7 @@ function PalmistryScanScreen({navigation, route}) {
     return (
         <DefaultView barStyle={useIsDark() ? 'light-content' : 'dark-content'}>
             <Aquarius color={colors.text} width={80} height={80} style={styles.aquarius}/>
-            <Backgrounds.Constellation height={250} width={250} style={styles.constellation}/>
+            <Backgrounds.Constellation color={colors.text} dotColor={colors.primary} height={250} width={250} style={styles.constellation}/>
             <View style={{flex: .2}}/>
             <View style={styles.textContainer}>
                 <Headline style={styles.textHeadline}>{i18n.t('Palmistry')}</Headline>

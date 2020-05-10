@@ -42,14 +42,13 @@ function NumberScreen({navigation}) {
                     style={styles.textText}>{i18n.t("{name}, to give you accurate and personal information we need to know some info", {name: 'Josep'})}</Text>
             </View>
             <View style={styles.logoContainer}>
-                <Dices height={80}/>
+                <Dices height={75}/>
             </View>
             <View style={styles.inputContainer}>
                 <PaperTextInput
                     value={number}
                     onChangeText={(text) => setNumber(text)}
-                    style={styles.inputStyle}
-                    underlineColor='#ffffff00'
+                    style={[styles.input, {backgroundColor: colors.text + '3D'}]}
                     keyboardType="number-pad"
                     enablesReturnKeyAutomatically={true}
                     render={props => <TextInput {...props} style={styles.inputCustom} maxLength={5}/>}

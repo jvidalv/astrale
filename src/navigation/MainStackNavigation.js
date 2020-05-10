@@ -10,6 +10,8 @@ import PalmistryPreScanScreen from "../screens/initials/PalmistryPreScanScreen";
 import PalmistryScanScreen from "../screens/initials/PalmistryScanScreen";
 import {useGlobals} from "../contexts/Global";
 import i18n from "i18n-js";
+import {Text, useTheme} from "react-native-paper";
+import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 
 const PalmistryStack = createStackNavigator();
 
@@ -49,48 +51,27 @@ function DailyStackNavigation() {
     )
 }
 
-const Tab = createMaterialBottomTabNavigator();
+const BarLabel = (props) => {
+    const {colors} = useTheme()
+    console.log(props)
+    return (
+        <Text style={{fontSize: 10, lineHeight: 20, textAlign: 'center', color: "#FFFFFF"}}>
+            {props.children}
+        </Text>
+    )
+}
+
+const Tab = createBottomTabNavigator();
 
 function MainStackNavigation() {
     const [{session}] = useGlobals();
     return (
-        <Tab.Navigator
-            shifting={false}
-        >
+        <Tab.Navigator>
             <Tab.Screen
                 name="symbol"
                 component={DailyStackNavigation}
-                options={{
-                    tabBarIcon: `zodiac-${session.sign.toLowerCase()}`,
-                    title: i18n.t(session.sign)
-                }}
             />
-            <Tab.Screen
-                name="Palmistry"
-                component={session.palmistry ? PalmistryScreen : PalmistryStackNavigation}
-                options={{
-                    tabBarIcon: 'hand',
-                    title: i18n.t('Palmistry')
-                }}
-            />
-            <Tab.Screen
-                name="Compatibility"
-                component={CompatibilityScreen}
-                options={{
-                    tabBarIcon: 'heart-multiple',
-                    title: i18n.t('Compatibility2'),
 
-                }}
-            />
-            <Tab.Screen
-                name="Profile"
-                component={ProfileScreen}
-                options={{
-                    tabBarIcon: 'account-box',
-                    title: i18n.t('Profile'),
-
-                }}
-            />
         </Tab.Navigator>
     );
 }

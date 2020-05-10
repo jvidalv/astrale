@@ -14,8 +14,6 @@ const HoroscopeSigns = [
 ]
 
 export const HoroscopeDates = {
-
-
     'Capricorn': {
         'es': '22 dic - 20 ene',
         'en': '22 dec - 20 jan',

@@ -31,7 +31,7 @@ function NameScreen({navigation}) {
             <Aquarius width={80} height={80} style={styles.aquarius}/>
             <Backgrounds.Constellation color={colors.text} dotColor={colors.primary} height={250} width={250}
                                        style={styles.constellation}/>
-            <View style={{flex: 1}}/>
+            <View style={{flex: .5}}/>
             <View style={styles.textContainer}>
                 <Headline style={styles.textHeadline}>{i18n.t('What\'s your name?')}</Headline>
                 <Text
@@ -44,8 +44,7 @@ function NameScreen({navigation}) {
                 <PaperTextInput
                     value={name}
                     onChangeText={(text) => setName(text)}
-                    style={styles.input}
-                    underlineColor='#ffffff00'
+                    style={[styles.input, {backgroundColor: colors.text + '3D'}]}
                     render={props => <TextInput {...props} style={styles.inputCustom}/>}
                 />
             </View>
@@ -80,13 +79,13 @@ const styles = StyleSheet.create({
         flex: 1, paddingHorizontal: 20, opacity: 0.9
     },
     input: {
-        borderRadius: 5, fontSize: 30, textAlign: 'center',
+        borderRadius: 5, fontSize: 30, textAlign: 'center'
     },
     inputCustom: {
         textAlign: 'center',
         marginTop: 10,
         color: 'white',
-        fontSize: 30
+        fontSize: 30,
     },
     buttonContainer: {
         flex: 1, paddingHorizontal: 20, paddingTop: 35, justifyContent: 'flex-end', marginBottom: 20
