@@ -73,6 +73,8 @@ const common = {
         "Choose one": "Elige uno",
         "Back": "Atrás",
         "Restart": "Reiniciar",
+        "Career": "Trabajo",
+
     },
     en: {
         "Ok": "Ok",
@@ -144,6 +146,8 @@ const common = {
         "Choose one": "Choose one",
         "Back": "Back",
         "Restart": "Restart",
+        "Career": "Career",
+
     },
 };
 

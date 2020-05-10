@@ -21,9 +21,12 @@ const horoscope = {
         "Life line": "Línea de la vida",
         "Check other signs": "Ver otros signos",
         "Zodiac signs": "Signos del Zodiaco",
-        "Compatibility2": "Compatibi.",
+        "Compatibility2": "Compatibilidad",
         "Switch sign": "Cambiar de signo",
-        "Astrologers" : "Astrólogos"
+        "Astrologers" : "Astrólogos",
+        "Your horoscope for today" : "El horóscopo de hoy",
+        "Focus of the day" : "Objetivo del día",
+        "Finances" : "Finanzas",
     },
     en: {
         "Aquarius": "Aquarius",
@@ -45,7 +48,10 @@ const horoscope = {
         "Zodiac signs": "Zodiac signs",
         "Compatibility2": "Compatibility",
         "Switch sign": "Switch sign",
-        "Astrologers" : "Astrologers"
+        "Astrologers" : "Astrologers",
+        "Your horoscope for today" : "Your horoscope for today",
+        "Focus of the day" : "Focus of the day",
+        "Finances" : "Finances",
     },
 };
 

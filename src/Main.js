@@ -11,15 +11,7 @@ import InitialStackNavigation from "./navigation/InitialStackNavigation";
 import * as Font from 'expo-font';
 import Storer from "./utils/Storer";
 import {SESSION_KEY} from "./constants/session";
-
-/**
- * Gets active theme dark/light
- * @returns {object}
- */
-const useTheme = () => {
-    const [{theme}] = useGlobals();
-    return themes[theme];
-};
+import {initialState as screensInitialState, reducer, ScreensProvider} from "./contexts/Screens";
 
 /**
  * Loads in cache images
@@ -55,10 +47,11 @@ const PERSISTENCE_KEY = 'NAVIGATION_STATE';
  * @constructor
  */
 function Main() {
-    const [{session}, dispatch] = useGlobals();
+    const [{session, theme}, dispatch] = useGlobals();
     const [isReady, setIsReady] = React.useState(false);
     const [initialState, setInitialState] = React.useState();
     const [fontsLoaded, setFontsLoaded] = React.useState(false);
+    const _theme = themes[theme];
 
     React.useEffect(() => {
         (async () => {
@@ -97,16 +90,18 @@ function Main() {
     }
 
     return (
-        <PaperProvider theme={useTheme()}>
+        <PaperProvider theme={_theme}>
             <NavigationContainer
                 initialState={initialState}
                 onStateChange={state =>
                     AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
                 }
-                theme={useTheme()}>
+                theme={_theme}>
+                <ScreensProvider reducer={reducer} initialState={screensInitialState}>
                 {
                     session.basicsDone ? <MainStackNavigation/> : <InitialStackNavigation/>
                 }
+                </ScreensProvider>
             </NavigationContainer>
         </PaperProvider>
     )

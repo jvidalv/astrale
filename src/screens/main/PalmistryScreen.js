@@ -6,6 +6,8 @@ import ShadowHeadline from "../../components/paper/ShadowHeadline";
 import Palmistry from "../../svgs/Palmistry";
 import {useIsDark} from "../../hooks/useTheme";
 import i18n from "i18n-js";
+import {useScreens} from "../../contexts/Screens";
+import useHideStatusBar from "../../hooks/useHideStatusBar";
 
 /**
  * @param navigation
@@ -14,10 +16,11 @@ import i18n from "i18n-js";
  */
 function PalmistryScreen({navigation}) {
     const {colors} = useTheme();
+    const _handleScroll = useHideStatusBar();
 
     return (
         <React.Fragment>
-            <DefaultScrollView barStyle={useIsDark() ? 'light-content' : 'dark-content'}>
+            <DefaultScrollView onScrollCallback={_handleScroll}>
                 <Palmistry width={80} color={colors.text} style={styles.backgroundStars}/>
                 <View style={styles.headerContainer}>
                     <ShadowHeadline style={styles.headerHeadline}>

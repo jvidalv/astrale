@@ -32,6 +32,8 @@ const themes = {
         colors: {
             ...NavigationDefaultTheme.colors,
             ...PaperDefaultTheme.colors,
+            accent : '#bc4598'
+
         },
         fonts: configureFonts(fontConfig),
     },
@@ -41,6 +43,7 @@ const themes = {
         colors: {
             ...NavigationDarkTheme.colors,
             ...PaperDarkTheme.colors,
+            accent : '#bc4598'
         },
         fonts: configureFonts(fontConfig),
     }

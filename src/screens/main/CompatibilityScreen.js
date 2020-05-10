@@ -1,16 +1,17 @@
 import React from "react";
 import {StyleSheet, View} from "react-native";
 import {DefaultScrollView} from "../../components/containers";
-import {ActivityIndicator, Button, Paragraph, ProgressBar, Surface, Text, useTheme} from "react-native-paper";
-import {Backgrounds} from "../../svgs";
+import {ActivityIndicator, Button, Divider, Paragraph, ProgressBar, Text, useTheme} from "react-native-paper";
 import HoroscopeSigns from "../../constants/zodiac_signs";
 import {Sign} from "../../components/zodiac";
 import ShadowHeadline from "../../components/paper/ShadowHeadline";
 import useMatch from "../../hooks/useMatch";
-import {useIsDark} from "../../hooks/useTheme";
 import i18n from "i18n-js";
 import useFetch from "../../hooks/useFetch";
 import ShowFromTop from "../../components/animations/ShowFromTop";
+import useHideStatusBar from "../../hooks/useHideStatusBar";
+import SpaceSky from "../../components/decorations/SpaceSky";
+import TextBold from "../../components/paper/TextBold";
 
 /**
  * Progress bars from match
@@ -43,34 +44,32 @@ const MatchContent = () => {
     const {data, loading, error} = useFetch();
 
     return (
-        <View style={styles.surfaceContainer}>
-            {loading ? <React.Fragment><ActivityIndicator size="large" style={{flex: 1, height: 200}}/><View
-                    style={{height: 500}}/></React.Fragment> :
-                (
-                    <ShowFromTop>
-                        <Surface style={styles.surfaceSurface}>
-                            <Paragraph style={styles.surfaceParagraph}>
-                                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a
-                                piece
-                                of classical Latin literature from 45 BC, making it over 2000 years old. Richard
-                                McClintock,
-                                a Latin professor at Hampden-Sydney College in Virginia.
-                                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a
-                                piece
-                                of classical Latin literature from 45 BC, making it over 2000 years old. Richard
-                                McClintock,
-                                a Latin professor at Hampden-Sydney College in Virginia.
+        <React.Fragment>
+            <Divider style={{marginBottom: 15}}/>
+            <View style={styles.surfaceContainer}>
+                {loading ? <React.Fragment><ActivityIndicator size="large" style={{flex: 1, height: 200}}/><View
+                        style={{height: 500}}/></React.Fragment> :
+                    (
+                        <ShowFromTop>
+                            <Paragraph>
+                                After viewing Capricorn compatibility with Aries, it is very hard to decide that which one of the two will come out as a winner from this relationship as both of them will feel awful most of the time when they are committed to each other, and they will only be relieved when they get separated.
                             </Paragraph>
-                        </Surface>
-                        <View style={{marginVertical: 20}}>
-                            {
-                                matches.map((props, index) => <Bars key={index} {...props}/>)
-                            }
-                        </View>
-                    </ShowFromTop>
-                )
-            }
-        </View>
+                            <TextBold style={{marginTop: 20, marginBottom: 10}}>
+                                Relationship
+                            </TextBold>
+                            <Paragraph>
+                                In a compatible relationship, Capricorn and Aquarius bring out the positive characteristics of each other. Capricorn is very careful and looks at life very realistically and logically. Aquarius, on the other hand, has an idealistic approach towards life. Initially, people do not see them as the couple that would click or get along, but once they start loving one another, they form a bond that never breaks."}
+                            </Paragraph>
+                            <View style={{marginVertical: 20}}>
+                                {
+                                    matches.map((props, index) => <Bars key={index} {...props}/>)
+                                }
+                            </View>
+                        </ShowFromTop>
+                    )
+                }
+            </View>
+        </React.Fragment>
     )
 };
 
@@ -106,10 +105,12 @@ function CompatibilityScreen({navigation}) {
     const [selectedSigns, setSelectedSigns] = React.useState([])
     const _handleSignPress = (sign) => setSelectedSigns(selectedSigns => [...selectedSigns, sign])
     const _handleSignTopPress = () => setSelectedSigns([])
+    const _handleScroll = useHideStatusBar();
 
     return (
         <React.Fragment>
-            <DefaultScrollView barStyle={useIsDark() ? 'light-content' : 'dark-content'}>
+            <SpaceSky/>
+            <DefaultScrollView onScrollCallback={_handleScroll}>
                 <View style={styles.headerContainer}>
                     <ShadowHeadline style={styles.headerHeadline}>
                         {i18n.t('Compatibility')}
@@ -131,7 +132,7 @@ function CompatibilityScreen({navigation}) {
                                 backgroundColor: colors.surface,
                                 borderColor: colors.text,
                             }]}>
-                                <Text style={{textAlign: 'center'}}>
+                                <Text style={{textAlign: 'center', fontSize: 10}}>
                                     {i18n.t('Your sign')}
                                 </Text>
                             </View>
@@ -156,7 +157,7 @@ function CompatibilityScreen({navigation}) {
                                 borderColor: colors.text,
 
                             }]}>
-                                <Text style={{textAlign: 'center'}}>
+                                <Text style={{textAlign: 'center', fontSize: 10}}>
                                     {i18n.t('Partner sign')}
                                 </Text>
                             </View>
@@ -165,10 +166,6 @@ function CompatibilityScreen({navigation}) {
                 {
                     selectedSigns.length === 2 ? <MatchContent/> : <SignsContent onPress={_handleSignPress}/>
                 }
-                <Backgrounds.Constellation
-                    height={450} width={450}
-                    color={colors.text} dotColor={colors.primary}
-                    style={styles.constellation}/>
             </DefaultScrollView>
         </React.Fragment>
     );
@@ -176,7 +173,7 @@ function CompatibilityScreen({navigation}) {
 
 const styles = StyleSheet.create({
     constellation: {
-        position: 'absolute', bottom: 10, left: 10, opacity: .05
+        position: 'absolute', bottom: 10, left: 10, opacity: .05, zIndex: 0
     },
     stars: {
         position: 'absolute', top: 20, right: 10, opacity: .05
@@ -213,7 +210,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         paddingHorizontal: 20,
         marginBottom: 20,
-        flex: 1
+        flex: 1,
     },
     surfaceContainer: {
         marginTop: 20, marginHorizontal: 20, elevation: 3

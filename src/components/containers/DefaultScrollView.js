@@ -1,41 +1,53 @@
 import React from "react";
-import {KeyboardAvoidingView, Platform, SafeAreaView, ScrollView, StatusBar} from "react-native";
+import {KeyboardAvoidingView, Platform, ScrollView, View} from "react-native";
 import {useTheme} from 'react-native-paper';
 import PropTypes from "prop-types";
+import PlatformUtils from "../../utils/Platform";
 
 /**
  * @param children
- * @param background
- * @param barStyle
- * @param keyboardAvoidView
+ * @param background {string}
+ * @param keyboardAvoidView {boolean}
  * @param styleScrollView {object}
+ * @param hideStatusBarOnScroll {boolean}
  * @returns {*}
  * @constructor
  */
-function DefaultScrollView({children, background, barStyle, keyboardAvoidView, styleScrollView}) {
+function DefaultScrollView({children, background, keyboardAvoidView, styleScrollView, onScrollCallback}) {
     const {colors} = useTheme();
+    const isAndroid = PlatformUtils.isAndroid;
+    const _onScroll = (event) => onScrollCallback ? onScrollCallback(event) : null;
     return (
-        <SafeAreaView style={{flex: 1}}>
-            <StatusBar barStyle={barStyle} backgroundColor={background || colors.background} animated/>
-            <KeyboardAvoidingView style={{flex: 1}} behavior={Platform.OS === "ios" ? "padding" : null}
-                                  enabled={keyboardAvoidView}>
-                <ScrollView style={[{flex: 1}, {backgroundColor: background || colors.background}, styleScrollView]}>
+        <View style={{flex: 1}}>
+            <KeyboardAvoidingView
+                style={{flex: 1}}
+                behavior={Platform.OS === "ios" ? "padding" : null}
+                enabled={keyboardAvoidView}>
+                <ScrollView
+                    scrollEventThrottle={1}
+                    style={[{
+                        flex: 1,
+                        paddingVertical: isAndroid ? 0 : 40
+                    }, styleScrollView
+                    ]}
+                    onScroll={_onScroll}>
                     {children}
+                    <View style={{height: isAndroid ? 25 : 50}}/>
                 </ScrollView>
             </KeyboardAvoidingView>
-        </SafeAreaView>
+        </View>
     );
 }
 
 DefaultScrollView.propTypes = {
     background: PropTypes.string,
-    barStyle: PropTypes.oneOf(['light-content', 'dark-content']),
-    styleScrollView: PropTypes.object
+    styleScrollView: PropTypes.object,
+    keyboardAvoidView: PropTypes.bool,
+    onScrollCallback: PropTypes.func
 };
 
 DefaultScrollView.defaultProps = {
     keyboardAvoidView: true,
-    barStyle: "light-content"
 };
 
 export default DefaultScrollView;

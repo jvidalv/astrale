@@ -1,11 +1,9 @@
 import React from "react";
-import {StyleSheet, View} from "react-native";
-import {ActivityIndicator, Button, FAB, Paragraph, Subheading, Surface, Title, useTheme} from "react-native-paper";
+import {SafeAreaView, StyleSheet, View} from "react-native";
+import {ActivityIndicator, Divider, ProgressBar, Subheading, Text, useTheme} from "react-native-paper";
 import {DefaultScrollView} from "../../components/containers";
-import {Backgrounds} from "../../svgs";
 import {Sign} from "../../components/zodiac";
 import ShadowHeadline from "../../components/paper/ShadowHeadline";
-import {useIsDark} from "../../hooks/useTheme";
 import i18n from "i18n-js";
 import useFetch from "../../hooks/useFetch";
 import ShowFromTop from "../../components/animations/ShowFromTop";
@@ -14,6 +12,67 @@ import Storer from "../../utils/Storer";
 import {SESSION_KEY} from "../../constants/session";
 import {DateUtils} from "../../utils";
 import registerForPushNotificationsAsync from "../../utils/Notifications";
+import SpaceSky from "../../components/decorations/SpaceSky";
+import PlatformUtils from "../../utils/Platform";
+import TextBold from "../../components/paper/TextBold";
+import {MaterialCommunityIcons} from "@expo/vector-icons";
+import MainNav from "../../components/navs/MainNav";
+
+/**
+ * @param number {number}
+ * @returns {*}
+ * @constructor
+ */
+const LuckyNumber = ({number}) => {
+    const {colors} = useTheme();
+    return (
+        <View style={[LuckyNumberStyles.circle, {backgroundColor: colors.accent}]}>
+            <Text>{number}</Text>
+        </View>
+    )
+}
+
+const LuckyNumberStyles = StyleSheet.create({
+    circle: {
+        borderRadius: 50,
+        height: 30,
+        width: 30,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+})
+
+
+/**
+ * @param text {text}
+ * @param percent {number}
+ * @param style {object}
+ * @returns {*}
+ * @constructor
+ */
+const ProgressItem = ({text, percent, style}) => {
+    const {colors} = useTheme();
+    return (
+        <View style={[{flex: 1}, style]}>
+            <Text style={ProgressItemStyles.text}>
+                {text}
+            </Text>
+            <ProgressBar style={ProgressItemStyles.bar} progress={percent / 100} st/>
+            <Text theme={{colors: {text: colors.primary}}}>
+                {percent}%
+            </Text>
+        </View>
+    )
+}
+
+const ProgressItemStyles = StyleSheet.create({
+    text: {
+        fontSize: 16
+    },
+    bar: {
+        marginVertical: 5, borderRadius: 5
+    }
+})
 
 /**
  * @param navigation
@@ -22,9 +81,10 @@ import registerForPushNotificationsAsync from "../../utils/Notifications";
  */
 function DailyScreen({navigation}) {
     const [{session}, dispatch] = useGlobals();
+    const {colors, fonts} = useTheme();
     const [fabOpen, setFabOpen] = React.useState(false);
     const {data, loading, error, setLoading} = useFetch();
-    const {colors} = useTheme();
+    const isAndroid = PlatformUtils.isAndroid;
 
     if (!session?.sign) {
         Storer.delete(SESSION_KEY).then(() => dispatch({type: 'setLogOut'}));
@@ -32,7 +92,7 @@ function DailyScreen({navigation}) {
 
     React.useEffect(() => {
         if (!session.notifications) {
-            registerForPushNotificationsAsync().then((res) => {
+            !__DEV__ && registerForPushNotificationsAsync().then((res) => {
                 dispatch({
                     type: 'setAndStoreSession',
                     fields: {notifications: res}
@@ -49,15 +109,11 @@ function DailyScreen({navigation}) {
 
     return (
         <React.Fragment>
-            <DefaultScrollView barStyle={useIsDark() ? 'light-content' : 'dark-content'}>
-                <Backgrounds.ConstellationSimple
-                    color={colors.text}
-                    dotColor={colors.primary}
-                    style={styles.backgroundConstellation}
-                    width={500} height={500}
-                />
-                <View style={styles.headerContainer}>
-                    <Sign sign={session.sign} showTitle={false} signWidth={80} signHeight={80}/>
+            <MainNav />
+            <SpaceSky/>
+            <SafeAreaView style={{flex: .4}}>
+                <View style={[styles.headerContainer]}>
+                    <Sign sign={session.sign} showTitle={false} signWidth={70} signHeight={70}/>
                     <ShadowHeadline style={styles.headerHeadline}>
                         {i18n.t(session.sign)}
                     </ShadowHeadline>
@@ -65,127 +121,132 @@ function DailyScreen({navigation}) {
                         {DateUtils.toEuropean((new Date()))}
                     </Subheading>
                 </View>
+            </SafeAreaView>
+            <Divider/>
+            <DefaultScrollView styleScrollView={{paddingTop: 20}}>
                 {
                     loading ? <ActivityIndicator size="large" style={{flex: 1, height: 400}}/>
                         : (
                             <ShowFromTop>
-                                <View style={styles.surfaceContainer}>
-                                    <Surface style={styles.surfaceSurface}>
-                                        <Button icon="heart"
-                                                style={styles.surfaceButton}
-                                                labelStyle={styles.surfaceButtonLabel}
-                                        >
-                                            {i18n.t('Love')}
-                                        </Button>
-                                        <Paragraph style={styles.surfaceParagraph}>
-                                            Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots
-                                            in a
-                                            piece
-                                            of classical Latin literature from 45 BC, making it over 2000 years old. Richard
-                                            McClintock,
-                                            a Latin professor at Hampden-Sydney College in Virginia, looked up one of the
-                                            more
-                                            obscure
-                                            Latin words, consectetur, from a Lorem Ipsum passage, and going through the
-                                            cites of
-                                            the
-                                            word in classical literature, discovered the undoubtable source
-                                        </Paragraph>
-                                    </Surface>
+                                <View style={[styles.defaultContainer, {
+                                    flexDirection: 'row',
+                                    alignItems: 'center',
+                                    marginTop: 10
+                                }]}>
+                                    <TextBold style={styles.textTitles}>
+                                        {i18n.t('Focus of the day')}:
+                                    </TextBold>
+                                    <TextBold style={{fontSize: 16, marginLeft: 5, color: colors.primary}}>
+                                        {i18n.t('Finances')}
+                                    </TextBold>
                                 </View>
-                                <View style={styles.surfaceContainer}>
-                                    <Surface style={styles.surfaceSurface}>
-                                        <Button icon="briefcase" style={styles.surfaceButton}
-                                                labelStyle={styles.surfaceButtonLabel}>{i18n.t('Work')}</Button>
-                                        <Paragraph style={styles.surfaceParagraph}>
-                                            It has roots in a piece
-                                            of classical Latin literature from 45 BC, making it over 2000 years old. Richard
-                                            McClintock,
-                                            a Latin professor at Hampden-Sydney College in Virginia, looked up one of the
-                                            more obscure
-                                            Latin words, consectetur, from a Lorem Ipsum passage, and going through the
-                                            cites of the
-                                            word in classical literature, discovered the undoubtable source
-                                        </Paragraph>
-                                    </Surface>
+                                <View style={[styles.defaultContainer, {
+                                    marginTop: 25,
+                                    marginBottom: 5,
+                                    flexDirection: 'row',
+                                    justifyContent: 'space-around'
+                                }]}>
+                                    <ProgressItem text={i18n.t('Love')} percent={50}/>
+                                    <ProgressItem text={i18n.t('Career')} percent={25} style={{marginHorizontal: 5}}/>
+                                    <ProgressItem text={i18n.t('Health')} percent={87}/>
                                 </View>
-                                <View style={styles.surfaceContainer}>
-                                    <Surface style={styles.surfaceSurface}>
-                                        <Button icon="food-apple" style={styles.surfaceButton}
-                                                labelStyle={styles.surfaceButtonLabel}>{i18n.t('Health')}</Button>
-                                        <Paragraph style={styles.surfaceParagraph}>
-                                            Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots
-                                            in a piece
-                                            of classical Latin literature from 45 BC, making it over 2000 years old. Richard
-                                            McClintock,
-                                            a Latin professor at Hampden-Sydney College in Virginia.
-                                        </Paragraph>
-                                    </Surface>
-                                </View>
-                                <View style={styles.surfaceContainer}>
-                                    <Surface style={styles.surfaceSurface}>
-                                        <Button style={styles.surfaceButton}
-                                                labelStyle={styles.surfaceButtonLabel}>{i18n.t('Today you love')}</Button>
-                                        <View style={styles.bottomThreeContainer}>
-                                            <Sign sign={'Scorpio'} signHeight={100}
-                                                  styleTitle={{fontSize: 20, marginTop: 15}}/>
-                                            <Sign sign={'Taurus'} signHeight={100}
-                                                  styleTitle={{fontSize: 20, marginTop: 15}}/>
+                                <View style={[styles.defaultContainer]}>
+                                    <View style={styles.horoscopeTodayContainer}>
+                                        <TextBold style={styles.textTitles}>
+                                            {i18n.t('Your horoscope for today')}:
+                                        </TextBold>
+                                        <View style={styles.iconsHoroscopeToday}>
+                                            <MaterialCommunityIcons
+                                                name="heart"
+                                                size={16}
+                                                color={colors.text}
+                                                style={{marginLeft: 5}}
+                                            />
+                                            <MaterialCommunityIcons
+                                                name="briefcase"
+                                                size={16}
+                                                color={colors.text}
+                                                style={{marginLeft: 5}}/>
+                                            <MaterialCommunityIcons
+                                                name="food-apple"
+                                                size={16}
+                                                color={colors.text}
+                                                style={{marginLeft: 5}}/>
                                         </View>
-                                    </Surface>
+
+                                    </View>
+                                    <Text style={{marginTop: 15}}>
+                                        Estás en un tono receptivo a las críticas y aceptarás las bien intencionadas.
+                                        Tendrás noticias de antiguos amigos de los que no sabes hace tiempo, te
+                                        sorprenderás.
+                                    </Text>
+                                    <Text style={{marginTop: 5}}>
+                                        Das los primeros pasos dentro de una nueva realidad, cargada de posibilidades.
+                                        Dedica una parte de tu tiempo libre a relajarte, así se evita el estrés. </Text>
+                                    <Text style={{marginTop: 5}}>
+                                        Tienes ganas de hacer cambios a nivel profesional, te sientes sin futuro. Incurrirás
+                                        en un gasto inesperado, la buena noticia es que podrás hacerle frente.
+                                    </Text>
                                 </View>
-                                <View style={styles.surfaceContainer}>
-                                    <Surface style={styles.surfaceSurface}>
-                                        <Button style={styles.surfaceButton}
-                                                labelStyle={styles.surfaceButtonLabel}>{i18n.t('Today you hate')}</Button>
-                                        <View style={styles.bottomThreeContainer}>
-                                            <Sign sign={'Libra'} signHeight={100}
-                                                  styleTitle={{fontSize: 20, marginTop: 15}}/>
-                                            <Sign sign={'Leo'} signHeight={100} styleTitle={{fontSize: 20, marginTop: 15}}/>
-                                        </View>
-                                    </Surface>
+                                <View style={styles.defaultContainer}>
+                                    <TextBold style={styles.textTitles}>{i18n.t('Today you love')}</TextBold>
                                 </View>
-                                <View style={styles.surfaceContainer}>
-                                    <Surface style={styles.surfaceSurface}>
-                                        <Button style={styles.surfaceButton}
-                                                labelStyle={styles.surfaceButtonLabel}>{i18n.t('Lucky numbers')}</Button>
-                                        <View style={styles.bottomThreeContainer}>
-                                            <View style={{alignItems: 'center'}}>
-                                                <Title style={styles.luckyNumbersTitle}>25</Title>
-                                            </View>
-                                            <View style={{alignItems: 'center'}}>
-                                                <Title style={styles.luckyNumbersTitle}>6</Title>
-                                            </View>
-                                            <View style={{alignItems: 'center'}}>
-                                                <Title style={styles.luckyNumbersTitle}>32</Title>
-                                            </View>
-                                        </View>
-                                    </Surface>
+                                <View style={[styles.loveContainer, {
+                                    borderColor: colors.text + '0D',
+                                }]}>
+                                    <View style={[styles.heartLoveContainer, {
+                                        backgroundColor: colors.text + '0D',
+                                    }]}>
+                                        <MaterialCommunityIcons name="heart" size={30} color={colors.accent}/>
+                                    </View>
+                                    <View style={[styles.loveSignsContainer]}>
+                                        <Sign sign={'Scorpio'} signHeight={40} signWidth={50}
+                                              styleTitle={{fontSize: 12}}/>
+                                        <Sign sign={'Taurus'} signHeight={40}
+                                              style={{marginLeft: 20}}
+                                              styleTitle={{fontSize: 12}}/>
+                                        <Sign sign={'Leo'} signHeight={40}
+                                              style={{marginLeft: 20}}
+                                              styleTitle={{fontSize: 12}}/>
+                                    </View>
                                 </View>
-                                <View style={{height: 20}}/>
+                                <Divider style={{marginTop: 20}}/>
+                                <View style={styles.defaultContainer}>
+                                    <TextBold style={styles.textTitles}>{i18n.t('Lucky numbers')}</TextBold>
+                                </View>
+                                <View style={[styles.defaultContainer, {
+                                    flexDirection: 'row',
+                                    justifyContent: 'space-evenly',
+                                }]}>
+
+                                    <LuckyNumber number={8}/>
+                                    <LuckyNumber number={12}/>
+                                    <LuckyNumber number={3}/>
+                                </View>
                             </ShowFromTop>
                         )
                 }
             </DefaultScrollView>
-            <FAB.Group
-                open={fabOpen}
-                icon={fabOpen ? 'arrow-up-circle' : 'plus-circle'}
-                actions={[
-                    {
-                        style: {backgroundColor: colors.primary},
-                        icon: 'share',
-                        label: i18n.t('Share'),
-                        onPress: () => setFabOpen(false)
-                    },
-                    {
-                        icon: 'swap-horizontal',
-                        label: i18n.t('Switch sign'),
-                        onPress: () => navigation.navigate('Signs') | setFabOpen(false)
-                    },
-                ]}
-                onStateChange={() => null}
-                onPress={() => setFabOpen(fabOpen => !fabOpen)}
-            />
+
+            {/*<FAB.Group*/}
+            {/*    open={fabOpen}*/}
+            {/*    icon={fabOpen ? 'arrow-up-circle' : 'plus-circle'}*/}
+            {/*    actions={[*/}
+            {/*        {*/}
+            {/*            style: {backgroundColor: colors.primary},*/}
+            {/*            icon: 'share',*/}
+            {/*            label: i18n.t('Share'),*/}
+            {/*            onPress: () => setFabOpen(false)*/}
+            {/*        },*/}
+            {/*        {*/}
+            {/*            icon: 'swap-horizontal',*/}
+            {/*            label: i18n.t('Switch sign'),*/}
+            {/*            onPress: () => navigation.navigate('Signs') | setFabOpen(false)*/}
+            {/*        },*/}
+            {/*    ]}*/}
+            {/*    onStateChange={() => null}*/}
+            {/*    onPress={() => setFabOpen(fabOpen => !fabOpen)}*/}
+            {/*/>*/}
         </React.Fragment>
     );
 }
@@ -200,26 +261,41 @@ const styles = StyleSheet.create({
     headerHeadline: {
         fontWeight: 'bold', fontSize: 30, lineHeight: 34, marginTop: 20
     },
-    surfaceContainer: {
-        marginTop: 20, marginHorizontal: 20
+    defaultContainer: {
+        marginHorizontal: 20,
+        marginTop: 20,
     },
-    surfaceSurface: {
-        padding: 20, borderRadius: 10, elevation: 3
+    textTitles: {
+        fontSize: 16
     },
-    surfaceButton: {
-        marginTop: -5, marginBottom: 10
+    horoscopeTodayContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
     },
-    surfaceButtonLabel: {
-        fontSize: 20, fontWeight: 'bold', letterSpacing: 4
+    iconsHoroscopeToday: {
+        flexDirection: 'row', justifyContent: 'space-evenly'
     },
-    surfaceParagraph: {
-        fontSize: 14, lineHeight: 22, letterSpacing: 1,
+    loveContainer: {
+        flexDirection: 'row',
+        marginTop: 15,
+        marginHorizontal: 20,
+        justifyContent: 'space-between',
+        borderWidth: 2,
+        borderRadius: 10
     },
-    bottomThreeContainer: {
-        flexDirection: 'row', justifyContent: 'space-around'
+    heartLoveContainer: {
+        flex: .2,
+        borderTopLeftRadius: 8,
+        borderBottomLeftRadius: 8,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
-    luckyNumbersTitle: {
-        fontSize: 26
+    loveSignsContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        flex: 1,
+        marginTop: 10
     }
 })
 

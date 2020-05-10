@@ -1,9 +1,7 @@
 import React from "react";
 import {Alert, StyleSheet, View} from "react-native";
-import {Button, Caption, Divider, Subheading, Switch, Title, useTheme} from "react-native-paper";
-import {DefaultScrollView} from "../../components/containers";
+import {Avatar, Button, Divider, Switch, Text, Title, useTheme} from "react-native-paper";
 import {useGlobals} from "../../contexts/Global";
-import ShadowHeadline from "../../components/paper/ShadowHeadline";
 import i18n from "i18n-js";
 import {useIsDark} from "../../hooks/useTheme";
 import {Backgrounds} from "../../svgs";
@@ -13,6 +11,11 @@ import {DateUtils} from "../../utils";
 import Storer from "../../utils/Storer";
 import {SESSION_KEY} from "../../constants/session";
 import registerForPushNotificationsAsync from "../../utils/Notifications";
+import useHideStatusBar from "../../hooks/useHideStatusBar";
+import {BlurView} from "expo-blur";
+import PlatformUtils from "../../utils/Platform";
+import {MaterialCommunityIcons} from "@expo/vector-icons";
+import Close from "../../components/navs/Close";
 
 /**
  * @param navigation
@@ -25,8 +28,9 @@ function ProfileScreen({navigation}) {
     const {colors} = useTheme();
     const {setRate} = useRate();
     const {setStartShare} = useShare('Proba', 'https://proba.com');
-
     const isDark = useIsDark();
+    const isAndroid = PlatformUtils.isAndroid;
+    const _handleScroll = useHideStatusBar();
     const _handleDarkThemeChange = () => {
         dispatch({
             'type': 'switchTheme',
@@ -62,66 +66,46 @@ function ProfileScreen({navigation}) {
     const _handleSharePress = async () => setStartShare(true);
 
     return (
-        <DefaultScrollView barStyle={useIsDark() ? 'light-content' : 'dark-content'}>
+        <BlurView style={[StyleSheet.absoluteFill]} tint={isDark ? 'dark' : 'light'} intensity={isAndroid ? 150 : 100}>
             <Backgrounds.Telescope color={colors.text} style={styles.telescope}/>
+            <Close position="right"/>
             <View style={styles.headerContainer}>
-                <ShadowHeadline style={styles.headerHeadline}>
-                    {name}
-                </ShadowHeadline>
-                <Subheading>
-                    {i18n.t(sign)}
-                </Subheading>
+                <Avatar.Text label={session.name.substring(0, 1)}/>
+                <View style={{marginLeft: 25}}>
+                    <Title>
+                        {i18n.t(sign)}
+                    </Title>
+                    <Title>
+                        {DateUtils.toEuropean((new Date(birthDate)))}
+                    </Title>
+                </View>
             </View>
             <Divider style={{marginTop: 25}}/>
             <View style={styles.detailsContainer}>
-                <Button
-                    icon="cake-variant"
-                    style={{alignItems: 'flex-start'}}
-                    labelStyle={styles.detailsLabel}
-                    theme={{colors: {primary: colors.text}}}
-                >
-                    {DateUtils.toEuropean((new Date(birthDate)))}
-                </Button>
-                <Button
-                    icon="gender-transgender"
-                    style={{alignItems: 'flex-start'}}
-                    labelStyle={styles.detailsLabel}
-                    uppercase={false}
-                    theme={{colors: {primary: colors.text}}}
-                >
-                    {i18n.t(sex)}
-                </Button>
-                <Button
-                    icon="heart-circle"
-                    style={{alignItems: 'flex-start'}}
-                    labelStyle={styles.detailsLabel}
-                    uppercase={false}
-                    theme={{colors: {primary: colors.text}}}
-                >
-                    {i18n.t(relationship)}
-                </Button>
-                <Button
-                    icon="dice-6"
-                    style={{alignItems: 'flex-start'}}
-                    labelStyle={styles.detailsLabel}
-                    uppercase={false}
-                    theme={{colors: {primary: colors.text}}}
-                >
-                    {number}
-                </Button>
-            </View>
-            <Divider style={{marginTop: 25}}/>
-            <View style={styles.featuredContainer}>
-                <View style={styles.featuredView}>
-                    <Title>{days}</Title>
-                    <Caption>{i18n.t('Days visited')}</Caption>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <MaterialCommunityIcons name="gender-transgender" color={colors.text} size={18}/>
+                    <Text style={{marginLeft: 10}}>{i18n.t(sex)} </Text>
                 </View>
-                <View style={styles.featuredView}>
-                    <Title>{daysRow}</Title>
-                    <Caption>{i18n.t('Consecutive days')}</Caption>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <MaterialCommunityIcons name="heart-circle" color={colors.text} size={18}/>
+                    <Text style={{marginLeft: 10}}>{i18n.t(relationship)} </Text>
+                </View>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <MaterialCommunityIcons name="dice-6" color={colors.text} size={18}/>
+                    <Text style={{marginLeft: 10}}>{number} </Text>
                 </View>
             </View>
-            <Divider/>
+            <Divider style={{marginTop: 15}}/>
+            {/*<View style={styles.featuredContainer}>*/}
+            {/*    <View style={styles.featuredView}>*/}
+            {/*        <Title>{days}</Title>*/}
+            {/*        <Caption>{i18n.t('Days visited')}</Caption>*/}
+            {/*    </View>*/}
+            {/*    <View style={styles.featuredView}>*/}
+            {/*        <Title>{daysRow}</Title>*/}
+            {/*        <Caption>{i18n.t('Consecutive days')}</Caption>*/}
+            {/*    </View>*/}
+            {/*</View>*/}
             <View style={styles.buttonsContainer}>
                 <Button onPress={_handleSharePress} icon="account-multiple" style={{marginTop: 10}}
                         labelStyle={styles.buttonsLabel} uppercase={false}
@@ -143,7 +127,7 @@ function ProfileScreen({navigation}) {
                 )
                 }
             </View>
-            <Divider style={{marginTop: 25}}/>
+            <Divider style={{marginTop: 10}}/>
             <View style={styles.optionsContainer}>
                 <View style={styles.optionsOption}>
                     <Button icon="brightness-6" style={styles.optionsButton}
@@ -168,22 +152,22 @@ function ProfileScreen({navigation}) {
                     />
                 </View>
             </View>
-        </DefaultScrollView>
+        </BlurView>
     );
 }
 
 const styles = StyleSheet.create({
     telescope: {
-        zIndex: 0, position: 'absolute', top: 170, right: 20, opacity: 0.1
+        zIndex: 0, position: 'absolute', top: 50, right: 20, opacity: 0.1
     },
     headerContainer: {
-        alignItems: 'center', justifyContent: 'center', marginTop: 30, marginHorizontal: 20
+        alignItems: 'center', justifyContent: 'flex-start', marginTop: 30, marginHorizontal: 20, flexDirection: 'row'
     },
     headerHeadline: {
         fontWeight: 'bold', fontSize: 30
     },
     detailsContainer: {
-        marginHorizontal: 20, justifyContent: 'flex-start', marginTop: 25
+        marginHorizontal: 20, justifyContent: 'space-between', marginTop: 15, flexDirection: 'row', flexWrap: 'nowrap'
     },
     detailsLabel: {
         marginLeft: 23, fontSize: 18
@@ -195,13 +179,13 @@ const styles = StyleSheet.create({
         alignItems: 'center', flex: 1, paddingVertical: 25
     },
     buttonsContainer: {
-        marginHorizontal: 20, justifyContent: 'flex-start', marginTop: 25,
+        marginHorizontal: 20, justifyContent: 'flex-start', marginTop: 10,
     },
     buttonsLabel: {
         marginLeft: 23, fontSize: 18
     },
     optionsContainer: {
-        marginHorizontal: 20, justifyContent: 'flex-start', marginTop: 25, marginBottom: 25
+        marginHorizontal: 20, justifyContent: 'flex-start', marginTop: 10, marginBottom: 10
     },
     optionsOption: {
         flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'

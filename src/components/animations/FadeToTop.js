@@ -29,12 +29,6 @@ function FadeToTop({children, fadeToTop, initialHeight, finalHeight}) {
                 inputRange: [0, 1],
                 outputRange: [1, 0],
             }),
-            transform: [{
-                translateY: fadeAnim.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [0, -100],
-                })
-            }],
             height: fadeAnim.interpolate({
                 inputRange: [0, 1],
                 outputRange: [initialHeight, finalHeight],

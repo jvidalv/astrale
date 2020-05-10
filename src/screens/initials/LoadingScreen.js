@@ -34,7 +34,6 @@ function LoadingScreen({navigation}) {
             if (phrase < 5) {
                 setPhrase(phrase + 1);
             } else {
-                clearInterval(intervalNumber);
                 const preSession = {...session, ...{days: 1, daysRow: 1, basicsDone: true}}
                 Storer.set(SESSION_KEY, preSession).then(() => {
                     dispatch({

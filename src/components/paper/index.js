@@ -1,5 +1,7 @@
 import ShadowHeadline from "./ShadowHeadline";
+import TextBold from "./TextBold"
 
 export {
-    ShadowHeadline
+    ShadowHeadline,
+    TextBold
 }

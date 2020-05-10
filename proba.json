@@ -1,0 +1,27 @@
+{
+  "love": {
+    "es": "Estás en un tono receptivo a las críticas y aceptarás las bien intencionadas. Tendrás noticias de antiguos amigos de los que no sabes hace tiempo, te sorprenderás.",
+    "en": "Today, you may need to adjust your attitude towards your loved one. He or she is likely to be under stress and may even take out the stress on you. If you retaliate in kind, the situation will degenerate. Instead, try to be understanding and accommodating and you will be rewarded with gratitude and tenderness ﾖ if not today, then certainly later. ."
+  },
+  "health": {
+    "es": "Das los primeros pasos dentro de una nueva realidad, cargada de posibilidades. Dedica una parte de tu tiempo libre a relajarte, así se evita el estrés.",
+    "en": "While your physical health is good, your emotions are now at a fragile state. Any stress or emotional turmoil will take its toll on you. You are also feeling overly sensitive. Accumulated stress may even begin to affect your health if you do not take timely steps to prevent it. Avoid any dramatic situation and controversies, especially those that are close to your heart."
+  },
+  "work": {
+    "es": "Tienes ganas de hacer cambios a nivel profesional, te sientes sin futuro. Incurrirás en un gasto inesperado, la buena noticia es que podrás hacerle frente.",
+    "en": "Seems to be a good time to touch base with colleagues and sub-ordinates. Long lasting period of review and frustration will come to an end soon. So out of happiness you will go crazy spending over yourself as well as over friends and family! Do it for a day or so at the maximum!"
+  },
+  "you_hate": [
+    "Aquarius",
+    "Pisces"
+  ],
+  "you_love": [
+    "Virgo",
+    "Gemini"
+  ],
+  "numbers": [
+    82,
+    74,
+    51
+  ]
+}

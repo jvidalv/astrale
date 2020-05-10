@@ -1,8 +1,6 @@
 import React from 'react';
-import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import DailyScreen from "../screens/main/DailyScreen";
 import ZodiacScreen from "../screens/main/ZodiacScreen";
-import ProfileScreen from "../screens/main/ProfileScreen";
 import CompatibilityScreen from "../screens/main/CompatibilityScreen";
 import PalmistryScreen from "../screens/main/PalmistryScreen";
 import {createStackNavigator} from "@react-navigation/stack";
@@ -12,6 +10,15 @@ import {useGlobals} from "../contexts/Global";
 import i18n from "i18n-js";
 import {Text, useTheme} from "react-native-paper";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
+import {MaterialCommunityIcons} from "@expo/vector-icons";
+import {StatusBar} from "react-native";
+import {useScreens} from "../contexts/Screens";
+import Sleep from "../utils/Sleep";
+import {useIsDark} from "../hooks/useTheme";
+import PlatformUtils from "../utils/Platform";
+import AstrologersScreen from "../screens/main/AstrologersScreen";
+import MainNav from "../components/navs/Close";
+import ProfileScreen from "../screens/main/ProfileScreen";
 
 const PalmistryStack = createStackNavigator();
 
@@ -33,47 +40,119 @@ function PalmistryStackNavigation() {
     )
 }
 
-const DailyStack = createStackNavigator();
-
-/**
- * @returns {*}
- * @constructor
- */
-function DailyStackNavigation() {
+const BarIcon = ({focused, color, size, name}) => {
+    const {colors} = useTheme()
     return (
-        <DailyStack.Navigator
-            initialRouteName="Daily"
-            headerMode="screen"
-        >
-            <DailyStack.Screen name="Daily" component={DailyScreen} options={{headerShown: false}}/>
-            <DailyStack.Screen name="Signs" component={ZodiacScreen} options={{headerShown: false}}/>
-        </DailyStack.Navigator>
+        <MaterialCommunityIcons color={color} size={size} name={name} style={{marginTop: 5}}/>
     )
 }
 
-const BarLabel = (props) => {
+const BarLabel = ({focused, color, children}) => {
     const {colors} = useTheme()
-    console.log(props)
     return (
-        <Text style={{fontSize: 10, lineHeight: 20, textAlign: 'center', color: "#FFFFFF"}}>
-            {props.children}
+        <Text style={{fontSize: 10, lineHeight: 20, textAlign: 'center', color: color}}>
+            {children}
         </Text>
     )
 }
 
+const Sta = createStackNavigator();
+
 const Tab = createBottomTabNavigator();
 
-function MainStackNavigation() {
+function BottomBarNavigation({navigation}) {
     const [{session}] = useGlobals();
+    const [{statusBarHidden}, dispatch] = useScreens();
+    const {colors} = useTheme();
+    const isIos = PlatformUtils.isIos;
+    const _barStyle = useIsDark() ? 'light-content' : 'dark-content'
+    const _handleTabPress = {
+        tabPress: () => {
+            // Scroll event can keep going while you are already on other screen
+            Sleep(750).then(() =>
+                dispatch({type: 'setStatusBar', statusBarHidden: false})
+            )
+        }
+    }
     return (
-        <Tab.Navigator>
-            <Tab.Screen
-                name="symbol"
-                component={DailyStackNavigation}
-            />
+        <React.Fragment>
+            <StatusBar
+                barStyle={_barStyle}
+                backgroundColor={colors.background}
+                animated
+                hidden={isIos && statusBarHidden}/>
+            <Tab.Navigator>
+                <Tab.Screen
+                    name="symbol"
+                    component={DailyScreen}
+                    listeners={_handleTabPress}
 
-        </Tab.Navigator>
+                    options={{
+                        tabBarIcon: (props) => <BarIcon {...props} name={`zodiac-${session.sign.toLowerCase()}`}/>,
+                        tabBarLabel: (props) => <BarLabel {...props} colo>{i18n.t(session.sign)}</BarLabel>,
+                        title: i18n.t(session.sign)
+                    }}
+                />
+                <Tab.Screen
+                    name="Palmistry"
+                    component={session.palmistry ? PalmistryScreen : PalmistryStackNavigation}
+                    listeners={_handleTabPress}
+                    options={{
+                        tabBarIcon: (props) => <BarIcon {...props} name='hand'/>,
+                        tabBarLabel: (props) => <BarLabel {...props} >{i18n.t('Palmistry')}</BarLabel>,
+                        title: i18n.t('Palmistry')
+                    }}
+                />
+                <Tab.Screen
+                    name="Compatibility"
+                    component={CompatibilityScreen}
+                    listeners={_handleTabPress}
+                    options={{
+                        tabBarIcon: (props) => <BarIcon {...props} name='heart-multiple'/>,
+                        tabBarLabel: (props) => <BarLabel {...props} >{i18n.t('Compatibility2')}</BarLabel>,
+                        title: i18n.t('Compatibility2'),
+
+                    }}
+                />
+                <Tab.Screen
+                    name="Astrologists"
+                    component={AstrologersScreen}
+                    listeners={_handleTabPress}
+                    options={{
+                        tabBarIcon: (props) => <BarIcon {...props} name='theme-light-dark'/>,
+                        tabBarLabel: (props) => <BarLabel {...props} >{i18n.t('Astrologers')}</BarLabel>,
+                        title: i18n.t('Astrologers'),
+
+                    }}
+                />
+            </Tab.Navigator>
+        </React.Fragment>
     );
+}
+
+function MainStackNavigation({navigation}) {
+    const {colors} = useTheme();
+    return (
+        <Sta.Navigator screenOptions={{headerShown : false}} mode="modal">
+            <Sta.Screen name="Home" component={BottomBarNavigation}/>
+            <Sta.Screen name="Profile" component={ProfileScreen} options={{
+                cardStyle : {
+                    backgroundColor: colors.background + '00',
+                    marginTop: 50,
+                    borderTopLeftRadius: 30,
+                    borderTopRightRadius: 30,
+                }
+            }}/>
+            <Sta.Screen name="Signs" component={ZodiacScreen} options={{
+                cardStyle : {
+                    backgroundColor: colors.background + '00',
+                    marginTop: 50,
+                    borderTopLeftRadius: 30,
+                    borderTopRightRadius: 30,
+                }
+            }}/>
+        </Sta.Navigator>
+    )
 }
 
 export default MainStackNavigation;

@@ -4,6 +4,7 @@ import {StyleSheet, View} from "react-native";
 import {Zodiac} from "../../svgs";
 import {Caption, Subheading, TouchableRipple, useTheme} from "react-native-paper";
 import i18n from "i18n-js";
+import PlatformUtils from "../../utils/Platform";
 
 const _signs = {
     Aquarius: Zodiac.Aquarius,
@@ -36,6 +37,7 @@ const _signs = {
  */
 function Sign({sign, title, showTitle, subtitle, onPress, style, signHeight, signWidth, styleTitle, styleSubtitle}) {
     const ParsedSign = _signs[sign];
+    const isAndroid = PlatformUtils.isAndroid;
     const {colors} = useTheme();
     return (
         <TouchableRipple onPress={() => onPress(sign)}
@@ -46,6 +48,8 @@ function Sign({sign, title, showTitle, subtitle, onPress, style, signHeight, sig
                     shadowColor: '#000000',
                     width: signWidth,
                     height: signHeight
+                }, {
+                    elevation : isAndroid ? 0 : 10
                 }, styles.signContainer, styles.signShadow]}>
                     <ParsedSign width={signHeight} height={signWidth}/>
                 </View>
@@ -64,7 +68,6 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.3,
         shadowRadius: 10,
-        elevation: 10,
     },
     signContainer: {
         justifyContent: 'center',

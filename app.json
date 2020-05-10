@@ -3,7 +3,6 @@
     "name": "Astral Daily Horoscope 2020",
     "slug": "astral-daily-horoscope-2020",
     "description": "@todo",
-    "sdkVersion": "37.0.0",
     "privacy": "public",
     "platforms": [
       "ios",
