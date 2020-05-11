@@ -14,8 +14,7 @@ import {SESSION_KEY} from "./constants/session";
 import {initialState as screensInitialState, reducer, ScreensProvider} from "./contexts/Screens";
 
 /**
- * Loads in cache images
- * @param images
+ * @param images {string[]}
  * @returns {*}
  */
 const cacheImages = (images) => {
@@ -29,7 +28,6 @@ const cacheImages = (images) => {
 }
 
 /**
- * Custom donts
  * @returns {Promise<void>}
  */
 const fetchFonts = () => Font.loadAsync({
