@@ -7,6 +7,7 @@ import {Backgrounds} from "../../svgs";
 import Aquarius from "../../svgs/Aquarius";
 import i18n from "i18n-js";
 import {useGlobals} from "../../contexts/Global";
+import SpaceSky from "../../components/decorations/SpaceSky";
 
 /**
  * @param navigation
@@ -28,8 +29,9 @@ function NameScreen({navigation}) {
 
     return (
         <DefaultView>
-            <Aquarius width={80} height={80} style={styles.aquarius}/>
-            <Backgrounds.Constellation color={colors.text} dotColor={colors.primary} height={250} width={250}
+            <SpaceSky />
+            <Aquarius width={60} height={60} style={styles.aquarius}/>
+            <Backgrounds.Constellation color={colors.text} dotColor={colors.primary} height={180} width={180}
                                        style={styles.constellation}/>
             <View style={{flex: .5}}/>
             <View style={styles.textContainer}>
@@ -37,14 +39,12 @@ function NameScreen({navigation}) {
                 <Text
                     style={styles.textText}>{i18n.t("In order to give you accurate and personal information we need to know some info")}</Text>
             </View>
-            <View style={styles.logoContainer}>
-                <Logo width={70} height={70}/>
-            </View>
             <View style={styles.inputContainer}>
                 <PaperTextInput
                     value={name}
+                    placeholder={i18n.t('Write here')}
                     onChangeText={(text) => setName(text)}
-                    style={[styles.input, {backgroundColor: colors.text + '3D'}]}
+                    style={[styles.input, {backgroundColor: colors.text + '00'}]}
                     render={props => <TextInput {...props} style={styles.inputCustom}/>}
                 />
             </View>
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
         zIndex: 0, position: 'absolute', top: 20, right: 20, opacity: 0.2
     },
     textContainer: {
-        flex: 1, alignSelf: 'center', paddingHorizontal: 20
+        flex: 1.3, alignSelf: 'center', paddingHorizontal: 20
     },
     textHeadline: {
         textAlign: 'center', textTransform: 'uppercase', fontWeight: 'bold'

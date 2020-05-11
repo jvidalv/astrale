@@ -1,20 +1,16 @@
 import React from "react";
-import {Alert, StyleSheet, View} from "react-native";
-import {Button, Headline, ProgressBar, Text, Title, useTheme} from "react-native-paper";
+import {Alert, StyleSheet, TouchableOpacity, View, Image} from "react-native";
+import {Button, Headline, ProgressBar, Text, useTheme} from "react-native-paper";
 import {DefaultView} from "../../components/containers";
 import {Camera} from 'expo-camera';
-import {Scanner} from "../../components/animations";
 import ActivityIndicator from "react-native-paper/src/components/ActivityIndicator";
-import Sleep from "../../utils/Sleep";
-import Aquarius from "../../svgs/Aquarius";
 import {Backgrounds} from "../../svgs";
-import useScanner from "../../hooks/useScanner";
 import PlatformUtils from "../../utils/Platform";
 import i18n from "i18n-js";
 import {useGlobals} from "../../contexts/Global";
-import Storer from "../../utils/Storer";
-import {SESSION_KEY} from "../../constants/session";
 import {useIsDark} from "../../hooks/useTheme";
+import SpaceSky from "../../components/decorations/SpaceSky";
+import Hand from "../../svgs/Hand";
 
 /**
  * @param navigation
@@ -27,13 +23,13 @@ function PalmistryScanScreen({navigation, route}) {
     const [{session}, dispatch] = useGlobals();
     const {colors} = useTheme();
     const [hand, setHand] = React.useState('left');
+    const [photo, setPhoto] = React.useState();
     const [scan, setScan] = React.useState(false);
     const [steps, setSteps] = React.useState(0);
     const [refCamera, setRefCamera] = React.useState();
     const [hasPermission, setHasPermission] = React.useState(null);
     const [handDetected, setHandDetected] = React.useState(false);
     const [pictureSize, setPictureSize] = React.useState(pictureSize);
-    const {match} = useScanner(refCamera, scan);
 
     React.useEffect(() => {
         (
@@ -44,42 +40,50 @@ function PalmistryScanScreen({navigation, route}) {
         )();
     }, []);
 
-    React.useEffect(() => {
-        if (match && scan) {
-            setSteps(steps => steps + 1);
-        }
-        if (match !== handDetected) {
-            setHandDetected(match);
-        }
-    }, [match])
+    // React.useEffect(() => {
+    //     if (match && scan) {
+    //         setSteps(steps => steps + 1);
+    //     }
+    //     if (match !== handDetected) {
+    //         setHandDetected(match);
+    //     }
+    // }, [match])
 
-    React.useEffect(() => {
-        if (steps === 5) {
-            setScan(false);
-            setSteps(0);
-            if (hand === 'left') {
-                setHandDetected(false);
-                setHand('right');
-                Alert.alert(i18n.t('Now place your right hand in front of the camera'),
-                    null,
-                    [
-                        {text: i18n.t('Ok'), onPress: () => Sleep(2000).then(() => setScan(true))}
-                    ]
-                );
-            } else {
-                Storer.set(SESSION_KEY, {...session, palmistry: true}).then(() => {
-                    dispatch({
-                        type: 'setSession',
-                        fields: {palmistry: true}
-                    })
-                    !isMain && navigation.reset({
-                        index: 0,
-                        routes: [{name: 'Loading'}],
-                    });
-                })
-            }
-        }
-    }, [steps])
+    // React.useEffect(() => {
+    //     if (steps === 5) {
+    //         setScan(false);
+    //         setSteps(0);
+    //         if (hand === 'left') {
+    //             setHandDetected(false);
+    //             setHand('right');
+    //             Alert.alert(i18n.t('Now place your right hand in front of the camera'),
+    //                 null,
+    //                 [
+    //                     {text: i18n.t('Ok'), onPress: () => Sleep(2000).then(() => setScan(true))}
+    //                 ]
+    //             );
+    //         } else {
+    //             Storer.set(SESSION_KEY, {...session, palmistry: true}).then(() => {
+    //                 dispatch({
+    //                     type: 'setSession',
+    //                     fields: {palmistry: true}
+    //                 })
+    //                 !isMain && navigation.reset({
+    //                     index: 0,
+    //                     routes: [{name: 'Loading'}],
+    //                 });
+    //             })
+    //         }
+    //     }
+    // }, [steps])
+    const _handleTakePhoto = async () => {
+        const base64 = awaitrefCamera.takePictureAsync({
+            base64: true,
+        }).then((response) => response.base64)
+        .catch(() => false);
+        refCamera.pausePreview();
+
+    }
 
     const _handleCameraReady = () => {
         if (PlatformUtils.isAndroid) {
@@ -100,13 +104,12 @@ function PalmistryScanScreen({navigation, route}) {
 
     return (
         <DefaultView barStyle={useIsDark() ? 'light-content' : 'dark-content'}>
-            <Aquarius color={colors.text} width={80} height={80} style={styles.aquarius}/>
-            <Backgrounds.Constellation color={colors.text} dotColor={colors.primary} height={250} width={250} style={styles.constellation}/>
+            <SpaceSky/>
+            <Backgrounds.Constellation color={colors.text} dotColor={colors.primary} height={250} width={250}
+                                       style={styles.constellation}/>
             <View style={{flex: .2}}/>
             <View style={styles.textContainer}>
                 <Headline style={styles.textHeadline}>{i18n.t('Palmistry')}</Headline>
-                <Text
-                    style={styles.textText}>{i18n.t('{name}, to receive your palmistry readings please follow the instructions on the screen', {name: 'Josep'})}</Text>
             </View>
             {
                 !hasPermission ? (
@@ -120,17 +123,17 @@ function PalmistryScanScreen({navigation, route}) {
                                 style={[styles.cameraContainer, {
                                     borderColor: colors.accent,
                                 }]} type={Camera.Constants.Type.back}>
-                            <View style={styles.cameraView}>
-                                {handDetected && scan ? <Scanner start={true} style={{
-                                    borderTopWidth: 3,
-                                    borderBottomWidth: 3,
-                                    opacity: .7
-                                }}/> : handDetected === false &&
-                                    <View style={styles.cameraNoHand}>
-                                        <Title>{i18n.t('No hand')}</Title>
-                                    </View>
-                                }
-                            </View>
+                            <Hand height={400} width={420}/>
+                            <TouchableOpacity onPress={_handleTakePhoto} style={{
+                                height: 60,
+                                width: 60,
+                                backgroundColor: colors.accent + '70',
+                                position: 'absolute',
+                                bottom: -30,
+                                borderRadius: 50,
+                                borderColor: colors.text,
+                                borderWidth: 5
+                            }}/>
                         </Camera>
                     )
             }
@@ -153,9 +156,8 @@ function PalmistryScanScreen({navigation, route}) {
 
 const styles = StyleSheet.create({
     progressContainer: {
-        paddingVertical: 20,
+        paddingTop: 30,
         paddingHorizontal: 20,
-        zIndex: 1,
     },
     constellation: {
         zIndex: 0, position: 'absolute', bottom: 20, left: 20, opacity: 0.1
@@ -176,7 +178,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center', zIndex: 1, borderWidth: 2, padding: 20, borderRadius: 50, borderColor: '#FFFFFF50'
     },
     cameraContainer: {
-        flex: 1.8,
+        flex: 2.5,
         justifyContent: 'center',
         alignItems: 'center'
     },

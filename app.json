@@ -12,11 +12,11 @@
     "version": "0.0.2",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "primaryColor": "#192f6a",
+    "primaryColor": "#151515",
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#192f6a"
+      "backgroundColor": "#151515"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -48,11 +48,11 @@
       "hidden": false,
       "translucent": true,
       "barStyle": "light-content",
-      "backgroundColor": "#192f6a"
+      "backgroundColor": "#151515"
     },
     "notification": {
       "icon": "./assets/images/icon-notification.png",
-      "color": "#192f6a",
+      "color": "#151515",
       "iosDisplayInForeground": true
     }
   }

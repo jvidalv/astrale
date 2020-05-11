@@ -61,14 +61,11 @@ function Main() {
         })()
     }, []);
 
-    /**
-     * Session set, from physical to app state
-     */
     React.useEffect(() => {
         (async () => {
             try {
                 const state = await Storer.get(PERSISTENCE_KEY);
-                //setInitialState(state);
+                setInitialState(state);
 
                 const session = await Storer.get(SESSION_KEY);
                 if (session) {

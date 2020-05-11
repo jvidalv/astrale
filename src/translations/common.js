@@ -74,7 +74,8 @@ const common = {
         "Back": "Atrás",
         "Restart": "Reiniciar",
         "Career": "Trabajo",
-
+        "Write here" : "Escribe aquí",
+        "Type here" : "Teclea aquí"
     },
     en: {
         "Ok": "Ok",
@@ -147,7 +148,8 @@ const common = {
         "Back": "Back",
         "Restart": "Restart",
         "Career": "Career",
-
+        "Write here" : "Write here",
+        "Type here" : "Type here"
     },
 };
 

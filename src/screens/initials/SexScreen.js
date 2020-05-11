@@ -9,6 +9,7 @@ import TouchableRipple from "react-native-paper/src/components/TouchableRipple/i
 import Leo from "../../svgs/Leo";
 import i18n from "i18n-js";
 import {useGlobals} from "../../contexts/Global";
+import SpaceSky from "../../components/decorations/SpaceSky";
 
 /**
  * @param navigation
@@ -16,7 +17,7 @@ import {useGlobals} from "../../contexts/Global";
  * @constructor
  */
 function SexScreen({navigation}) {
-    const [{}, dispatch] = useGlobals();
+    const [{session}, dispatch] = useGlobals();
     const {colors} = useTheme();
     const [sex, setSex] = React.useState('');
     const buttonDisabled = !sex;
@@ -30,14 +31,13 @@ function SexScreen({navigation}) {
 
     return (
         <DefaultView>
-            <Leo width={80} height={80} style={styles.leo}/>
-            <Backgrounds.Constellation color={colors.text} dotColor={colors.primary} height={250} width={250}
-                                       style={styles.constellation}/>
+            <SpaceSky />
+            <Leo width={60} height={60} style={styles.leo}/>
             <View style={{flex: 1}}/>
             <View style={styles.textContainer}>
                 <Headline style={styles.textHeadline}>{i18n.t('Your gender')}</Headline>
                 <Text
-                    style={styles.textText}>{i18n.t("{name}, to give you accurate and personal information we need to know some info", {name: 'Josep'})}</Text>
+                    style={styles.textText}>{i18n.t("{name}, to give you accurate and personal information we need to know some info", {name: session.name})}</Text>
             </View>
             <View style={styles.sexContainer}>
                 <TouchableRipple onPress={() => setSex('Male')} rippleColor="rgba(0,0,0,0)">

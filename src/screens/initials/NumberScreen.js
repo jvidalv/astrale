@@ -7,6 +7,7 @@ import Aquarius from "../../svgs/Aquarius";
 import Dices from "../../svgs/Dices";
 import i18n from "i18n-js";
 import {useGlobals} from "../../contexts/Global";
+import SpaceSky from "../../components/decorations/SpaceSky";
 
 /**
  * @param navigation
@@ -14,7 +15,7 @@ import {useGlobals} from "../../contexts/Global";
  * @constructor
  */
 function NumberScreen({navigation}) {
-    const [{}, dispatch] = useGlobals();
+    const [{session}, dispatch] = useGlobals();
     const {colors} = useTheme();
     const [number, setNumber] = React.useState();
     const buttonDisabled = !number;
@@ -28,27 +29,23 @@ function NumberScreen({navigation}) {
 
     return (
         <DefaultView>
-            <Aquarius width={80} height={80} style={styles.aquarius}/>
-            <Backgrounds.Constellation
-                color={colors.text}
-                dotColor={colors.primary}
-                height={250} width={250}
-                style={styles.constellation}
-            />
+            <SpaceSky />
+            <Aquarius width={60} height={60} style={styles.aquarius}/>
             <View style={{flex: .3}}/>
             <View style={styles.textContainer}>
                 <Headline style={styles.textHeadline}>{i18n.t('Your favorite number')}</Headline>
                 <Text
-                    style={styles.textText}>{i18n.t("{name}, to give you accurate and personal information we need to know some info", {name: 'Josep'})}</Text>
+                    style={styles.textText}>{i18n.t("{name}, to give you accurate and personal information we need to know some info", {name: session.name})}</Text>
             </View>
             <View style={styles.logoContainer}>
-                <Dices height={75}/>
+                <Dices height={60}/>
             </View>
             <View style={styles.inputContainer}>
                 <PaperTextInput
                     value={number}
                     onChangeText={(text) => setNumber(text)}
-                    style={[styles.input, {backgroundColor: colors.text + '3D'}]}
+                    placeholder={i18n.t('Type here')}
+                    style={[styles.input, {backgroundColor: colors.text + '00'}]}
                     keyboardType="number-pad"
                     enablesReturnKeyAutomatically={true}
                     render={props => <TextInput {...props} style={styles.inputCustom} maxLength={5}/>}
@@ -70,7 +67,7 @@ const styles = StyleSheet.create({
         zIndex: 0, position: 'absolute', top: 20, right: 20, opacity: 0.2
     },
     textContainer: {
-        flex: 1, alignSelf: 'center', paddingHorizontal: 20
+        flex: 1.5, alignSelf: 'center', paddingHorizontal: 20
     },
     textHeadline: {
         textAlign: 'center', textTransform: 'uppercase', fontWeight: 'bold'

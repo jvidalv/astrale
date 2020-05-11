@@ -11,6 +11,7 @@ import ItsDifficult from "../../svgs/ItsDifficult";
 import Taurus from "../../svgs/Taurus";
 import i18n from "i18n-js";
 import {useGlobals} from "../../contexts/Global";
+import SpaceSky from "../../components/decorations/SpaceSky";
 
 /**
  * @param navigation
@@ -18,8 +19,7 @@ import {useGlobals} from "../../contexts/Global";
  * @constructor
  */
 function RelationshipScreen({navigation}) {
-    const [{}, dispatch] = useGlobals();
-    const {colors} = useTheme();
+    const [{session}, dispatch] = useGlobals();
     const [relationshipStatus, setRelationshipStatus] = React.useState('');
     const buttonDisabled = !relationshipStatus;
     const _handleContinue = () => {
@@ -32,14 +32,13 @@ function RelationshipScreen({navigation}) {
 
     return (
         <DefaultView>
-            <Taurus width={80} height={80} style={styles.taurus}/>
-            <Backgrounds.Constellation color={colors.text} dotColor={colors.primary} height={250} width={250}
-                                       style={styles.constellation}/>
+            <SpaceSky />
+            <Taurus width={60} height={60} style={styles.taurus}/>
             <View style={{flex: .4}}/>
             <View style={styles.textContainer}>
                 <Headline style={styles.textHeadline}>{i18n.t('What is your relationship status')}</Headline>
                 <Text
-                    style={styles.textText}>{i18n.t("{name}, to give you accurate and personal information we need to know some info", {name: 'Josep'})}</Text>
+                    style={styles.textText}>{i18n.t("{name}, to give you accurate and personal information we need to know some info", {name: session.name})}</Text>
             </View>
             <View style={styles.sexContainer}>
                 <TouchableRipple onPress={() => setRelationshipStatus('Married')} rippleColor="rgba(0,0,0,0)">
