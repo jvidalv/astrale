@@ -11,6 +11,21 @@ import {useGlobals} from "../../contexts/Global";
 import {useIsDark} from "../../hooks/useTheme";
 import SpaceSky from "../../components/decorations/SpaceSky";
 import Hand from "../../svgs/Hand";
+import {clarifai_key} from "../../credentials";
+
+/**
+ * Clarifai import for image match usage
+ * @type {{App: function(*=, *, *=): void, FOCUS_MODEL: string, COLOR_MODEL: string, PORTRAIT_QUALITY: string, WEDDINGS_MODEL: string, FACE_DETECT_MODEL: string, CELEBRITY_MODEL: string, GENERAL_EMBED_MODEL: string, LANDSCAPE_QUALITY: string, version: string, CLUSTER_MODEL: string, GENERAL_MODEL: string, DEMOGRAPHICS_MODEL: string, TRAVEL_MODEL: string, MODERATION_MODEL: string, TEXTURES_AND_PATTERNS: string, FACE_EMBED_MODEL: string, APPAREL_MODEL: string, WEDDING_MODEL: string, LOGO_MODEL: string, FOOD_MODEL: string, NSFW_MODEL: string}}
+ */
+const Clarifai = require('clarifai');
+
+/**
+ * Instantiate clarifai app
+ * @type {App}
+ */
+const app = new Clarifai.App({
+    apiKey: clarifai_key
+});
 
 /**
  * @param navigation
@@ -77,11 +92,17 @@ function PalmistryScanScreen({navigation, route}) {
     //     }
     // }, [steps])
     const _handleTakePhoto = async () => {
-        const base64 = awaitrefCamera.takePictureAsync({
+        /** @var refCamera {Camera} **/
+        const base64 = await refCamera.takePictureAsync({
             base64: true,
-        }).then((response) => response.base64)
-        .catch(() => false);
+        }).then((response) => response.base64).catch(() => false);
+
         refCamera.pausePreview();
+
+        const response = await app.models.predict("daily-horoscope", {base64: base64});
+        console.log(response.outputs[0].data.concepts[0].value)
+
+        refCamera.resumePreview();
 
     }
 
@@ -123,7 +144,7 @@ function PalmistryScanScreen({navigation, route}) {
                                 style={[styles.cameraContainer, {
                                     borderColor: colors.accent,
                                 }]} type={Camera.Constants.Type.back}>
-                            <Hand height={400} width={420}/>
+                            <Hand height={360} width={360}/>
                             <TouchableOpacity onPress={_handleTakePhoto} style={{
                                 height: 60,
                                 width: 60,
@@ -132,7 +153,8 @@ function PalmistryScanScreen({navigation, route}) {
                                 bottom: -30,
                                 borderRadius: 50,
                                 borderColor: colors.text,
-                                borderWidth: 5
+                                borderWidth: 5,
+                                zIndex: 5,
                             }}/>
                         </Camera>
                     )

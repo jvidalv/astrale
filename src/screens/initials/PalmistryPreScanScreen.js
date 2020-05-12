@@ -28,8 +28,9 @@ function PalmistryPreScanScreen({navigation, route}) {
             <View style={{flex: .5}}/>
             <View style={styles.textContainer}>
                 <Headline style={styles.textHeadline}>{i18n.t('Palmistry')}</Headline>
-                <Text
-                    style={styles.textText}>{i18n.t('{name}, in order to offer you the reading of your lifelines we need to scan both hands', {name: session.name})}</Text>
+                <Text style={styles.textText}>
+                    {i18n.t('{name}, in order to offer you the reading of your lifelines we need to scan both hands', {name: session.name})}
+                </Text>
             </View>
             <View style={[styles.palmistryContainer, {borderColor: colors.text + '50'}]}>
                 <Palmistry color={colors.text}/>
