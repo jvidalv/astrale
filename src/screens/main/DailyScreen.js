@@ -109,7 +109,13 @@ function DailyScreen({navigation}) {
 
     return (
         <React.Fragment>
-            <MainNav />
+            <MainNav leftButton={ <MaterialCommunityIcons
+                onPress={() => navigation.navigate('Signs', {key : 'Sign'})}
+                name="swap-horizontal"
+                color={colors.text}
+                size={30}
+                style={{opacity: .5, flex: 1, flexGrow: 1}}
+            />}/>
             <SpaceSky/>
             <SafeAreaView style={{flex: .4}}>
                 <View style={[styles.headerContainer]}>
@@ -223,30 +229,11 @@ function DailyScreen({navigation}) {
                                     <LuckyNumber number={12}/>
                                     <LuckyNumber number={3}/>
                                 </View>
+                                <View style={{paddingVertical: 10}} />
                             </ShowFromTop>
                         )
                 }
             </DefaultScrollView>
-
-            {/*<FAB.Group*/}
-            {/*    open={fabOpen}*/}
-            {/*    icon={fabOpen ? 'arrow-up-circle' : 'plus-circle'}*/}
-            {/*    actions={[*/}
-            {/*        {*/}
-            {/*            style: {backgroundColor: colors.primary},*/}
-            {/*            icon: 'share',*/}
-            {/*            label: i18n.t('Share'),*/}
-            {/*            onPress: () => setFabOpen(false)*/}
-            {/*        },*/}
-            {/*        {*/}
-            {/*            icon: 'swap-horizontal',*/}
-            {/*            label: i18n.t('Switch sign'),*/}
-            {/*            onPress: () => navigation.navigate('Signs') | setFabOpen(false)*/}
-            {/*        },*/}
-            {/*    ]}*/}
-            {/*    onStateChange={() => null}*/}
-            {/*    onPress={() => setFabOpen(fabOpen => !fabOpen)}*/}
-            {/*/>*/}
         </React.Fragment>
     );
 }

@@ -94,24 +94,24 @@ function BottomBarNavigation({navigation}) {
                     }}
                 />
                 <Tab.Screen
-                    name="Palmistry"
-                    component={session.palmistry ? PalmistryScreen : PalmistryStackNavigation}
-                    listeners={_handleTabPress}
-                    options={{
-                        tabBarIcon: (props) => <BarIcon {...props} name='hand'/>,
-                        tabBarLabel: (props) => <BarLabel {...props} >{i18n.t('Palmistry')}</BarLabel>,
-                        title: i18n.t('Palmistry')
-                    }}
-                />
-                <Tab.Screen
                     name="Compatibility"
                     component={CompatibilityScreen}
                     listeners={_handleTabPress}
                     options={{
-                        tabBarIcon: (props) => <BarIcon {...props} name='heart-multiple'/>,
+                        tabBarIcon: (props) => <BarIcon {...props} name='account-heart'/>,
                         tabBarLabel: (props) => <BarLabel {...props} >{i18n.t('Compatibility2')}</BarLabel>,
                         title: i18n.t('Compatibility2'),
 
+                    }}
+                />
+                <Tab.Screen
+                    name="Learn"
+                    component={session.palmistry ? PalmistryScreen : PalmistryStackNavigation}
+                    listeners={_handleTabPress}
+                    options={{
+                        tabBarIcon: (props) => <BarIcon {...props} name='book-open-page-variant'/>,
+                        tabBarLabel: (props) => <BarLabel {...props} >{i18n.t('Learn')}</BarLabel>,
+                        title: i18n.t('Learn')
                     }}
                 />
                 <Tab.Screen

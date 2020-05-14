@@ -26,8 +26,8 @@ function InitialStackNavigation() {
             <Stack.Screen name="Sex" component={SexScreen} options={{headerShown: false}}/>
             <Stack.Screen name="Relationship" component={RelationshipScreen} options={{headerShown: false}}/>
             <Stack.Screen name="Number" component={NumberScreen} options={{headerShown: false}}/>
-            <Stack.Screen name="Palmistry" component={PalmistryPreScanScreen} options={{headerShown: false}}/>
-            <Stack.Screen name="PalmistryScan" component={PalmistryScanScreen} options={{headerShown: false}}/>
+            {/*<Stack.Screen name="Palmistry" component={PalmistryPreScanScreen} options={{headerShown: false}}/>*/}
+            {/*<Stack.Screen name="PalmistryScan" component={PalmistryScanScreen} options={{headerShown: false}}/>*/}
             <Stack.Screen name="Loading" component={LoadingScreen} options={{headerShown: false}}/>
         </Stack.Navigator>
     )

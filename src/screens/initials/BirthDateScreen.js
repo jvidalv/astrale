@@ -23,11 +23,14 @@ function BirthDateScreen({navigation, theme}) {
     const [date, setDate] = React.useState(new Date(642449499000));
     const [sign, setSign] = React.useState(ZodiacCalculator(date.getDate(), date.getMonth() + 1))
     const [show, setShow] = React.useState(true);
+    React.useLayoutEffect(() => {
+        setSign(ZodiacCalculator(date.getDate(), date.getMonth() + 1))
+    },[date])
+
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
-        setShow(Platform.isIos);
+        Platform.isAndroid && setShow(Platform.isIos);
         setDate(currentDate);
-        setSign(ZodiacCalculator(currentDate.getDate(), currentDate.getMonth() + 1))
     };
     const showDatePicker = () => {
         setShow(true);
@@ -62,6 +65,7 @@ function BirthDateScreen({navigation, theme}) {
                     value={date}
                     display="spinner"
                     onChange={onChange}
+                    on
                     minimumDate={new Date(1930, 0, 0)}
                     maximumDate={new Date(2010, 0, 0)}
                     style={{height: 50}}

@@ -32,7 +32,7 @@ function ZodiacScreen({navigation}) {
             type: 'setAndStoreSession',
             fields: {sign: sign}
         })
-        navigation.pop();
+        setTimeout(() => navigation.pop(), 10);
     }
 
     return (

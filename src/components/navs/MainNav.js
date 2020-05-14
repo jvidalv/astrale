@@ -4,6 +4,8 @@ import {MaterialCommunityIcons} from "@expo/vector-icons";
 import {useNavigation} from "@react-navigation/core";
 import PlatformUtils from "../../utils/Platform";
 import {useTheme} from "react-native-paper";
+import PropTypes from "prop-types";
+import Close from "./Close";
 
 /**
  * @param navigation
@@ -12,26 +14,20 @@ import {useTheme} from "react-native-paper";
  * @returns {*}
  * @constructor
  */
-function MainNav({children, style}) {
+function MainNav({children, style, leftButton}) {
     const navigation = useNavigation();
     const {colors} = useTheme();
     const isAndroid = PlatformUtils.isAndroid;
     return (
-        <View style={[StyleSheet.absoluteFill, styles.container, style, {top: isAndroid ? 25 : 50}]}>
+        <View style={[StyleSheet.absoluteFill, styles.container, style, {top: isAndroid ? 15 : 45}]}>
             <View style={styles.content}>
-                <MaterialCommunityIcons
-                    onPress={() => navigation.navigate('Signs', {key : 'Sign'})}
-                    name="swap-horizontal"
-                    color={colors.text}
-                    size={30}
-                    style={{opacity: .5}}
-                />
+                {leftButton}
                 <MaterialCommunityIcons
                     onPress={() => navigation.navigate('Profile', {key: 'Profile'})}
-                    name="tune"
+                    name="account-circle-outline"
                     color={colors.text}
                     size={30}
-                    style={{opacity: .5}}
+                    style={{opacity: .5, justifyContent: 'flex-end'}}
                 />
             </View>
         </View>
@@ -46,9 +42,21 @@ const styles = StyleSheet.create({
     },
     content: {
         flex: 1,
-        justifyContent: 'space-between',
+        justifyContent: 'space-around',
+        alignItems : 'center',
         flexDirection: 'row'
     }
 })
+
+MainNav.propTypes = {
+    style: PropTypes.object,
+    leftButton: PropTypes.element
+};
+
+MainNav.defaultProps = {
+    leftButton: <View style={{flex: 1, flexGrow : 1}}/>,
+};
+
+
 
 export default MainNav;

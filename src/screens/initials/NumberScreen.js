@@ -24,14 +24,14 @@ function NumberScreen({navigation}) {
             type: 'setSession',
             fields: {number: number}
         })
-        navigation.push('Palmistry')
+        navigation.push('Loading')
     };
 
     return (
         <DefaultView>
             <SpaceSky />
             <Aquarius width={60} height={60} style={styles.aquarius}/>
-            <View style={{flex: .3}}/>
+            <View style={{flex: 1}}/>
             <View style={styles.textContainer}>
                 <Headline style={styles.textHeadline}>{i18n.t('Your favorite number')}</Headline>
                 <Text
