@@ -22,7 +22,7 @@ function Close({style, position}) {
             style={[styles.container, _position]}
             name="close"
             color={colors.text}
-            size={35}/>
+            size={30}/>
     )
 }
 

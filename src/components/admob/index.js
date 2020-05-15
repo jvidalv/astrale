@@ -1,5 +1,7 @@
 import Simple from "./Simple";
 
-export default AdMob = {
+const AdMob = {
     Simple
 }
+
+export default AdMob;

@@ -8,6 +8,7 @@ import Dices from "../../svgs/Dices";
 import i18n from "i18n-js";
 import {useGlobals} from "../../contexts/Global";
 import SpaceSky from "../../components/decorations/SpaceSky";
+import CustomInput from "../../components/paper/CustomInput";
 
 /**
  * @param navigation
@@ -41,14 +42,12 @@ function NumberScreen({navigation}) {
                 <Dices height={60}/>
             </View>
             <View style={styles.inputContainer}>
-                <PaperTextInput
+                <CustomInput
                     value={number}
                     onChangeText={(text) => setNumber(text)}
                     placeholder={i18n.t('Type here')}
-                    style={[styles.input, {backgroundColor: colors.text + '00'}]}
                     keyboardType="number-pad"
                     enablesReturnKeyAutomatically={true}
-                    render={props => <TextInput {...props} style={styles.inputCustom} maxLength={5}/>}
                 />
             </View>
             <View style={styles.buttonContainer}>

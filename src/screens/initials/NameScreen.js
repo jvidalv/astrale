@@ -1,13 +1,13 @@
 import React from "react";
-import {StyleSheet, TextInput, View} from "react-native";
-import {Button, Headline, Text, TextInput as PaperTextInput, useTheme} from "react-native-paper";
+import {StyleSheet, View} from "react-native";
+import {Button, Headline, Text, useTheme} from "react-native-paper";
 import {DefaultView} from "../../components/containers";
-import Logo from "../../svgs/Logo";
 import {Backgrounds} from "../../svgs";
 import Aquarius from "../../svgs/Aquarius";
 import i18n from "i18n-js";
 import {useGlobals} from "../../contexts/Global";
 import SpaceSky from "../../components/decorations/SpaceSky";
+import CustomInput from "../../components/paper/CustomInput";
 
 /**
  * @param navigation
@@ -29,7 +29,7 @@ function NameScreen({navigation}) {
 
     return (
         <DefaultView>
-            <SpaceSky />
+            <SpaceSky/>
             <Aquarius width={60} height={60} style={styles.aquarius}/>
             <Backgrounds.Constellation color={colors.text} dotColor={colors.primary} height={180} width={180}
                                        style={styles.constellation}/>
@@ -40,12 +40,11 @@ function NameScreen({navigation}) {
                     style={styles.textText}>{i18n.t("In order to give you accurate and personal information we need to know some info")}</Text>
             </View>
             <View style={styles.inputContainer}>
-                <PaperTextInput
+                <CustomInput
                     value={name}
                     placeholder={i18n.t('Write here')}
                     onChangeText={(text) => setName(text)}
-                    style={[styles.input, {backgroundColor: colors.text + '00'}]}
-                    render={props => <TextInput {...props} style={styles.inputCustom}/>}
+                    style={{fontSize: 12}}
                 />
             </View>
             <View style={styles.buttonContainer}>
@@ -77,15 +76,6 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         flex: 1, paddingHorizontal: 20, opacity: 0.9
-    },
-    input: {
-        borderRadius: 5, fontSize: 30, textAlign: 'center'
-    },
-    inputCustom: {
-        textAlign: 'center',
-        marginTop: 10,
-        color: 'white',
-        fontSize: 30,
     },
     buttonContainer: {
         flex: 1, paddingHorizontal: 20, paddingTop: 35, justifyContent: 'flex-end', marginBottom: 20

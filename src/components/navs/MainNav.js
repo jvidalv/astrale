@@ -19,7 +19,7 @@ function MainNav({children, style, leftButton}) {
     const {colors} = useTheme();
     const isAndroid = PlatformUtils.isAndroid;
     return (
-        <View style={[StyleSheet.absoluteFill, styles.container, style, {top: isAndroid ? 15 : 45}]}>
+        <View style={[StyleSheet.absoluteFill, styles.container, {top: isAndroid ? 15 : 45}, style]}>
             <View style={styles.content}>
                 {leftButton}
                 <MaterialCommunityIcons
@@ -27,7 +27,7 @@ function MainNav({children, style, leftButton}) {
                     name="account-circle-outline"
                     color={colors.text}
                     size={30}
-                    style={{opacity: .5, justifyContent: 'flex-end'}}
+                    style={{opacity: .5}}
                 />
             </View>
         </View>
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     },
     content: {
         flex: 1,
-        justifyContent: 'space-around',
+        justifyContent: 'space-between',
         alignItems : 'center',
         flexDirection: 'row'
     }

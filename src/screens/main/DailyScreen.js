@@ -27,7 +27,7 @@ const LuckyNumber = ({number}) => {
     const {colors} = useTheme();
     return (
         <View style={[LuckyNumberStyles.circle, {backgroundColor: colors.accent}]}>
-            <Text>{number}</Text>
+            <Text style={{fontSize: 16, marginTop: 3}}>{number}</Text>
         </View>
     )
 }

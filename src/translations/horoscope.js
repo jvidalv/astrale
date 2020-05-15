@@ -27,6 +27,14 @@ const horoscope = {
         "Your horoscope for today" : "El horóscopo de hoy",
         "Focus of the day" : "Objetivo del día",
         "Finances" : "Finanzas",
+        "Astrology" : "Astrología",
+        "Western" : "{{word}} occidental",
+        "Oriental" : "{{word}} oriental",
+        "Vedic" : "{{word}} védica",
+        "Hellenistic" : "{{word}} helenistica",
+        "Select an astrologer" : "Selecciona un astrólogo",
+        "Introduce your email and question" : "Introduce tu correo electrónico y tu pregunta",
+        "Wait ~24 hours for the response" : "Espere ~24 horas para la respuesta"
     },
     en: {
         "Aquarius": "Aquarius",
@@ -52,6 +60,14 @@ const horoscope = {
         "Your horoscope for today" : "Your horoscope for today",
         "Focus of the day" : "Focus of the day",
         "Finances" : "Finances",
+        "Astrology" : "Astrology",
+        "Western" : "Western {{word}}",
+        "Oriental" : "Oriental {{word}}",
+        "Vedic" : "Vedic {{word}}",
+        "Hellenistic" : "Hellenistic {{word}}",
+        "Select an astrologer" : "Select an astrologer",
+        "Introduce your email and question" : "Introduce your email and question",
+        "Wait ~24 hours for the response" : "Wait ~24 hours for the response"
     },
 };
 

@@ -12,6 +12,7 @@ import ShowFromTop from "../../components/animations/ShowFromTop";
 import useHideStatusBar from "../../hooks/useHideStatusBar";
 import SpaceSky from "../../components/decorations/SpaceSky";
 import TextBold from "../../components/paper/TextBold";
+import MainNav from "../../components/navs/MainNav";
 
 /**
  * Progress bars from match
@@ -111,6 +112,7 @@ function CompatibilityScreen({navigation}) {
         <React.Fragment>
             <SpaceSky/>
             <DefaultScrollView onScrollCallback={_handleScroll}>
+                <MainNav style={{top: 15}} />
                 <View style={styles.headerContainer}>
                     <ShadowHeadline style={styles.headerHeadline}>
                         {i18n.t('Compatibility')}

@@ -80,6 +80,7 @@ Sign.defaultProps = {
     height: 120,
     width: 120,
     showTitle: true,
+    onPress: () => null,
 };
 
 Sign.propTypes = {

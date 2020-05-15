@@ -19,6 +19,7 @@ import PlatformUtils from "../utils/Platform";
 import AstrologersScreen from "../screens/main/AstrologersScreen";
 import MainNav from "../components/navs/Close";
 import ProfileScreen from "../screens/main/ProfileScreen";
+import AstrologerQuestionScreen from "../screens/main/AstrologerQuestionScreen";
 
 const PalmistryStack = createStackNavigator();
 
@@ -144,6 +145,14 @@ function MainStackNavigation({navigation}) {
                 }
             }}/>
             <Sta.Screen name="Signs" component={ZodiacScreen} options={{
+                cardStyle : {
+                    backgroundColor: colors.background + '00',
+                    marginTop: 50,
+                    borderTopLeftRadius: 30,
+                    borderTopRightRadius: 30,
+                }
+            }}/>
+            <Sta.Screen name="Question" component={AstrologerQuestionScreen} options={{
                 cardStyle : {
                     backgroundColor: colors.background + '00',
                     marginTop: 50,

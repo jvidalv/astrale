@@ -76,8 +76,10 @@ const common = {
         "Career": "Trabajo",
         "Write here" : "Escribe aquí",
         "Type here" : "Teclea aquí",
-        "Learn" : "Aprende"
-
+        "Learn" : "Aprende",
+        "How it works" : "Cómo funciona",
+        "Your email" : "Tu correo electrónico",
+        "Your question" : "Tu pregunta",
     },
     en: {
         "Ok": "Ok",
@@ -152,7 +154,10 @@ const common = {
         "Career": "Career",
         "Write here" : "Write here",
         "Type here" : "Type here",
-        "Learn" : "Learn"
+        "Learn" : "Learn",
+        "How it works" : "How it works",
+        "Your email" : "Your email",
+        "Your question" : "Your question",
     },
 };
 
