@@ -109,7 +109,7 @@ function DailyScreen({navigation}) {
 
     return (
         <React.Fragment>
-            <MainNav leftButton={ <MaterialCommunityIcons
+            <MainNav style={{top: isAndroid ? 15 : 55}} leftButton={ <MaterialCommunityIcons
                 onPress={() => navigation.navigate('Signs', {key : 'Sign'})}
                 name="swap-horizontal"
                 color={colors.text}

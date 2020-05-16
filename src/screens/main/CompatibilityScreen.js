@@ -114,7 +114,7 @@ function CompatibilityScreen({navigation}) {
             <DefaultScrollView onScrollCallback={_handleScroll}>
                 <MainNav style={{top: 15}} />
                 <View style={styles.headerContainer}>
-                    <ShadowHeadline style={styles.headerHeadline}>
+                    <ShadowHeadline>
                         {i18n.t('Compatibility')}
                     </ShadowHeadline>
                 </View>
@@ -182,9 +182,6 @@ const styles = StyleSheet.create({
     },
     headerContainer: {
         alignItems: 'center', justifyContent: 'center', marginHorizontal: 20, marginTop: 25
-    },
-    headerHeadline: {
-        fontWeight: 'bold', fontSize: 30, lineHeight: 34,
     },
     matchCirclesContainer: {
         flexDirection: 'row',

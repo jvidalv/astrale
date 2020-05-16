@@ -20,6 +20,8 @@ import AstrologersScreen from "../screens/main/AstrologersScreen";
 import MainNav from "../components/navs/Close";
 import ProfileScreen from "../screens/main/ProfileScreen";
 import AstrologerQuestionScreen from "../screens/main/AstrologerQuestionScreen";
+import LearnScreen from "../screens/main/LearnScreen";
+import LearnStackNavigation from "./LearnStackNavigation";
 
 const PalmistryStack = createStackNavigator();
 
@@ -107,7 +109,7 @@ function BottomBarNavigation({navigation}) {
                 />
                 <Tab.Screen
                     name="Learn"
-                    component={session.palmistry ? PalmistryScreen : PalmistryStackNavigation}
+                    component={LearnStackNavigation}
                     listeners={_handleTabPress}
                     options={{
                         tabBarIcon: (props) => <BarIcon {...props} name='book-open-page-variant'/>,

@@ -24,13 +24,12 @@ import Close from "../../components/navs/Close";
  */
 function ProfileScreen({navigation}) {
     const [{session}, dispatch] = useGlobals();
-    const {name, sign, birthDate, number, relationship, sex, days, daysRow, notifications} = session;
+    const {name, sign, birthDate, number, relationship, sex, notifications} = session;
     const {colors} = useTheme();
     const {setRate} = useRate();
     const {setStartShare} = useShare('Proba', 'https://proba.com');
     const isDark = useIsDark();
     const isAndroid = PlatformUtils.isAndroid;
-    const _handleScroll = useHideStatusBar();
     const _handleDarkThemeChange = () => {
         dispatch({
             'type': 'switchTheme',
@@ -70,7 +69,7 @@ function ProfileScreen({navigation}) {
             <Backgrounds.Telescope color={colors.text} style={styles.telescope}/>
             <Close position="right"/>
             <View style={styles.headerContainer}>
-                <Avatar.Text label={session.name.substring(0, 1)}/>
+                <Avatar.Text label={name.substring(0, 1)}/>
                 <View style={{marginLeft: 25}}>
                     <Title>
                         {i18n.t(sign)}
@@ -96,16 +95,6 @@ function ProfileScreen({navigation}) {
                 </View>
             </View>
             <Divider style={{marginTop: 15}}/>
-            {/*<View style={styles.featuredContainer}>*/}
-            {/*    <View style={styles.featuredView}>*/}
-            {/*        <Title>{days}</Title>*/}
-            {/*        <Caption>{i18n.t('Days visited')}</Caption>*/}
-            {/*    </View>*/}
-            {/*    <View style={styles.featuredView}>*/}
-            {/*        <Title>{daysRow}</Title>*/}
-            {/*        <Caption>{i18n.t('Consecutive days')}</Caption>*/}
-            {/*    </View>*/}
-            {/*</View>*/}
             <View style={styles.buttonsContainer}>
                 <Button onPress={_handleSharePress} icon="account-multiple" style={{marginTop: 10}}
                         labelStyle={styles.buttonsLabel} uppercase={false}

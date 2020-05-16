@@ -33,8 +33,8 @@ const horoscope = {
         "Vedic" : "{{word}} védica",
         "Hellenistic" : "{{word}} helenistica",
         "Select an astrologer" : "Selecciona un astrólogo",
-        "Introduce your email and question" : "Introduce tu correo electrónico y tu pregunta",
-        "Wait ~24 hours for the response" : "Espere ~24 horas para la respuesta"
+
+        "Learn paragraph" : "Conviértete en un experto de la astrología con esta serie de guías, desde lo más básico del zodiaco a lo más avanzado en constelaciones y ciclos lunares."
     },
     en: {
         "Aquarius": "Aquarius",
@@ -66,8 +66,7 @@ const horoscope = {
         "Vedic" : "Vedic {{word}}",
         "Hellenistic" : "Hellenistic {{word}}",
         "Select an astrologer" : "Select an astrologer",
-        "Introduce your email and question" : "Introduce your email and question",
-        "Wait ~24 hours for the response" : "Wait ~24 hours for the response"
+        "Learn paragraph" : "Become an expert in astrology with this series of guides, from the basics of the zodiac to the most advanced in constellations and lunar cycles."
     },
 };
 

@@ -1,5 +1,5 @@
 import React from "react";
-import {StyleSheet, View} from "react-native";
+import {StyleSheet, View, Dimensions} from "react-native";
 import {MaterialCommunityIcons} from "@expo/vector-icons";
 import {useNavigation} from "@react-navigation/core";
 import PlatformUtils from "../../utils/Platform";
@@ -19,7 +19,7 @@ function MainNav({children, style, leftButton}) {
     const {colors} = useTheme();
     const isAndroid = PlatformUtils.isAndroid;
     return (
-        <View style={[StyleSheet.absoluteFill, styles.container, {top: isAndroid ? 15 : 45}, style]}>
+        <View style={[StyleSheet.absoluteFill, styles.container, {top: 15}, style]}>
             <View style={styles.content}>
                 {leftButton}
                 <MaterialCommunityIcons
@@ -38,7 +38,8 @@ const styles = StyleSheet.create({
     container: {
         zIndex: 10,
         height: 50,
-        marginHorizontal: 20
+        marginHorizontal: 20,
+        width: Dimensions.get('window').width - 30
     },
     content: {
         flex: 1,
@@ -54,7 +55,7 @@ MainNav.propTypes = {
 };
 
 MainNav.defaultProps = {
-    leftButton: <View style={{flex: 1, flexGrow : 1}}/>,
+    leftButton: <View style={{width: 1}}/>,
 };
 
 

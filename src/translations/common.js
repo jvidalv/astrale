@@ -80,6 +80,12 @@ const common = {
         "How it works" : "Cómo funciona",
         "Your email" : "Tu correo electrónico",
         "Your question" : "Tu pregunta",
+        "You'll need to see an ad before you can send the question" : "Es necesario ver un anuncio antes de poder enviar la pregunta.",
+        "Proceed" : "Continuar",
+        "Introduce your email and question" : "Introduce your email and question",
+        "Wait ~24 hours for the response" : "Wait ~24 hours for the response",
+        "Watch an ad to unblock" : "Ver un ad para desbloquear",
+
     },
     en: {
         "Ok": "Ok",
@@ -158,6 +164,11 @@ const common = {
         "How it works" : "How it works",
         "Your email" : "Your email",
         "Your question" : "Your question",
+        "You'll need to see an ad before you can send the question" : "You'll need to see an ad before you can send the question",
+        "Proceed" : "Proceed",
+        "Introduce your email and question" : "Introduce tu correo electrónico y tu pregunta",
+        "Wait ~24 hours for the response" : "Espere ~24 horas para la respuesta",
+        "Watch an ad to unblock" : "Watch an ad to unlock",
     },
 };
 

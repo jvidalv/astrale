@@ -91,16 +91,17 @@ function AstrologersScreen({navigation}) {
             <DefaultScrollView onScrollCallback={_handleScroll}>
                 <MainNav style={{top: 15}}/>
                 <View style={styles.headerContainer}>
-                    <ShadowHeadline style={styles.headerHeadline}>
+                    <ShadowHeadline>
                         {i18n.t('Astrologers')}
                     </ShadowHeadline>
                 </View>
                 {showAdvice && (
-                    <View style={[styles.adviceContainer, {borderColor: colors.accent + 'E6',}]}>
-                        <MaterialCommunityIcons onPress={_handleCloseAdvice}
-                                                name='close' size={20}
-                                                style={styles.adviceClose}
-                                                color={colors.accent + 'E6'}/>
+                    <View style={[styles.adviceContainer, {borderColor: colors.primary + 'E6',}]}>
+                        <MaterialCommunityIcons
+                            onPress={_handleCloseAdvice}
+                            name='close' size={20}
+                            style={styles.adviceClose}
+                            color={colors.primary + 'E6'}/>
                         <Title style={{textAlign: 'center'}}>
                             {i18n.t('How it works')}
                         </Title>
@@ -108,18 +109,18 @@ function AstrologersScreen({navigation}) {
                             <View style={{flexDirection: 'row', alignItems: 'center'}}>
                                 <Avatar.Text
                                     size={30} label="1"
-                                    theme={{colors: {primary: colors.accent + 'E6'}}}
+                                    theme={{colors: {primary: colors.primary + 'E6'}}}
                                     labelStyle={{fontSize: 22}}
                                 />
                                 <Text style={{marginLeft: 15, fontSize: 12}}>{i18n.t('Select an astrologer')}</Text>
                             </View>
                             <View style={[styles.listDivider, {
-                                borderLeftColor: colors.primary + 'E6'
+                                borderLeftColor: colors.accent + 'E6'
                             }]}/>
                             <View style={{flexDirection: 'row', alignItems: 'center'}}>
                                 <Avatar.Text
                                     size={30} label="2"
-                                    theme={{colors: {primary: colors.accent + 'E6'}}}
+                                    theme={{colors: {primary: colors.primary + 'E6'}}}
                                     labelStyle={{fontSize: 22}}
                                 />
                                 <Text style={{
@@ -128,12 +129,12 @@ function AstrologersScreen({navigation}) {
                                 }}>{i18n.t('Introduce your email and question')}</Text>
                             </View>
                             <View style={[styles.listDivider, {
-                                borderLeftColor: colors.primary + 'E6'
+                                borderLeftColor: colors.accent + 'E6'
                             }]}/>
                             <View style={{flexDirection: 'row', alignItems: 'center'}}>
                                 <Avatar.Text
                                     size={30} label="3"
-                                    theme={{colors: {primary: colors.accent + 'E6'}}}
+                                    theme={{colors: {primary: colors.primary + 'E6'}}}
                                     labelStyle={{fontSize: 22}}/>
                                 <Text style={{
                                     marginLeft: 15,
@@ -147,7 +148,10 @@ function AstrologersScreen({navigation}) {
                     {
                         dummy_astrologist.map(({id, name, school, years_exp, stars, photo, reviews}, i) => (
                                 <React.Fragment key={id}>
-                                    <TouchableRipple onPress={() =>  navigation.navigate('Question', {key: 'Profile', astrologist : dummy_astrologist[i]})} style={styles.astrologistCard} underlayColor={colors.text + '33'} borderless={true}>
+                                    <TouchableRipple onPress={() => navigation.navigate('Question', {
+                                        key: 'Profile',
+                                        astrologist: dummy_astrologist[i]
+                                    })} style={styles.astrologistCard} underlayColor={colors.text + '33'} borderless={true}>
                                         <React.Fragment>
                                             <Image style={styles.astrologistImage}
                                                    source={{uri: photo}}/>
@@ -185,10 +189,6 @@ function AstrologersScreen({navigation}) {
                         )}
                 </View>
             </DefaultScrollView>
-            {/* Adjust the tint and intensity */}
-            {/*<BlurView intensity={100} style={[StyleSheet.absoluteFill, styles.nonBlurredContent]}>*/}
-            {/*    <Text>Hello! I am bluring contents underneath</Text>*/}
-            {/*</BlurView>*/}
         </React.Fragment>
     );
 }
