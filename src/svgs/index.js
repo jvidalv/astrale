@@ -16,9 +16,23 @@ import Telescope from "./backgrounds/Telescope";
 import ConstellationSimple from "./backgrounds/ConstellationSimple";
 
 export const Zodiac = {
-    Aquarius, Aries, Cancer, Capricorn, Gemini, Leo, Libra, Pisces, Sagittarius, Scorpio, Taurus, Virgo
-}
+  Aquarius,
+  Aries,
+  Cancer,
+  Capricorn,
+  Gemini,
+  Leo,
+  Libra,
+  Pisces,
+  Sagittarius,
+  Scorpio,
+  Taurus,
+  Virgo,
+};
 
 export const Backgrounds = {
-    Stars, Constellation, Telescope, ConstellationSimple
-}
+  Stars,
+  Constellation,
+  Telescope,
+  ConstellationSimple,
+};

@@ -1,5 +1,5 @@
 import React from "react";
-import {Text} from "react-native-paper";
+import { Text } from "react-native-paper";
 
 /**
  * @param children
@@ -7,12 +7,10 @@ import {Text} from "react-native-paper";
  * @returns {*}
  * @constructor
  */
-function TextBold({children, style}) {
-    return (
-        <Text style={[{fontFamily: 'poppins_bold'}, style]}>
-            {children}
-        </Text>
-    )
+function TextBold({ children, style }) {
+  return (
+    <Text style={[{ fontFamily: "poppins_bold" }, style]}>{children}</Text>
+  );
 }
 
 export default TextBold;

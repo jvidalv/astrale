@@ -1,5 +1,3 @@
 import Sign from "./Sign";
 
-export {
-    Sign
-}
+export { Sign };

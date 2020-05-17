@@ -1,5 +1,6 @@
 {
   "main": "node_modules/expo/AppEntry.js",
+  "private": false,
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -16,10 +17,15 @@
     "@react-navigation/material-bottom-tabs": "^5.2.2",
     "@react-navigation/native": "^5.2.1",
     "@react-navigation/stack": "^5.2.16",
+    "@typescript-eslint/eslint-plugin": "^2.33.0",
+    "@typescript-eslint/parser": "^2.33.0",
     "@use-expo/font": "^2.0.0",
     "clarifai": "^2.9.1",
+    "eslint": "^7.0.0",
+    "eslint-config-universe": "^3.0.0",
     "expo": "^37.0.0",
     "expo-asset": "~8.1.4",
+    "expo-blur": "~8.1.0",
     "expo-camera": "~8.2.0",
     "expo-constants": "~9.0.0",
     "expo-facebook": "~8.1.0",
@@ -31,6 +37,7 @@
     "expo-localization": "~8.1.0",
     "expo-store-review": "~2.1.0",
     "i18n-js": "^3.5.1",
+    "prettier": "^2.0.5",
     "prop-types": "latest",
     "react": "16.9.0",
     "react-dom": "16.9.0",
@@ -44,7 +51,7 @@
     "react-native-svg": "11.0.1",
     "react-native-web": "^0.11.7",
     "react-navigation-material-bottom-tabs": "^2.2.12",
-    "expo-blur": "~8.1.0"
+    "expo-ads-admob": "~8.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
@@ -53,5 +60,7 @@
     "babel-preset-expo": "^8.1.0",
     "typescript": "^3.8.3"
   },
-  "private": true
+  "eslintConfig": {
+    "extends": "universe/native"
+  }
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import {Animated, Easing} from "react-native";
+import { Animated, Easing } from "react-native";
 import PropTypes from "prop-types";
 
 /**
@@ -9,40 +9,44 @@ import PropTypes from "prop-types";
  * @returns {*}
  * @constructor
  */
-function Fade({children, show}) {
-    const fadeAnim = React.useRef(new Animated.Value(0)).current;
+function Fade({ children, show }) {
+  const fadeAnim = React.useRef(new Animated.Value(0)).current;
 
-    React.useEffect(() => {
-        Animated.timing(fadeAnim, {
-            toValue: show ? 1 : 0,
-            easing: Easing.ease,
-            duration: 500,
-        }).start();
-    }, [show]);
+  React.useEffect(() => {
+    Animated.timing(fadeAnim, {
+      toValue: show ? 1 : 0,
+      easing: Easing.ease,
+      duration: 500,
+    }).start();
+  }, [show]);
 
-    return (
-        <Animated.View style={[{
-            flex: 1,
-            paddingVertical: 10,
-            opacity: fadeAnim,
-        }]}>
-            {children}
-        </Animated.View>
-    )
+  return (
+    <Animated.View
+      style={[
+        {
+          flex: 1,
+          paddingVertical: 10,
+          opacity: fadeAnim,
+        },
+      ]}
+    >
+      {children}
+    </Animated.View>
+  );
 }
 
 Fade.defaultProps = {
-    fadeToTop: false,
-    initialHeight: 300,
-    finalHeight: 80
+  fadeToTop: false,
+  initialHeight: 300,
+  finalHeight: 80,
 };
 
 Fade.propTypes = {
-    fadeToTop: PropTypes.bool.isRequired,
-    children: PropTypes.oneOfType([
-        PropTypes.arrayOf(PropTypes.node),
-        PropTypes.node
-    ]).isRequired,
+  fadeToTop: PropTypes.bool.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
 };
 
 export default Fade;

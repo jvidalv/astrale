@@ -20,3 +20,5 @@ src/credentials/
 # ides
 .idea
 
+# App json coz keys
+app.json

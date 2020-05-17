@@ -1,5 +1,5 @@
-import React, {createContext, useContext, useReducer} from "react";
-import default_session, {SESSION_KEY} from "../constants/session";
+import React, { createContext, useContext, useReducer } from "react";
+import default_session, { SESSION_KEY } from "../constants/session";
 import Storer from "../utils/Storer";
 
 /**
@@ -8,42 +8,42 @@ import Storer from "../utils/Storer";
  * @returns {{isAuthenticated: boolean}|{theme: *}|{theme: *, isAuthenticated: boolean, user: {}}}
  */
 export const reducer = (state, action) => {
-    switch (action.type) {
-        case "switchTheme":
-            return {
-                ...state,
-                theme: action.theme,
-            };
-        case "setLogOut":
-            return {
-                ...state,
-                session: default_session,
-            };
-        case "setSession":
-            return {
-                ...state,
-                session: {...state.session, ...action.fields},
-            };
-        case "setAndStoreSession":
-            Storer.set(SESSION_KEY, {...state.session, ...action.fields});
-            return {
-                ...state,
-                session: {...state.session, ...action.fields},
-            };
-        default:
-            return {
-                ...state
-            }
-    }
+  switch (action.type) {
+    case "switchTheme":
+      return {
+        ...state,
+        theme: action.theme,
+      };
+    case "setLogOut":
+      return {
+        ...state,
+        session: default_session,
+      };
+    case "setSession":
+      return {
+        ...state,
+        session: { ...state.session, ...action.fields },
+      };
+    case "setAndStoreSession":
+      Storer.set(SESSION_KEY, { ...state.session, ...action.fields });
+      return {
+        ...state,
+        session: { ...state.session, ...action.fields },
+      };
+    default:
+      return {
+        ...state,
+      };
+  }
 };
 
 /**
  * @type {{theme: string}}
  */
 export const initialState = {
-    theme: 'dark',
-    session: default_session,
-    notifications: false,
+  theme: "dark",
+  session: default_session,
+  notifications: false,
 };
 
 /**
@@ -59,10 +59,10 @@ export const StateContext = createContext(initialState);
  * @returns {*}
  * @constructor
  */
-export const StateProvider = ({reducer, initialState, children}) => (
-    <StateContext.Provider value={useReducer(reducer, initialState)}>
-        {children}
-    </StateContext.Provider>
+export const StateProvider = ({ reducer, initialState, children }) => (
+  <StateContext.Provider value={useReducer(reducer, initialState)}>
+    {children}
+  </StateContext.Provider>
 );
 
 /**
