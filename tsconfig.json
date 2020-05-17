@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
     "allowSyntheticDefaultImports": true,
     "jsx": "react-native",
     "lib": ["dom", "esnext"],

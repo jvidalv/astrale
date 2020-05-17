@@ -22,6 +22,8 @@ import { useIsDark } from "../../hooks/useTheme";
 import { BlurView } from "expo-blur";
 import PlatformUtils from "../../utils/Platform";
 import Close from "../../components/navs/Close";
+import { AdMobBanner, AdMobInterstitial } from "expo-ads-admob";
+import Ads from "../../credentials/admob";
 
 /**
  * @param route
@@ -35,7 +37,17 @@ function AstrologerQuestionScreen({ route, navigation }) {
   const astrologist = route.params.astrologist;
   const isDark = useIsDark();
   const isAndroid = PlatformUtils.isAndroid;
-  const _handleProceed = () => {};
+  const _handleProceed = async () => {
+    try {
+      await AdMobInterstitial.setAdUnitID(Ads.astrologers);
+      await AdMobInterstitial.requestAdAsync();
+      await AdMobInterstitial.showAdAsync();
+    } catch {
+      //
+    } finally {
+      // @todo send data to an api and show info that message was sent
+    }
+  };
   return (
     <BlurView
       style={[StyleSheet.absoluteFill, { flex: 1 }]}
@@ -85,7 +97,10 @@ function AstrologerQuestionScreen({ route, navigation }) {
           </View>
           <Divider />
           <View>
-            <Text>@ADHERE</Text>
+            <AdMobBanner
+              adUnitID={Ads.astrologersBanner}
+              bannerSize="largeBanner"
+            />
           </View>
         </ScrollView>
       </TouchableWithoutFeedback>

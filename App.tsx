@@ -1,9 +1,10 @@
-import React from 'react';
+import React from "react";
 import Main from "./src/Main";
-import {initialState, reducer, StateProvider} from "./src/contexts/Global";
-import i18n from 'i18n-js';
-import * as Localization from 'expo-localization';
+import { initialState, reducer, StateProvider } from "./src/contexts/Global";
+import i18n from "i18n-js";
+import * as Localization from "expo-localization";
 import Translations from "./src/translations";
+import { AdMobInterstitial, AdMobRewarded } from "expo-ads-admob";
 
 /**
  * Language
@@ -16,11 +17,11 @@ i18n.fallbacks = true;
  * @constructor
  */
 function App() {
-    return (
-        <StateProvider initialState={initialState} reducer={reducer}>
-            <Main/>
-        </StateProvider>
-    );
+  return (
+    <StateProvider initialState={initialState} reducer={reducer}>
+      <Main />
+    </StateProvider>
+  );
 }
 
 export default App;

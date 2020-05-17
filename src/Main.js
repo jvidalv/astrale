@@ -11,6 +11,7 @@ import InitialStackNavigation from "./navigation/InitialStackNavigation";
 import * as Font from "expo-font";
 import Storer from "./utils/Storer";
 import { SESSION_KEY } from "./constants/session";
+import { setTestDeviceIDAsync } from "expo-ads-admob";
 
 /**
  * @param images {string[]}
@@ -64,6 +65,8 @@ function Main() {
   React.useEffect(() => {
     (async () => {
       try {
+        __DEV__ && (await setTestDeviceIDAsync("EMULATOR"));
+
         const state = await Storer.get(PERSISTENCE_KEY);
         setInitialState(state);
 

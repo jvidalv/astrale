@@ -18,6 +18,8 @@ import Constellation from "../../svgs/backgrounds/Constellation";
 import { LinearGradient } from "expo-linear-gradient";
 import ConstellationSimple from "../../svgs/backgrounds/ConstellationSimple";
 import Leo from "../../svgs/Leo";
+import { AdMobInterstitial } from "expo-ads-admob";
+import Ads from "../../credentials/admob";
 
 const SubHeading = () => {
   const { colors } = useTheme();
@@ -42,6 +44,17 @@ const SubHeading = () => {
  */
 function LearnScreen({ navigation }) {
   const { colors } = useTheme();
+  const _handleViewLesson = async (lesson) => {
+    try {
+      await AdMobInterstitial.setAdUnitID(Ads.learn);
+      await AdMobInterstitial.requestAdAsync();
+      await AdMobInterstitial.showAdAsync();
+    } catch {
+      navigation.navigate(lesson, { key: 1 });
+    } finally {
+      navigation.navigate(lesson, { key: 1 });
+    }
+  };
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <SpaceSky />
@@ -99,7 +112,7 @@ function LearnScreen({ navigation }) {
                     colors: { primary: colors.backdrop, text: "#FFFFFF" },
                   }}
                   labelStyle={{ fontSize: 9, letterSpacing: 0 }}
-                  onPress={() => navigation.navigate("AboutZodiac", { key: 1 })}
+                  onPress={() => _handleViewLesson("AboutZodiac")}
                 >
                   {i18n.t("Watch an ad to unblock")}
                 </Button>
@@ -153,7 +166,7 @@ function LearnScreen({ navigation }) {
                     colors: { primary: colors.backdrop, text: "#FFFFFF" },
                   }}
                   labelStyle={{ fontSize: 9, letterSpacing: 0 }}
-                  onPress={() => navigation.navigate("TheSigns", { key: 1 })}
+                  onPress={() => _handleViewLesson("TheSigns")}
                 >
                   {i18n.t("Watch an ad to unblock")}
                 </Button>
@@ -197,7 +210,7 @@ function LearnScreen({ navigation }) {
                   style={{ borderRadius: 25, marginTop: 5 }}
                   theme={{ colors: { primary: colors.backdrop } }}
                   labelStyle={{ fontSize: 9, letterSpacing: 0 }}
-                  onPress={() => navigation.navigate("TheElements", { key: 1 })}
+                  onPress={() => _handleViewLesson("TheElements")}
                 >
                   {i18n.t("Watch an ad to unblock")}
                 </Button>

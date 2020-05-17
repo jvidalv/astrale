@@ -19,6 +19,8 @@ import ShowFromTop from "../../components/animations/ShowFromTop";
 import SpaceSky from "../../components/decorations/SpaceSky";
 import TextBold from "../../components/paper/TextBold";
 import MainNav from "../../components/navs/MainNav";
+import { AdMobInterstitial } from "expo-ads-admob";
+import Ads from "../../credentials/admob";
 
 /**
  * Progress bars from match
@@ -124,11 +126,27 @@ function CompatibilityScreen({ navigation }) {
   const { colors } = useTheme();
   const [scRef, setScRef] = React.useState();
   const [selectedSigns, setSelectedSigns] = React.useState([]);
-  const _handleSignPress = (sign) =>
+  const [compDetailsShow, setCompDetailsShow] = React.useState(false);
+  const _handleSignPress = (sign) => {
     setSelectedSigns((selectedSigns) => [...selectedSigns, sign]);
-  const _handleSignTopPress = () => setSelectedSigns([]);
+  };
+  const _handleSignTopPress = () =>
+    setSelectedSigns([]) || setCompDetailsShow(false);
   React.useEffect(() => {
-    selectedSigns.length === 2 && scRef.scrollTo({ y: 0 });
+    if (selectedSigns.length === 2) {
+      (async () => {
+        try {
+          await AdMobInterstitial.setAdUnitID(Ads.compatibility);
+          await AdMobInterstitial.requestAdAsync();
+          await AdMobInterstitial.showAdAsync();
+        } catch {
+          //
+        } finally {
+          setCompDetailsShow(true);
+          scRef.scrollTo({ y: 0 });
+        }
+      })();
+    }
   }, [selectedSigns]);
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -195,7 +213,7 @@ function CompatibilityScreen({ navigation }) {
       <Divider />
       <ScrollView ref={(scrollRef) => setScRef(scrollRef)}>
         <View style={{ height: 20 }} />
-        {selectedSigns.length === 2 ? (
+        {compDetailsShow ? (
           <MatchContent />
         ) : (
           <SignsContent onPress={_handleSignPress} />

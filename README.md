@@ -1,5 +1,7 @@
 <p align="center">
-  <img src="https://i.imgur.com/cnTYXlE.png" width="250">
+  <img src="https://i.imgur.com/thLMLAq.png">
 </p>
 
-# Astraleh
+# Astrale
+
+React Native powered app about astrology.
