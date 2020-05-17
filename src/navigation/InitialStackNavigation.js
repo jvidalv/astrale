@@ -5,8 +5,6 @@ import BirthDateScreen from "../screens/initials/BirthDateScreen";
 import SexScreen from "../screens/initials/SexScreen";
 import RelationshipScreen from "../screens/initials/RelationshipScreen";
 import NumberScreen from "../screens/initials/NumberScreen";
-import PalmistryPreScanScreen from "../screens/initials/PalmistryPreScanScreen";
-import PalmistryScanScreen from "../screens/initials/PalmistryScanScreen";
 import LoadingScreen from "../screens/initials/LoadingScreen";
 
 const Stack = createStackNavigator();

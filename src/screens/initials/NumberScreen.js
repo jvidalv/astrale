@@ -1,8 +1,7 @@
 import React from "react";
-import {StyleSheet, TextInput, View} from "react-native";
-import {Button, Headline, Text, TextInput as PaperTextInput, useTheme} from "react-native-paper";
+import {StyleSheet, View} from "react-native";
+import {Button, Headline, Text, useTheme} from "react-native-paper";
 import {DefaultView} from "../../components/containers";
-import {Backgrounds} from "../../svgs";
 import Aquarius from "../../svgs/Aquarius";
 import Dices from "../../svgs/Dices";
 import i18n from "i18n-js";
@@ -30,7 +29,7 @@ function NumberScreen({navigation}) {
 
     return (
         <DefaultView>
-            <SpaceSky />
+            <SpaceSky/>
             <Aquarius width={60} height={60} style={styles.aquarius}/>
             <View style={{flex: 1}}/>
             <View style={styles.textContainer}>

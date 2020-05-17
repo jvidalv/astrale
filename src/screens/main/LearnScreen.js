@@ -70,7 +70,7 @@ function LearnScreen({navigation}) {
                                     style={{borderRadius: 25, marginTop: 5}}
                                     theme={{colors: {primary: colors.backdrop, text: '#FFFFFF'}}}
                                     labelStyle={{fontSize: 9, letterSpacing: 0}}
-                                    onPress={() => navigation.navigate('AboutZodiac', {key : 1})}
+                                    onPress={() => navigation.navigate('AboutZodiac', {key: 1})}
                                 >
                                     {i18n.t("Watch an ad to unblock")}
                                 </Button>
@@ -92,9 +92,10 @@ function LearnScreen({navigation}) {
                         start={[0, 0]} end={[1, 0]}
                         style={styles.gradientLeft}>
                         <View style={{flex: 1}}>
-                            <Subheading theme={{colors: {text: '#FFFFFF'}}}
-                                        numberOfLines={1}
-                                        style={{fontFamily: 'poppins_bold'}}>
+                            <Subheading
+                                theme={{colors: {text: '#FFFFFF'}}}
+                                numberOfLines={1}
+                                style={{fontFamily: 'poppins_bold'}}>
                                 {i18n.t('The signs')}
                             </Subheading>
                             <Caption theme={{colors: {text: '#FFFFFF'}}}>
@@ -106,6 +107,7 @@ function LearnScreen({navigation}) {
                                     style={{borderRadius: 25}}
                                     theme={{colors: {primary: colors.backdrop, text: '#FFFFFF'}}}
                                     labelStyle={{fontSize: 9, letterSpacing: 0}}
+                                    onPress={() => navigation.navigate('TheSigns', {key: 1})}
                                 >
                                     {i18n.t("Watch an ad to unblock")}
                                 </Button>
@@ -125,8 +127,11 @@ function LearnScreen({navigation}) {
                         style={styles.gradientRight}>
                         <View style={{flex: .8}}/>
                         <View style={{flex: 1}}>
-                            <Subheading theme={{colors: {text: '#FFFFFF'}}} numberOfLines={1}
-                                        style={{fontFamily: 'poppins_bold'}}>
+                            <Subheading
+                                theme={{colors: {text: '#FFFFFF'}}}
+                                numberOfLines={1}
+                                style={{fontFamily: 'poppins_bold'}}
+                            >
                                 {i18n.t('The elements')}
                             </Subheading>
                             <Caption theme={{colors: {text: '#FFFFFF'}}}>
@@ -139,6 +144,7 @@ function LearnScreen({navigation}) {
                                     style={{borderRadius: 25, marginTop: 5}}
                                     theme={{colors: {primary: colors.backdrop}}}
                                     labelStyle={{fontSize: 9, letterSpacing: 0}}
+                                    onPress={() => navigation.navigate('TheElements', {key: 1})}
                                 >
                                     {i18n.t("Watch an ad to unblock")}
                                 </Button>

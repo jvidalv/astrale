@@ -4,10 +4,7 @@ import {Button, Paragraph, Surface, useTheme} from "react-native-paper";
 import {DefaultScrollView} from "../../components/containers";
 import ShadowHeadline from "../../components/paper/ShadowHeadline";
 import Palmistry from "../../svgs/Palmistry";
-import {useIsDark} from "../../hooks/useTheme";
 import i18n from "i18n-js";
-import {useScreens} from "../../contexts/Screens";
-import useHideStatusBar from "../../hooks/useHideStatusBar";
 
 /**
  * @param navigation

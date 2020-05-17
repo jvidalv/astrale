@@ -48,8 +48,10 @@ function AstrologerQuestionScreen({route, navigation}) {
                         <TextInput label={i18n.t('Your email')} keyboardType='email-address'/>
                     </View>
                     <View style={{marginHorizontal: 20, marginBottom: 20}}>
-                        <Button onPress={_handleProceed} mode="contained" style={{borderRadius: 20}} icon="send">{i18n.t('Proceed')}</Button>
-                        <Text style={styles.advice}>*{i18n.t('You\'ll need to see an ad before you can send the question')}</Text>
+                        <Button onPress={_handleProceed} mode="contained" style={{borderRadius: 20}}
+                                icon="send">{i18n.t('Proceed')}</Button>
+                        <Text
+                            style={styles.advice}>*{i18n.t('You\'ll need to see an ad before you can send the question')}</Text>
                     </View>
                     <Divider/>
                     <View>
@@ -63,7 +65,7 @@ function AstrologerQuestionScreen({route, navigation}) {
 
 const styles = StyleSheet.create({
     image: {width: 80, aspectRatio: 100 / 100, borderRadius: 100, marginTop: 10},
-    advice : {
+    advice: {
         marginTop: 7,
         fontSize: 10,
         textAlign: 'center',

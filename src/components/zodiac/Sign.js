@@ -40,16 +40,18 @@ function Sign({sign, title, showTitle, subtitle, onPress, style, signHeight, sig
     const isAndroid = PlatformUtils.isAndroid;
     const {colors} = useTheme();
     return (
-        <TouchableRipple onPress={() => onPress(sign)}
-                         underlayColor="#ffffff00" rippleColor="#ffffff00"
-                         style={[{alignItems: 'center', justifyContent: 'center'}, style]}>
+        <TouchableRipple
+            onPress={() => onPress(sign)}
+            underlayColor="#ffffff00" rippleColor="#ffffff00"
+            style={[{alignItems: 'center', justifyContent: 'center'}, style]}
+        >
             <React.Fragment>
                 <View style={[{
                     shadowColor: '#000000',
                     width: signWidth,
                     height: signHeight
                 }, {
-                    elevation : isAndroid ? 0 : 10
+                    elevation: isAndroid ? 0 : 10
                 }, styles.signContainer, styles.signShadow]}>
                     <ParsedSign width={signHeight} height={signWidth}/>
                 </View>

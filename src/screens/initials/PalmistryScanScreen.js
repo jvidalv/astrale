@@ -1,5 +1,5 @@
 import React from "react";
-import {Alert, StyleSheet, TouchableOpacity, View, Image} from "react-native";
+import {Alert, StyleSheet, TouchableOpacity, View} from "react-native";
 import {Button, Headline, ProgressBar, Text, useTheme} from "react-native-paper";
 import {DefaultView} from "../../components/containers";
 import {Camera} from 'expo-camera';

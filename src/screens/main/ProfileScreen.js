@@ -11,7 +11,6 @@ import {DateUtils} from "../../utils";
 import Storer from "../../utils/Storer";
 import {SESSION_KEY} from "../../constants/session";
 import registerForPushNotificationsAsync from "../../utils/Notifications";
-import useHideStatusBar from "../../hooks/useHideStatusBar";
 import {BlurView} from "expo-blur";
 import PlatformUtils from "../../utils/Platform";
 import {MaterialCommunityIcons} from "@expo/vector-icons";

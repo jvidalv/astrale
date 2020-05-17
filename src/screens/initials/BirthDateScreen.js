@@ -25,7 +25,7 @@ function BirthDateScreen({navigation, theme}) {
     const [show, setShow] = React.useState(true);
     React.useLayoutEffect(() => {
         setSign(ZodiacCalculator(date.getDate(), date.getMonth() + 1))
-    },[date])
+    }, [date])
 
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
@@ -45,10 +45,10 @@ function BirthDateScreen({navigation, theme}) {
 
     return (
         <DefaultView>
-            <SpaceSky />
+            <SpaceSky/>
             <Scorpio width={60} height={60} style={styles.scorpio}/>
             <Backgrounds.ConstellationSimple color={colors.text} dotColor={colors.primary} height={200} width={200}
-                                       style={styles.constellation}/>
+                                             style={styles.constellation}/>
             <View style={{flex: 1}}/>
             <View style={styles.textContainer}>
                 <Headline style={styles.textHeadline}>{i18n.t('Your date of birth')}</Headline>
@@ -111,8 +111,8 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
         paddingVertical: 10,
         borderRadius: 5,
-        ...(Platform.isIos ? { paddingTop: 0 } : {}),
-        ...(Platform.isIos ? { backgroundColor: '#FFFFFFB3' } : {}),
+        ...(Platform.isIos ? {paddingTop: 0} : {}),
+        ...(Platform.isIos ? {backgroundColor: '#FFFFFFB3'} : {}),
     },
     buttonContainer: {
         flex: 1, paddingHorizontal: 20, paddingTop: 35, justifyContent: 'flex-end', marginBottom: 20

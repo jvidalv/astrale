@@ -2,8 +2,6 @@ import React from "react";
 import {StyleSheet, View} from "react-native";
 import {Button, Headline, Text, useTheme} from "react-native-paper";
 import {DefaultView} from "../../components/containers";
-import {Backgrounds} from "../../svgs";
-import Aquarius from "../../svgs/Aquarius";
 import Palmistry from "../../svgs/Palmistry";
 import i18n from "i18n-js";
 import {useIsDark} from "../../hooks/useTheme";
@@ -23,7 +21,7 @@ function PalmistryPreScanScreen({navigation, route}) {
     const isMain = route.params?.main;
     return (
         <DefaultView barStyle={useIsDark() ? 'light-content' : 'dark-content'}>
-            <SpaceSky />
+            <SpaceSky/>
             <SolarSystem color={colors.text} width={60} height={60} style={styles.aquarius}/>
             <View style={{flex: .5}}/>
             <View style={styles.textContainer}>

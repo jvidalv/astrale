@@ -1,5 +1,5 @@
 import * as React from "react"
-import Svg, {Circle, Path, G} from "react-native-svg"
+import Svg, {G, Path} from "react-native-svg"
 import PropTypes from "prop-types";
 
 function Cancer({color, height, width, style}) {
@@ -21,7 +21,7 @@ function Cancer({color, height, width, style}) {
                 d="M328 359.786h35.508a16 16 0 0015.522-12.12 16 16 0 00-15.522-19.88H296a32 32 0 0032 32zM400 471.786c16.169-2.837 24-13.948 24-25.6v-62.4c-14.728 0-32 8-32 24v48l-8 16s13.25.482 16 0zM360 440h-40v-64a40 40 0 0140 40v24z"
                 fill="#5f4bbc"
             />
-            <Path d="M304 408h16v-32h-48a32 32 0 0032 32z" fill="#5540b0" />
+            <Path d="M304 408h16v-32h-48a32 32 0 0032 32z" fill="#5540b0"/>
             <Path
                 d="M316 488h-12a24 24 0 01-24-24 24 24 0 0124-24h56v4a44 44 0 01-44 44z"
                 fill="#705dc9"
@@ -70,7 +70,7 @@ function Cancer({color, height, width, style}) {
                 d="M137.6 72l31.7-27.175A86.507 86.507 0 01225.6 24l-56 48z"
                 fill="#5540b0"
             />
-            <Path d="M89.6 120a45.255 45.255 0 000 64l32-32z" fill="#705dc9" />
+            <Path d="M89.6 120a45.255 45.255 0 000 64l32-32z" fill="#705dc9"/>
             <Path
                 d="M427.73 139.093l-3.698-42.38 15.936-1.426 3.699 42.38zM389.198 81.084l14.864-5.936 13.508 33.823-14.864 5.936zM357.665 67.802l14.912-5.792 12.8 32.954-14.913 5.792zM360 149.256h16V184h-16zM336 165.256h16v45.488h-16z"
                 fill="#5540b0"
@@ -83,9 +83,9 @@ function Cancer({color, height, width, style}) {
                 d="M352 74.511l-31-37.5c-6.564-7.326-13.66-13.3-23.5-13-16.5.5-23.5 4.5-31 11l17.944-.5 43.556 56z"
                 fill="#5540b0"
             />
-            <Path d="M416 106.511s56 24 16 66.745L399.667 146z" fill="#705dc9" />
-            <Path d="M192 376v64h-40v-24a40 40 0 0140-40z" fill="#5f4bbc" />
-            <Path d="M208 408h-16v-32h48a32 32 0 01-32 32z" fill="#5540b0" />
+            <Path d="M416 106.511s56 24 16 66.745L399.667 146z" fill="#705dc9"/>
+            <Path d="M192 376v64h-40v-24a40 40 0 0140-40z" fill="#5f4bbc"/>
+            <Path d="M208 408h-16v-32h48a32 32 0 01-32 32z" fill="#5540b0"/>
             <Path
                 d="M152 440h56a24 24 0 0124 24 24 24 0 01-24 24h-12a44 44 0 01-44-44v-4z"
                 fill="#705dc9"
@@ -102,9 +102,10 @@ function Cancer({color, height, width, style}) {
                 d="M305.14 356.116l-7.536-12.56a48.518 48.518 0 00-83.208 0l-7.536 12.56-13.72-8.232 7.536-12.56a64.518 64.518 0 01110.648 0l7.536 12.56z"
                 fill="#b44037"
             />
-            <Path d="M248 240h16v112h-16z" fill="#af3b34" />
+            <Path d="M248 240h16v112h-16z" fill="#af3b34"/>
             <G fill="#cd5c53">
-                <Path d="M176 256h16v16h-16zM216 256h16v16h-16zM192 288h16v16h-16zM320 256h16v16h-16zM280 256h16v16h-16zM304 288h16v16h-16z" />
+                <Path
+                    d="M176 256h16v16h-16zM216 256h16v16h-16zM192 288h16v16h-16zM320 256h16v16h-16zM280 256h16v16h-16zM304 288h16v16h-16z"/>
             </G>
         </Svg>
     )

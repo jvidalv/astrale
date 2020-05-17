@@ -1,7 +1,6 @@
 import React from "react";
-import {StyleSheet, TextInput, View} from "react-native";
-import {Headline, TextInput as PaperTextInput, useTheme} from "react-native-paper";
-import i18n from "i18n-js";
+import {StyleSheet, TextInput} from "react-native";
+import {TextInput as PaperTextInput, useTheme} from "react-native-paper";
 import MainNav from "../navs/MainNav";
 
 /**
@@ -16,7 +15,8 @@ function CustomInput(props) {
         <PaperTextInput
             {...props}
             style={[styles.input, {backgroundColor: colors.text + '00'}]}
-            render={props => <TextInput {...props} style={[styles.inputCustom, props.customStyle]} maxLength={_maxLength}/>}
+            render={props => <TextInput {...props} style={[styles.inputCustom, props.customStyle]}
+                                        maxLength={_maxLength}/>}
         />
     )
 }
@@ -27,16 +27,14 @@ const styles = StyleSheet.create({
         marginTop: 10,
         color: 'white',
         fontSize: 30,
-        backgroundColor: 'red'
     },
-    input : {
-        borderRadius: 5, fontSize: 30, textAlign: 'center',   justifyContent: 'flex-end'
+    input: {
+        borderRadius: 5, fontSize: 30, textAlign: 'center', justifyContent: 'flex-end'
     }
 });
 MainNav.defaultProps = {
     customStyle: null,
 };
-
 
 
 export default CustomInput;

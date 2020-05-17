@@ -1,15 +1,10 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import NameScreen from "../screens/initials/NameScreen";
-import BirthDateScreen from "../screens/initials/BirthDateScreen";
-import SexScreen from "../screens/initials/SexScreen";
-import RelationshipScreen from "../screens/initials/RelationshipScreen";
-import NumberScreen from "../screens/initials/NumberScreen";
-import PalmistryPreScanScreen from "../screens/initials/PalmistryPreScanScreen";
-import PalmistryScanScreen from "../screens/initials/PalmistryScanScreen";
-import LoadingScreen from "../screens/initials/LoadingScreen";
 import LearnScreen from "../screens/main/LearnScreen";
 import AboutZodiacScreen from "../screens/main/lean/AboutZodiacScreen";
+import i18n from "i18n-js";
+import TheSignsScreen from "../screens/main/lean/TheSignsScreen";
+import TheElementsScreen from "../screens/main/lean/TheElementsScreen";
 
 const Stack = createStackNavigator();
 
@@ -24,7 +19,18 @@ function LearnStackNavigation() {
             headerMode="screen"
         >
             <Stack.Screen name="Learn" component={LearnScreen} options={{headerShown: false}}/>
-            <Stack.Screen name="AboutZodiac" component={AboutZodiacScreen}/>
+            <Stack.Screen name="AboutZodiac" component={AboutZodiacScreen} options={{
+                headerTitle: i18n.t('About the Zodiac'),
+                headerStyle: {backgroundColor: 'transparent'}
+            }}/>
+            <Stack.Screen name="TheSigns" component={TheSignsScreen} options={{
+                headerTitle: i18n.t('The signs'),
+                headerStyle: {backgroundColor: 'transparent'}
+            }}/>
+            <Stack.Screen name="TheElements" component={TheElementsScreen} options={{
+                headerTitle: i18n.t('The elements'),
+                headerStyle: {backgroundColor: 'transparent'}
+            }}/>
         </Stack.Navigator>
     )
 }

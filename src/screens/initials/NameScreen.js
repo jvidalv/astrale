@@ -45,6 +45,7 @@ function NameScreen({navigation}) {
                     placeholder={i18n.t('Write here')}
                     onChangeText={(text) => setName(text)}
                     style={{fontSize: 12}}
+                    maxLength={20}
                 />
             </View>
             <View style={styles.buttonContainer}>

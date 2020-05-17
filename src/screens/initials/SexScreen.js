@@ -2,7 +2,6 @@ import React from "react";
 import {StyleSheet, View} from "react-native";
 import {Button, Headline, Text, useTheme} from "react-native-paper";
 import {DefaultView} from "../../components/containers";
-import {Backgrounds} from "../../svgs";
 import Male from "../../svgs/Male";
 import Female from "../../svgs/Female";
 import TouchableRipple from "react-native-paper/src/components/TouchableRipple/index";
@@ -31,7 +30,7 @@ function SexScreen({navigation}) {
 
     return (
         <DefaultView>
-            <SpaceSky />
+            <SpaceSky/>
             <Leo width={60} height={60} style={styles.leo}/>
             <View style={{flex: 1}}/>
             <View style={styles.textContainer}>

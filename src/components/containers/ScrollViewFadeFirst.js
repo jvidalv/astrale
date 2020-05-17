@@ -5,10 +5,11 @@ import PropTypes from "prop-types";
 /**
  * @param children
  * @param background {string}
+ * @param style {object}
  * @returns {*}
  * @constructor
  */
-function ScrollViewFadeFirst({children, element, height}) {
+function ScrollViewFadeFirst({children, element, height, style}) {
     const [opacity, setOpacity] = React.useState(1)
     const _handleScroll = (event) => {
         const offsetY = event.nativeEvent.contentOffset.y;
@@ -20,7 +21,7 @@ function ScrollViewFadeFirst({children, element, height}) {
     };
 
     return (
-        <ScrollView stickyHeaderIndices={[0]} scrollEventThrottle={2} onScroll={_handleScroll}>
+        <ScrollView style={style} stickyHeaderIndices={[0]} scrollEventThrottle={2} onScroll={_handleScroll}>
             <View style={{opacity: opacity}}>
                 <View style={[StyleSheet.absoluteFill, {height: height}]}>
                     {element}
@@ -35,6 +36,7 @@ function ScrollViewFadeFirst({children, element, height}) {
 ScrollViewFadeFirst.propTypes = {
     element: PropTypes.element.isRequired,
     height: PropTypes.number.isRequired,
+    style: PropTypes.object,
 };
 
 export default ScrollViewFadeFirst;

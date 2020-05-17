@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "react";
-import {Image, StyleSheet, Dimensions} from "react-native";
+import {Dimensions, Image, StyleSheet, View} from "react-native";
 import {useIsDark} from "../../hooks/useTheme";
-import {View} from "react-native";
+
 /**
  * @param style {object}
  * @returns {*}
@@ -32,7 +32,7 @@ function SpaceSky({style}) {
 }
 
 const styles = StyleSheet.create({
-    container : {
+    container: {
         position: 'absolute',
         top: -60,
         left: 0,
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
 })
 
 SpaceSky.PropsType = {
-    style : PropTypes.object
+    style: PropTypes.object
 }
 
 export default SpaceSky;

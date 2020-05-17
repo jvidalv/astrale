@@ -1,6 +1,5 @@
 import React from "react";
-import {StyleSheet, View} from "react-native";
-import {DefaultScrollView} from "../../components/containers";
+import {SafeAreaView, ScrollView, StyleSheet, View} from "react-native";
 import {ActivityIndicator, Button, Divider, Paragraph, ProgressBar, Text, useTheme} from "react-native-paper";
 import HoroscopeSigns from "../../constants/zodiac_signs";
 import {Sign} from "../../components/zodiac";
@@ -9,7 +8,6 @@ import useMatch from "../../hooks/useMatch";
 import i18n from "i18n-js";
 import useFetch from "../../hooks/useFetch";
 import ShowFromTop from "../../components/animations/ShowFromTop";
-import useHideStatusBar from "../../hooks/useHideStatusBar";
 import SpaceSky from "../../components/decorations/SpaceSky";
 import TextBold from "../../components/paper/TextBold";
 import MainNav from "../../components/navs/MainNav";
@@ -46,20 +44,31 @@ const MatchContent = () => {
 
     return (
         <React.Fragment>
-            <Divider style={{marginBottom: 15}}/>
             <View style={styles.surfaceContainer}>
-                {loading ? <React.Fragment><ActivityIndicator size="large" style={{flex: 1, height: 200}}/><View
-                        style={{height: 500}}/></React.Fragment> :
+                {loading ? (
+                        <React.Fragment>
+                            <ActivityIndicator size="large" style={{flex: 1, height: 300}}/>
+                            <View style={{height: 500}}/>
+                        </React.Fragment>
+                    )
+                    :
                     (
                         <ShowFromTop>
                             <Paragraph>
-                                After viewing Capricorn compatibility with Aries, it is very hard to decide that which one of the two will come out as a winner from this relationship as both of them will feel awful most of the time when they are committed to each other, and they will only be relieved when they get separated.
+                                After viewing Capricorn compatibility with Aries, it is very hard to decide that which
+                                one of the two will come out as a winner from this relationship as both of them will
+                                feel awful most of the time when they are committed to each other, and they will only be
+                                relieved when they get separated.
                             </Paragraph>
                             <TextBold style={{marginTop: 20, marginBottom: 10}}>
-                                Relationship
+                                {i18n.t('Relationship')}
                             </TextBold>
                             <Paragraph>
-                                In a compatible relationship, Capricorn and Aquarius bring out the positive characteristics of each other. Capricorn is very careful and looks at life very realistically and logically. Aquarius, on the other hand, has an idealistic approach towards life. Initially, people do not see them as the couple that would click or get along, but once they start loving one another, they form a bond that never breaks."}
+                                In a compatible relationship, Capricorn and Aquarius bring out the positive
+                                characteristics of each other. Capricorn is very careful and looks at life very
+                                realistically and logically. Aquarius, on the other hand, has an idealistic approach
+                                towards life. Initially, people do not see them as the couple that would click or get
+                                along, but once they start loving one another, they form a bond that never breaks."}
                             </Paragraph>
                             <View style={{marginVertical: 20}}>
                                 {
@@ -103,85 +112,85 @@ const SignsContent = ({onPress}) => (
  */
 function CompatibilityScreen({navigation}) {
     const {colors} = useTheme();
+    const [scRef, setScRef] = React.useState();
     const [selectedSigns, setSelectedSigns] = React.useState([])
     const _handleSignPress = (sign) => setSelectedSigns(selectedSigns => [...selectedSigns, sign])
     const _handleSignTopPress = () => setSelectedSigns([])
-    const _handleScroll = useHideStatusBar();
-
+    React.useEffect(() => {
+        selectedSigns.length === 2 && scRef.scrollTo({y: 0});
+    }, [selectedSigns])
     return (
-        <React.Fragment>
+        <SafeAreaView style={{flex: 1}}>
             <SpaceSky/>
-            <DefaultScrollView onScrollCallback={_handleScroll}>
-                <MainNav style={{top: 15}} />
+            <View style={{marginBottom: 10}}>
+                <MainNav/>
                 <View style={styles.headerContainer}>
                     <ShadowHeadline>
                         {i18n.t('Compatibility')}
                     </ShadowHeadline>
                 </View>
-                <View style={styles.matchCirclesContainer}>
-                    {
-                        selectedSigns[0] ? (
-                                <Sign sign={selectedSigns[0]}
-                                      onPress={_handleSignTopPress}
-                                      showTitle={false}
-                                      signHeight={100}
-                                      signWidth={100}
-                                />
-                            )
-                            :
-                            <View style={[styles.matchCircle, {
-                                shadowColor: '#000000',
-                                backgroundColor: colors.surface,
-                                borderColor: colors.text,
-                            }]}>
-                                <Text style={{textAlign: 'center', fontSize: 10}}>
-                                    {i18n.t('Your sign')}
-                                </Text>
-                            </View>
-                    }
-                    <View style={styles.matchSeparator}>
-                        <Text style={{fontSize: 22}}>🔥</Text>
-                    </View>
-                    {
-                        selectedSigns[1] ? (
-                                <Sign
-                                    onPress={_handleSignTopPress}
-                                    sign={selectedSigns[1]}
-                                    showTitle={false}
-                                    signHeight={100}
-                                    signWidth={100}
-                                />
-                            )
-                            :
-                            <View style={[styles.matchCircle, {
-                                shadowColor: '#000000',
-                                backgroundColor: colors.surface,
-                                borderColor: colors.text,
-
-                            }]}>
-                                <Text style={{textAlign: 'center', fontSize: 10}}>
-                                    {i18n.t('Partner sign')}
-                                </Text>
-                            </View>
-                    }
+            </View>
+            <View style={styles.matchCirclesContainer}>
+                {
+                    selectedSigns[0] ? (
+                            <Sign sign={selectedSigns[0]}
+                                  onPress={_handleSignTopPress}
+                                  showTitle={false}
+                                  signHeight={100}
+                                  signWidth={100}
+                            />
+                        )
+                        :
+                        <View style={[styles.matchCircle, {
+                            shadowColor: '#000000',
+                            backgroundColor: colors.surface,
+                            borderColor: colors.text,
+                        }]}>
+                            <Text style={{textAlign: 'center', fontSize: 10}}>
+                                {i18n.t('Your sign')}
+                            </Text>
+                        </View>
+                }
+                <View style={styles.matchSeparator}>
+                    <Text style={{fontSize: 22}}>🔥</Text>
                 </View>
+                {
+                    selectedSigns[1] ? (
+                            <Sign
+                                onPress={_handleSignTopPress}
+                                sign={selectedSigns[1]}
+                                showTitle={false}
+                                signHeight={100}
+                                signWidth={100}
+                            />
+                        )
+                        :
+                        <View style={[styles.matchCircle, {
+                            shadowColor: '#000000',
+                            backgroundColor: colors.surface,
+                            borderColor: colors.text,
+
+                        }]}>
+                            <Text style={{textAlign: 'center', fontSize: 10}}>
+                                {i18n.t('Partner sign')}
+                            </Text>
+                        </View>
+                }
+            </View>
+            <Divider/>
+            <ScrollView ref={scrollRef => setScRef(scrollRef)}>
+                <View style={{height: 20}}/>
                 {
                     selectedSigns.length === 2 ? <MatchContent/> : <SignsContent onPress={_handleSignPress}/>
                 }
-            </DefaultScrollView>
-        </React.Fragment>
+            </ScrollView>
+        </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
-    constellation: {
-        position: 'absolute', bottom: 10, left: 10, opacity: .05, zIndex: 0
-    },
-    stars: {
-        position: 'absolute', top: 20, right: 10, opacity: .05
-    },
     headerContainer: {
-        alignItems: 'center', justifyContent: 'center', marginHorizontal: 20, marginTop: 25
+        alignItems: 'center', justifyContent: 'center', marginHorizontal: 20, marginTop: 10
     },
     matchCirclesContainer: {
         flexDirection: 'row',
@@ -212,7 +221,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     surfaceContainer: {
-        marginTop: 20, marginHorizontal: 20, elevation: 3
+        marginHorizontal: 20, elevation: 3
     },
     surfaceSurface: {
         padding: 20, borderRadius: 10

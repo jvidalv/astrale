@@ -4,7 +4,6 @@ import {MaterialCommunityIcons} from "@expo/vector-icons";
 import {useNavigation} from "@react-navigation/core";
 import {useTheme} from "react-native-paper";
 import PropTypes from "prop-types";
-import DefaultScrollView from "../containers/DefaultScrollView";
 
 /**
  * @param navigation

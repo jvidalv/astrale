@@ -1,8 +1,7 @@
 import React from "react";
 import {StyleSheet, View} from "react-native";
-import {Button, Headline, Text, useTheme} from "react-native-paper";
+import {Button, Headline, Text} from "react-native-paper";
 import {DefaultView} from "../../components/containers";
-import {Backgrounds} from "../../svgs";
 import TouchableRipple from "react-native-paper/src/components/TouchableRipple/index";
 import Married from "../../svgs/Married";
 import Cool from "../../svgs/Cool";
@@ -32,7 +31,7 @@ function RelationshipScreen({navigation}) {
 
     return (
         <DefaultView>
-            <SpaceSky />
+            <SpaceSky/>
             <Taurus width={60} height={60} style={styles.taurus}/>
             <View style={{flex: .4}}/>
             <View style={styles.textContainer}>

@@ -11,7 +11,6 @@ import InitialStackNavigation from "./navigation/InitialStackNavigation";
 import * as Font from 'expo-font';
 import Storer from "./utils/Storer";
 import {SESSION_KEY} from "./constants/session";
-import {initialState as screensInitialState, reducer, ScreensProvider} from "./contexts/Screens";
 
 /**
  * @param images {string[]}
@@ -92,11 +91,9 @@ function Main() {
                     AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
                 }
                 theme={_theme}>
-                <ScreensProvider reducer={reducer} initialState={screensInitialState}>
                 {
                     session.basicsDone ? <MainStackNavigation/> : <InitialStackNavigation/>
                 }
-                </ScreensProvider>
             </NavigationContainer>
         </PaperProvider>
     )

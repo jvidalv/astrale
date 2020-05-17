@@ -1,11 +1,9 @@
 import React from 'react';
-import {Image, StyleSheet, View} from 'react-native';
+import {Image, SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import MainNav from "../../components/navs/MainNav";
 import SpaceSky from "../../components/decorations/SpaceSky";
-import {DefaultScrollView} from "../../components/containers";
 import ShadowHeadline from "../../components/paper/ShadowHeadline";
 import i18n from "i18n-js";
-import useHideStatusBar from "../../hooks/useHideStatusBar";
 import {Avatar, Subheading, Text, Title, TouchableRipple, useTheme} from "react-native-paper";
 import {MaterialCommunityIcons} from "@expo/vector-icons";
 import {LinearGradient} from 'expo-linear-gradient';
@@ -20,7 +18,6 @@ import PlatformUtils from "../../utils/Platform";
 function AstrologersScreen({navigation}) {
     const {colors} = useTheme();
     const [showAdvice, setShowAdvice] = React.useState(true);
-    const _handleScroll = useHideStatusBar();
     const _handleCloseAdvice = () => setShowAdvice(false);
     const astrologist_colors = {
         Western: '#0f3e6a',
@@ -86,15 +83,17 @@ function AstrologersScreen({navigation}) {
     ]
 
     return (
-        <React.Fragment>
+        <SafeAreaView style={{flex: 1}}>
             <SpaceSky/>
-            <DefaultScrollView onScrollCallback={_handleScroll}>
-                <MainNav style={{top: 15}}/>
+            <View style={{marginBottom: 10}}>
+                <MainNav style={{top: 0}}/>
                 <View style={styles.headerContainer}>
                     <ShadowHeadline>
                         {i18n.t('Astrologers')}
                     </ShadowHeadline>
                 </View>
+            </View>
+            <ScrollView>
                 {showAdvice && (
                     <View style={[styles.adviceContainer, {borderColor: colors.primary + 'E6',}]}>
                         <MaterialCommunityIcons
@@ -188,14 +187,14 @@ function AstrologersScreen({navigation}) {
                             )
                         )}
                 </View>
-            </DefaultScrollView>
-        </React.Fragment>
+            </ScrollView>
+        </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
     headerContainer: {
-        alignItems: 'center', justifyContent: 'center', marginHorizontal: 20, marginTop: 25
+        alignItems: 'center', justifyContent: 'center', marginHorizontal: 20, marginTop: 10
     },
     headerHeadline: {
         fontWeight: 'bold', fontSize: 30, lineHeight: 34,

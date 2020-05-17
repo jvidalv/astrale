@@ -2,14 +2,13 @@ import React from "react";
 import {StyleSheet, View} from "react-native";
 import {Subheading, useTheme} from "react-native-paper";
 import {DefaultView} from "../../components/containers";
-import {Backgrounds} from "../../svgs";
 import SolarSystem from "../../svgs/SolarSystem";
 import Rotation from "../../components/animations/Rotation";
-import Leo from "../../svgs/Leo";
 import i18n from "i18n-js";
 import {useGlobals} from "../../contexts/Global";
 import Storer from "../../utils/Storer";
 import {SESSION_KEY} from "../../constants/session";
+import SpaceSky from "../../components/decorations/SpaceSky";
 
 /**
  * @param navigation
@@ -48,9 +47,7 @@ function LoadingScreen({navigation}) {
 
     return (
         <DefaultView>
-            <Leo width={80} height={80} style={styles.leo}/>
-            <Backgrounds.Constellation color={colors.text} dotColor={colors.primary} height={250} width={250}
-                                       style={styles.constellation}/>
+            <SpaceSky/>
             <View style={{flex: 1}}/>
             <View style={styles.loadingContainer}>
                 <Rotation style={{opacity: .7}} rotate={true}>

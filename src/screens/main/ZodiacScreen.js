@@ -4,7 +4,6 @@ import {useTheme} from "react-native-paper";
 import i18n from "i18n-js";
 import {Sign} from "../../components/zodiac";
 import ShadowHeadline from "../../components/paper/ShadowHeadline";
-import SolarSystem from "../../svgs/SolarSystem";
 import HoroscopeSigns, {HoroscopeDates} from "../../constants/zodiac_signs";
 import {Backgrounds} from "../../svgs";
 import * as Localization from "expo-localization";

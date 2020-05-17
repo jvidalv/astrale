@@ -1,8 +1,6 @@
 import React from "react";
-import {View} from "react-native";
 import {Button, useTheme} from 'react-native-paper';
 import PropTypes from "prop-types";
-import {useIsDark} from "../../hooks/useTheme";
 
 /**
  * @param children
