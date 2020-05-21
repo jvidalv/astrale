@@ -21,6 +21,7 @@ import TextBold from "../../components/paper/TextBold";
 import MainNav from "../../components/navs/MainNav";
 import { AdMobInterstitial } from "expo-ads-admob";
 import Ads from "../../credentials/admob";
+import api_calls from "../../constants/apis";
 
 /**
  * Progress bars from match
@@ -46,13 +47,16 @@ const Bars = ({ start, name, icon }) => {
 };
 
 /**
- * Content on both selected
+ * Content when both selected
  * @returns {*}
  * @constructor
  */
-const MatchContent = () => {
+const MatchContent = ({ sign1, sign2 }) => {
   const matches = useMatch();
-  const { data, loading, error } = useFetch();
+  const { data, loading, error } = useFetch(api_calls.compatibility, {
+    sign1: sign1,
+    sign2: sign2,
+  });
 
   return (
     <React.Fragment>
@@ -136,9 +140,9 @@ function CompatibilityScreen({ navigation }) {
     if (selectedSigns.length === 2) {
       (async () => {
         try {
-          await AdMobInterstitial.setAdUnitID(Ads.compatibility);
-          await AdMobInterstitial.requestAdAsync();
-          await AdMobInterstitial.showAdAsync();
+          // await AdMobInterstitial.setAdUnitID(Ads.compatibility);
+          // await AdMobInterstitial.requestAdAsync();
+          // await AdMobInterstitial.showAdAsync();
         } catch {
           //
         } finally {
@@ -214,7 +218,7 @@ function CompatibilityScreen({ navigation }) {
       <ScrollView ref={(scrollRef) => setScRef(scrollRef)}>
         <View style={{ height: 20 }} />
         {compDetailsShow ? (
-          <MatchContent />
+          <MatchContent sign1={selectedSigns[0]} sign2={selectedSigns[1]} />
         ) : (
           <SignsContent onPress={_handleSignPress} />
         )}

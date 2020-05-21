@@ -24,6 +24,8 @@ import MainNav from "../../components/navs/MainNav";
 import ScrollViewFadeFirst from "../../components/containers/ScrollViewFadeFirst";
 import months from "../../constants/months";
 import * as Localization from "expo-localization";
+import api_calls from "../../constants/apis";
+import { DateUtils } from "../../utils";
 
 /**
  * @param number {number}
@@ -87,7 +89,11 @@ const ProgressItemStyles = StyleSheet.create({
 function DailyScreen({ navigation }) {
   const [{ session }, dispatch] = useGlobals();
   const { colors, fonts } = useTheme();
-  const { data, loading, error, setLoading } = useFetch();
+  const { data, loading, error, setLoading } = useFetch(api_calls.daily, {
+    day: DateUtils.toAmerican(new Date()),
+    sign: session.sign,
+  });
+  console.log(data);
   const d = new Date();
   const l = Localization.locale.substr(0, 2);
   const RightButton = (
