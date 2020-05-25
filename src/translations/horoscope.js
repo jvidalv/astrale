@@ -40,6 +40,13 @@ const horoscope = {
     "Learn paragraph":
       "Conviértete en un experto de la astrología con esta serie de guías, desde lo más básico del zodiaco a lo más avanzado en constelaciones y ciclos lunares.",
     date_daily: "Día {{day}} de {{month}}, {{year}}",
+    Fitness: "Fitness",
+    Cooking: "Cocinar",
+    Work: "Trabajo",
+    Study: "Estudio",
+    Love: "Amor",
+    Health: "Salud",
+    "Astrology guides": "Guías de astrología",
   },
   en: {
     Aquarius: "Aquarius",
@@ -78,6 +85,13 @@ const horoscope = {
     "Learn paragraph":
       "Become an expert in astrology with this series of guides, from the basics of the zodiac to the most advanced in constellations and lunar cycles.",
     date_daily: "Day {{day}} of {{month}}, {{year}}",
+    Fitness: "Fitness",
+    Cooking: "Cooking",
+    Work: "Work",
+    Study: "Study",
+    Love: "Love",
+    Health: "Health",
+    "Astrology guides": "Astrology guides",
   },
 };
 

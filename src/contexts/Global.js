@@ -19,6 +19,11 @@ export const reducer = (state, action) => {
         ...state,
         session: default_session,
       };
+    case "setShowLoader":
+      return {
+        ...state,
+        showLoader: !state.showLoader,
+      };
     case "setSession":
       return {
         ...state,
@@ -44,6 +49,7 @@ export const initialState = {
   theme: "dark",
   session: default_session,
   notifications: false,
+  showLoader: false,
 };
 
 /**

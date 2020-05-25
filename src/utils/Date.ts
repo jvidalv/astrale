@@ -12,7 +12,6 @@ const FORMAT_AMERICAN = "american";
  */
 function convertDate(format: string, date: Date): string {
   const pad = (s) => (s < 10 ? "0" + s : s);
-
   switch (format) {
     default:
     case FORMAT_EUROPEAN:

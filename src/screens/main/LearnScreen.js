@@ -20,6 +20,7 @@ import ConstellationSimple from "../../svgs/backgrounds/ConstellationSimple";
 import Leo from "../../svgs/Leo";
 import { AdMobInterstitial } from "expo-ads-admob";
 import Ads from "../../credentials/admob";
+import { useGlobals } from "../../contexts/Global";
 
 const SubHeading = () => {
   const { colors } = useTheme();
@@ -29,7 +30,7 @@ const SubHeading = () => {
         theme={{ colors: { text: colors.primary } }}
         style={{ textAlign: "center" }}
       >
-        Astrology guides
+        {i18n.t("Astrology guides")}
       </Title>
       <View style={{ height: 10 }} />
       <Text style={{ textAlign: "center" }}>{i18n.t("Learn paragraph")}</Text>
@@ -43,12 +44,15 @@ const SubHeading = () => {
  * @constructor
  */
 function LearnScreen({ navigation }) {
+  const [{}, dispatch] = useGlobals();
   const { colors } = useTheme();
   const _handleViewLesson = async (lesson) => {
     try {
+      dispatch({ type: "setShowLoader" });
       await AdMobInterstitial.setAdUnitID(Ads.learn);
       await AdMobInterstitial.requestAdAsync();
       await AdMobInterstitial.showAdAsync();
+      dispatch({ type: "setShowLoader" });
     } catch {
       navigation.navigate(lesson, { key: 1 });
     } finally {

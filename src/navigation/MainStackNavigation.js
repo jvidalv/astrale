@@ -2,12 +2,19 @@ import React from "react";
 import DailyScreen from "../screens/main/DailyScreen";
 import ZodiacScreen from "../screens/main/ZodiacScreen";
 import CompatibilityScreen from "../screens/main/CompatibilityScreen";
+import { View, StyleSheet, Dimensions } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import PalmistryPreScanScreen from "../screens/initials/PalmistryPreScanScreen";
 import PalmistryScanScreen from "../screens/initials/PalmistryScanScreen";
 import { useGlobals } from "../contexts/Global";
 import i18n from "i18n-js";
-import { Text, useTheme } from "react-native-paper";
+import {
+  Text,
+  useTheme,
+  Portal,
+  Modal,
+  ActivityIndicator,
+} from "react-native-paper";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { StatusBar } from "react-native";
@@ -17,6 +24,7 @@ import AstrologersScreen from "../screens/main/AstrologersScreen";
 import ProfileScreen from "../screens/main/ProfileScreen";
 import AstrologerQuestionScreen from "../screens/main/AstrologerQuestionScreen";
 import LearnStackNavigation from "./LearnStackNavigation";
+import { BlurView } from "expo-blur";
 
 const PalmistryStack = createStackNavigator();
 
@@ -150,47 +158,76 @@ function BottomBarNavigation({ navigation }) {
 }
 
 function MainStackNavigation({ navigation }) {
+  const [{ showLoader }] = useGlobals();
   const { colors } = useTheme();
   return (
-    <Sta.Navigator screenOptions={{ headerShown: false }} mode="modal">
-      <Sta.Screen name="Home" component={BottomBarNavigation} />
-      <Sta.Screen
-        name="Profile"
-        component={ProfileScreen}
-        options={{
-          cardStyle: {
-            backgroundColor: "transparent",
-            marginTop: 50,
-            borderTopLeftRadius: 30,
-            borderTopRightRadius: 30,
-          },
-        }}
-      />
-      <Sta.Screen
-        name="Signs"
-        component={ZodiacScreen}
-        options={{
-          cardStyle: {
-            backgroundColor: "transparent",
-            marginTop: 50,
-            borderTopLeftRadius: 30,
-            borderTopRightRadius: 30,
-          },
-        }}
-      />
-      <Sta.Screen
-        name="Question"
-        component={AstrologerQuestionScreen}
-        options={{
-          cardStyle: {
-            backgroundColor: "transparent",
-            marginTop: 50,
-            borderTopLeftRadius: 30,
-            borderTopRightRadius: 30,
-          },
-        }}
-      />
-    </Sta.Navigator>
+    <React.Fragment>
+      <Sta.Navigator screenOptions={{ headerShown: false }} mode="modal">
+        <Sta.Screen name="Home" component={BottomBarNavigation} />
+        <Sta.Screen
+          name="Profile"
+          component={ProfileScreen}
+          options={{
+            cardStyle: {
+              backgroundColor: "transparent",
+              marginTop: 50,
+              borderTopLeftRadius: 30,
+              borderTopRightRadius: 30,
+            },
+          }}
+        />
+        <Sta.Screen
+          name="Signs"
+          component={ZodiacScreen}
+          options={{
+            cardStyle: {
+              backgroundColor: "transparent",
+              marginTop: 50,
+              borderTopLeftRadius: 30,
+              borderTopRightRadius: 30,
+            },
+          }}
+        />
+        <Sta.Screen
+          name="Question"
+          component={AstrologerQuestionScreen}
+          options={{
+            cardStyle: {
+              backgroundColor: "transparent",
+              marginTop: 50,
+              borderTopLeftRadius: 30,
+              borderTopRightRadius: 30,
+            },
+          }}
+        />
+      </Sta.Navigator>
+      {showLoader && (
+        <Portal>
+          <BlurView
+            intensity={70}
+            style={[
+              StyleSheet.absoluteFill,
+              {
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+                zIndex: 50,
+              },
+            ]}
+          >
+            <View
+              style={{
+                backgroundColor: colors.text,
+                padding: 20,
+                borderRadius: 15,
+              }}
+            >
+              <ActivityIndicator size={50} />
+            </View>
+          </BlurView>
+        </Portal>
+      )}
+    </React.Fragment>
   );
 }
 

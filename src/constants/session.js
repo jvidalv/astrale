@@ -1,3 +1,5 @@
+import { Language } from "../utils";
+
 export const SESSION_KEY = "session-key";
 
 const default_session = {
@@ -12,6 +14,7 @@ const default_session = {
   daysRow: 0,
   basicsDone: false,
   notifications: false,
+  language: Language.filteredLocale(),
 };
 
 export default default_session;

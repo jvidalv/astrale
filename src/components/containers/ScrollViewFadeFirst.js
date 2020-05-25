@@ -30,7 +30,7 @@ function ScrollViewFadeFirst({ children, element, height, style }) {
       onScroll={_handleScroll}
     >
       <View style={{ opacity: opacity }}>
-        <View style={[StyleSheet.absoluteFill, { height: height }]}>
+        <View style={[StyleSheet.absoluteFill, { height: height, zIndex: 10 }]}>
           {element}
         </View>
         <View style={{ height: height }} />

@@ -109,7 +109,6 @@ function PalmistryScanScreen({ navigation, route }) {
     const response = await app.models.predict("daily-horoscope", {
       base64: base64,
     });
-    console.log(response.outputs[0].data.concepts[0].value);
 
     refCamera.resumePreview();
   };

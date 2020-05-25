@@ -22,16 +22,19 @@ import MainNav from "../../components/navs/MainNav";
 import { AdMobInterstitial } from "expo-ads-admob";
 import Ads from "../../credentials/admob";
 import api_calls from "../../constants/apis";
+import { Language } from "../../utils";
+import { useGlobals } from "../../contexts/Global";
 
 /**
  * Progress bars from match
  * @param start {number|string}
  * @param name {string}
  * @param icon {string}
+ * @param end
  * @returns {*}
  * @constructor
  */
-const Bars = ({ start, name, icon }) => {
+const Bars = ({ name, icon, end }) => {
   const { colors } = useTheme();
   return (
     <React.Fragment>
@@ -39,9 +42,9 @@ const Bars = ({ start, name, icon }) => {
         <Button theme={{ colors: { primary: colors.text } }} icon={icon}>
           {i18n.t(name)}
         </Button>
-        <Text>{start}%</Text>
+        <Text>{end}%</Text>
       </View>
-      <ProgressBar progress={start / 100} style={styles.matchProgressBar} />
+      <ProgressBar progress={end / 100} style={styles.matchProgressBar} />
     </React.Fragment>
   );
 };
@@ -52,11 +55,21 @@ const Bars = ({ start, name, icon }) => {
  * @constructor
  */
 const MatchContent = ({ sign1, sign2 }) => {
-  const matches = useMatch();
   const { data, loading, error } = useFetch(api_calls.compatibility, {
     sign1: sign1,
     sign2: sign2,
   });
+  const matches_data = [
+    {
+      name: "Intimate",
+      icon: "account-multiple-plus-outline",
+    },
+    { name: "Mindset", icon: "thought-bubble" },
+    { name: "Feelings", icon: "heart" },
+    { name: "Priorities", icon: "priority-high" },
+    { name: "Interests", icon: "sticker-emoji" },
+    { name: "Sport", icon: "run" },
+  ];
 
   return (
     <React.Fragment>
@@ -68,28 +81,23 @@ const MatchContent = ({ sign1, sign2 }) => {
           </React.Fragment>
         ) : (
           <ShowFromTop>
-            <Paragraph>
-              After viewing Capricorn compatibility with Aries, it is very hard
-              to decide that which one of the two will come out as a winner from
-              this relationship as both of them will feel awful most of the time
-              when they are committed to each other, and they will only be
-              relieved when they get separated.
-            </Paragraph>
+            <TextBold style={{ marginBottom: 10 }}>
+              {i18n.t(sign1)} & {i18n.t(sign2)}
+            </TextBold>
+            <Paragraph>{data.resume[Language.filteredLocale()]}</Paragraph>
             <TextBold style={{ marginTop: 20, marginBottom: 10 }}>
               {i18n.t("Relationship")}
             </TextBold>
             <Paragraph>
-              In a compatible relationship, Capricorn and Aquarius bring out the
-              positive characteristics of each other. Capricorn is very careful
-              and looks at life very realistically and logically. Aquarius, on
-              the other hand, has an idealistic approach towards life.
-              Initially, people do not see them as the couple that would click
-              or get along, but once they start loving one another, they form a
-              bond that never breaks."}
+              {data.relationship[Language.filteredLocale()]}
             </Paragraph>
             <View style={{ marginVertical: 20 }}>
-              {matches.map((props, index) => (
-                <Bars key={index} {...props} />
+              {matches_data.map((props, index) => (
+                <Bars
+                  key={index}
+                  end={data.percents[props.name.toLowerCase()]}
+                  {...props}
+                />
               ))}
             </View>
           </ShowFromTop>
@@ -127,6 +135,7 @@ const SignsContent = ({ onPress }) => (
  * @constructor
  */
 function CompatibilityScreen({ navigation }) {
+  const [{}, dispatch] = useGlobals();
   const { colors } = useTheme();
   const [scRef, setScRef] = React.useState();
   const [selectedSigns, setSelectedSigns] = React.useState([]);
@@ -140,9 +149,11 @@ function CompatibilityScreen({ navigation }) {
     if (selectedSigns.length === 2) {
       (async () => {
         try {
-          // await AdMobInterstitial.setAdUnitID(Ads.compatibility);
-          // await AdMobInterstitial.requestAdAsync();
-          // await AdMobInterstitial.showAdAsync();
+          dispatch({ type: "setShowLoader" });
+          await AdMobInterstitial.setAdUnitID(Ads.compatibility);
+          await AdMobInterstitial.requestAdAsync();
+          await AdMobInterstitial.showAdAsync();
+          dispatch({ type: "setShowLoader" });
         } catch {
           //
         } finally {

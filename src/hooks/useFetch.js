@@ -30,7 +30,7 @@ const useFetch = ({ method, params, url }, values = {}) => {
       if (method === "POST") {
         config.body = JSON.stringify(values);
       }
-      console.log(url, config);
+
       return fetch(url, config).then((res) => {
         if (res.ok) {
           return res.json();

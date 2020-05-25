@@ -23,9 +23,8 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import MainNav from "../../components/navs/MainNav";
 import ScrollViewFadeFirst from "../../components/containers/ScrollViewFadeFirst";
 import months from "../../constants/months";
-import * as Localization from "expo-localization";
 import api_calls from "../../constants/apis";
-import { DateUtils } from "../../utils";
+import { DateUtils, Language } from "../../utils";
 
 /**
  * @param number {number}
@@ -88,14 +87,12 @@ const ProgressItemStyles = StyleSheet.create({
  */
 function DailyScreen({ navigation }) {
   const [{ session }, dispatch] = useGlobals();
-  const { colors, fonts } = useTheme();
+  const { colors } = useTheme();
   const { data, loading, error, setLoading } = useFetch(api_calls.daily, {
     day: DateUtils.toAmerican(new Date()),
     sign: session.sign,
   });
-  console.log(data);
   const d = new Date();
-  const l = Localization.locale.substr(0, 2);
   const RightButton = (
     <MaterialCommunityIcons
       onPress={() => navigation.navigate("Signs", { key: "Sign" })}
@@ -106,7 +103,7 @@ function DailyScreen({ navigation }) {
     />
   );
   const Header = (
-    <SafeAreaView>
+    <View>
       <MainNav rightButton={RightButton} />
       <View style={[styles.headerContainer]}>
         <Sign
@@ -121,13 +118,13 @@ function DailyScreen({ navigation }) {
         <Subheading>
           {i18n.t("date_daily", {
             day: d.getDate(),
-            month: months[l][d.getMonth()],
+            month: months[session.language][d.getMonth()],
             year: d.getFullYear(),
           })}
         </Subheading>
       </View>
       <Divider />
-    </SafeAreaView>
+    </View>
   );
 
   if (!session?.sign) {
@@ -178,7 +175,7 @@ function DailyScreen({ navigation }) {
                 <TextBold
                   style={{ fontSize: 16, marginLeft: 5, color: colors.primary }}
                 >
-                  {i18n.t("Finances")}
+                  {i18n.t(data.contents.focus)}
                 </TextBold>
               </View>
               <View
@@ -192,13 +189,19 @@ function DailyScreen({ navigation }) {
                   },
                 ]}
               >
-                <ProgressItem text={i18n.t("Love")} percent={50} />
+                <ProgressItem
+                  text={i18n.t("Love")}
+                  percent={data.contents.percents.love}
+                />
                 <ProgressItem
                   text={i18n.t("Career")}
-                  percent={25}
+                  percent={data.contents.percents.work}
                   style={{ marginHorizontal: 5 }}
                 />
-                <ProgressItem text={i18n.t("Health")} percent={87} />
+                <ProgressItem
+                  text={i18n.t("Health")}
+                  percent={data.contents.percents.health}
+                />
               </View>
               <View style={[styles.defaultContainer]}>
                 <View style={styles.horoscopeTodayContainer}>
@@ -227,19 +230,7 @@ function DailyScreen({ navigation }) {
                   </View>
                 </View>
                 <Text style={{ marginTop: 15 }}>
-                  Estás en un tono receptivo a las críticas y aceptarás las bien
-                  intencionadas. Tendrás noticias de antiguos amigos de los que
-                  no sabes hace tiempo, te sorprenderás.
-                </Text>
-                <Text style={{ marginTop: 5 }}>
-                  Das los primeros pasos dentro de una nueva realidad, cargada
-                  de posibilidades. Dedica una parte de tu tiempo libre a
-                  relajarte, así se evita el estrés.{" "}
-                </Text>
-                <Text style={{ marginTop: 5 }}>
-                  Tienes ganas de hacer cambios a nivel profesional, te sientes
-                  sin futuro. Incurrirás en un gasto inesperado, la buena
-                  noticia es que podrás hacerle frente.
+                  {data.contents.text[Language.filteredLocale()]}
                 </Text>
               </View>
               <View style={styles.defaultContainer}>
@@ -270,24 +261,15 @@ function DailyScreen({ navigation }) {
                   />
                 </View>
                 <View style={[styles.loveSignsContainer]}>
-                  <Sign
-                    sign={"Scorpio"}
-                    signHeight={40}
-                    signWidth={50}
-                    styleTitle={{ fontSize: 12 }}
-                  />
-                  <Sign
-                    sign={"Taurus"}
-                    signHeight={40}
-                    style={{ marginLeft: 20 }}
-                    styleTitle={{ fontSize: 12 }}
-                  />
-                  <Sign
-                    sign={"Leo"}
-                    signHeight={40}
-                    style={{ marginLeft: 20 }}
-                    styleTitle={{ fontSize: 12 }}
-                  />
+                  {data.contents.compatibility.map((sign, i) => (
+                    <Sign
+                      key={i}
+                      sign={sign}
+                      signHeight={40}
+                      signWidth={50}
+                      styleTitle={{ fontSize: 12 }}
+                    />
+                  ))}
                 </View>
               </View>
               <Divider style={{ marginTop: 20 }} />
@@ -305,9 +287,9 @@ function DailyScreen({ navigation }) {
                   },
                 ]}
               >
-                <LuckyNumber number={8} />
-                <LuckyNumber number={12} />
-                <LuckyNumber number={3} />
+                {data.contents.numbers.map((number, i) => (
+                  <LuckyNumber key={i} number={number} />
+                ))}
               </View>
               <View style={{ paddingVertical: 10 }} />
             </ShowFromTop>

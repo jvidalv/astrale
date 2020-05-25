@@ -1,20 +1,6 @@
 import React from "react";
 import Sleep from "../utils/Sleep";
 
-const _matches = [
-  {
-    name: "Intimate",
-    icon: "account-multiple-plus-outline",
-    start: 0,
-    end: 91,
-  },
-  { name: "Mindset", icon: "thought-bubble", start: 0, end: 75 },
-  { name: "Feelings", icon: "heart", start: 0, end: 56 },
-  { name: "Priorities", icon: "priority-high", start: 0, end: 34 },
-  { name: "Interests", icon: "sticker-emoji", start: 0, end: 60 },
-  { name: "Sport", icon: "run", start: 0, end: 50 },
-];
-
 const useMatch = () => {
   const [matches, setMatches] = React.useState(_matches);
 
