@@ -1,52 +1,64 @@
 import React from "react";
+import ViFetch from "../utils/ViFetch";
 
 /**
- * @param {method : {string}, params : {array}, url : {string}}
+ * @type {{data: null, loading: boolean}}
+ */
+const initialState = {
+  loading: true,
+  data: null,
+};
+
+/**
+ * @param state
+ * @param action
+ * @returns {{loading: boolean}|{data: *, loading: boolean}}
+ */
+function reducer(state, action) {
+  switch (action.type) {
+    case "fetchResponse":
+      return {
+        loading: false,
+        data: action.data,
+      };
+    case "fetchAgain":
+      return {
+        loading: true,
+        data: null,
+      };
+    default:
+      throw new Error("action.type is not defined inside reducer's switch");
+  }
+}
+
+/**
+ * @param method {string}
+ * @param params {object}
+ * @param url {string}
  * @param values {object}
- * @returns {{data: unknown, setLoading: React.Dispatch<React.SetStateAction<boolean>>, loading: boolean, error: boolean}}
+ * @returns {{data: *, setLoading: setLoading, loading: *, error: boolean}}
  */
 const useFetch = ({ method, params, url }, values = {}) => {
-  const [data, setData] = React.useState(null);
-  const [loading, setLoading] = React.useState(true);
+  const [{ data, loading }, dispatch] = React.useReducer(reducer, initialState);
   const [error, setError] = React.useState(false);
+  const setLoading = () => {
+    dispatch({ type: "fetchAgain" });
+  };
 
   React.useEffect(() => {
-    const begin = async () => {
-      const config = {
-        method: method,
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: "josep-is-the-best-programmer-out-there",
-        },
-      };
-
-      if (method === "GET") {
-        for (let param of params) {
-          url = url.replace("{" + param + "}", values[param]);
-        }
-      }
-
-      if (method === "POST") {
-        config.body = JSON.stringify(values);
-      }
-
-      return fetch(url, config).then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        throw Error("Error while fetching data");
-      });
-    };
+    let isSubscribed = true;
 
     if (loading) {
-      begin()
+      ViFetch(method, url, params, values)
         .then((res) => {
-          setData(res);
-          setLoading(false);
+          isSubscribed && dispatch({ type: "fetchResponse", data: res });
         })
-        .catch(() => setError(true));
+        .catch(() => isSubscribed && setError(true));
     }
+
+    return () => {
+      isSubscribed = false;
+    };
   }, [loading]);
 
   return { data, loading, error, setLoading };

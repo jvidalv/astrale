@@ -86,7 +86,6 @@ const Tab = createBottomTabNavigator();
 function BottomBarNavigation({ navigation }) {
   const [{ session }] = useGlobals();
   const { colors } = useTheme();
-  const isIos = PlatformUtils.isIos;
   const _barStyle = useIsDark() ? "light-content" : "dark-content";
 
   return (
@@ -217,7 +216,7 @@ function MainStackNavigation({ navigation }) {
           >
             <View
               style={{
-                backgroundColor: colors.text,
+                backgroundColor: colors.background,
                 padding: 20,
                 borderRadius: 15,
               }}

@@ -23,8 +23,8 @@ const api_calls = {
     method: "GET",
   },
   astrology: {
-    url: `${BASE_PATH}category/all`,
-    params: ["email", "question"],
+    url: `${BASE_PATH}astrale/message`,
+    params: ["email", "question", "astrologer"],
     method: "POST",
   },
 };

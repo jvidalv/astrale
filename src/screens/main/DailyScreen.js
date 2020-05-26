@@ -93,6 +93,11 @@ function DailyScreen({ navigation }) {
     sign: session.sign,
   });
   const d = new Date();
+
+  if (!session?.sign) {
+    Storer.delete(SESSION_KEY).then(() => dispatch({ type: "setLogOut" }));
+  }
+
   const RightButton = (
     <MaterialCommunityIcons
       onPress={() => navigation.navigate("Signs", { key: "Sign" })}
@@ -126,10 +131,6 @@ function DailyScreen({ navigation }) {
       <Divider />
     </View>
   );
-
-  if (!session?.sign) {
-    Storer.delete(SESSION_KEY).then(() => dispatch({ type: "setLogOut" }));
-  }
 
   React.useEffect(() => {
     if (!session.notifications) {

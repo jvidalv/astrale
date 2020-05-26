@@ -24,6 +24,8 @@ import PlatformUtils from "../../utils/Platform";
 import Close from "../../components/navs/Close";
 import { AdMobBanner, AdMobInterstitial } from "expo-ads-admob";
 import Ads from "../../credentials/admob";
+import ViFetch from "../../utils/ViFetch";
+import api_calls from "../../constants/apis";
 
 /**
  * @param route
@@ -35,17 +37,30 @@ function AstrologerQuestionScreen({ route, navigation }) {
   const [{ session }, dispatch] = useGlobals();
   const { colors } = useTheme();
   const astrologist = route.params.astrologist;
+  const [data, setData] = React.useState({
+    question: null,
+    email: null,
+    astrologer: astrologist.name,
+  });
   const isDark = useIsDark();
   const isAndroid = PlatformUtils.isAndroid;
   const _handleProceed = async () => {
     try {
-      await AdMobInterstitial.setAdUnitID(Ads.astrologers);
-      await AdMobInterstitial.requestAdAsync();
-      await AdMobInterstitial.showAdAsync();
+      dispatch({ type: "setShowLoader" });
+      // await AdMobInterstitial.setAdUnitID(Ads.astrologers);
+      // await AdMobInterstitial.requestAdAsync();
+      // await AdMobInterstitial.showAdAsync();
+      dispatch({ type: "setShowLoader" });
     } catch {
       //
     } finally {
-      // @todo send data to an api and show info that message was sent
+      const { method, url, params } = api_calls.astrology;
+      const form = new FormData();
+      form.append("astrologer", data.astrologer);
+      form.append("question", data.question);
+      form.append("email", data.email);
+      const response = await ViFetch(method, url, params, form);
+      console.log(response);
     }
   };
   return (
@@ -72,11 +87,17 @@ function AstrologerQuestionScreen({ route, navigation }) {
               multiline={true}
               style={{ height: 150 }}
               maxLength={250}
+              onChangeText={(text) =>
+                setData((data) => ({ ...data, question: text }))
+              }
             />
             <View style={{ height: 5 }} />
             <TextInput
               label={i18n.t("Your email")}
               keyboardType="email-address"
+              onChangeText={(text) =>
+                setData((data) => ({ ...data, email: text }))
+              }
             />
           </View>
           <View style={{ marginHorizontal: 20, marginBottom: 20 }}>
@@ -96,7 +117,7 @@ function AstrologerQuestionScreen({ route, navigation }) {
             </Text>
           </View>
           <Divider />
-          <View>
+          <View style={{ justifyContent: "center", alignItems: "center" }}>
             <AdMobBanner
               adUnitID={Ads.astrologersBanner}
               bannerSize="largeBanner"
