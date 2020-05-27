@@ -92,6 +92,7 @@ function ProfileScreen({ navigation }) {
       intensity={isAndroid ? 150 : 100}
     >
       <Backgrounds.Telescope color={colors.text} style={styles.telescope} />
+      <Close position="right" />
       <View style={styles.headerContainer}>
         <Avatar.Text label={name.substring(0, 1)} />
         <View style={{ marginLeft: 25 }}>
@@ -99,7 +100,6 @@ function ProfileScreen({ navigation }) {
           <Title>{DateUtils.toEuropean(new Date(birthDate))}</Title>
         </View>
       </View>
-      <Close position="right" />
       <Divider style={{ marginTop: 25 }} />
       <View style={styles.detailsContainer}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>

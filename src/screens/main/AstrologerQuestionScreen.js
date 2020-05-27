@@ -24,8 +24,8 @@ import PlatformUtils from "../../utils/Platform";
 import Close from "../../components/navs/Close";
 import { AdMobBanner, AdMobInterstitial } from "expo-ads-admob";
 import Ads from "../../credentials/admob";
-import ViFetch from "../../utils/ViFetch";
 import api_calls from "../../constants/apis";
+import { fetcher } from "../../hooks/useFetch";
 
 /**
  * @param route
@@ -38,29 +38,28 @@ function AstrologerQuestionScreen({ route, navigation }) {
   const { colors } = useTheme();
   const astrologist = route.params.astrologist;
   const [data, setData] = React.useState({
-    question: null,
+    message: null,
     email: null,
     astrologer: astrologist.name,
   });
+  const [disabled, setDisabled] = React.useState(false);
   const isDark = useIsDark();
   const isAndroid = PlatformUtils.isAndroid;
   const _handleProceed = async () => {
     try {
       dispatch({ type: "setShowLoader" });
-      // await AdMobInterstitial.setAdUnitID(Ads.astrologers);
-      // await AdMobInterstitial.requestAdAsync();
-      // await AdMobInterstitial.showAdAsync();
+      await AdMobInterstitial.setAdUnitID(Ads.astrologers);
+      await AdMobInterstitial.requestAdAsync();
+      await AdMobInterstitial.showAdAsync();
       dispatch({ type: "setShowLoader" });
     } catch {
       //
     } finally {
       const { method, url, params } = api_calls.astrology;
-      const form = new FormData();
-      form.append("astrologer", data.astrologer);
-      form.append("question", data.question);
-      form.append("email", data.email);
-      const response = await ViFetch(method, url, params, form);
-      console.log(response);
+      const response = await fetcher(method, url, params, data);
+      if (response) {
+        setDisabled(true);
+      }
     }
   };
   return (
@@ -88,7 +87,7 @@ function AstrologerQuestionScreen({ route, navigation }) {
               style={{ height: 150 }}
               maxLength={250}
               onChangeText={(text) =>
-                setData((data) => ({ ...data, question: text }))
+                setData((data) => ({ ...data, message: text }))
               }
             />
             <View style={{ height: 5 }} />
@@ -106,6 +105,7 @@ function AstrologerQuestionScreen({ route, navigation }) {
               mode="contained"
               style={{ borderRadius: 20 }}
               icon="send"
+              disabled={disabled}
             >
               {i18n.t("Proceed")}
             </Button>

@@ -40,12 +40,12 @@ function ZodiacScreen({ navigation }) {
       tint={isDark ? "dark" : "light"}
       intensity={isAndroid ? 150 : 100}
     >
+      <Close position="right" />
       <View style={styles.headerContainer}>
         <ShadowHeadline style={styles.headerHeadline}>
           {i18n.t("Zodiac signs")}
         </ShadowHeadline>
       </View>
-      <Close position="right" />
       <View style={styles.signsContainer}>
         {HoroscopeSigns.map((sign) => (
           <Sign

@@ -88,8 +88,10 @@ const ProgressItemStyles = StyleSheet.create({
 function DailyScreen({ navigation }) {
   const [{ session }, dispatch] = useGlobals();
   const { colors } = useTheme();
+  const [date, setDate] = React.useState(new Date());
+  console.log(date);
   const { data, loading, error, setLoading } = useFetch(api_calls.daily, {
-    day: DateUtils.toAmerican(new Date()),
+    day: DateUtils.toAmerican(date),
     sign: session.sign,
   });
   const d = new Date();
@@ -145,8 +147,15 @@ function DailyScreen({ navigation }) {
   }, []);
 
   React.useEffect(() => {
+    if (!data) {
+      setDate((date) => new Date(date.setDate(date.getDate() - 1)));
+      setLoading();
+    }
+  }, [data]);
+
+  React.useEffect(() => {
     if (!loading) {
-      setLoading(true);
+      setLoading();
     }
   }, [session.sign]);
 
@@ -156,7 +165,7 @@ function DailyScreen({ navigation }) {
       <SafeAreaView>
         <ScrollViewFadeFirst element={Header} height={200}>
           <View style={{ height: 20 }} />
-          {loading ? (
+          {loading || !data ? (
             <ActivityIndicator size="large" style={{ flex: 1, height: 400 }} />
           ) : (
             <ShowFromTop>

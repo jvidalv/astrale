@@ -1,5 +1,38 @@
 import React from "react";
-import ViFetch from "../utils/ViFetch";
+
+/**
+ * @param method
+ * @param url
+ * @param params
+ * @param values
+ * @returns {Promise<T>}
+ */
+export const fetcher = async (method, url, params, values) => {
+  const config = {
+    method: method,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "josep-is-the-best-programmer-out-there",
+    },
+  };
+
+  if (method === "GET") {
+    for (let param of params) {
+      url = url.replace("{" + param + "}", values[param]);
+    }
+  }
+
+  if (method === "POST") {
+    config.body = JSON.stringify(values);
+  }
+
+  return fetch(url, config).then((res) => {
+    if (res.ok) {
+      return res.json();
+    }
+    throw Error("Error while fetching data");
+  });
+};
 
 /**
  * @type {{data: null, loading: boolean}}
@@ -36,11 +69,11 @@ function reducer(state, action) {
  * @param params {object}
  * @param url {string}
  * @param values {object}
- * @returns {{data: *, setLoading: setLoading, loading: *, error: boolean}}
+ * @returns {{data: *, setLoading: (function(): void), loading: *, error: number}}
  */
 const useFetch = ({ method, params, url }, values = {}) => {
   const [{ data, loading }, dispatch] = React.useReducer(reducer, initialState);
-  const [error, setError] = React.useState(false);
+  const [error, setError] = React.useState(0);
   const setLoading = () => {
     dispatch({ type: "fetchAgain" });
   };
@@ -49,11 +82,13 @@ const useFetch = ({ method, params, url }, values = {}) => {
     let isSubscribed = true;
 
     if (loading) {
-      ViFetch(method, url, params, values)
+      fetcher(method, url, params, values)
         .then((res) => {
           isSubscribed && dispatch({ type: "fetchResponse", data: res });
         })
-        .catch(() => isSubscribed && setError(true));
+        .catch(() => {
+          setError((error) => error + 1);
+        });
     }
 
     return () => {
@@ -61,7 +96,7 @@ const useFetch = ({ method, params, url }, values = {}) => {
     };
   }, [loading]);
 
-  return { data, loading, error, setLoading };
+  return { data, loading, error, setLoading: () => setLoading() };
 };
 
 export default useFetch;
