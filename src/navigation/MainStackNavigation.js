@@ -194,7 +194,7 @@ function MainStackNavigation({ navigation }) {
           options={{
             cardStyle: {
               backgroundColor: "transparent",
-              marginTop: 50,
+              marginTop: 100,
               borderTopLeftRadius: 30,
               borderTopRightRadius: 30,
             },

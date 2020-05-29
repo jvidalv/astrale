@@ -4,7 +4,7 @@
  */
 const BASE_PATH =
   process.env.NODE_ENV === "development"
-    ? "http://192.168.10.10/api/"
+    ? "https://test.vvadmin.dev/api/"
     : "https://test.vvadmin.dev/api/";
 
 /**

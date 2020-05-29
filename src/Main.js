@@ -11,7 +11,8 @@ import InitialStackNavigation from "./navigation/InitialStackNavigation";
 import * as Font from "expo-font";
 import Storer from "./utils/Storer";
 import { SESSION_KEY } from "./constants/session";
-import { setTestDeviceIDAsync } from "expo-ads-admob";
+import { AdMobInterstitial, setTestDeviceIDAsync } from "expo-ads-admob";
+import Ads from "./credentials/admob";
 
 /**
  * @param images {string[]}
@@ -65,6 +66,7 @@ function Main() {
   React.useEffect(() => {
     (async () => {
       try {
+        // AdMob config
         __DEV__ && (await setTestDeviceIDAsync("EMULATOR"));
 
         const state = await Storer.get(PERSISTENCE_KEY);

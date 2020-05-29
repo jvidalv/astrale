@@ -47,6 +47,8 @@ function AstrologerQuestionScreen({ route, navigation }) {
   const _handleProceed = async () => {
     try {
       dispatch({ type: "toggleLoader" });
+      await AdMobInterstitial.setAdUnitID(Ads.astrologers);
+      await AdMobInterstitial.requestAdAsync();
       await AdMobInterstitial.showAdAsync();
       dispatch({ type: "toggleLoader" });
     } catch {
@@ -59,12 +61,6 @@ function AstrologerQuestionScreen({ route, navigation }) {
       }
     }
   };
-  React.useEffect(() => {
-    (async () => {
-      await AdMobInterstitial.setAdUnitID(Ads.astrologers);
-      await AdMobInterstitial.requestAdAsync();
-    })();
-  }, []);
 
   return (
     <BlurView

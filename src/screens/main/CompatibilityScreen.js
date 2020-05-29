@@ -155,7 +155,7 @@ function CompatibilityScreen({ navigation }) {
           await AdMobInterstitial.showAdAsync();
           dispatch({ type: "toggleLoader" });
         } catch {
-          //
+          // error
         } finally {
           setCompDetailsShow(true);
           scRef.scrollTo({ y: 0 });
