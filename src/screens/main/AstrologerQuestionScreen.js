@@ -34,8 +34,7 @@ import { fetcher } from "../../hooks/useFetch";
  * @constructor
  */
 function AstrologerQuestionScreen({ route, navigation }) {
-  const [{ session }, dispatch] = useGlobals();
-  const { colors } = useTheme();
+  const [{}, dispatch] = useGlobals();
   const astrologist = route.params.astrologist;
   const [data, setData] = React.useState({
     message: null,
@@ -47,11 +46,9 @@ function AstrologerQuestionScreen({ route, navigation }) {
   const isAndroid = PlatformUtils.isAndroid;
   const _handleProceed = async () => {
     try {
-      dispatch({ type: "setShowLoader" });
-      await AdMobInterstitial.setAdUnitID(Ads.astrologers);
-      await AdMobInterstitial.requestAdAsync();
+      dispatch({ type: "toggleLoader" });
       await AdMobInterstitial.showAdAsync();
-      dispatch({ type: "setShowLoader" });
+      dispatch({ type: "toggleLoader" });
     } catch {
       //
     } finally {
@@ -62,6 +59,13 @@ function AstrologerQuestionScreen({ route, navigation }) {
       }
     }
   };
+  React.useEffect(() => {
+    (async () => {
+      await AdMobInterstitial.setAdUnitID(Ads.astrologers);
+      await AdMobInterstitial.requestAdAsync();
+    })();
+  }, []);
+
   return (
     <BlurView
       style={[StyleSheet.absoluteFill, { flex: 1 }]}
@@ -76,7 +80,7 @@ function AstrologerQuestionScreen({ route, navigation }) {
             <Subheading>
               {i18n.t(astrologist.school, { word: i18n.t("Astrology") })}
             </Subheading>
-            <Image source={{ uri: astrologist.photo }} style={styles.image} />
+            <Image source={astrologist.photo} style={styles.image} />
           </View>
           <Divider />
           <View style={{ margin: 20 }}>
@@ -132,6 +136,7 @@ function AstrologerQuestionScreen({ route, navigation }) {
 const styles = StyleSheet.create({
   image: {
     width: 80,
+    height: 80,
     aspectRatio: 100 / 100,
     borderRadius: 100,
     marginTop: 10,

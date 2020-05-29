@@ -19,10 +19,15 @@ export const reducer = (state, action) => {
         ...state,
         session: default_session,
       };
-    case "setShowLoader":
+    case "toggleLoader":
       return {
         ...state,
         showLoader: !state.showLoader,
+      };
+    case "showSnackbar":
+      return {
+        ...state,
+        snackbar: action.text,
       };
     case "setSession":
       return {
@@ -43,17 +48,18 @@ export const reducer = (state, action) => {
 };
 
 /**
- * @type {{theme: string}}
+ * @type {{session: {daysRow: number, number: null, basicsDone: boolean, sex: null, name: null, sign: null, days: number, language: string, relationship: null, birthDate: null, palmistry: boolean, notifications: boolean}, theme: string, toggle: null, showLoader: boolean, notifications: boolean}}
  */
 export const initialState = {
   theme: "dark",
   session: default_session,
   notifications: false,
   showLoader: false,
+  snackbar: null,
 };
 
 /**
- * @type {React.Context<{theme: string}>}
+ * @type {React.Context<{session: {daysRow: number, number: null, basicsDone: boolean, sex: null, name: null, sign: null, days: number, language: string, relationship: null, birthDate: null, palmistry: boolean, notifications: boolean}, theme: string, toggle: null, showLoader: boolean, notifications: boolean}>}
  */
 export const StateContext = createContext(initialState);
 

@@ -149,11 +149,11 @@ function CompatibilityScreen({ navigation }) {
     if (selectedSigns.length === 2) {
       (async () => {
         try {
-          dispatch({ type: "setShowLoader" });
+          dispatch({ type: "toggleLoader" });
           await AdMobInterstitial.setAdUnitID(Ads.compatibility);
           await AdMobInterstitial.requestAdAsync();
           await AdMobInterstitial.showAdAsync();
-          dispatch({ type: "setShowLoader" });
+          dispatch({ type: "toggleLoader" });
         } catch {
           //
         } finally {

@@ -89,7 +89,6 @@ function DailyScreen({ navigation }) {
   const [{ session }, dispatch] = useGlobals();
   const { colors } = useTheme();
   const [date, setDate] = React.useState(new Date());
-  console.log(date);
   const { data, loading, error, setLoading } = useFetch(api_calls.daily, {
     day: DateUtils.toAmerican(date),
     sign: session.sign,
@@ -147,11 +146,11 @@ function DailyScreen({ navigation }) {
   }, []);
 
   React.useEffect(() => {
-    if (!data) {
+    if (!data && !loading) {
       setDate((date) => new Date(date.setDate(date.getDate() - 1)));
       setLoading();
     }
-  }, [data]);
+  }, [data, loading]);
 
   React.useEffect(() => {
     if (!loading) {

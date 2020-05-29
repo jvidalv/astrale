@@ -14,6 +14,7 @@ import {
   Portal,
   Modal,
   ActivityIndicator,
+  Snackbar,
 } from "react-native-paper";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -157,7 +158,7 @@ function BottomBarNavigation({ navigation }) {
 }
 
 function MainStackNavigation({ navigation }) {
-  const [{ showLoader }] = useGlobals();
+  const [{ showLoader, snackbar }] = useGlobals();
   const { colors } = useTheme();
   return (
     <React.Fragment>

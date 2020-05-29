@@ -41,60 +41,57 @@ function AstrologersScreen({ navigation }) {
     {
       id: 1,
       name: "Marisa",
-      school: "Western",
+      school: "Hellenistic",
       years_exp: 9,
       stars: 4,
       reviews: 125,
-      photo:
-        "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+      photo: require("./astrologers/marisa.jpg"),
     },
     {
       id: 2,
-      name: "Ahmed",
-      school: "Hellenistic",
+      name: "Carter",
+      school: "Western",
       years_exp: 21,
       stars: 5,
       reviews: 120,
-      photo:
-        "https://images.pexels.com/photos/1154059/pexels-photo-1154059.jpeg",
+      photo: require("./astrologers/carter.jpg"),
     },
     {
       id: 3,
-      name: "Xian Ju",
+      name: "Samanta",
       school: "Oriental",
-      years_exp: 32,
+      years_exp: 12,
       stars: 5,
       reviews: 321,
-      photo: "https://c.stocksy.com/a/5i1000/z9/6577.jpg",
+      photo: require("./astrologers/samanta.jpg"),
     },
+
     {
       id: 4,
-      name: "Jordi",
+      name: "Bianca",
       school: "Vedic",
-      years_exp: 15,
-      stars: 5,
-      reviews: 198,
-      photo: "https://pbs.twimg.com/media/DnPQUOLWwAEffF3.jpg",
-    },
-    {
-      id: 5,
-      name: "Chad",
-      school: "Western",
       years_exp: 45,
       stars: 4,
       reviews: 69,
-      photo:
-        "https://static2.abc.es/media/estilo/2019/08/15/john-kiwE--620x349@abc.jpg",
+      photo: require("./astrologers/bianca.jpg"),
+    },
+    {
+      id: 5,
+      name: "George",
+      school: "Western",
+      years_exp: 15,
+      stars: 5,
+      reviews: 198,
+      photo: require("./astrologers/george.jpg"),
     },
     {
       id: 6,
-      name: "Luffy",
+      name: "Meowi",
       school: "Oriental",
-      years_exp: 21,
+      years_exp: 1,
       stars: 5,
-      reviews: 976,
-      photo:
-        "https://sites.google.com/site/heroespoderosos/_/rsrc/1397058950773/home/Estatua_de_cera_de_Luffy.png?height=330&width=400",
+      reviews: 7,
+      photo: require("./astrologers/meowi.jpg"),
     },
   ];
 
@@ -206,7 +203,9 @@ function AstrologersScreen({ navigation }) {
                   <React.Fragment>
                     <Image
                       style={styles.astrologistImage}
-                      source={{ uri: photo }}
+                      source={photo}
+                      resizeMethod="resize"
+                      resizeMode="cover"
                     />
                     <LinearGradient
                       colors={["transparent", "rgba(0,0,0,0.8)"]}
@@ -313,9 +312,10 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   astrologistImage: {
-    height: 150,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
+    height: 150,
+    width: "100%",
   },
   astrologistGradient: {
     marginTop: -34,
