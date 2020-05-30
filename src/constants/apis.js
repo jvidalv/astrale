@@ -27,6 +27,19 @@ const api_calls = {
     params: ["email", "question", "astrologer"],
     method: "POST",
   },
+  user: {
+    url: `${BASE_PATH}astrale/user`,
+    params: [
+      "name",
+      "birth_date",
+      "sign",
+      "relationship_status",
+      "sex",
+      "number",
+      "expo_token",
+    ],
+    method: "POST",
+  },
 };
 
 export default api_calls;

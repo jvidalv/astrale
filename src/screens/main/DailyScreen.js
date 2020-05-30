@@ -11,7 +11,7 @@ import {
 import { Sign } from "../../components/zodiac";
 import ShadowHeadline from "../../components/paper/ShadowHeadline";
 import i18n from "i18n-js";
-import useFetch from "../../hooks/useFetch";
+import useFetch, { fetcher } from "../../hooks/useFetch";
 import ShowFromTop from "../../components/animations/ShowFromTop";
 import { useGlobals } from "../../contexts/Global";
 import Storer from "../../utils/Storer";
@@ -136,7 +136,7 @@ function DailyScreen({ navigation }) {
   React.useEffect(() => {
     if (!session.notifications) {
       !__DEV__ &&
-        registerForPushNotificationsAsync().then((res) => {
+        registerForPushNotificationsAsync(session).then((res) => {
           dispatch({
             type: "setAndStoreSession",
             fields: { notifications: res },

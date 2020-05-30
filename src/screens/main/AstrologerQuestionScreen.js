@@ -58,6 +58,7 @@ function AstrologerQuestionScreen({ route, navigation }) {
       const response = await fetcher(method, url, params, data);
       if (response) {
         setDisabled(true);
+      } else {
       }
     }
   };
