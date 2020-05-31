@@ -135,13 +135,12 @@ function DailyScreen({ navigation }) {
 
   React.useEffect(() => {
     if (!session.notifications) {
-      !__DEV__ &&
-        registerForPushNotificationsAsync(session).then((res) => {
-          dispatch({
-            type: "setAndStoreSession",
-            fields: { notifications: res },
-          });
+      registerForPushNotificationsAsync(session).then((res) => {
+        dispatch({
+          type: "setAndStoreSession",
+          fields: { notifications: res },
         });
+      });
     }
   }, []);
 

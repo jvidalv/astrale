@@ -47,6 +47,8 @@ const horoscope = {
     Love: "Amor",
     Health: "Salud",
     "Astrology guides": "Guías de astrología",
+    "Try Astrale, the most precise horoscopes app in this existential plain":
+      "Prueba Astrale, la aplicación de horóscopos más precisa de este plano existencial",
   },
   en: {
     Aquarius: "Aquarius",
@@ -92,6 +94,8 @@ const horoscope = {
     Love: "Love",
     Health: "Health",
     "Astrology guides": "Astrology guides",
+    "Try Astrale, the most precise horoscopes app in this existential plain":
+      "Try Astrale, the most precise horoscopes app in this existential plain",
   },
 };
 

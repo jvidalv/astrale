@@ -1,26 +1,13 @@
 import { Notifications } from "expo";
 import * as Permissions from "expo-permissions";
 import { fetcher } from "../hooks/useFetch";
-import { Language } from "./index";
-
-type Session = {
-  name: string;
-  sign: string;
-  birthDate: string;
-  sex: null;
-  relationship: null;
-  number: null;
-  days: 0;
-  daysRow: 0;
-  basicsDone: false;
-  notifications: false;
-};
+import api_calls from "../constants/apis";
 
 /**
  * Push notification request
  */
 async function registerForPushNotificationsAsync(
-  session: Session
+  session: any
 ): Promise<boolean> {
   const { status: existingStatus } = await Permissions.getAsync(
     Permissions.NOTIFICATIONS
@@ -38,30 +25,14 @@ async function registerForPushNotificationsAsync(
 
   // Stop here if the user did not grant permissions
   if (finalStatus !== "granted") {
-    return;
+    return false;
   }
 
   // Get the token that uniquely identifies this device
-  let token = await Notifications.getExpoPushTokenAsync();
-
+  session.expo_token = await Notifications.getExpoPushTokenAsync();
   // POST the token to backend server from where you can retrieve it to send push notifications.
-  const { method, url, params } = api_calls.astrology;
-  const response = await fetcher(method, url, params, {
-    name: session.name,
-    sign: null,
-    birthDate: null,
-    sex: null,
-    relationship: null,
-    number: null,
-    palmistry: false,
-    days: 0,
-    daysRow: 0,
-    basicsDone: false,
-    notifications: false,
-    language: Language.filteredLocale(),
-  });
-
-  return true;
+  const { method, url, params } = api_calls.user;
+  return await fetcher(method, url, params, session).then((res) => res.ok);
 }
 
 export default registerForPushNotificationsAsync;

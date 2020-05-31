@@ -42,7 +42,12 @@ function ProfileScreen({ navigation }) {
   } = session;
   const { colors } = useTheme();
   const { setRate } = useRate();
-  const { setStartShare } = useShare("Proba", "https://proba.com");
+  const { setStartShare } = useShare(
+    i18n.t(
+      "Try Astrale, the most precise horoscopes app in this existential plain"
+    ),
+    "https://test.vvadmin.dev/site/astrale"
+  );
   const isDark = useIsDark();
   const isAndroid = PlatformUtils.isAndroid;
   const _handleDarkThemeChange = () => {
@@ -54,33 +59,6 @@ function ProfileScreen({ navigation }) {
   const _handleLogOut = async () => {
     await Storer.delete(SESSION_KEY);
     dispatch({ type: "setLogOut" });
-  };
-  const _handleNotificationsChange = () => {
-    if (notifications) {
-      Alert.alert(
-        i18n.t("This will disable daily notifications"),
-        i18n.t("Are you sure?"),
-        [
-          {
-            text: i18n.t("Yes"),
-            onPress: () => {
-              //@todo delete from api
-              dispatch({
-                type: "setAndStoreSession",
-                fields: { notifications: false },
-              });
-            },
-          },
-        ]
-      );
-    } else {
-      registerForPushNotificationsAsync().then((res) => {
-        dispatch({
-          type: "setAndStoreSession",
-          fields: { notifications: res },
-        });
-      });
-    }
   };
   const _handleRatePress = async () => setRate(true);
   const _handleSharePress = async () => setStartShare(true);
@@ -171,18 +149,6 @@ function ProfileScreen({ navigation }) {
             {i18n.t("Dark theme")}
           </Button>
           <Switch onChange={_handleDarkThemeChange} value={isDark} />
-        </View>
-        <View style={styles.optionsOption}>
-          <Button
-            icon="bell"
-            style={styles.optionsButton}
-            labelStyle={styles.optionsLabel}
-            uppercase={false}
-            theme={{ colors: { primary: colors.text } }}
-          >
-            {i18n.t("Notifications")}
-          </Button>
-          <Switch onChange={_handleNotificationsChange} value={notifications} />
         </View>
       </View>
     </BlurView>

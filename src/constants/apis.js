@@ -4,7 +4,7 @@
  */
 const BASE_PATH =
   process.env.NODE_ENV === "development"
-    ? "https://test.vvadmin.dev/api/"
+    ? "http://192.168.10.10/api/"
     : "https://test.vvadmin.dev/api/";
 
 /**
@@ -28,16 +28,8 @@ const api_calls = {
     method: "POST",
   },
   user: {
-    url: `${BASE_PATH}astrale/user`,
-    params: [
-      "name",
-      "birth_date",
-      "sign",
-      "relationship_status",
-      "sex",
-      "number",
-      "expo_token",
-    ],
+    url: `${BASE_PATH}astrale/user?XDEBUG_SESSION_START=10670`,
+    params: [],
     method: "POST",
   },
 };
