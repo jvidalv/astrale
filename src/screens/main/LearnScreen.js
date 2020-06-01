@@ -49,13 +49,12 @@ function LearnScreen({ navigation }) {
   const _handleViewLesson = async (lesson) => {
     try {
       dispatch({ type: "toggleLoader" });
-      await AdMobInterstitial.setAdUnitID(Ads.learn);
       await AdMobInterstitial.requestAdAsync();
       await AdMobInterstitial.showAdAsync();
-      dispatch({ type: "toggleLoader" });
     } catch {
-      navigation.navigate(lesson, { key: 1 });
+      // Error
     } finally {
+      dispatch({ type: "toggleLoader" });
       navigation.navigate(lesson, { key: 1 });
     }
   };

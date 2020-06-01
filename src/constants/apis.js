@@ -2,10 +2,9 @@
  * Check for environment to pick a base
  * @type {string}
  */
-const BASE_PATH =
-  process.env.NODE_ENV === "development"
-    ? "http://192.168.10.10/api/"
-    : "https://test.vvadmin.dev/api/";
+const BASE_PATH = __DEV__
+  ? "https://test.vvadmin.dev/api/"
+  : "https://test.vvadmin.dev/api/";
 
 /**
  *
@@ -28,7 +27,7 @@ const api_calls = {
     method: "POST",
   },
   user: {
-    url: `${BASE_PATH}astrale/user?XDEBUG_SESSION_START=10670`,
+    url: `${BASE_PATH}astrale/user`,
     params: [],
     method: "POST",
   },

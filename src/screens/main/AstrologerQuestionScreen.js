@@ -6,6 +6,7 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   View,
+  Alert,
 } from "react-native";
 import {
   Button,
@@ -47,18 +48,18 @@ function AstrologerQuestionScreen({ route, navigation }) {
   const _handleProceed = async () => {
     try {
       dispatch({ type: "toggleLoader" });
-      await AdMobInterstitial.setAdUnitID(Ads.astrologers);
       await AdMobInterstitial.requestAdAsync();
       await AdMobInterstitial.showAdAsync();
-      dispatch({ type: "toggleLoader" });
     } catch {
-      //
+      // Error
     } finally {
+      dispatch({ type: "toggleLoader" });
       const { method, url, params } = api_calls.astrology;
       const response = await fetcher(method, url, params, data);
       if (response) {
-        setDisabled(true);
+        navigation.pop();
       } else {
+        Alert.alert(i18n.t("Error"));
       }
     }
   };

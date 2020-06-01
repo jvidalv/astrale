@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useReducer } from "react";
 import default_session, { SESSION_KEY } from "../constants/session";
 import Storer from "../utils/Storer";
+import { DateUtils } from "../utils";
 
 /**
  * @param state
@@ -24,21 +25,15 @@ export const reducer = (state, action) => {
         ...state,
         showLoader: !state.showLoader,
       };
-    case "showSnackbar":
-      return {
-        ...state,
-        snackbar: action.text,
-      };
     case "setSession":
       return {
         ...state,
         session: { ...state.session, ...action.fields },
       };
-    case "setAndStoreSession":
-      Storer.set(SESSION_KEY, { ...state.session, ...action.fields });
+    case "setDay":
       return {
         ...state,
-        session: { ...state.session, ...action.fields },
+        day: action.day,
       };
     default:
       return {
@@ -48,18 +43,18 @@ export const reducer = (state, action) => {
 };
 
 /**
- * @type {{session: {daysRow: number, number: null, basicsDone: boolean, sex: null, name: null, sign: null, days: number, language: string, relationship: null, birthDate: null, palmistry: boolean, notifications: boolean}, theme: string, toggle: null, showLoader: boolean, notifications: boolean}}
+ *
+ * @type {{session: {number: null, sex: null, name: null, sign: null, language: string, relationship: null, birthDate: null, notifications: boolean}, theme: string, showLoader: boolean, day: string}}
  */
 export const initialState = {
   theme: "dark",
   session: default_session,
-  notifications: false,
   showLoader: false,
-  snackbar: null,
+  day: DateUtils.toAmerican(new Date()),
 };
 
 /**
- * @type {React.Context<{session: {daysRow: number, number: null, basicsDone: boolean, sex: null, name: null, sign: null, days: number, language: string, relationship: null, birthDate: null, palmistry: boolean, notifications: boolean}, theme: string, toggle: null, showLoader: boolean, notifications: boolean}>}
+ * @type {React.Context<{session: {number: null, sex: null, name: null, sign: null, language: string, relationship: null, birthDate: null, notifications: boolean}, theme: string, showLoader: boolean, day: string}>}
  */
 export const StateContext = createContext(initialState);
 

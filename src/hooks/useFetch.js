@@ -27,10 +27,13 @@ export const fetcher = async (method, url, params, values) => {
   }
 
   return fetch(url, config).then((res) => {
-    if (res.ok) {
-      return res.json();
+    try {
+      if (res.ok) {
+        return res.json();
+      }
+    } catch {
+      throw Error("Error while fetching data");
     }
-    throw Error("Error while fetching data");
   });
 };
 

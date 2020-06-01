@@ -9,10 +9,6 @@ const default_session = {
   sex: null,
   relationship: null,
   number: null,
-  palmistry: false,
-  days: 0,
-  daysRow: 0,
-  basicsDone: false,
   notifications: false,
   language: Language.filteredLocale(),
 };

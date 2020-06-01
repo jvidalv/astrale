@@ -23,6 +23,9 @@ import { BlurView } from "expo-blur";
 import PlatformUtils from "../../utils/Platform";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Close from "../../components/navs/Close";
+import { AdMobBanner } from "expo-ads-admob";
+import Ads from "../../credentials/admob";
+import Constants from "expo-constants";
 
 /**
  * @param navigation
@@ -31,15 +34,7 @@ import Close from "../../components/navs/Close";
  */
 function ProfileScreen({ navigation }) {
   const [{ session }, dispatch] = useGlobals();
-  const {
-    name,
-    sign,
-    birthDate,
-    number,
-    relationship,
-    sex,
-    notifications,
-  } = session;
+  const { name, sign, birthDate, number, relationship, sex } = session;
   const { colors } = useTheme();
   const { setRate } = useRate();
   const { setStartShare } = useShare(
@@ -123,18 +118,19 @@ function ProfileScreen({ navigation }) {
         >
           {i18n.t("Rate the app")}
         </Button>
-        {__DEV__ && (
-          <Button
-            onPress={_handleLogOut}
-            icon="restart"
-            style={{ marginTop: 10 }}
-            labelStyle={styles.buttonsLabel}
-            uppercase={false}
-            contentStyle={{ justifyContent: "flex-start" }}
-          >
-            {i18n.t("Restart")}
-          </Button>
-        )}
+        {__DEV__ ||
+          (session.name === "vidal" && (
+            <Button
+              onPress={_handleLogOut}
+              icon="restart"
+              style={{ marginTop: 10 }}
+              labelStyle={styles.buttonsLabel}
+              uppercase={false}
+              contentStyle={{ justifyContent: "flex-start" }}
+            >
+              {i18n.t("Restart")}
+            </Button>
+          ))}
       </View>
       <Divider style={{ marginTop: 10 }} />
       <View style={styles.optionsContainer}>
@@ -150,6 +146,23 @@ function ProfileScreen({ navigation }) {
           </Button>
           <Switch onChange={_handleDarkThemeChange} value={isDark} />
         </View>
+      </View>
+      <Divider style={{ marginTop: 10 }} />
+      <View style={{ marginTop: 20 }}>
+        <AdMobBanner adUnitID={Ads.banner} />
+      </View>
+      <View
+        style={[
+          {
+            position: "absolute",
+            bottom: 20,
+            alignItems: "center",
+            justifyContent: "center",
+            width: "100%",
+          },
+        ]}
+      >
+        <Text>v{Constants.manifest.version}</Text>
       </View>
     </BlurView>
   );

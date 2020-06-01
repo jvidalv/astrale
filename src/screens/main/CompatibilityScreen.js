@@ -150,13 +150,12 @@ function CompatibilityScreen({ navigation }) {
       (async () => {
         try {
           dispatch({ type: "toggleLoader" });
-          await AdMobInterstitial.setAdUnitID(Ads.compatibility);
           await AdMobInterstitial.requestAdAsync();
           await AdMobInterstitial.showAdAsync();
-          dispatch({ type: "toggleLoader" });
         } catch {
           // error
         } finally {
+          dispatch({ type: "toggleLoader" });
           setCompDetailsShow(true);
           scRef.scrollTo({ y: 0 });
         }

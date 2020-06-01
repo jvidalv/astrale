@@ -1,6 +1,5 @@
 import { Notifications } from "expo";
 import * as Permissions from "expo-permissions";
-import { fetcher } from "../hooks/useFetch";
 import api_calls from "../constants/apis";
 
 /**
@@ -14,25 +13,37 @@ async function registerForPushNotificationsAsync(
   );
   let finalStatus = existingStatus;
 
-  // only ask if permissions have not already been determined, because
-  // iOS won't necessarily prompt the user a second time.
-  if (existingStatus !== "granted") {
-    // Android remote notification permissions are granted during the app
-    // install, so this will only ask on iOS
-    const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
-    finalStatus = status;
+  try {
+    // only ask if permissions have not already been determined, because
+    // iOS won't necessarily prompt the user a second time.
+    if (existingStatus !== "granted") {
+      // Android remote notification permissions are granted during the app
+      // install, so this will only ask on iOS
+      const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+      finalStatus = status;
+    }
+
+    // Stop here if the user did not grant permissions
+    if (finalStatus !== "granted") {
+      // Get the token that uniquely identifies this device
+      return false;
+    }
+    session.expo_token = await Notifications.getExpoPushTokenAsync();
+    session.pushStatus = finalStatus;
+  } catch (error) {
+    session.error = error;
   }
 
-  // Stop here if the user did not grant permissions
-  if (finalStatus !== "granted") {
-    return false;
-  }
-
-  // Get the token that uniquely identifies this device
-  session.expo_token = await Notifications.getExpoPushTokenAsync();
   // POST the token to backend server from where you can retrieve it to send push notifications.
-  const { method, url, params } = api_calls.user;
-  return await fetcher(method, url, params, session).then((res) => res.ok);
+  const { method, url } = api_calls.user;
+  return fetch(url, {
+    method: method,
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(session),
+  }).then((res) => (res.ok ? res.json() : false));
 }
 
 export default registerForPushNotificationsAsync;

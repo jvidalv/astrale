@@ -11,7 +11,7 @@ import {
 import { Sign } from "../../components/zodiac";
 import ShadowHeadline from "../../components/paper/ShadowHeadline";
 import i18n from "i18n-js";
-import useFetch, { fetcher } from "../../hooks/useFetch";
+import useFetch from "../../hooks/useFetch";
 import ShowFromTop from "../../components/animations/ShowFromTop";
 import { useGlobals } from "../../contexts/Global";
 import Storer from "../../utils/Storer";
@@ -24,7 +24,7 @@ import MainNav from "../../components/navs/MainNav";
 import ScrollViewFadeFirst from "../../components/containers/ScrollViewFadeFirst";
 import months from "../../constants/months";
 import api_calls from "../../constants/apis";
-import { DateUtils, Language } from "../../utils";
+import { Language } from "../../utils";
 
 /**
  * @param number {number}
@@ -86,14 +86,39 @@ const ProgressItemStyles = StyleSheet.create({
  * @constructor
  */
 function DailyScreen({ navigation }) {
-  const [{ session }, dispatch] = useGlobals();
+  const [{ session, day }, dispatch] = useGlobals();
   const { colors } = useTheme();
-  const [date, setDate] = React.useState(new Date());
+  const [date, setDate] = React.useState(day);
   const { data, loading, error, setLoading } = useFetch(api_calls.daily, {
-    day: DateUtils.toAmerican(date),
+    day: day,
     sign: session.sign,
   });
   const d = new Date();
+
+  React.useEffect(() => {
+    if (!session.notifications) {
+      registerForPushNotificationsAsync(session).then((res) => {
+        dispatch({
+          type: "setSession",
+          fields: { notifications: res },
+        });
+        Storer.set(SESSION_KEY, { ...session, notifications: res });
+      });
+    }
+  }, []);
+
+  React.useEffect(() => {
+    if (!data && !loading) {
+      setDate((date) => new Date(date.setDate(date.getDate() - 1)));
+      setLoading();
+    }
+  }, [data, loading]);
+
+  React.useEffect(() => {
+    if (!loading) {
+      setLoading();
+    }
+  }, [session.sign, day]);
 
   if (!session?.sign) {
     Storer.delete(SESSION_KEY).then(() => dispatch({ type: "setLogOut" }));
@@ -132,30 +157,6 @@ function DailyScreen({ navigation }) {
       <Divider />
     </View>
   );
-
-  React.useEffect(() => {
-    if (!session.notifications) {
-      registerForPushNotificationsAsync(session).then((res) => {
-        dispatch({
-          type: "setAndStoreSession",
-          fields: { notifications: res },
-        });
-      });
-    }
-  }, []);
-
-  React.useEffect(() => {
-    if (!data && !loading) {
-      setDate((date) => new Date(date.setDate(date.getDate() - 1)));
-      setLoading();
-    }
-  }, [data, loading]);
-
-  React.useEffect(() => {
-    if (!loading) {
-      setLoading();
-    }
-  }, [session.sign]);
 
   return (
     <React.Fragment>
