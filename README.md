@@ -10,7 +10,7 @@ It comes with **texts in both English and Spanish**.
 
 As it is right now is only published in Android, as Apple is not accepting more Astrology apps, but it is programmed and tested for both platforms.
 
-- Android: url_to_android
+- Android: https://play.google.com/store/apps/details?id=josep.astrale
 
 You can check it in your device installing the [Expo](https://expo.io/) app and opening this page: 
 - https://expo.io/@vidalv/astrale
