@@ -74,7 +74,7 @@ const common = {
     Restart: "Reiniciar",
     Career: "Trabajo",
     "Write here": "Escribe aquí",
-    "Type here": "Teclea aquí",
+    "Type here": "Escribe aquí",
     Learn: "Aprende",
     "How it works": "Cómo funciona",
     "Your email": "Tu correo electrónico",

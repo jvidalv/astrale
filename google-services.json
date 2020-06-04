@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "635981650568",
+    "firebase_url": "https://astrale-6baac.firebaseio.com",
+    "project_id": "astrale-6baac",
+    "storage_bucket": "astrale-6baac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:635981650568:android:cc917d28b94cc4d7801d3d",
+        "android_client_info": {
+          "package_name": "josep.astrale"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "635981650568-0e9mtuoujvei0ivo0k4avgnvgtvomf4j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAPo2Uls25xiLv8b31Q2rV6QTMyPP8GUM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "635981650568-0e9mtuoujvei0ivo0k4avgnvgtvomf4j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

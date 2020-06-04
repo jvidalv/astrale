@@ -118,19 +118,18 @@ function ProfileScreen({ navigation }) {
         >
           {i18n.t("Rate the app")}
         </Button>
-        {__DEV__ ||
-          (session.name === "vidal" && (
-            <Button
-              onPress={_handleLogOut}
-              icon="restart"
-              style={{ marginTop: 10 }}
-              labelStyle={styles.buttonsLabel}
-              uppercase={false}
-              contentStyle={{ justifyContent: "flex-start" }}
-            >
-              {i18n.t("Restart")}
-            </Button>
-          ))}
+        {__DEV__ && (
+          <Button
+            onPress={_handleLogOut}
+            icon="restart"
+            style={{ marginTop: 10 }}
+            labelStyle={styles.buttonsLabel}
+            uppercase={false}
+            contentStyle={{ justifyContent: "flex-start" }}
+          >
+            {i18n.t("Restart")}
+          </Button>
+        )}
       </View>
       <Divider style={{ marginTop: 10 }} />
       <View style={styles.optionsContainer}>
