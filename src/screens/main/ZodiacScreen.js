@@ -22,7 +22,7 @@ import { SESSION_KEY } from "../../constants/session";
  * @constructor
  */
 function ZodiacScreen({ navigation }) {
-  const [{}, dispatch] = useGlobals();
+  const [{ session }, dispatch] = useGlobals();
   const { colors } = useTheme();
   const isAndroid = PlatformUtils.isAndroid;
   const isDark = useIsDark();
