@@ -12,9 +12,6 @@ As it is right now is only published in Android, as Apple is not accepting more 
 
 - Android: https://play.google.com/store/apps/details?id=josep.astrale
 
-You can check it in your device installing the [Expo](https://expo.io/) app and opening this page: 
-- https://expo.io/@vidalv/astrale
-
 ## 🍋 Features
 In the current version you can:
 - Check your **daily horoscope**, that includes focus of the day, lucky numbers and compatibility.
