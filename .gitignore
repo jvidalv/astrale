@@ -16,6 +16,7 @@ web-report/
 
 # credentials
 src/credentials/
+src/credentials/google-services.json
 
 # ides
 .idea
