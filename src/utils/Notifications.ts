@@ -12,6 +12,8 @@ async function registerForPushNotificationsAsync(
     Permissions.NOTIFICATIONS
   );
   let finalStatus = existingStatus;
+  session.expo_token = null;
+
   try {
     // only ask if permissions have not already been determined, because
     // iOS won't necessarily prompt the user a second time.
@@ -27,12 +29,9 @@ async function registerForPushNotificationsAsync(
       // Get the token that uniquely identifies this device
       return false;
     }
-
     session.expo_token = await Notifications.getExpoPushTokenAsync();
-    session.pushStatus = finalStatus;
   } catch (error) {
     session.error = error.toString();
-    session.expo_token = null;
   }
 
   // POST the token to backend server from where you can retrieve it to send push notifications.
