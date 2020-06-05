@@ -10,7 +10,8 @@ const LANGS = ["es", "en"];
  */
 function getLocale(): string {
   const locale = Localization.locale.substr(0, 2);
-  return LANGS.includes(locale) ? locale : "en";
+  const customLocale = locale === "ca" ? "es" : locale;
+  return LANGS.includes(customLocale) ? customLocale : "en";
 }
 
 const Language = {

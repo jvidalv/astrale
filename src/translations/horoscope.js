@@ -34,7 +34,7 @@ const horoscope = {
     Hellenistic: "{{word}} helenistica",
     "Select an astrologer": "Selecciona un astrólogo",
     "Today you hate": "Hoy odias",
-    "Today you love": "Compatibilidades de hoy",
+    "Today you love": "Compatibilidades:",
     "Lucky numbers": "Números de la suerte",
     Relationship: "Relación",
     "Learn paragraph":

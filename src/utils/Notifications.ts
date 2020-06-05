@@ -43,7 +43,7 @@ async function registerForPushNotificationsAsync(
       "Content-Type": "application/json",
     },
     body: JSON.stringify(session),
-  }).then((res) => (res.ok ? false : false));
+  }).then((res) => res.ok);
 }
 
 export default registerForPushNotificationsAsync;
