@@ -41,7 +41,7 @@ function ProfileScreen({ navigation }) {
     i18n.t(
       "Try Astrale, the most precise horoscopes app in this existential plain"
     ),
-    "https://test.vvadmin.dev/site/astrale"
+    "https://play.google.com/store/apps/details?id=josep.astrale"
   );
   const isDark = useIsDark();
   const isAndroid = PlatformUtils.isAndroid;
