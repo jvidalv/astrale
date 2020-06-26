@@ -81,7 +81,7 @@ const ProgressItemStyles = StyleSheet.create({
 });
 
 /**
- * @param navigation
+ * @param navigation {object}
  * @returns {*}
  * @constructor
  */
