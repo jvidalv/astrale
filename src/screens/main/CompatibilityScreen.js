@@ -12,19 +12,15 @@ import {
 import HoroscopeSigns from "../../constants/zodiac_signs";
 import { Sign } from "../../components/zodiac";
 import ShadowHeadline from "../../components/paper/ShadowHeadline";
-import useMatch from "../../hooks/useMatch";
 import i18n from "i18n-js";
 import useFetch from "../../hooks/useFetch";
 import ShowFromTop from "../../components/animations/ShowFromTop";
 import SpaceSky from "../../components/decorations/SpaceSky";
 import TextBold from "../../components/paper/TextBold";
 import MainNav from "../../components/navs/MainNav";
-import { AdMobInterstitial } from "expo-ads-admob";
-import Ads from "../../credentials/admob";
 import api_calls from "../../constants/apis";
 import { Language } from "../../utils";
 import { useGlobals } from "../../contexts/Global";
-import Sleep from "../../utils/Sleep";
 
 /**
  * Progress bars from match
@@ -148,18 +144,8 @@ function CompatibilityScreen({ navigation }) {
     setSelectedSigns([]) || setCompDetailsShow(false);
   React.useEffect(() => {
     if (selectedSigns.length === 2) {
-      (async () => {
-        try {
-          dispatch({ type: "toggleLoader" });
-          await Sleep(500);
-        } catch {
-          // error
-        } finally {
-          dispatch({ type: "toggleLoader" });
-          setCompDetailsShow(true);
-          scRef.scrollTo({ y: 0 });
-        }
-      })();
+      setCompDetailsShow(true);
+      scRef.scrollTo({ y: 0 });
     }
   }, [selectedSigns]);
   return (
