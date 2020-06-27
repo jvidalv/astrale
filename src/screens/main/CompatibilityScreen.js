@@ -24,6 +24,7 @@ import Ads from "../../credentials/admob";
 import api_calls from "../../constants/apis";
 import { Language } from "../../utils";
 import { useGlobals } from "../../contexts/Global";
+import Sleep from "../../utils/Sleep";
 
 /**
  * Progress bars from match
@@ -150,8 +151,7 @@ function CompatibilityScreen({ navigation }) {
       (async () => {
         try {
           dispatch({ type: "toggleLoader" });
-          await AdMobInterstitial.requestAdAsync();
-          await AdMobInterstitial.showAdAsync();
+          await Sleep(500);
         } catch {
           // error
         } finally {
