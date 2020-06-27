@@ -12,6 +12,8 @@ As it is right now is only published in Android, as Apple is not accepting more 
 
 - Android: https://play.google.com/store/apps/details?id=josep.astrale
 
+There are some files omitted because they contain sensitive information, if you want to clone the repository and test it locally, you can send me a private message, and I'll provide them to you. 
+
 ## 🍋 Features
 In the current version you can:
 - Check your **daily horoscope**, that includes focus of the day, lucky numbers and compatibility.
