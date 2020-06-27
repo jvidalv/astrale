@@ -86,6 +86,7 @@ const common = {
       "Introduce tu correo electrónico y tu pregunta",
     "Wait ~24 hours for the response": "Espere ~24 horas para la respuesta",
     "Watch an ad to unblock": "Ver un ad para desbloquear",
+    "Something is wrong": "Alguna cosa no está funcionando correctamente 🙄",
   },
   en: {
     Ok: "Ok",
@@ -169,6 +170,7 @@ const common = {
     "Introduce your email and question": "Introduce your email and question",
     "Wait ~24 hours for the response": "Wait ~24 hours for the response",
     "Watch an ad to unblock": "Watch an ad to unlock",
+    "Something is wrong": "Something is wrong 🙄",
   },
 };
 

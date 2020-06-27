@@ -88,7 +88,6 @@ const ProgressItemStyles = StyleSheet.create({
 function DailyScreen({ navigation }) {
   const [{ session, day }, dispatch] = useGlobals();
   const { colors } = useTheme();
-  const [date, setDate] = React.useState(day);
   const { data, loading, error, setLoading } = useFetch(api_calls.daily, {
     day: day,
     sign: session.sign,
@@ -106,13 +105,6 @@ function DailyScreen({ navigation }) {
       });
     }
   }, []);
-
-  React.useEffect(() => {
-    if (!data && !loading) {
-      setDate((date) => new Date(date.setDate(date.getDate() - 1)));
-      setLoading();
-    }
-  }, [data, loading]);
 
   React.useEffect(() => {
     if (!loading) {
@@ -166,6 +158,24 @@ function DailyScreen({ navigation }) {
           <View style={{ height: 20 }} />
           {loading || !data ? (
             <ActivityIndicator size="large" style={{ flex: 1, height: 400 }} />
+          ) : !loading && !data ? (
+            <ShowFromTop>
+              <View
+                style={[
+                  styles.defaultContainer,
+                  {
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginTop: 10,
+                  },
+                ]}
+              >
+                <TextBold style={styles.textTitles}>
+                  {i18n.t("Something is wrong")}:
+                </TextBold>
+              </View>
+            </ShowFromTop>
           ) : (
             <ShowFromTop>
               <View
