@@ -12,9 +12,9 @@ import { BlurView } from "expo-blur";
 import PlatformUtils from "../../utils/Platform";
 import { useIsDark } from "../../hooks/useTheme";
 import Close from "../../components/navs/Close";
-import { AdMobInterstitial } from "expo-ads-admob";
 import Storer from "../../utils/Storer";
 import { SESSION_KEY } from "../../constants/session";
+import Sleep from "../../utils/Sleep";
 
 /**
  * @param navigation
@@ -36,8 +36,7 @@ function ZodiacScreen({ navigation }) {
     });
     await Storer.set(SESSION_KEY, { session, sign: sign });
     dispatch({ type: "toggleLoader" });
-    await AdMobInterstitial.requestAdAsync();
-    await AdMobInterstitial.showAdAsync();
+    await Sleep(300);
     dispatch({ type: "toggleLoader" });
     navigation.pop();
   };
