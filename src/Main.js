@@ -8,12 +8,12 @@ import { AppLoading } from "expo";
 import { Asset } from "expo-asset";
 import MainStackNavigation from "./navigation/MainStackNavigation";
 import InitialStackNavigation from "./navigation/InitialStackNavigation";
-import * as Font from "expo-font";
 import Storer from "./utils/Storer";
 import { SESSION_KEY } from "./constants/session";
 import { AdMobInterstitial, setTestDeviceIDAsync } from "expo-ads-admob";
 import Ads from "./credentials/admob";
 import { DateUtils } from "./utils";
+import { useFonts } from "@expo-google-fonts/inter";
 
 /**
  * @param images {string[]}
@@ -32,14 +32,7 @@ const cacheImages = (images) => {
 /**
  * @returns {Promise<void>}
  */
-const fetchFonts = () =>
-  Font.loadAsync({
-    poppins_light: require("../assets/fonts/Poppins-Light.ttf"),
-    poppins_medium: require("../assets/fonts/Poppins-Medium.ttf"),
-    poppins_regular: require("../assets/fonts/Poppins-Regular.ttf"),
-    poppins_thin: require("../assets/fonts/Poppins-Thin.ttf"),
-    poppins_bold: require("../assets/fonts/Poppins-Bold.ttf"),
-  });
+const fetchFonts = () => Font.loadAsync({});
 
 const PERSISTENCE_KEY = "NAVIGATION_STATE";
 
@@ -51,9 +44,9 @@ function Main() {
   const [{ session, theme, day }, dispatch] = useGlobals();
   const [isReady, setIsReady] = React.useState(false);
   const [initialState, setInitialState] = React.useState();
-  const [fontsLoaded, setFontsLoaded] = React.useState(false);
   const [appState, setAppState] = React.useState(AppState.currentState);
   const _theme = themes[theme];
+
   // Handles screen focus and case when user reopens app one day later (Date has to be updated)
   const _handleAppStateChange = (nextAppState) => {
     if (appState.match(/active/) && nextAppState === "active") {
@@ -76,16 +69,14 @@ function Main() {
     };
   }, []);
 
-  // Fonts
-  React.useEffect(() => {
-    (async () => {
-      try {
-        await fetchFonts();
-      } finally {
-        setFontsLoaded(true);
-      }
-    })();
-  }, []);
+  // Custom fonts
+  // let [fontsLoaded] = useFonts({
+  //   poppins_light: require("../assets/fonts/Poppins-Light.ttf"),
+  //   poppins_medium: require("../assets/fonts/Poppins-Medium.ttf"),
+  //   poppins_regular: require("../assets/fonts/Poppins-Regular.ttf"),
+  //   poppins_thin: require("../assets/fonts/Poppins-Thin.ttf"),
+  //   poppins_bold: require("../assets/fonts/Poppins-Bold.ttf"),
+  // });
 
   // Backbones
   React.useEffect(() => {
@@ -113,7 +104,7 @@ function Main() {
     })();
   }, []);
 
-  if (!isReady || !fontsLoaded) {
+  if (!isReady /* || !fontsLoaded*/) {
     return <AppLoading />;
   }
 

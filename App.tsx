@@ -4,7 +4,6 @@ import { initialState, reducer, StateProvider } from "./src/contexts/Global";
 import i18n from "i18n-js";
 import * as Localization from "expo-localization";
 import Translations from "./src/translations";
-import { AdMobInterstitial, AdMobRewarded } from "expo-ads-admob";
 
 /**
  * Language

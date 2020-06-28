@@ -19,6 +19,7 @@ function FadeToTop({ children, fadeToTop, initialHeight, finalHeight }) {
       toValue: fadeToTop ? 1 : 0,
       easing: Easing.ease,
       duration: 500,
+      useNativeDriver: true,
     }).start();
   }, [fadeToTop]);
 

@@ -15,7 +15,7 @@ web-report/
 .DS_Store
 
 # credentials
-src/credentials/
+src/credentials/admob.js
 src/credentials/google-services.json
 
 # ides

@@ -16,6 +16,7 @@ function ShowFromTop({ children, duration }) {
     toValue: 1,
     easing: Easing.linear,
     duration: duration,
+    useNativeDriver: true,
   }).start();
 
   return (

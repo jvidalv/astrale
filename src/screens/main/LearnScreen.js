@@ -93,7 +93,7 @@ function LearnScreen({ navigation }) {
               <Subheading
                 theme={{ colors: { text: "#FFFFFF" } }}
                 numberOfLines={1}
-                style={{ fontFamily: "poppins_bold" }}
+                style={{ fontWeight: "bold" }}
               >
                 {i18n.t("About the Zodiac")}
               </Subheading>
@@ -153,7 +153,7 @@ function LearnScreen({ navigation }) {
               <Subheading
                 theme={{ colors: { text: "#FFFFFF" } }}
                 numberOfLines={1}
-                style={{ fontFamily: "poppins_bold" }}
+                style={{ fontWeight: "bold" }}
               >
                 {i18n.t("The signs")}
               </Subheading>
@@ -199,7 +199,7 @@ function LearnScreen({ navigation }) {
               <Subheading
                 theme={{ colors: { text: "#FFFFFF" } }}
                 numberOfLines={1}
-                style={{ fontFamily: "poppins_bold" }}
+                style={{ fontWeight: "bold" }}
               >
                 {i18n.t("The elements")}
               </Subheading>

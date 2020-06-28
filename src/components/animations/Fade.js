@@ -17,6 +17,7 @@ function Fade({ children, show }) {
       toValue: show ? 1 : 0,
       easing: Easing.ease,
       duration: 500,
+      useNativeDriver: true,
     }).start();
   }, [show]);
 

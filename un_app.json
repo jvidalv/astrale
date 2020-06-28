@@ -1,0 +1,37 @@
+{
+  "expo": {
+    "name": "Astrale",
+    "slug": "astrale",
+    "version": "1.0.3",
+    "description": "Discover what the future holds for you. Get an insight on what to expect for love, work, wellbeing and good fortune for today with Astrale app.",
+    "privacy": "public",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "primaryColor": "#151515",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#151515"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "scheme": "astrale",
+    "androidStatusBar": {
+      "hidden": false,
+      "translucent": true,
+      "barStyle": "light-content",
+      "backgroundColor": "#151515"
+    },
+    "notification": {
+      "icon": "./assets/images/icon-notification.png",
+      "color": "#151515",
+      "iosDisplayInForeground": true
+    }
+  }
+}

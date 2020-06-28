@@ -8,9 +8,7 @@ import { Text } from "react-native-paper";
  * @constructor
  */
 function TextBold({ children, style }) {
-  return (
-    <Text style={[{ fontFamily: "poppins_bold" }, style]}>{children}</Text>
-  );
+  return <Text style={[{ fontWeight: "bold" }, style]}>{children}</Text>;
 }
 
 export default TextBold;

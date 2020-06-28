@@ -18,6 +18,7 @@ function Rotation({ children, rotate, style }) {
       toValue: rotate ? 1 : 0,
       easing: Easing.linear,
       duration: 250000,
+      useNativeDriver: true,
     }).start();
   }, [rotate]);
 

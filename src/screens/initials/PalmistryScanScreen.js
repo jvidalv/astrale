@@ -17,7 +17,6 @@ import { useGlobals } from "../../contexts/Global";
 import { useIsDark } from "../../hooks/useTheme";
 import SpaceSky from "../../components/decorations/SpaceSky";
 import Hand from "../../svgs/Hand";
-import { clarifai_key } from "../../credentials";
 
 /**
  * Clarifai import for image match usage
@@ -30,7 +29,7 @@ const Clarifai = require("clarifai");
  * @type {App}
  */
 const app = new Clarifai.App({
-  apiKey: clarifai_key,
+  apiKey: "api_key",
 });
 
 /**
