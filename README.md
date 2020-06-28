@@ -12,7 +12,7 @@ As it is right now is only published in Android, as Apple is not accepting more 
 
 - Android: https://play.google.com/store/apps/details?id=josep.astrale
 
-There are some files omitted because they contain sensitive information, if you want to clone the repository and test it locally, you can send me a private message, and I'll provide them to you. 
+There are some files omitted because they contain sensitive information, if you want to clone the repository and test it locally, you must rename `un_app.json` to `app.json` and `src/credentials/un_admob.js` to `admob.js`.
 
 ## 🍋 Features
 In the current version you can:
