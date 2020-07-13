@@ -1,6 +1,6 @@
 import React from "react";
-import { StyleSheet, TextInput } from "react-native";
-import { TextInput as PaperTextInput, useTheme } from "react-native-paper";
+import {StyleSheet, TextInput} from "react-native";
+import {TextInput as PaperTextInput, useTheme} from "react-native-paper";
 import MainNav from "../navs/MainNav";
 
 /**
@@ -9,39 +9,39 @@ import MainNav from "../navs/MainNav";
  * @constructor
  */
 function CustomInput(props) {
-  const { colors } = useTheme();
-  const _maxLength = props.keyboardType === "number-pad" ? 5 : null;
-  return (
-    <PaperTextInput
-      {...props}
-      style={[styles.input, { backgroundColor: colors.text + "00" }]}
-      render={(props) => (
-        <TextInput
-          {...props}
-          style={[styles.inputCustom, props.customStyle]}
-          maxLength={_maxLength}
+    const {colors} = useTheme();
+    const _maxLength = props.keyboardType === "number-pad" ? 5 : null;
+    return (
+        <PaperTextInput
+            {...props}
+            style={[styles.input, {backgroundColor: colors.text + "00"}]}
+            render={(props) => (
+                <TextInput
+                    {...props}
+                    style={[styles.inputCustom, props.customStyle]}
+                    maxLength={_maxLength}
+                />
+            )}
         />
-      )}
-    />
-  );
+    );
 }
 
 const styles = StyleSheet.create({
-  inputCustom: {
-    textAlign: "center",
-    marginTop: 10,
-    color: "white",
-    fontSize: 30,
-  },
-  input: {
-    borderRadius: 5,
-    fontSize: 30,
-    textAlign: "center",
-    justifyContent: "flex-end",
-  },
+    inputCustom: {
+        textAlign: "center",
+        marginTop: 10,
+        color: "white",
+        fontSize: 30,
+    },
+    input: {
+        borderRadius: 5,
+        fontSize: 30,
+        textAlign: "center",
+        justifyContent: "flex-end",
+    },
 });
 MainNav.defaultProps = {
-  customStyle: null,
+    customStyle: null,
 };
 
 export default CustomInput;

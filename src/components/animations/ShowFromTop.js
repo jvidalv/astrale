@@ -1,5 +1,5 @@
 import React from "react";
-import { Animated, Easing } from "react-native";
+import {Animated, Easing} from "react-native";
 import PropTypes from "prop-types";
 
 /**
@@ -9,49 +9,49 @@ import PropTypes from "prop-types";
  * @returns {*}
  * @constructor
  */
-function ShowFromTop({ children, duration }) {
-  const fadeAnim = React.useRef(new Animated.Value(0)).current;
+function ShowFromTop({children, duration}) {
+    const fadeAnim = React.useRef(new Animated.Value(0)).current;
 
-  Animated.timing(fadeAnim, {
-    toValue: 1,
-    easing: Easing.linear,
-    duration: duration,
-    useNativeDriver: true,
-  }).start();
+    Animated.timing(fadeAnim, {
+        toValue: 1,
+        easing: Easing.linear,
+        duration: duration,
+        useNativeDriver: true,
+    }).start();
 
-  return (
-    <Animated.View
-      style={[
-        {
-          flex: 1,
-          opacity: fadeAnim.interpolate({
-            inputRange: [0, 1],
-            outputRange: [0, 1],
-          }),
-          transform: [
-            {
-              translateY: fadeAnim.interpolate({
-                inputRange: [0, 1],
-                outputRange: [-25, 0],
-              }),
-            },
-          ],
-        },
-      ]}
-    >
-      {children}
-    </Animated.View>
-  );
+    return (
+        <Animated.View
+            style={[
+                {
+                    flex: 1,
+                    opacity: fadeAnim.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [0, 1],
+                    }),
+                    transform: [
+                        {
+                            translateY: fadeAnim.interpolate({
+                                inputRange: [0, 1],
+                                outputRange: [-25, 0],
+                            }),
+                        },
+                    ],
+                },
+            ]}
+        >
+            {children}
+        </Animated.View>
+    );
 }
 
 ShowFromTop.defaultProps = {
-  duration: 250,
+    duration: 250,
 };
 ShowFromTop.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]).isRequired,
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node,
+    ]).isRequired,
 };
 
 export default ShowFromTop;

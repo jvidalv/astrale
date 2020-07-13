@@ -1,12 +1,5 @@
-import {
-  DarkTheme as NavigationDarkTheme,
-  DefaultTheme as NavigationDefaultTheme,
-} from "@react-navigation/native";
-import {
-  configureFonts,
-  DarkTheme as PaperDarkTheme,
-  DefaultTheme as PaperDefaultTheme,
-} from "react-native-paper";
+import {DarkTheme as NavigationDarkTheme, DefaultTheme as NavigationDefaultTheme,} from "@react-navigation/native";
+import {DarkTheme as PaperDarkTheme, DefaultTheme as PaperDefaultTheme,} from "react-native-paper";
 
 // const fontConfig = {
 //   default: {
@@ -33,26 +26,26 @@ import {
 // fontConfig.android = fontConfig.default;
 
 const themes = {
-  light: {
-    ...NavigationDefaultTheme,
-    ...PaperDefaultTheme,
-    colors: {
-      ...NavigationDefaultTheme.colors,
-      ...PaperDefaultTheme.colors,
-      accent: "#bc4598",
+    light: {
+        ...NavigationDefaultTheme,
+        ...PaperDefaultTheme,
+        colors: {
+            ...NavigationDefaultTheme.colors,
+            ...PaperDefaultTheme.colors,
+            accent: "#bc4598",
+        },
+        // fonts: configureFonts(fontConfig),
     },
-    // fonts: configureFonts(fontConfig),
-  },
-  dark: {
-    ...NavigationDarkTheme,
-    ...PaperDarkTheme,
-    colors: {
-      ...NavigationDarkTheme.colors,
-      ...PaperDarkTheme.colors,
-      accent: "#bc4598",
+    dark: {
+        ...NavigationDarkTheme,
+        ...PaperDarkTheme,
+        colors: {
+            ...NavigationDarkTheme.colors,
+            ...PaperDarkTheme.colors,
+            accent: "#bc4598",
+        },
+        // fonts: configureFonts(fontConfig),
     },
-    // fonts: configureFonts(fontConfig),
-  },
 };
 
 export default themes;

@@ -1,7 +1,7 @@
 import Simple from "./Simple";
 
 const AdMob = {
-  Simple,
+    Simple,
 };
 
 export default AdMob;
