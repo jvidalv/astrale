@@ -1,24 +1,29 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {StyleSheet, View} from "react-native";
-import {Zodiac} from "../../svgs";
-import {Caption, Subheading, TouchableRipple, useTheme,} from "react-native-paper";
+import { StyleSheet, View } from "react-native";
+import { Zodiac } from "../../svgs";
+import {
+  Caption,
+  Subheading,
+  TouchableRipple,
+  useTheme,
+} from "react-native-paper";
 import i18n from "i18n-js";
 import PlatformUtils from "../../utils/Platform";
 
 const _signs = {
-    Aquarius: Zodiac.Aquarius,
-    Aries: Zodiac.Aries,
-    Cancer: Zodiac.Cancer,
-    Capricorn: Zodiac.Capricorn,
-    Gemini: Zodiac.Gemini,
-    Leo: Zodiac.Leo,
-    Libra: Zodiac.Libra,
-    Pisces: Zodiac.Pisces,
-    Sagittarius: Zodiac.Sagittarius,
-    Scorpio: Zodiac.Scorpio,
-    Taurus: Zodiac.Taurus,
-    Virgo: Zodiac.Virgo,
+  Aquarius: Zodiac.Aquarius,
+  Aries: Zodiac.Aries,
+  Cancer: Zodiac.Cancer,
+  Capricorn: Zodiac.Capricorn,
+  Gemini: Zodiac.Gemini,
+  Leo: Zodiac.Leo,
+  Libra: Zodiac.Libra,
+  Pisces: Zodiac.Pisces,
+  Sagittarius: Zodiac.Sagittarius,
+  Scorpio: Zodiac.Scorpio,
+  Taurus: Zodiac.Taurus,
+  Virgo: Zodiac.Virgo,
 };
 
 /**
@@ -36,87 +41,87 @@ const _signs = {
  * @constructor
  */
 function Sign({
-                  sign,
-                  title,
-                  showTitle,
-                  subtitle,
-                  onPress,
-                  style,
-                  signHeight,
-                  signWidth,
-                  styleTitle,
-                  styleSubtitle,
-              }) {
-    const ParsedSign = _signs[sign];
-    const isAndroid = PlatformUtils.isAndroid;
-    const {colors} = useTheme();
-    return (
-        <TouchableRipple
-            onPress={() => onPress(sign)}
-            underlayColor="#ffffff00"
-            rippleColor="#ffffff00"
-            style={[{alignItems: "center", justifyContent: "center"}, style]}
+  sign,
+  title,
+  showTitle,
+  subtitle,
+  onPress,
+  style,
+  signHeight,
+  signWidth,
+  styleTitle,
+  styleSubtitle,
+}) {
+  const ParsedSign = _signs[sign];
+  const isAndroid = PlatformUtils.isAndroid;
+  const { colors } = useTheme();
+  return (
+    <TouchableRipple
+      onPress={() => onPress(sign)}
+      underlayColor="#ffffff00"
+      rippleColor="#ffffff00"
+      style={[{ alignItems: "center", justifyContent: "center" }, style]}
+    >
+      <React.Fragment>
+        <View
+          style={[
+            {
+              shadowColor: "#000000",
+              width: signWidth,
+              height: signHeight,
+            },
+            {
+              elevation: isAndroid ? 0 : 10,
+            },
+            styles.signContainer,
+            styles.signShadow,
+          ]}
         >
-            <React.Fragment>
-                <View
-                    style={[
-                        {
-                            shadowColor: "#000000",
-                            width: signWidth,
-                            height: signHeight,
-                        },
-                        {
-                            elevation: isAndroid ? 0 : 10,
-                        },
-                        styles.signContainer,
-                        styles.signShadow,
-                    ]}
-                >
-                    <ParsedSign width={signHeight} height={signWidth}/>
-                </View>
-                {showTitle && (
-                    <Subheading style={styleTitle}>{title ?? i18n.t(sign)}</Subheading>
-                )}
-                {subtitle && <Caption style={styleSubtitle}>{subtitle}</Caption>}
-            </React.Fragment>
-        </TouchableRipple>
-    );
+          <ParsedSign width={signHeight} height={signWidth} />
+        </View>
+        {showTitle && (
+          <Subheading style={styleTitle}>{title ?? i18n.t(sign)}</Subheading>
+        )}
+        {subtitle && <Caption style={styleSubtitle}>{subtitle}</Caption>}
+      </React.Fragment>
+    </TouchableRipple>
+  );
 }
 
 const styles = StyleSheet.create({
-    signShadow: {
-        shadowOffset: {
-            width: 0,
-            height: 6,
-        },
-        shadowOpacity: 0.3,
-        shadowRadius: 10,
+  signShadow: {
+    shadowOffset: {
+      width: 0,
+      height: 6,
     },
-    signContainer: {
-        justifyContent: "center",
-        alignItems: "center",
-        borderRadius: 100,
-    },
+    shadowOpacity: 0.3,
+    shadowRadius: 10,
+  },
+  signContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 100,
+  },
 });
 
 Sign.defaultProps = {
-    height: 120,
-    width: 120,
-    showTitle: true,
-    onPress: () => null,
+  height: 120,
+  width: 120,
+  showTitle: true,
+  onPress: () => null,
 };
 
 Sign.propTypes = {
-    sign: PropTypes.string.isRequired,
-    title: PropTypes.string,
-    showTitle: PropTypes.bool,
-    subtitle: PropTypes.string,
-    onPress: PropTypes.func,
-    style: PropTypes.object,
-    styleTitle: PropTypes.object,
-    styleSubtitle: PropTypes.object,
-    width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-    height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  sign: PropTypes.string.isRequired,
+  title: PropTypes.string,
+  showTitle: PropTypes.bool,
+  subtitle: PropTypes.string,
+  onPress: PropTypes.func,
+  style: PropTypes.object,
+  styleTitle: PropTypes.object,
+  styleSubtitle: PropTypes.object,
+  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
 };
 
 export default Sign;

@@ -1,5 +1,5 @@
 import React from "react";
-import {Share} from "react-native";
+import { Share } from "react-native";
 import PlatformUtils from "../utils/Platform";
 
 /**
@@ -8,46 +8,46 @@ import PlatformUtils from "../utils/Platform";
  * @returns {{setStartShare: React.Dispatch<React.SetStateAction<boolean>>}}
  */
 const useShare = (message, url) => {
-    const [startShare, setStartShare] = React.useState(false);
+  const [startShare, setStartShare] = React.useState(false);
 
-    React.useEffect(() => {
-        const sharing = async () => {
-            try {
-                const buildContent = () => {
-                    const content = {};
-                    if (PlatformUtils.isIos) {
-                        content.message = message;
-                        content.url = url;
-                    } else {
-                        content.message = url;
-                        content.title = message;
-                    }
-                    return content;
-                };
-                const content = buildContent();
-                const result = await Share.share(content);
-
-                if (result.action === Share.sharedAction) {
-                    if (result.activityType) {
-                        // shared with activity type of result.activityType
-                    } else {
-                        // shared
-                    }
-                } else if (result.action === Share.dismissedAction) {
-                    // dismissed
-                }
-            } catch (error) {
-                // todo
-            }
-            return true;
+  React.useEffect(() => {
+    const sharing = async () => {
+      try {
+        const buildContent = () => {
+          const content = {};
+          if (PlatformUtils.isIos) {
+            content.message = message;
+            content.url = url;
+          } else {
+            content.message = url;
+            content.title = message;
+          }
+          return content;
         };
+        const content = buildContent();
+        const result = await Share.share(content);
 
-        if (startShare) {
-            sharing().then(() => setStartShare(false));
+        if (result.action === Share.sharedAction) {
+          if (result.activityType) {
+            // shared with activity type of result.activityType
+          } else {
+            // shared
+          }
+        } else if (result.action === Share.dismissedAction) {
+          // dismissed
         }
-    }, [startShare]);
+      } catch (error) {
+        // todo
+      }
+      return true;
+    };
 
-    return {setStartShare};
+    if (startShare) {
+      sharing().then(() => setStartShare(false));
+    }
+  }, [startShare]);
+
+  return { setStartShare };
 };
 
 export default useShare;

@@ -35,15 +35,16 @@ async function registerForPushNotificationsAsync(
     }
 
     // POST the token to backend server from where you can retrieve it to send push notifications.
-    const {method, url} = api_calls.user;
-    return fetch(url, {
-        method: method,
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(session),
-    }).then((res) => res.ok);
+    // const {method, url} = api_calls.user;
+    // return fetch(url, {
+    //     method: method,
+    //     headers: {
+    //         Accept: "application/json",
+    //         "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(session),
+    // }).then((res) => res.ok);
+    return true
 }
 
 export default registerForPushNotificationsAsync;

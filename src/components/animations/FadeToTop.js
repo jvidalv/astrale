@@ -1,5 +1,5 @@
 import React from "react";
-import {Animated, Easing} from "react-native";
+import { Animated, Easing } from "react-native";
 import PropTypes from "prop-types";
 
 /**
@@ -11,51 +11,51 @@ import PropTypes from "prop-types";
  * @returns {*}
  * @constructor
  */
-function FadeToTop({children, fadeToTop, initialHeight, finalHeight}) {
-    const fadeAnim = React.useRef(new Animated.Value(0)).current;
+function FadeToTop({ children, fadeToTop, initialHeight, finalHeight }) {
+  const fadeAnim = React.useRef(new Animated.Value(0)).current;
 
-    React.useEffect(() => {
-        Animated.timing(fadeAnim, {
-            toValue: fadeToTop ? 1 : 0,
-            easing: Easing.ease,
-            duration: 500,
-            useNativeDriver: true,
-        }).start();
-    }, [fadeToTop]);
+  React.useEffect(() => {
+    Animated.timing(fadeAnim, {
+      toValue: fadeToTop ? 1 : 0,
+      easing: Easing.ease,
+      duration: 500,
+      useNativeDriver: true,
+    }).start();
+  }, [fadeToTop]);
 
-    return (
-        <Animated.View
-            style={[
-                {
-                    flex: 1,
-                    opacity: fadeAnim.interpolate({
-                        inputRange: [0, 1],
-                        outputRange: [1, 0],
-                    }),
-                    height: fadeAnim.interpolate({
-                        inputRange: [0, 1],
-                        outputRange: [initialHeight, finalHeight],
-                    }),
-                },
-            ]}
-        >
-            {children}
-        </Animated.View>
-    );
+  return (
+    <Animated.View
+      style={[
+        {
+          flex: 1,
+          opacity: fadeAnim.interpolate({
+            inputRange: [0, 1],
+            outputRange: [1, 0],
+          }),
+          height: fadeAnim.interpolate({
+            inputRange: [0, 1],
+            outputRange: [initialHeight, finalHeight],
+          }),
+        },
+      ]}
+    >
+      {children}
+    </Animated.View>
+  );
 }
 
 FadeToTop.defaultProps = {
-    fadeToTop: false,
-    initialHeight: 300,
-    finalHeight: 80,
+  fadeToTop: false,
+  initialHeight: 300,
+  finalHeight: 80,
 };
 
 FadeToTop.propTypes = {
-    fadeToTop: PropTypes.bool.isRequired,
-    children: PropTypes.oneOfType([
-        PropTypes.arrayOf(PropTypes.node),
-        PropTypes.node,
-    ]).isRequired,
+  fadeToTop: PropTypes.bool.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
 };
 
 export default FadeToTop;
