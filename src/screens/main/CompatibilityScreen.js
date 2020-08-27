@@ -1,7 +1,6 @@
 import React from "react";
 import { SafeAreaView, ScrollView, StyleSheet, View } from "react-native";
 import {
-  ActivityIndicator,
   Button,
   Divider,
   Paragraph,
@@ -13,15 +12,11 @@ import HoroscopeSigns from "../../constants/zodiac_signs";
 import { Sign } from "../../components/zodiac";
 import ShadowHeadline from "../../components/paper/ShadowHeadline";
 import i18n from "i18n-js";
-import useFetch from "../../hooks/useFetch";
 import ShowFromTop from "../../components/animations/ShowFromTop";
 import SpaceSky from "../../components/decorations/SpaceSky";
 import TextBold from "../../components/paper/TextBold";
 import MainNav from "../../components/navs/MainNav";
-import api_calls from "../../constants/apis";
 import { Language } from "../../utils";
-import { useGlobals } from "../../contexts/Global";
-import { daily } from "../../constants/daily";
 import { stale } from "../../constants/stale";
 
 /**

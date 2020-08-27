@@ -1,7 +1,6 @@
 import React from "react";
 import { SafeAreaView, StyleSheet, View } from "react-native";
 import {
-  ActivityIndicator,
   Divider,
   ProgressBar,
   Subheading,
@@ -11,7 +10,6 @@ import {
 import { Sign } from "../../components/zodiac";
 import ShadowHeadline from "../../components/paper/ShadowHeadline";
 import i18n from "i18n-js";
-import useFetch from "../../hooks/useFetch";
 import ShowFromTop from "../../components/animations/ShowFromTop";
 import { useGlobals } from "../../contexts/Global";
 import Storer from "../../utils/Storer";
@@ -23,7 +21,6 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import MainNav from "../../components/navs/MainNav";
 import ScrollViewFadeFirst from "../../components/containers/ScrollViewFadeFirst";
 import months from "../../constants/months";
-import api_calls from "../../constants/apis";
 import { Language } from "../../utils";
 import { daily } from "../../constants/daily";
 
