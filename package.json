@@ -10,7 +10,6 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
-    "@expo-google-fonts/inter": "^0.1.0",
     "@expo/vector-icons": "^12.0.0",
     "@react-native-community/datetimepicker": "3.0.4",
     "@react-native-community/masked-view": "0.1.10",
@@ -26,11 +25,6 @@
     "expo-blur": "~8.2.2",
     "expo-camera": "~9.1.0",
     "expo-constants": "~9.3.3",
-    "expo-facebook": "~9.1.0",
-    "expo-file-system": "~9.3.0",
-    "expo-font": "~8.4.0",
-    "expo-google-app-auth": "^8.1.0",
-    "expo-image-picker": "~9.2.0",
     "expo-linear-gradient": "~8.4.0",
     "expo-local-authentication": "~9.5.0",
     "expo-localization": "~9.1.0",
@@ -40,27 +34,25 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",
-    "react-native-gesture-handler": "~1.8.0",
+    "react-native-gesture-handler": "^1.10.1",
     "react-native-paper": "^3.10.1",
     "react-native-picker-select": "^7.0.0",
-    "react-native-reanimated": "~1.13.0",
     "react-native-safe-area-context": "3.1.9",
     "react-native-screens": "~2.15.2",
     "react-native-svg": "12.1.0",
-    "react-native-web": "~0.13.12",
     "react-navigation-material-bottom-tabs": "^2.2.12"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",
     "@types/react": "~16.9.35",
     "@types/react-native": "~0.63.2",
-    "babel-preset-expo": "8.3.0",
-    "typescript": "~4.0.0",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
+    "babel-preset-expo": "8.3.0",
     "eslint": "^7.0.0",
     "eslint-config-universe": "^3.0.0",
-    "prettier": "^2.0.5"
+    "prettier": "^2.0.5",
+    "typescript": "~4.0.0"
   },
   "eslintConfig": {
     "extends": "universe/native"
