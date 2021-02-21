@@ -1,13 +1,13 @@
-import React from "react";
+import PropTypes from 'prop-types';
+import React from 'react';
 import {
   KeyboardAvoidingView,
   Platform,
   SafeAreaView,
   StatusBar,
   View,
-} from "react-native";
-import { useTheme } from "react-native-paper";
-import PropTypes from "prop-types";
+} from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 /**
  * @param children
@@ -36,7 +36,7 @@ function DefaultView({
       />
       <KeyboardAvoidingView
         style={{ flex: 1 }}
-        behavior={Platform.OS === "ios" ? "padding" : null}
+        behavior={Platform.OS === 'ios' ? 'padding' : null}
         enabled={keyboardAvoidView}
       >
         <View
@@ -55,13 +55,13 @@ function DefaultView({
 
 DefaultView.propTypes = {
   background: PropTypes.string,
-  barStyle: PropTypes.oneOf(["light-content", "dark-content"]),
+  barStyle: PropTypes.oneOf(['light-content', 'dark-content']),
   styleView: PropTypes.object,
 };
 
 DefaultView.defaultProps = {
   keyboardAvoidView: true,
-  barStyle: "light-content",
+  barStyle: 'light-content',
 };
 
 export default DefaultView;

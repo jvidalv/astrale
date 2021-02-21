@@ -1,5 +1,9 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { BlurView } from 'expo-blur';
+import Constants from 'expo-constants';
+import i18n from 'i18n-js';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
 import {
   Avatar,
   Button,
@@ -8,23 +12,18 @@ import {
   Text,
   Title,
   useTheme,
-} from "react-native-paper";
-import { useGlobals } from "../../contexts/Global";
-import i18n from "i18n-js";
-import { useIsDark } from "../../hooks/useTheme";
-import { Backgrounds } from "../../svgs";
-import useRate from "../../hooks/useRate";
-import useShare from "../../hooks/useShare";
-import { DateUtils } from "../../utils";
-import Storer from "../../utils/Storer";
-import { SESSION_KEY } from "../../constants/session";
-import { BlurView } from "expo-blur";
-import PlatformUtils from "../../utils/Platform";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import Close from "../../components/navs/Close";
-// import {AdMobBanner} from "expo-ads-admob";
-// import Ads from "../../credentials/admob";
-import Constants from "expo-constants";
+} from 'react-native-paper';
+
+import Close from '../../components/navs/Close';
+import { SESSION_KEY } from '../../constants/session';
+import { useGlobals } from '../../contexts/Global';
+import useRate from '../../hooks/useRate';
+import useShare from '../../hooks/useShare';
+import { useIsDark } from '../../hooks/useTheme';
+import { Backgrounds } from '../../svgs';
+import { DateUtils } from '../../utils';
+import PlatformUtils from '../../utils/Platform';
+import Storer from '../../utils/Storer';
 
 /**
  * @param navigation
@@ -38,21 +37,21 @@ function ProfileScreen({ navigation }) {
   const { setRate } = useRate();
   const { setStartShare } = useShare(
     i18n.t(
-      "Try Astrale, the most precise horoscopes app in this existential plain"
+      'Try Astrale, the most precise horoscopes app in this existential plain'
     ),
-    "https://play.google.com/store/apps/details?id=josep.astrale"
+    'https://play.google.com/store/apps/details?id=josep.astrale'
   );
   const isDark = useIsDark();
   const isAndroid = PlatformUtils.isAndroid;
   const _handleDarkThemeChange = () => {
     dispatch({
-      type: "switchTheme",
-      theme: isDark ? "light" : "dark",
+      type: 'switchTheme',
+      theme: isDark ? 'light' : 'dark',
     });
   };
   const _handleLogOut = async () => {
     await Storer.delete(SESSION_KEY);
-    dispatch({ type: "setLogOut" });
+    dispatch({ type: 'setLogOut' });
   };
   const _handleRatePress = async () => setRate(true);
   const _handleSharePress = async () => setStartShare(true);
@@ -60,7 +59,7 @@ function ProfileScreen({ navigation }) {
   return (
     <BlurView
       style={[StyleSheet.absoluteFill]}
-      tint={isDark ? "dark" : "light"}
+      tint={isDark ? 'dark' : 'light'}
       intensity={isAndroid ? 150 : 100}
     >
       <Backgrounds.Telescope color={colors.text} style={styles.telescope} />
@@ -74,7 +73,7 @@ function ProfileScreen({ navigation }) {
       </View>
       <Divider style={{ marginTop: 25 }} />
       <View style={styles.detailsContainer}>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <MaterialCommunityIcons
             name="gender-transgender"
             color={colors.text}
@@ -82,7 +81,7 @@ function ProfileScreen({ navigation }) {
           />
           <Text style={{ marginLeft: 10 }}>{i18n.t(sex)} </Text>
         </View>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <MaterialCommunityIcons
             name="heart-circle"
             color={colors.text}
@@ -90,7 +89,7 @@ function ProfileScreen({ navigation }) {
           />
           <Text style={{ marginLeft: 10 }}>{i18n.t(relationship)} </Text>
         </View>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <MaterialCommunityIcons name="dice-6" color={colors.text} size={18} />
           <Text style={{ marginLeft: 10 }}>{number} </Text>
         </View>
@@ -103,9 +102,9 @@ function ProfileScreen({ navigation }) {
           style={{ marginTop: 10 }}
           labelStyle={styles.buttonsLabel}
           uppercase={false}
-          contentStyle={{ justifyContent: "flex-start" }}
+          contentStyle={{ justifyContent: 'flex-start' }}
         >
-          {i18n.t("Share with your friends")}
+          {i18n.t('Share with your friends')}
         </Button>
         <Button
           onPress={_handleRatePress}
@@ -113,9 +112,9 @@ function ProfileScreen({ navigation }) {
           style={{ marginTop: 10 }}
           labelStyle={styles.buttonsLabel}
           uppercase={false}
-          contentStyle={{ justifyContent: "flex-start" }}
+          contentStyle={{ justifyContent: 'flex-start' }}
         >
-          {i18n.t("Rate the app")}
+          {i18n.t('Rate the app')}
         </Button>
         {__DEV__ && (
           <Button
@@ -124,9 +123,9 @@ function ProfileScreen({ navigation }) {
             style={{ marginTop: 10 }}
             labelStyle={styles.buttonsLabel}
             uppercase={false}
-            contentStyle={{ justifyContent: "flex-start" }}
+            contentStyle={{ justifyContent: 'flex-start' }}
           >
-            {i18n.t("Restart")}
+            {i18n.t('Restart')}
           </Button>
         )}
       </View>
@@ -140,23 +139,20 @@ function ProfileScreen({ navigation }) {
             uppercase={false}
             theme={{ colors: { primary: colors.text } }}
           >
-            {i18n.t("Dark theme")}
+            {i18n.t('Dark theme')}
           </Button>
           <Switch onChange={_handleDarkThemeChange} value={isDark} />
         </View>
       </View>
       <Divider style={{ marginTop: 10 }} />
-      <View style={{ marginTop: 20 }}>
-        {/*<AdMobBanner adUnitID={Ads.banner}/>*/}
-      </View>
       <View
         style={[
           {
-            position: "absolute",
+            position: 'absolute',
             bottom: 20,
-            alignItems: "center",
-            justifyContent: "center",
-            width: "100%",
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '100%',
           },
         ]}
       >
@@ -169,45 +165,45 @@ function ProfileScreen({ navigation }) {
 const styles = StyleSheet.create({
   telescope: {
     zIndex: 0,
-    position: "absolute",
+    position: 'absolute',
     top: 50,
     right: 20,
     opacity: 0.1,
   },
   headerContainer: {
-    alignItems: "center",
-    justifyContent: "flex-start",
+    alignItems: 'center',
+    justifyContent: 'flex-start',
     marginTop: 30,
     marginHorizontal: 20,
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   headerHeadline: {
-    fontWeight: "bold",
+    fontWeight: 'bold',
     fontSize: 30,
   },
   detailsContainer: {
     marginHorizontal: 20,
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
     marginTop: 15,
-    flexDirection: "row",
-    flexWrap: "nowrap",
+    flexDirection: 'row',
+    flexWrap: 'nowrap',
   },
   detailsLabel: {
     marginLeft: 23,
     fontSize: 18,
   },
   featuredContainer: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   featuredView: {
-    alignItems: "center",
+    alignItems: 'center',
     flex: 1,
     paddingVertical: 25,
   },
   buttonsContainer: {
     marginHorizontal: 20,
-    justifyContent: "flex-start",
+    justifyContent: 'flex-start',
     marginTop: 10,
   },
   buttonsLabel: {
@@ -216,17 +212,17 @@ const styles = StyleSheet.create({
   },
   optionsContainer: {
     marginHorizontal: 20,
-    justifyContent: "flex-start",
+    justifyContent: 'flex-start',
     marginTop: 10,
     marginBottom: 10,
   },
   optionsOption: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   optionsButton: {
-    alignItems: "flex-start",
+    alignItems: 'flex-start',
     marginTop: 10,
   },
   optionsLabel: {

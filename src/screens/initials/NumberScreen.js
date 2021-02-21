@@ -1,13 +1,14 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
-import { Button, Headline, Text, useTheme } from "react-native-paper";
-import { DefaultView } from "../../components/containers";
-import Aquarius from "../../svgs/Aquarius";
-import Dices from "../../svgs/Dices";
-import i18n from "i18n-js";
-import { useGlobals } from "../../contexts/Global";
-import SpaceSky from "../../components/decorations/SpaceSky";
-import CustomInput from "../../components/paper/CustomInput";
+import i18n from 'i18n-js';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { Button, Headline, Text, useTheme } from 'react-native-paper';
+
+import { DefaultView } from '../../components/containers';
+import SpaceSky from '../../components/decorations/SpaceSky';
+import CustomInput from '../../components/paper/CustomInput';
+import { useGlobals } from '../../contexts/Global';
+import Aquarius from '../../svgs/Aquarius';
+import Dices from '../../svgs/Dices';
 
 /**
  * @param navigation
@@ -16,15 +17,14 @@ import CustomInput from "../../components/paper/CustomInput";
  */
 function NumberScreen({ navigation }) {
   const [{ session }, dispatch] = useGlobals();
-  const { colors } = useTheme();
   const [number, setNumber] = React.useState();
   const buttonDisabled = !number;
   const _handleContinue = () => {
     dispatch({
-      type: "setSession",
-      fields: { number: number },
+      type: 'setSession',
+      fields: { number },
     });
-    navigation.push("Loading");
+    navigation.push('Loading');
   };
 
   return (
@@ -34,11 +34,11 @@ function NumberScreen({ navigation }) {
       <View style={{ flex: 1 }} />
       <View style={styles.textContainer}>
         <Headline style={styles.textHeadline}>
-          {i18n.t("Your favorite number")}
+          {i18n.t('Your favorite number')}
         </Headline>
         <Text style={styles.textText}>
           {i18n.t(
-            "{name}, to give you accurate and personal information we need to know some info",
+            '{name}, to give you accurate and personal information we need to know some info',
             { name: session.name }
           )}
         </Text>
@@ -50,9 +50,9 @@ function NumberScreen({ navigation }) {
         <CustomInput
           value={number}
           onChangeText={(text) => setNumber(text)}
-          placeholder={i18n.t("Type here")}
+          placeholder={i18n.t('Type here')}
           keyboardType="number-pad"
-          enablesReturnKeyAutomatically={true}
+          enablesReturnKeyAutomatically
         />
       </View>
       <View style={styles.buttonContainer}>
@@ -61,7 +61,7 @@ function NumberScreen({ navigation }) {
           disabled={buttonDisabled}
           onPress={_handleContinue}
         >
-          {i18n.t("Continue")}
+          {i18n.t('Continue')}
         </Button>
       </View>
     </DefaultView>
@@ -71,35 +71,35 @@ function NumberScreen({ navigation }) {
 const styles = StyleSheet.create({
   constellation: {
     zIndex: 0,
-    position: "absolute",
+    position: 'absolute',
     bottom: 20,
     left: 20,
     opacity: 0.1,
   },
   aquarius: {
     zIndex: 0,
-    position: "absolute",
+    position: 'absolute',
     top: 20,
     right: 20,
     opacity: 0.2,
   },
   textContainer: {
     flex: 1.5,
-    alignSelf: "center",
+    alignSelf: 'center',
     paddingHorizontal: 20,
   },
   textHeadline: {
-    textAlign: "center",
-    textTransform: "uppercase",
-    fontWeight: "bold",
+    textAlign: 'center',
+    textTransform: 'uppercase',
+    fontWeight: 'bold',
   },
   textText: {
-    textAlign: "center",
+    textAlign: 'center',
     paddingVertical: 5,
   },
   logoContainer: {
     flex: 1,
-    alignSelf: "center",
+    alignSelf: 'center',
     paddingVertical: 25,
     zIndex: 1,
   },
@@ -111,19 +111,19 @@ const styles = StyleSheet.create({
   },
   inputStyle: {
     borderRadius: 5,
-    textAlign: "center",
+    textAlign: 'center',
   },
   inputCustom: {
-    textAlign: "center",
+    textAlign: 'center',
     marginTop: 10,
-    color: "white",
+    color: 'white',
     fontSize: 30,
   },
   buttonContainer: {
     flex: 1,
     paddingHorizontal: 20,
     paddingTop: 35,
-    justifyContent: "flex-end",
+    justifyContent: 'flex-end',
     marginBottom: 20,
   },
 });

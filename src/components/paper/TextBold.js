@@ -1,5 +1,5 @@
-import React from "react";
-import { Text } from "react-native-paper";
+import React from 'react';
+import { Text } from 'react-native-paper';
 
 /**
  * @param children
@@ -8,7 +8,7 @@ import { Text } from "react-native-paper";
  * @constructor
  */
 function TextBold({ children, style }) {
-  return <Text style={[{ fontWeight: "bold" }, style]}>{children}</Text>;
+  return <Text style={[{ fontWeight: 'bold' }, style]}>{children}</Text>;
 }
 
 export default TextBold;

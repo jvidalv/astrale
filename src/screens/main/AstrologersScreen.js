@@ -1,15 +1,14 @@
-import React from "react";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
+import i18n from 'i18n-js';
+import React from 'react';
 import {
   Image,
   SafeAreaView,
   ScrollView,
   StyleSheet,
   View,
-} from "react-native";
-import MainNav from "../../components/navs/MainNav";
-import SpaceSky from "../../components/decorations/SpaceSky";
-import ShadowHeadline from "../../components/paper/ShadowHeadline";
-import i18n from "i18n-js";
+} from 'react-native';
 import {
   Avatar,
   Subheading,
@@ -17,10 +16,12 @@ import {
   Title,
   TouchableRipple,
   useTheme,
-} from "react-native-paper";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { LinearGradient } from "expo-linear-gradient";
-import PlatformUtils from "../../utils/Platform";
+} from 'react-native-paper';
+
+import SpaceSky from '../../components/decorations/SpaceSky';
+import MainNav from '../../components/navs/MainNav';
+import ShadowHeadline from '../../components/paper/ShadowHeadline';
+import PlatformUtils from '../../utils/Platform';
 
 /**
  * @param navigation
@@ -32,66 +33,66 @@ function AstrologersScreen({ navigation }) {
   const [showAdvice, setShowAdvice] = React.useState(true);
   const _handleCloseAdvice = () => setShowAdvice(false);
   const astrologist_colors = {
-    Western: "#0f3e6a",
-    Vedic: "#3d530d",
-    Hellenistic: "#735b13",
-    Oriental: "#62230d",
+    Western: '#0f3e6a',
+    Vedic: '#3d530d',
+    Hellenistic: '#735b13',
+    Oriental: '#62230d',
   };
   const dummy_astrologist = [
     {
       id: 1,
-      name: "Marisa",
-      school: "Hellenistic",
+      name: 'Marisa',
+      school: 'Hellenistic',
       years_exp: 9,
       stars: 4,
       reviews: 125,
-      photo: require("./astrologers/marisa.jpg"),
+      photo: require('./astrologers/marisa.jpg'),
     },
     {
       id: 2,
-      name: "Carter",
-      school: "Western",
+      name: 'Carter',
+      school: 'Western',
       years_exp: 21,
       stars: 5,
       reviews: 120,
-      photo: require("./astrologers/carter.jpg"),
+      photo: require('./astrologers/carter.jpg'),
     },
     {
       id: 3,
-      name: "Samanta",
-      school: "Oriental",
+      name: 'Samanta',
+      school: 'Oriental',
       years_exp: 12,
       stars: 5,
       reviews: 321,
-      photo: require("./astrologers/samanta.jpg"),
+      photo: require('./astrologers/samanta.jpg'),
     },
 
     {
       id: 4,
-      name: "Bianca",
-      school: "Vedic",
+      name: 'Bianca',
+      school: 'Vedic',
       years_exp: 45,
       stars: 4,
       reviews: 69,
-      photo: require("./astrologers/bianca.jpg"),
+      photo: require('./astrologers/bianca.jpg'),
     },
     {
       id: 5,
-      name: "George",
-      school: "Western",
+      name: 'George',
+      school: 'Western',
       years_exp: 15,
       stars: 5,
       reviews: 198,
-      photo: require("./astrologers/george.jpg"),
+      photo: require('./astrologers/george.jpg'),
     },
     {
       id: 6,
-      name: "Meowi",
-      school: "Oriental",
+      name: 'Meowi',
+      school: 'Oriental',
       years_exp: 1,
       stars: 5,
       reviews: 7,
-      photo: require("./astrologers/meowi.jpg"),
+      photo: require('./astrologers/meowi.jpg'),
     },
   ];
 
@@ -101,7 +102,7 @@ function AstrologersScreen({ navigation }) {
       <View style={{ marginBottom: 10 }}>
         <MainNav style={{ top: 0 }} />
         <View style={styles.headerContainer}>
-          <ShadowHeadline>{i18n.t("Astrologers")}</ShadowHeadline>
+          <ShadowHeadline>{i18n.t('Astrologers')}</ShadowHeadline>
         </View>
       </View>
       <ScrollView>
@@ -109,7 +110,7 @@ function AstrologersScreen({ navigation }) {
           <View
             style={[
               styles.adviceContainer,
-              { borderColor: colors.primary + "E6" },
+              { borderColor: colors.primary + 'E6' },
             ]}
           >
             <MaterialCommunityIcons
@@ -117,36 +118,36 @@ function AstrologersScreen({ navigation }) {
               name="close"
               size={20}
               style={styles.adviceClose}
-              color={colors.primary + "E6"}
+              color={colors.primary + 'E6'}
             />
-            <Title style={{ textAlign: "center" }}>
-              {i18n.t("How it works")}
+            <Title style={{ textAlign: 'center' }}>
+              {i18n.t('How it works')}
             </Title>
             <View style={{ marginTop: 10 }}>
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Avatar.Text
                   size={30}
                   label="1"
-                  theme={{ colors: { primary: colors.primary + "E6" } }}
+                  theme={{ colors: { primary: colors.primary + 'E6' } }}
                   labelStyle={{ fontSize: 22 }}
                 />
                 <Text style={{ marginLeft: 15, fontSize: 12 }}>
-                  {i18n.t("Select an astrologer")}
+                  {i18n.t('Select an astrologer')}
                 </Text>
               </View>
               <View
                 style={[
                   styles.listDivider,
                   {
-                    borderLeftColor: colors.accent + "E6",
+                    borderLeftColor: colors.accent + 'E6',
                   },
                 ]}
               />
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Avatar.Text
                   size={30}
                   label="2"
-                  theme={{ colors: { primary: colors.primary + "E6" } }}
+                  theme={{ colors: { primary: colors.primary + 'E6' } }}
                   labelStyle={{ fontSize: 22 }}
                 />
                 <Text
@@ -155,22 +156,22 @@ function AstrologersScreen({ navigation }) {
                     fontSize: 12,
                   }}
                 >
-                  {i18n.t("Introduce your email and question")}
+                  {i18n.t('Introduce your email and question')}
                 </Text>
               </View>
               <View
                 style={[
                   styles.listDivider,
                   {
-                    borderLeftColor: colors.accent + "E6",
+                    borderLeftColor: colors.accent + 'E6',
                   },
                 ]}
               />
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Avatar.Text
                   size={30}
                   label="3"
-                  theme={{ colors: { primary: colors.primary + "E6" } }}
+                  theme={{ colors: { primary: colors.primary + 'E6' } }}
                   labelStyle={{ fontSize: 22 }}
                 />
                 <Text
@@ -179,7 +180,7 @@ function AstrologersScreen({ navigation }) {
                     fontSize: 12,
                   }}
                 >
-                  {i18n.t("Wait ~24 hours for the response")}
+                  {i18n.t('Wait ~24 hours for the response')}
                 </Text>
               </View>
             </View>
@@ -191,16 +192,16 @@ function AstrologersScreen({ navigation }) {
               <React.Fragment key={id}>
                 <TouchableRipple
                   onPress={() =>
-                    navigation.navigate("Question", {
-                      key: "Profile",
+                    navigation.navigate('Question', {
+                      key: 'Profile',
                       astrologist: dummy_astrologist[i],
                     })
                   }
                   style={styles.astrologistCard}
-                  underlayColor={colors.text + "33"}
-                  borderless={true}
+                  underlayColor={colors.text + '33'}
+                  borderless
                 >
-                  <React.Fragment>
+                  <>
                     <Image
                       style={styles.astrologistImage}
                       source={photo}
@@ -208,21 +209,21 @@ function AstrologersScreen({ navigation }) {
                       resizeMode="cover"
                     />
                     <LinearGradient
-                      colors={["transparent", "rgba(0,0,0,0.8)"]}
+                      colors={['transparent', 'rgba(0,0,0,0.8)']}
                       style={styles.astrologistGradient}
                     >
-                      <Title theme={{ colors: { text: "#FFFFFF" } }}>
+                      <Title theme={{ colors: { text: '#FFFFFF' } }}>
                         {name}
                       </Title>
                     </LinearGradient>
                     <Subheading
-                      theme={{ colors: { text: "#FFFFFF" } }}
+                      theme={{ colors: { text: '#FFFFFF' } }}
                       style={[
                         styles.astrologistSubheading,
                         { backgroundColor: astrologist_colors[school] },
                       ]}
                     >
-                      {i18n.t(school, { word: i18n.t("Astrology") })}
+                      {i18n.t(school, { word: i18n.t('Astrology') })}
                     </Subheading>
                     <View
                       style={[
@@ -239,16 +240,16 @@ function AstrologersScreen({ navigation }) {
                         <MaterialCommunityIcons name="star" color="gold" />
                         <MaterialCommunityIcons name="star" color="gold" />
                         <MaterialCommunityIcons
-                          name={stars === 5 ? "star" : "star-half"}
+                          name={stars === 5 ? 'star' : 'star-half'}
                           color="gold"
                         />
                         <Text style={styles.astrologistReview}>{reviews}</Text>
                       </View>
                     </View>
-                  </React.Fragment>
+                  </>
                 </TouchableRipple>
                 {i + (1 % 2) === 0 ? (
-                  <View style={{ width: "100%", height: 50 }} />
+                  <View style={{ width: '100%', height: 50 }} />
                 ) : null}
               </React.Fragment>
             )
@@ -261,13 +262,13 @@ function AstrologersScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   headerContainer: {
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     marginHorizontal: 20,
     marginTop: 10,
   },
   headerHeadline: {
-    fontWeight: "bold",
+    fontWeight: 'bold',
     fontSize: 30,
     lineHeight: 34,
   },
@@ -278,7 +279,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     padding: 20,
   },
-  adviceClose: { position: "absolute", top: 20, right: 20, zIndex: 2 },
+  adviceClose: { position: 'absolute', top: 20, right: 20, zIndex: 2 },
   listDivider: {
     height: 10,
     borderLeftWidth: 1,
@@ -287,17 +288,17 @@ const styles = StyleSheet.create({
   astrologistContainer: {
     margin: 20,
     marginTop: 20,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    flexWrap: "wrap",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flexWrap: 'wrap',
   },
   astrologistCard: {
     borderRadius: PlatformUtils.isAndroid ? 0 : 25,
-    width: "48%",
+    width: '48%',
     marginTop: 8,
     marginBottom: 5,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 1,
@@ -315,15 +316,15 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     height: 150,
-    width: "100%",
+    width: '100%',
   },
   astrologistGradient: {
     marginTop: -34,
     paddingLeft: 10,
   },
   astrologistDetailsContainer: {
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     padding: 10,
     borderBottomWidth: 2,
     borderLeftWidth: 2,
@@ -333,9 +334,9 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 25,
   },
   astrologistStars: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     marginTop: 3,
   },
   astrologistReview: {

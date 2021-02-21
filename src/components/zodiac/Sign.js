@@ -1,15 +1,16 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { StyleSheet, View } from "react-native";
-import { Zodiac } from "../../svgs";
+import i18n from 'i18n-js';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
 import {
   Caption,
   Subheading,
   TouchableRipple,
   useTheme,
-} from "react-native-paper";
-import i18n from "i18n-js";
-import PlatformUtils from "../../utils/Platform";
+} from 'react-native-paper';
+
+import { Zodiac } from '../../svgs';
+import PlatformUtils from '../../utils/Platform';
 
 const _signs = {
   Aquarius: Zodiac.Aquarius,
@@ -54,19 +55,18 @@ function Sign({
 }) {
   const ParsedSign = _signs[sign];
   const isAndroid = PlatformUtils.isAndroid;
-  const { colors } = useTheme();
   return (
     <TouchableRipple
       onPress={() => onPress(sign)}
       underlayColor="#ffffff00"
       rippleColor="#ffffff00"
-      style={[{ alignItems: "center", justifyContent: "center" }, style]}
+      style={[{ alignItems: 'center', justifyContent: 'center' }, style]}
     >
-      <React.Fragment>
+      <>
         <View
           style={[
             {
-              shadowColor: "#000000",
+              shadowColor: '#000000',
               width: signWidth,
               height: signHeight,
             },
@@ -83,7 +83,7 @@ function Sign({
           <Subheading style={styleTitle}>{title ?? i18n.t(sign)}</Subheading>
         )}
         {subtitle && <Caption style={styleSubtitle}>{subtitle}</Caption>}
-      </React.Fragment>
+      </>
     </TouchableRipple>
   );
 }
@@ -98,8 +98,8 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
   },
   signContainer: {
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     borderRadius: 100,
   },
 });

@@ -1,9 +1,7 @@
-import React from "react";
-import { SafeAreaView, StyleSheet, View } from "react-native";
-import MainNav from "../../components/navs/MainNav";
-import SpaceSky from "../../components/decorations/SpaceSky";
-import ShadowHeadline from "../../components/paper/ShadowHeadline";
-import i18n from "i18n-js";
+import { LinearGradient } from 'expo-linear-gradient';
+import i18n from 'i18n-js';
+import React from 'react';
+import { SafeAreaView, StyleSheet, View } from 'react-native';
 import {
   Button,
   Caption,
@@ -12,14 +10,16 @@ import {
   Text,
   Title,
   useTheme,
-} from "react-native-paper";
-import ScrollViewFadeFirst from "../../components/containers/ScrollViewFadeFirst";
-import Constellation from "../../svgs/backgrounds/Constellation";
-import { LinearGradient } from "expo-linear-gradient";
-import ConstellationSimple from "../../svgs/backgrounds/ConstellationSimple";
-import Leo from "../../svgs/Leo";
-// import {AdMobInterstitial} from "expo-ads-admob";
-import { useGlobals } from "../../contexts/Global";
+} from 'react-native-paper';
+
+import ScrollViewFadeFirst from '../../components/containers/ScrollViewFadeFirst';
+import SpaceSky from '../../components/decorations/SpaceSky';
+import MainNav from '../../components/navs/MainNav';
+import ShadowHeadline from '../../components/paper/ShadowHeadline';
+import { useGlobals } from '../../contexts/Global';
+import Leo from '../../svgs/Leo';
+import Constellation from '../../svgs/backgrounds/Constellation';
+import ConstellationSimple from '../../svgs/backgrounds/ConstellationSimple';
 
 const SubHeading = () => {
   const { colors } = useTheme();
@@ -27,12 +27,12 @@ const SubHeading = () => {
     <View style={{ marginHorizontal: 20 }}>
       <Title
         theme={{ colors: { text: colors.primary } }}
-        style={{ textAlign: "center" }}
+        style={{ textAlign: 'center' }}
       >
-        {i18n.t("Astrology guides")}
+        {i18n.t('Astrology guides')}
       </Title>
       <View style={{ height: 10 }} />
-      <Text style={{ textAlign: "center" }}>{i18n.t("Learn paragraph")}</Text>
+      <Text style={{ textAlign: 'center' }}>{i18n.t('Learn paragraph')}</Text>
     </View>
   );
 };
@@ -47,13 +47,10 @@ function LearnScreen({ navigation }) {
   const { colors } = useTheme();
   const _handleViewLesson = async (lesson) => {
     try {
-      dispatch({ type: "toggleLoader" });
-      // await AdMobInterstitial.requestAdAsync();
-      // await AdMobInterstitial.showAdAsync();
+      dispatch({ type: 'toggleLoader' });
     } catch {
-      // Error
     } finally {
-      dispatch({ type: "toggleLoader" });
+      dispatch({ type: 'toggleLoader' });
       navigation.navigate(lesson, { key: 1 });
     }
   };
@@ -63,26 +60,26 @@ function LearnScreen({ navigation }) {
       <View style={{ marginBottom: 10 }}>
         <MainNav style={{ top: 0 }} />
         <View style={styles.headerContainer}>
-          <ShadowHeadline>{i18n.t("Learn")}</ShadowHeadline>
+          <ShadowHeadline>{i18n.t('Learn')}</ShadowHeadline>
         </View>
       </View>
       <ScrollViewFadeFirst element={<SubHeading />} height={140}>
         <Surface
           style={[
             styles.surfaceRight,
-            { backgroundColor: "transparent", marginTop: 10 },
+            { backgroundColor: 'transparent', marginTop: 10 },
           ]}
         >
           <View style={[StyleSheet.absoluteFill, { top: -25, opacity: 0.8 }]}>
             <Constellation
-              color={colors.text + "3D"}
+              color={colors.text + '3D'}
               dotColor={colors.accent}
               width={250}
               height={300}
             />
           </View>
           <LinearGradient
-            colors={["transparent", "#4c4c4c" + "E6", "#4c4c4c" + "E6"]}
+            colors={['transparent', '#4c4c4c' + 'E6', '#4c4c4c' + 'E6']}
             start={[0, 0]}
             end={[1, 0]}
             style={styles.gradientRight}
@@ -90,33 +87,33 @@ function LearnScreen({ navigation }) {
             <View style={{ flex: 0.8 }} />
             <View style={{ flex: 1 }}>
               <Subheading
-                theme={{ colors: { text: "#FFFFFF" } }}
+                theme={{ colors: { text: '#FFFFFF' } }}
                 numberOfLines={1}
-                style={{ fontWeight: "bold" }}
+                style={{ fontWeight: 'bold' }}
               >
-                {i18n.t("About the Zodiac")}
+                {i18n.t('About the Zodiac')}
               </Subheading>
-              <Caption theme={{ colors: { text: "#FFFFFF" } }}>
-                {i18n.t("Older as mankind")}
+              <Caption theme={{ colors: { text: '#FFFFFF' } }}>
+                {i18n.t('Older as mankind')}
               </Caption>
               <Caption
-                theme={{ colors: { text: "#FFFFFF" } }}
+                theme={{ colors: { text: '#FFFFFF' } }}
                 style={{ marginTop: -3 }}
               >
-                {i18n.t("Bind to the sky")}
+                {i18n.t('Bind to the sky')}
               </Caption>
-              <View style={{ flex: 1, justifyContent: "flex-end" }}>
+              <View style={{ flex: 1, justifyContent: 'flex-end' }}>
                 <Button
                   mode="contained"
                   icon="lock-outline"
                   style={{ borderRadius: 25, marginTop: 5 }}
                   theme={{
-                    colors: { primary: colors.backdrop, text: "#FFFFFF" },
+                    colors: { primary: colors.backdrop, text: '#FFFFFF' },
                   }}
                   labelStyle={{ fontSize: 9, letterSpacing: 0 }}
-                  onPress={() => _handleViewLesson("AboutZodiac")}
+                  onPress={() => _handleViewLesson('AboutZodiac')}
                 >
-                  {i18n.t("Watch an ad to unblock")}
+                  {i18n.t('Watch an ad to unblock')}
                 </Button>
               </View>
             </View>
@@ -126,51 +123,46 @@ function LearnScreen({ navigation }) {
         <Surface
           style={[
             styles.surfaceLeft,
-            { backgroundColor: "transparent", height: 140 },
+            { backgroundColor: 'transparent', height: 140 },
           ]}
         >
           <View style={[StyleSheet.absoluteFill, { right: 150, opacity: 0.4 }]}>
             <ConstellationSimple
-              color={colors.text + "3D"}
+              color={colors.text + '3D'}
               dotColor={colors.primary}
               width={200}
               height={150}
             />
           </View>
           <LinearGradient
-            colors={[
-              "#81411a",
-              "#81411a" + "E6",
-              "#81411a" + "3D",
-              "transparent",
-            ]}
+            colors={['#81411a', '#81411aE6', '#81411a3D', 'transparent']}
             start={[0, 0]}
             end={[1, 0]}
             style={styles.gradientLeft}
           >
             <View style={{ flex: 1 }}>
               <Subheading
-                theme={{ colors: { text: "#FFFFFF" } }}
+                theme={{ colors: { text: '#FFFFFF' } }}
                 numberOfLines={1}
-                style={{ fontWeight: "bold" }}
+                style={{ fontWeight: 'bold' }}
               >
-                {i18n.t("The signs")}
+                {i18n.t('The signs')}
               </Subheading>
-              <Caption theme={{ colors: { text: "#FFFFFF" } }}>
-                {i18n.t("The importance of when")}
+              <Caption theme={{ colors: { text: '#FFFFFF' } }}>
+                {i18n.t('The importance of when')}
               </Caption>
-              <View style={{ flex: 1, justifyContent: "flex-end" }}>
+              <View style={{ flex: 1, justifyContent: 'flex-end' }}>
                 <Button
                   mode="contained"
                   icon="lock-outline"
                   style={{ borderRadius: 25 }}
                   theme={{
-                    colors: { primary: colors.backdrop, text: "#FFFFFF" },
+                    colors: { primary: colors.backdrop, text: '#FFFFFF' },
                   }}
                   labelStyle={{ fontSize: 9, letterSpacing: 0 }}
-                  onPress={() => _handleViewLesson("TheSigns")}
+                  onPress={() => _handleViewLesson('TheSigns')}
                 >
-                  {i18n.t("Watch an ad to unblock")}
+                  {i18n.t('Watch an ad to unblock')}
                 </Button>
               </View>
             </View>
@@ -181,14 +173,14 @@ function LearnScreen({ navigation }) {
         <Surface
           style={[
             styles.surfaceRight,
-            { backgroundColor: "transparent", height: 130 },
+            { backgroundColor: 'transparent', height: 130 },
           ]}
         >
           <View style={[StyleSheet.absoluteFill, { top: -25, opacity: 0.3 }]}>
             <Leo color={colors.text} width={200} height={200} />
           </View>
           <LinearGradient
-            colors={["transparent", "#13366f" + "E6", "#13366f" + "E6"]}
+            colors={['transparent', '#13366f' + 'E6', '#13366f' + 'E6']}
             start={[0, 0]}
             end={[1, 0]}
             style={styles.gradientRight}
@@ -196,25 +188,25 @@ function LearnScreen({ navigation }) {
             <View style={{ flex: 0.8 }} />
             <View style={{ flex: 1 }}>
               <Subheading
-                theme={{ colors: { text: "#FFFFFF" } }}
+                theme={{ colors: { text: '#FFFFFF' } }}
                 numberOfLines={1}
-                style={{ fontWeight: "bold" }}
+                style={{ fontWeight: 'bold' }}
               >
-                {i18n.t("The elements")}
+                {i18n.t('The elements')}
               </Subheading>
-              <Caption theme={{ colors: { text: "#FFFFFF" } }}>
-                {i18n.t("The pillars of life")}
+              <Caption theme={{ colors: { text: '#FFFFFF' } }}>
+                {i18n.t('The pillars of life')}
               </Caption>
-              <View style={{ flex: 1, justifyContent: "flex-end" }}>
+              <View style={{ flex: 1, justifyContent: 'flex-end' }}>
                 <Button
                   mode="contained"
                   icon="lock-outline"
                   style={{ borderRadius: 25, marginTop: 5 }}
                   theme={{ colors: { primary: colors.backdrop } }}
                   labelStyle={{ fontSize: 9, letterSpacing: 0 }}
-                  onPress={() => _handleViewLesson("TheElements")}
+                  onPress={() => _handleViewLesson('TheElements')}
                 >
-                  {i18n.t("Watch an ad to unblock")}
+                  {i18n.t('Watch an ad to unblock')}
                 </Button>
               </View>
             </View>
@@ -228,8 +220,8 @@ function LearnScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   headerContainer: {
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     marginHorizontal: 20,
     marginTop: 10,
   },
@@ -240,37 +232,37 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     padding: 20,
   },
-  adviceClose: { position: "absolute", top: 20, right: 20, zIndex: 2 },
+  adviceClose: { position: 'absolute', top: 20, right: 20, zIndex: 2 },
   surfaceRight: {
     elevation: 3,
     height: 160,
-    flexDirection: "row",
+    flexDirection: 'row',
 
     borderRadius: 25,
     marginHorizontal: 20,
-    overflow: "hidden",
+    overflow: 'hidden',
   },
   surfaceLeft: {
     elevation: 3,
     height: 160,
-    flexDirection: "row-reverse",
+    flexDirection: 'row-reverse',
     borderRadius: 25,
     marginHorizontal: 20,
-    overflow: "hidden",
+    overflow: 'hidden',
   },
   gradientRight: {
     padding: 15,
     borderTopRightRadius: 25,
     borderBottomRightRadius: 25,
     flex: 1,
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   gradientLeft: {
     padding: 15,
     borderTopRightRadius: 25,
     borderBottomRightRadius: 25,
     flex: 1,
-    flexDirection: "row",
+    flexDirection: 'row',
   },
 });
 

@@ -1,5 +1,5 @@
-import React from "react";
-import { Keyboard } from "react-native";
+import React from 'react';
+import { Keyboard } from 'react-native';
 
 /**
  * Keyboard shown hook
@@ -10,13 +10,13 @@ const useKeyboard = () => {
 
   React.useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
-      "keyboardDidShow",
+      'keyboardDidShow',
       () => {
         setKeyboardVisible(true);
       }
     );
     const keyboardDidHideListener = Keyboard.addListener(
-      "keyboardDidHide",
+      'keyboardDidHide',
       () => {
         setKeyboardVisible(false);
       }

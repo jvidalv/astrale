@@ -1,6 +1,6 @@
-import * as React from "react";
-import Svg, { Circle, G, Path } from "react-native-svg";
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
+import * as React from 'react';
+import Svg, { Circle, G, Path } from 'react-native-svg';
 
 function SolarSystem({ height, width, style }) {
   return (

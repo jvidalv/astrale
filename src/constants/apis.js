@@ -3,8 +3,8 @@
  * @type {string}
  */
 const BASE_PATH = __DEV__
-  ? "https://test.vvadmin.dev/api/"
-  : "https://test.vvadmin.dev/api/";
+  ? 'https://test.vvadmin.dev/api/'
+  : 'https://test.vvadmin.dev/api/';
 
 /**
  *
@@ -13,23 +13,23 @@ const BASE_PATH = __DEV__
 const api_calls = {
   daily: {
     url: `${BASE_PATH}astrale/daily?day={day}&sign={sign}`,
-    params: ["day", "sign"],
-    method: "GET",
+    params: ['day', 'sign'],
+    method: 'GET',
   },
   compatibility: {
     url: `${BASE_PATH}astrale/compatibility?sign1={sign1}&sign2={sign2}`,
-    params: ["sign1", "sign2"],
-    method: "GET",
+    params: ['sign1', 'sign2'],
+    method: 'GET',
   },
   astrology: {
     url: `${BASE_PATH}astrale/message`,
-    params: ["email", "question", "astrologer"],
-    method: "POST",
+    params: ['email', 'question', 'astrologer'],
+    method: 'POST',
   },
   user: {
     url: `${BASE_PATH}astrale/user`,
     params: [],
-    method: "POST",
+    method: 'POST',
   },
 };
 

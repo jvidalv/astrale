@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 /**
  * @param method
@@ -9,20 +9,20 @@ import React from "react";
  */
 export const fetcher = async (method, url, params, values) => {
   const config = {
-    method: method,
+    method,
     headers: {
-      "Content-Type": "application/json",
-      Authorization: "josep-is-the-best-programmer-out-there",
+      'Content-Type': 'application/json',
+      Authorization: 'josep-is-the-best-programmer-out-there',
     },
   };
 
-  if (method === "GET") {
-    for (let param of params) {
-      url = url.replace("{" + param + "}", values[param]);
+  if (method === 'GET') {
+    for (const param of params) {
+      url = url.replace('{' + param + '}', values[param]);
     }
   }
 
-  if (method === "POST") {
+  if (method === 'POST') {
     config.body = JSON.stringify(values);
   }
 
@@ -32,7 +32,7 @@ export const fetcher = async (method, url, params, values) => {
         return res.json();
       }
     } catch {
-      throw Error("Error while fetching data");
+      throw Error('Error while fetching data');
     }
   });
 };
@@ -52,12 +52,12 @@ const initialState = {
  */
 function reducer(state, action) {
   switch (action.type) {
-    case "fetchResponse":
+    case 'fetchResponse':
       return {
         loading: false,
         data: action.data,
       };
-    case "fetchAgain":
+    case 'fetchAgain':
       return {
         loading: true,
         data: null,
@@ -78,7 +78,7 @@ const useFetch = ({ method, params, url }, values = {}) => {
   const [{ data, loading }, dispatch] = React.useReducer(reducer, initialState);
   const [error, setError] = React.useState(0);
   const setLoading = () => {
-    dispatch({ type: "fetchAgain" });
+    dispatch({ type: 'fetchAgain' });
   };
 
   React.useEffect(() => {
@@ -87,7 +87,7 @@ const useFetch = ({ method, params, url }, values = {}) => {
     if (loading) {
       fetcher(method, url, params, values)
         .then((res) => {
-          isSubscribed && dispatch({ type: "fetchResponse", data: res });
+          isSubscribed && dispatch({ type: 'fetchResponse', data: res });
         })
         .catch(() => {
           setError((error) => error + 1);

@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Svg, { Circle, Path } from "react-native-svg";
+import PropTypes from 'prop-types';
+import React from 'react';
+import Svg, { Circle, Path } from 'react-native-svg';
 
 /**
  * @param height {number}

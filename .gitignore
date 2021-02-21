@@ -21,5 +21,3 @@ src/credentials/google-services.json
 # ides
 .idea
 
-# App json coz keys
-app.json

@@ -1,5 +1,6 @@
-import React from "react";
-import { SafeAreaView, ScrollView, StyleSheet, View } from "react-native";
+import i18n from 'i18n-js';
+import React from 'react';
+import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
 import {
   Button,
   Divider,
@@ -7,17 +8,17 @@ import {
   ProgressBar,
   Text,
   useTheme,
-} from "react-native-paper";
-import HoroscopeSigns from "../../constants/zodiac_signs";
-import { Sign } from "../../components/zodiac";
-import ShadowHeadline from "../../components/paper/ShadowHeadline";
-import i18n from "i18n-js";
-import ShowFromTop from "../../components/animations/ShowFromTop";
-import SpaceSky from "../../components/decorations/SpaceSky";
-import TextBold from "../../components/paper/TextBold";
-import MainNav from "../../components/navs/MainNav";
-import { Language } from "../../utils";
-import { stale } from "../../constants/stale";
+} from 'react-native-paper';
+
+import ShowFromTop from '../../components/animations/ShowFromTop';
+import SpaceSky from '../../components/decorations/SpaceSky';
+import MainNav from '../../components/navs/MainNav';
+import ShadowHeadline from '../../components/paper/ShadowHeadline';
+import TextBold from '../../components/paper/TextBold';
+import { Sign } from '../../components/zodiac';
+import { stale } from '../../constants/stale';
+import HoroscopeSigns from '../../constants/zodiac_signs';
+import { Language } from '../../utils';
 
 /**
  * Progress bars from match
@@ -31,7 +32,7 @@ import { stale } from "../../constants/stale";
 const Bars = ({ name, icon, end }) => {
   const { colors } = useTheme();
   return (
-    <React.Fragment>
+    <>
       <View style={styles.mathProgressText}>
         <Button theme={{ colors: { primary: colors.text } }} icon={icon}>
           {i18n.t(name)}
@@ -39,7 +40,7 @@ const Bars = ({ name, icon, end }) => {
         <Text>{end}%</Text>
       </View>
       <ProgressBar progress={end / 100} style={styles.matchProgressBar} />
-    </React.Fragment>
+    </>
   );
 };
 
@@ -55,18 +56,18 @@ const MatchContent = ({ sign1, sign2 }) => {
   const data = stale[dataIndex !== -1 ? dataIndex : 0];
   const matches_data = [
     {
-      name: "Intimate",
-      icon: "account-multiple-plus-outline",
+      name: 'Intimate',
+      icon: 'account-multiple-plus-outline',
     },
-    { name: "Mindset", icon: "thought-bubble" },
-    { name: "Feelings", icon: "heart" },
-    { name: "Priorities", icon: "priority-high" },
-    { name: "Interests", icon: "sticker-emoji" },
-    { name: "Sport", icon: "run" },
+    { name: 'Mindset', icon: 'thought-bubble' },
+    { name: 'Feelings', icon: 'heart' },
+    { name: 'Priorities', icon: 'priority-high' },
+    { name: 'Interests', icon: 'sticker-emoji' },
+    { name: 'Sport', icon: 'run' },
   ];
 
   return (
-    <React.Fragment>
+    <>
       <View style={styles.surfaceContainer}>
         <ShowFromTop>
           <TextBold style={{ marginBottom: 10 }}>
@@ -74,7 +75,7 @@ const MatchContent = ({ sign1, sign2 }) => {
           </TextBold>
           <Paragraph>{data.resume[Language.filteredLocale()]}</Paragraph>
           <TextBold style={{ marginTop: 20, marginBottom: 10 }}>
-            {i18n.t("Relationship")}
+            {i18n.t('Relationship')}
           </TextBold>
           <Paragraph>{data.relationship[Language.filteredLocale()]}</Paragraph>
           <View style={{ marginVertical: 20 }}>
@@ -88,7 +89,7 @@ const MatchContent = ({ sign1, sign2 }) => {
           </View>
         </ShowFromTop>
       </View>
-    </React.Fragment>
+    </>
   );
 };
 
@@ -103,7 +104,7 @@ const SignsContent = ({ onPress }) => (
     {HoroscopeSigns.map((sign) => (
       <Sign
         key={sign}
-        showTitle={true}
+        showTitle
         sign={sign}
         signHeight={100}
         signWidth={90}
@@ -141,7 +142,7 @@ function CompatibilityScreen({ navigation }) {
       <View style={{ marginBottom: 10 }}>
         <MainNav />
         <View style={styles.headerContainer}>
-          <ShadowHeadline>{i18n.t("Compatibility")}</ShadowHeadline>
+          <ShadowHeadline>{i18n.t('Compatibility')}</ShadowHeadline>
         </View>
       </View>
       <View style={styles.matchCirclesContainer}>
@@ -158,14 +159,14 @@ function CompatibilityScreen({ navigation }) {
             style={[
               styles.matchCircle,
               {
-                shadowColor: "#000000",
+                shadowColor: '#000000',
                 backgroundColor: colors.surface,
                 borderColor: colors.text,
               },
             ]}
           >
-            <Text style={{ textAlign: "center", fontSize: 10 }}>
-              {i18n.t("Your sign")}
+            <Text style={{ textAlign: 'center', fontSize: 10 }}>
+              {i18n.t('Your sign')}
             </Text>
           </View>
         )}
@@ -185,14 +186,14 @@ function CompatibilityScreen({ navigation }) {
             style={[
               styles.matchCircle,
               {
-                shadowColor: "#000000",
+                shadowColor: '#000000',
                 backgroundColor: colors.surface,
                 borderColor: colors.text,
               },
             ]}
           >
-            <Text style={{ textAlign: "center", fontSize: 10 }}>
-              {i18n.t("Partner sign")}
+            <Text style={{ textAlign: 'center', fontSize: 10 }}>
+              {i18n.t('Partner sign')}
             </Text>
           </View>
         )}
@@ -212,35 +213,35 @@ function CompatibilityScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   headerContainer: {
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     marginHorizontal: 20,
     marginTop: 10,
   },
   matchCirclesContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "center",
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
     marginVertical: 30,
   },
   matchCircle: {
     elevation: 10,
     shadowRadius: 7,
     shadowOpacity: 0.2,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     borderWidth: 1,
     width: 100,
     height: 100,
     borderRadius: 50,
-    borderStyle: "dashed",
+    borderStyle: 'dashed',
     padding: 5,
   },
   signsContainer: {
     zIndex: 5,
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
     paddingHorizontal: 20,
     marginBottom: 20,
     flex: 1,
@@ -259,9 +260,9 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
   },
   mathProgressText: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   matchProgressBar: {
     borderRadius: 10,
@@ -269,9 +270,9 @@ const styles = StyleSheet.create({
     marginBottom: 3,
   },
   matchSeparator: {
-    justifyContent: "center",
+    justifyContent: 'center',
     flex: 0.3,
-    alignItems: "center",
+    alignItems: 'center',
   },
 });
 

@@ -1,6 +1,7 @@
-import React from "react";
-import { Share } from "react-native";
-import PlatformUtils from "../utils/Platform";
+import React from 'react';
+import { Share } from 'react-native';
+
+import PlatformUtils from '../utils/Platform';
 
 /**
  * @param message {string}

@@ -1,6 +1,6 @@
-import { Language } from "../utils";
+import { Language } from '../utils';
 
-export const SESSION_KEY = "session-key";
+export const SESSION_KEY = 'session-key';
 
 const default_session = {
   name: null,

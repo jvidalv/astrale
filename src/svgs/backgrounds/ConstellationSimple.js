@@ -1,6 +1,6 @@
-import * as React from "react";
-import Svg, { Circle, Path } from "react-native-svg";
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
+import * as React from 'react';
+import Svg, { Circle, Path } from 'react-native-svg';
 
 function ConstellationSimple({ color, dotColor, height, width, style }) {
   return (
@@ -23,8 +23,8 @@ function ConstellationSimple({ color, dotColor, height, width, style }) {
 ConstellationSimple.defaultProps = {
   height: 120,
   width: 120,
-  color: "#fbf1e2",
-  dotColor: "#f4d8a5",
+  color: '#fbf1e2',
+  dotColor: '#f4d8a5',
 };
 
 ConstellationSimple.propTypes = {

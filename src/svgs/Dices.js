@@ -1,7 +1,7 @@
-import * as React from "react";
-import Svg, { Ellipse, G, Path } from "react-native-svg";
-import PropTypes from "prop-types";
-import { useTheme } from "react-native-paper";
+import PropTypes from 'prop-types';
+import * as React from 'react';
+import { useTheme } from 'react-native-paper';
+import Svg, { Ellipse, G, Path } from 'react-native-svg';
 
 function Dices({ color, height, width, style }) {
   const { colors } = useTheme();
@@ -118,7 +118,7 @@ function Dices({ color, height, width, style }) {
 Dices.defaultProps = {
   height: 120,
   width: 120,
-  color: "white",
+  color: 'white',
 };
 
 Dices.propTypes = {

@@ -1,7 +1,7 @@
-import * as React from "react";
-import Svg, { Circle, Path } from "react-native-svg";
-import PropTypes from "prop-types";
-import { useTheme } from "react-native-paper";
+import PropTypes from 'prop-types';
+import * as React from 'react';
+import { useTheme } from 'react-native-paper';
+import Svg, { Circle, Path } from 'react-native-svg';
 
 function Married({ color, height, width, style }) {
   const { colors } = useTheme();
@@ -12,7 +12,7 @@ function Married({ color, height, width, style }) {
         cx={236.967}
         cy={236.967}
         r={236.967}
-        fill={colors.primary + "50"}
+        fill={colors.primary + '50'}
       />
       <Path
         d="M362.409 45.446c0 51.115-85.141 90.88-85.141 90.88s-21.291-9.941-42.571-26.272c-20.532-15.725-42.571-38.626-42.571-64.608 0-24.553 19.548-44.794 44.235-45.43 17.147-.453 32.791 8.769 40.907 23.424C285.489 8.596 301.308-.467 318.153.027c24.685.609 44.256 20.821 44.256 45.419z"
@@ -37,7 +37,7 @@ function Married({ color, height, width, style }) {
 Married.defaultProps = {
   height: 120,
   width: 120,
-  color: "white",
+  color: 'white',
 };
 
 Married.propTypes = {

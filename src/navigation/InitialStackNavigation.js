@@ -1,11 +1,12 @@
-import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
-import NameScreen from "../screens/initials/NameScreen";
-import BirthDateScreen from "../screens/initials/BirthDateScreen";
-import SexScreen from "../screens/initials/SexScreen";
-import RelationshipScreen from "../screens/initials/RelationshipScreen";
-import NumberScreen from "../screens/initials/NumberScreen";
-import LoadingScreen from "../screens/initials/LoadingScreen";
+import { createStackNavigator } from '@react-navigation/stack';
+import React from 'react';
+
+import BirthDateScreen from '../screens/initials/BirthDateScreen';
+import LoadingScreen from '../screens/initials/LoadingScreen';
+import NameScreen from '../screens/initials/NameScreen';
+import NumberScreen from '../screens/initials/NumberScreen';
+import RelationshipScreen from '../screens/initials/RelationshipScreen';
+import SexScreen from '../screens/initials/SexScreen';
 
 const Stack = createStackNavigator();
 
@@ -41,8 +42,6 @@ function InitialStackNavigation() {
         component={NumberScreen}
         options={{ headerShown: false }}
       />
-      {/*<Stack.Screen name="Palmistry" component={PalmistryPreScanScreen} options={{headerShown: false}}/>*/}
-      {/*<Stack.Screen name="PalmistryScan" component={PalmistryScanScreen} options={{headerShown: false}}/>*/}
       <Stack.Screen
         name="Loading"
         component={LoadingScreen}

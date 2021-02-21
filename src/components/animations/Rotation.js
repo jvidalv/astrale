@@ -1,6 +1,6 @@
-import React from "react";
-import { Animated, Easing } from "react-native";
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Animated, Easing } from 'react-native';
 
 /**
  * Fades a set of children to the top
@@ -24,7 +24,7 @@ function Rotation({ children, rotate, style }) {
 
   const spinInterpolate = spinAnim.interpolate({
     inputRange: [0, 1],
-    outputRange: ["0deg", "10000deg"],
+    outputRange: ['0deg', '10000deg'],
   });
 
   return (

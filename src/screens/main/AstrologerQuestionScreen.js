@@ -1,4 +1,6 @@
-import React from "react";
+import { BlurView } from 'expo-blur';
+import i18n from 'i18n-js';
+import React from 'react';
 import {
   Alert,
   Image,
@@ -7,7 +9,7 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   View,
-} from "react-native";
+} from 'react-native';
 import {
   Button,
   Divider,
@@ -15,15 +17,14 @@ import {
   Subheading,
   Text,
   TextInput,
-} from "react-native-paper";
-import { useGlobals } from "../../contexts/Global";
-import i18n from "i18n-js";
-import { useIsDark } from "../../hooks/useTheme";
-import { BlurView } from "expo-blur";
-import PlatformUtils from "../../utils/Platform";
-import Close from "../../components/navs/Close";
-import api_calls from "../../constants/apis";
-import { fetcher } from "../../hooks/useFetch";
+} from 'react-native-paper';
+
+import Close from '../../components/navs/Close';
+import api_calls from '../../constants/apis';
+import { useGlobals } from '../../contexts/Global';
+import { fetcher } from '../../hooks/useFetch';
+import { useIsDark } from '../../hooks/useTheme';
+import PlatformUtils from '../../utils/Platform';
 
 /**
  * @param route
@@ -34,46 +35,37 @@ import { fetcher } from "../../hooks/useFetch";
 function AstrologerQuestionScreen({ route, navigation }) {
   const [{}, dispatch] = useGlobals();
   const astrologist = route.params.astrologist;
-  const [data, setData] = React.useState({
+  const [setData] = React.useState({
     message: null,
     email: null,
     astrologer: astrologist.name,
   });
-  const [disabled, setDisabled] = React.useState(false);
+  const [disabled] = React.useState(false);
   const isDark = useIsDark();
   const isAndroid = PlatformUtils.isAndroid;
   const _handleProceed = async () => {
     try {
-      dispatch({ type: "toggleLoader" });
-      // await AdMobInterstitial.requestAdAsync();
-      // await AdMobInterstitial.showAdAsync();
+      dispatch({ type: 'toggleLoader' });
     } catch {
-      // Error
     } finally {
-      dispatch({ type: "toggleLoader" });
-      const { method, url, params } = api_calls.astrology;
-      // const response = await fetcher(method, url, params, data);
-      // if (response) {
+      dispatch({ type: 'toggleLoader' });
       navigation.pop();
-      // } else {
-      //     Alert.alert(i18n.t("Error"));
-      // }
     }
   };
 
   return (
     <BlurView
       style={[StyleSheet.absoluteFill, { flex: 1 }]}
-      tint={isDark ? "dark" : "light"}
+      tint={isDark ? 'dark' : 'light'}
       intensity={isAndroid ? 150 : 100}
     >
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <ScrollView style={{ paddingBottom: 200 }}>
           <Close position="right" />
-          <View style={{ margin: 20, alignItems: "center" }}>
+          <View style={{ margin: 20, alignItems: 'center' }}>
             <Headline>{astrologist.name}</Headline>
             <Subheading>
-              {i18n.t(astrologist.school, { word: i18n.t("Astrology") })}
+              {i18n.t(astrologist.school, { word: i18n.t('Astrology') })}
             </Subheading>
             <Image source={astrologist.photo} style={styles.image} />
           </View>
@@ -81,8 +73,8 @@ function AstrologerQuestionScreen({ route, navigation }) {
           <View style={{ margin: 20 }}>
             <View style={{ height: 5 }} />
             <TextInput
-              label={i18n.t("Your question")}
-              multiline={true}
+              label={i18n.t('Your question')}
+              multiline
               style={{ height: 150 }}
               maxLength={250}
               onChangeText={(text) =>
@@ -91,7 +83,7 @@ function AstrologerQuestionScreen({ route, navigation }) {
             />
             <View style={{ height: 5 }} />
             <TextInput
-              label={i18n.t("Your email")}
+              label={i18n.t('Your email')}
               keyboardType="email-address"
               onChangeText={(text) =>
                 setData((data) => ({ ...data, email: text }))
@@ -106,7 +98,7 @@ function AstrologerQuestionScreen({ route, navigation }) {
               icon="send"
               disabled={disabled}
             >
-              {i18n.t("Proceed")}
+              {i18n.t('Proceed')}
             </Button>
             <Text style={styles.advice}>
               *
@@ -116,12 +108,6 @@ function AstrologerQuestionScreen({ route, navigation }) {
             </Text>
           </View>
           <Divider />
-          <View style={{ justifyContent: "center", alignItems: "center" }}>
-            {/*<AdMobBanner*/}
-            {/*    adUnitID={Ads.astrologersBanner}*/}
-            {/*    bannerSize="largeBanner"*/}
-            {/*/>*/}
-          </View>
         </ScrollView>
       </TouchableWithoutFeedback>
     </BlurView>
@@ -139,7 +125,7 @@ const styles = StyleSheet.create({
   advice: {
     marginTop: 7,
     fontSize: 10,
-    textAlign: "center",
+    textAlign: 'center',
     opacity: 0.8,
   },
 });

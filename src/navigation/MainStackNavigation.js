@@ -1,50 +1,23 @@
-import React from "react";
-import DailyScreen from "../screens/main/DailyScreen";
-import ZodiacScreen from "../screens/main/ZodiacScreen";
-import CompatibilityScreen from "../screens/main/CompatibilityScreen";
-import { StatusBar, StyleSheet, View } from "react-native";
-import { createStackNavigator } from "@react-navigation/stack";
-import PalmistryPreScanScreen from "../screens/initials/PalmistryPreScanScreen";
-import PalmistryScanScreen from "../screens/initials/PalmistryScanScreen";
-import { useGlobals } from "../contexts/Global";
-import i18n from "i18n-js";
-import { ActivityIndicator, Portal, Text, useTheme } from "react-native-paper";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useIsDark } from "../hooks/useTheme";
-import AstrologersScreen from "../screens/main/AstrologersScreen";
-import ProfileScreen from "../screens/main/ProfileScreen";
-import AstrologerQuestionScreen from "../screens/main/AstrologerQuestionScreen";
-import LearnStackNavigation from "./LearnStackNavigation";
-import { BlurView } from "expo-blur";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
+import { BlurView } from 'expo-blur';
+import i18n from 'i18n-js';
+import React from 'react';
+import { StatusBar, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, Portal, Text, useTheme } from 'react-native-paper';
 
-const PalmistryStack = createStackNavigator();
+import { useGlobals } from '../contexts/Global';
+import { useIsDark } from '../hooks/useTheme';
+import AstrologerQuestionScreen from '../screens/main/AstrologerQuestionScreen';
+import AstrologersScreen from '../screens/main/AstrologersScreen';
+import CompatibilityScreen from '../screens/main/CompatibilityScreen';
+import DailyScreen from '../screens/main/DailyScreen';
+import ProfileScreen from '../screens/main/ProfileScreen';
+import ZodiacScreen from '../screens/main/ZodiacScreen';
+import LearnStackNavigation from './LearnStackNavigation';
 
-/**
- * @returns {*}
- * @constructor
- */
-function PalmistryStackNavigation() {
-  return (
-    <PalmistryStack.Navigator initialRouteName="Daily" headerMode="screen">
-      <PalmistryStack.Screen
-        name="Palmistry"
-        initialParams={{ main: true }}
-        component={PalmistryPreScanScreen}
-        options={{ headerShown: false }}
-      />
-      <PalmistryStack.Screen
-        name="PalmistryScan"
-        initialParams={{ main: true }}
-        component={PalmistryScanScreen}
-        options={{ headerShown: false }}
-      />
-    </PalmistryStack.Navigator>
-  );
-}
-
-const BarIcon = ({ focused, color, size, name }) => {
-  const { colors } = useTheme();
+const BarIcon = ({ color, size, name }) => {
   return (
     <MaterialCommunityIcons
       color={color}
@@ -55,15 +28,14 @@ const BarIcon = ({ focused, color, size, name }) => {
   );
 };
 
-const BarLabel = ({ focused, color, children }) => {
-  const { colors } = useTheme();
+const BarLabel = ({ color, children }) => {
   return (
     <Text
       style={{
         fontSize: 10,
         lineHeight: 20,
-        textAlign: "center",
-        color: color,
+        textAlign: 'center',
+        color,
       }}
     >
       {children}
@@ -75,13 +47,13 @@ const Sta = createStackNavigator();
 
 const Tab = createBottomTabNavigator();
 
-function BottomBarNavigation({ navigation }) {
+function BottomBarNavigation() {
   const [{ session }] = useGlobals();
   const { colors } = useTheme();
-  const _barStyle = useIsDark() ? "light-content" : "dark-content";
+  const _barStyle = useIsDark() ? 'light-content' : 'dark-content';
 
   return (
-    <React.Fragment>
+    <>
       <StatusBar
         barStyle={_barStyle}
         backgroundColor={colors.background}
@@ -112,9 +84,9 @@ function BottomBarNavigation({ navigation }) {
           options={{
             tabBarIcon: (props) => <BarIcon {...props} name="account-heart" />,
             tabBarLabel: (props) => (
-              <BarLabel {...props}>{i18n.t("Compatibility2")}</BarLabel>
+              <BarLabel {...props}>{i18n.t('Compatibility2')}</BarLabel>
             ),
-            title: i18n.t("Compatibility2"),
+            title: i18n.t('Compatibility2'),
           }}
         />
         <Tab.Screen
@@ -125,9 +97,9 @@ function BottomBarNavigation({ navigation }) {
               <BarIcon {...props} name="book-open-page-variant" />
             ),
             tabBarLabel: (props) => (
-              <BarLabel {...props}>{i18n.t("Learn")}</BarLabel>
+              <BarLabel {...props}>{i18n.t('Learn')}</BarLabel>
             ),
-            title: i18n.t("Learn"),
+            title: i18n.t('Learn'),
           }}
         />
         <Tab.Screen
@@ -138,21 +110,21 @@ function BottomBarNavigation({ navigation }) {
               <BarIcon {...props} name="theme-light-dark" />
             ),
             tabBarLabel: (props) => (
-              <BarLabel {...props}>{i18n.t("Astrologers")}</BarLabel>
+              <BarLabel {...props}>{i18n.t('Astrologers')}</BarLabel>
             ),
-            title: i18n.t("Astrologers"),
+            title: i18n.t('Astrologers'),
           }}
         />
       </Tab.Navigator>
-    </React.Fragment>
+    </>
   );
 }
 
-function MainStackNavigation({ navigation }) {
-  const [{ showLoader, snackbar }] = useGlobals();
+function MainStackNavigation() {
+  const [{ showLoader }] = useGlobals();
   const { colors } = useTheme();
   return (
-    <React.Fragment>
+    <>
       <Sta.Navigator screenOptions={{ headerShown: false }} mode="modal">
         <Sta.Screen name="Home" component={BottomBarNavigation} />
         <Sta.Screen
@@ -160,7 +132,7 @@ function MainStackNavigation({ navigation }) {
           component={ProfileScreen}
           options={{
             cardStyle: {
-              backgroundColor: "transparent",
+              backgroundColor: 'transparent',
               marginTop: 50,
               borderTopLeftRadius: 30,
               borderTopRightRadius: 30,
@@ -172,7 +144,7 @@ function MainStackNavigation({ navigation }) {
           component={ZodiacScreen}
           options={{
             cardStyle: {
-              backgroundColor: "transparent",
+              backgroundColor: 'transparent',
               marginTop: 50,
               borderTopLeftRadius: 30,
               borderTopRightRadius: 30,
@@ -184,7 +156,7 @@ function MainStackNavigation({ navigation }) {
           component={AstrologerQuestionScreen}
           options={{
             cardStyle: {
-              backgroundColor: "transparent",
+              backgroundColor: 'transparent',
               marginTop: 100,
               borderTopLeftRadius: 30,
               borderTopRightRadius: 30,
@@ -200,8 +172,8 @@ function MainStackNavigation({ navigation }) {
               StyleSheet.absoluteFill,
               {
                 flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
+                justifyContent: 'center',
+                alignItems: 'center',
                 zIndex: 50,
               },
             ]}
@@ -218,7 +190,7 @@ function MainStackNavigation({ navigation }) {
           </BlurView>
         </Portal>
       )}
-    </React.Fragment>
+    </>
   );
 }
 

@@ -1,6 +1,6 @@
-import React from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
+import React from 'react';
+import { ScrollView, StyleSheet, View } from 'react-native';
 
 /**
  * @param children
@@ -29,11 +29,11 @@ function ScrollViewFadeFirst({ children, element, height, style }) {
       scrollEventThrottle={2}
       onScroll={_handleScroll}
     >
-      <View style={{ opacity: opacity }}>
-        <View style={[StyleSheet.absoluteFill, { height: height, zIndex: 10 }]}>
+      <View style={{ opacity }}>
+        <View style={[StyleSheet.absoluteFill, { height, zIndex: 10 }]}>
           {element}
         </View>
-        <View style={{ height: height }} />
+        <View style={{ height }} />
       </View>
       {children}
     </ScrollView>

@@ -1,6 +1,6 @@
-import React from "react";
-import { StyleSheet } from "react-native";
-import { Title } from "react-native-paper";
+import React from 'react';
+import { StyleSheet } from 'react-native';
+import { Title } from 'react-native-paper';
 
 /**
  * @param props
@@ -17,7 +17,7 @@ function ShadowHeadline(props) {
 
 const styles = StyleSheet.create({
   shadow: {
-    textShadowColor: "#0000003D",
+    textShadowColor: '#0000003D',
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 5,
   },

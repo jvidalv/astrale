@@ -1,14 +1,15 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
-import { Subheading, useTheme } from "react-native-paper";
-import { DefaultView } from "../../components/containers";
-import SolarSystem from "../../svgs/SolarSystem";
-import Rotation from "../../components/animations/Rotation";
-import i18n from "i18n-js";
-import { useGlobals } from "../../contexts/Global";
-import Storer from "../../utils/Storer";
-import { SESSION_KEY } from "../../constants/session";
-import SpaceSky from "../../components/decorations/SpaceSky";
+import i18n from 'i18n-js';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { Subheading, useTheme } from 'react-native-paper';
+
+import Rotation from '../../components/animations/Rotation';
+import { DefaultView } from '../../components/containers';
+import SpaceSky from '../../components/decorations/SpaceSky';
+import { SESSION_KEY } from '../../constants/session';
+import { useGlobals } from '../../contexts/Global';
+import SolarSystem from '../../svgs/SolarSystem';
+import Storer from '../../utils/Storer';
 
 /**
  * @param navigation
@@ -20,12 +21,12 @@ function LoadingScreen({ navigation }) {
   const { colors } = useTheme();
   const [phrase, setPhrase] = React.useState(0);
   const phrases = [
-    i18n.t("Analyzing name"),
-    i18n.t("Analyzing birth date"),
-    i18n.t("Analyzing gender"),
-    i18n.t("Analyzing relationship status"),
-    i18n.t("Analyzing favourite number"),
-    i18n.t("Concluding analysis"),
+    i18n.t('Analyzing name'),
+    i18n.t('Analyzing birth date'),
+    i18n.t('Analyzing gender'),
+    i18n.t('Analyzing relationship status'),
+    i18n.t('Analyzing favourite number'),
+    i18n.t('Concluding analysis'),
   ];
 
   React.useEffect(() => {
@@ -39,7 +40,7 @@ function LoadingScreen({ navigation }) {
         };
         Storer.set(SESSION_KEY, preSession).then(() => {
           dispatch({
-            type: "setSession",
+            type: 'setSession',
             fields: preSession,
           });
         });
@@ -53,7 +54,7 @@ function LoadingScreen({ navigation }) {
       <SpaceSky />
       <View style={{ flex: 1 }} />
       <View style={styles.loadingContainer}>
-        <Rotation style={{ opacity: 0.7 }} rotate={true}>
+        <Rotation style={{ opacity: 0.7 }} rotate>
           <SolarSystem />
         </Rotation>
       </View>
@@ -69,31 +70,31 @@ function LoadingScreen({ navigation }) {
 const styles = StyleSheet.create({
   constellation: {
     zIndex: 0,
-    position: "absolute",
+    position: 'absolute',
     bottom: 20,
     left: 20,
     opacity: 0.1,
   },
   leo: {
     zIndex: 0,
-    position: "absolute",
+    position: 'absolute',
     top: 20,
     right: 20,
     opacity: 0.2,
   },
   counterContainer: {
-    position: "absolute",
+    position: 'absolute',
     top: 20,
     left: 20,
   },
   loadingContainer: {
     flex: 1,
-    alignSelf: "center",
+    alignSelf: 'center',
     paddingTop: 40,
     zIndex: 1,
   },
   textSubheading: {
-    textAlign: "center",
+    textAlign: 'center',
     marginTop: 20,
   },
 });

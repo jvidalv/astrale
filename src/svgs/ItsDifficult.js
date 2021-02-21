@@ -1,7 +1,7 @@
-import * as React from "react";
-import Svg, { Circle, Ellipse, G, Path } from "react-native-svg";
-import PropTypes from "prop-types";
-import { useTheme } from "react-native-paper";
+import PropTypes from 'prop-types';
+import * as React from 'react';
+import { useTheme } from 'react-native-paper';
+import Svg, { Circle, Ellipse, G, Path } from 'react-native-svg';
 
 function ItsDifficult({ color, height, width, style }) {
   const { colors } = useTheme();
@@ -51,7 +51,7 @@ function ItsDifficult({ color, height, width, style }) {
 ItsDifficult.defaultProps = {
   height: 120,
   width: 120,
-  color: "white",
+  color: 'white',
 };
 
 ItsDifficult.propTypes = {

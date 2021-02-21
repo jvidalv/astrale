@@ -1,40 +1,16 @@
-import React from "react";
-import { AppState } from "react-native";
-import { Provider as PaperProvider } from "react-native-paper";
-import { NavigationContainer } from "@react-navigation/native";
-import { useGlobals } from "./contexts/Global";
-import themes from "./constants/themes";
-import { AppLoading } from "expo";
-import { Asset } from "expo-asset";
-import MainStackNavigation from "./navigation/MainStackNavigation";
-import InitialStackNavigation from "./navigation/InitialStackNavigation";
-import Storer from "./utils/Storer";
-import { SESSION_KEY } from "./constants/session";
-// import {AdMobInterstitial, setTestDeviceIDAsync} from "expo-ads-admob";
-// import Ads from "./credentials/admob";
-import { DateUtils } from "./utils";
+import { NavigationContainer } from '@react-navigation/native';
+import AppLoading from 'expo-app-loading';
+import React from 'react';
+import { AppState } from 'react-native';
+import { Provider as PaperProvider } from 'react-native-paper';
 
-/**
- * @param images {string[]}
- * @returns {*}
- */
-const cacheImages = (images) => {
-  return images.map((image) => {
-    if (typeof image === "string") {
-      return Image.prefetch(image);
-    } else {
-      return Asset.fromModule(image).downloadAsync();
-    }
-  });
-};
-
-/**
- * @returns {Promise<void>}
- */
-const fetchFonts = () => Font.loadAsync({});
-
-/** Persistence key **/
-const PERSISTENCE_KEY = "NAVIGATION_STATE";
+import { SESSION_KEY } from './constants/session';
+import themes from './constants/themes';
+import { useGlobals } from './contexts/Global';
+import InitialStackNavigation from './navigation/InitialStackNavigation';
+import MainStackNavigation from './navigation/MainStackNavigation';
+import { DateUtils } from './utils';
+import Storer from './utils/Storer';
 
 /**
  * @returns {*}
@@ -48,11 +24,11 @@ function Main() {
 
   // Handles screen focus and case when user reopens app one day later (Date has to be updated)
   const _handleAppStateChange = (nextAppState) => {
-    if (appState.match(/active/) && nextAppState === "active") {
+    if (appState.match(/active/) && nextAppState === 'active') {
       const nDate = DateUtils.toAmerican(new Date());
       if (nDate !== day) {
         dispatch({
-          type: "setDay",
+          type: 'setDay',
           day: nDate,
         });
       }
@@ -62,38 +38,20 @@ function Main() {
 
   // Deal with background/active app
   React.useEffect(() => {
-    AppState.addEventListener("change", _handleAppStateChange);
+    AppState.addEventListener('change', _handleAppStateChange);
     return () => {
-      AppState.removeEventListener("change", _handleAppStateChange);
+      AppState.removeEventListener('change', _handleAppStateChange);
     };
   }, []);
-
-  // Custom fonts
-  // let [fontsLoaded] = useFonts({
-  //   poppins_light: require("../assets/fonts/Poppins-Light.ttf"),
-  //   poppins_medium: require("../assets/fonts/Poppins-Medium.ttf"),
-  //   poppins_regular: require("../assets/fonts/Poppins-Regular.ttf"),
-  //   poppins_thin: require("../assets/fonts/Poppins-Thin.ttf"),
-  //   poppins_bold: require("../assets/fonts/Poppins-Bold.ttf"),
-  // });
 
   // Backbones
   React.useEffect(() => {
     (async () => {
       try {
-        if (__DEV__) {
-          // await setTestDeviceIDAsync("EMULATOR");
-          // const state = await Storer.get(PERSISTENCE_KEY);
-          // setInitialState(state);
-        }
-
-        // Admob config
-        // await AdMobInterstitial.setAdUnitID(Ads.intersticial);
-
         const session = await Storer.get(SESSION_KEY);
         if (session) {
           dispatch({
-            type: "setSession",
+            type: 'setSession',
             fields: { ...session },
           });
         }
@@ -103,7 +61,7 @@ function Main() {
     })();
   }, []);
 
-  if (!isReady /* || !fontsLoaded*/) {
+  if (!isReady) {
     return <AppLoading />;
   }
 

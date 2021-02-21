@@ -1,8 +1,9 @@
-import React from "react";
-import { KeyboardAvoidingView, Platform, ScrollView, View } from "react-native";
-import { useTheme } from "react-native-paper";
-import PropTypes from "prop-types";
-import PlatformUtils from "../../utils/Platform";
+import PropTypes from 'prop-types';
+import React from 'react';
+import { KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
+
+import PlatformUtils from '../../utils/Platform';
 
 /**
  * @param children
@@ -20,7 +21,6 @@ function DefaultScrollView({
   styleScrollView,
   onScrollCallback,
 }) {
-  const { colors } = useTheme();
   const isAndroid = PlatformUtils.isAndroid;
   const _onScroll = (event) =>
     onScrollCallback ? onScrollCallback(event) : null;
@@ -28,7 +28,7 @@ function DefaultScrollView({
     <View style={{ flex: 1 }}>
       <KeyboardAvoidingView
         style={{ flex: 1 }}
-        behavior={Platform.OS === "ios" ? "padding" : null}
+        behavior={Platform.OS === 'ios' ? 'padding' : null}
         enabled={keyboardAvoidView}
       >
         <ScrollView

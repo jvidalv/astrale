@@ -1,7 +1,7 @@
-import * as React from "react";
-import Svg, { Circle, G, Path } from "react-native-svg";
-import PropTypes from "prop-types";
-import { useTheme } from "react-native-paper";
+import PropTypes from 'prop-types';
+import * as React from 'react';
+import { useTheme } from 'react-native-paper';
+import Svg, { Circle, G, Path } from 'react-native-svg';
 
 function Female({ color, height, width, style }) {
   const { colors } = useTheme();
@@ -24,7 +24,7 @@ function Female({ color, height, width, style }) {
 Female.defaultProps = {
   height: 120,
   width: 120,
-  color: "white",
+  color: 'white',
 };
 
 Female.propTypes = {

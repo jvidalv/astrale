@@ -1,8 +1,8 @@
-import common from "./common";
-import custom from "./custom";
-import forms from "./forms";
-import horoscope from "./horoscope";
-import learn from "./learn";
+import common from './common';
+import custom from './custom';
+import forms from './forms';
+import horoscope from './horoscope';
+import learn from './learn';
 
 const Translations = {
   ca: {

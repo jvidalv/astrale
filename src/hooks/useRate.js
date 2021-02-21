@@ -1,5 +1,5 @@
-import React from "react";
-import * as StoreReview from "expo-store-review";
+import * as StoreReview from 'expo-store-review';
+import React from 'react';
 
 const useRate = () => {
   const [rate, setRate] = React.useState(false);
@@ -19,7 +19,7 @@ const useRate = () => {
     }
   }, [rate]);
 
-  return { setRate, rated };
+  return { setRate, rated, error };
 };
 
 export default useRate;

@@ -1,6 +1,6 @@
-import * as React from "react";
-import Svg, { G, Path } from "react-native-svg";
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
+import * as React from 'react';
+import Svg, { G, Path } from 'react-native-svg';
 
 function Gemini({ color, height, width, style }) {
   return (
@@ -64,7 +64,7 @@ function Gemini({ color, height, width, style }) {
 Gemini.defaultProps = {
   height: 120,
   width: 120,
-  color: "#FFFFFFFF",
+  color: '#FFFFFFFF',
 };
 
 Gemini.propTypes = {

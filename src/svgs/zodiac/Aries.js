@@ -1,6 +1,6 @@
-import * as React from "react";
-import Svg, { G, Path, Rect } from "react-native-svg";
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
+import * as React from 'react';
+import Svg, { G, Path, Rect } from 'react-native-svg';
 
 function Aries({ color, height, width, style }) {
   return (
@@ -58,7 +58,7 @@ function Aries({ color, height, width, style }) {
 Aries.defaultProps = {
   height: 120,
   width: 120,
-  color: "#FFFFFFFF",
+  color: '#FFFFFFFF',
 };
 
 Aries.propTypes = {

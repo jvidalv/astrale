@@ -1,6 +1,6 @@
-import * as React from "react";
-import Svg, { G, Path, Rect } from "react-native-svg";
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
+import * as React from 'react';
+import Svg, { G, Path, Rect } from 'react-native-svg';
 
 function Taurus({ color, height, width, style }) {
   return (
@@ -40,7 +40,7 @@ function Taurus({ color, height, width, style }) {
 Taurus.defaultProps = {
   height: 120,
   width: 120,
-  color: "#FFFFFFFF",
+  color: '#FFFFFFFF',
 };
 
 Taurus.propTypes = {

@@ -1,28 +1,29 @@
-import React from "react";
-import { SafeAreaView, StyleSheet, View } from "react-native";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import i18n from 'i18n-js';
+import React from 'react';
+import { SafeAreaView, StyleSheet, View } from 'react-native';
 import {
   Divider,
   ProgressBar,
   Subheading,
   Text,
   useTheme,
-} from "react-native-paper";
-import { Sign } from "../../components/zodiac";
-import ShadowHeadline from "../../components/paper/ShadowHeadline";
-import i18n from "i18n-js";
-import ShowFromTop from "../../components/animations/ShowFromTop";
-import { useGlobals } from "../../contexts/Global";
-import Storer from "../../utils/Storer";
-import { SESSION_KEY } from "../../constants/session";
-import registerForPushNotificationsAsync from "../../utils/Notifications";
-import SpaceSky from "../../components/decorations/SpaceSky";
-import TextBold from "../../components/paper/TextBold";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import MainNav from "../../components/navs/MainNav";
-import ScrollViewFadeFirst from "../../components/containers/ScrollViewFadeFirst";
-import months from "../../constants/months";
-import { Language } from "../../utils";
-import { daily } from "../../constants/daily";
+} from 'react-native-paper';
+
+import ShowFromTop from '../../components/animations/ShowFromTop';
+import ScrollViewFadeFirst from '../../components/containers/ScrollViewFadeFirst';
+import SpaceSky from '../../components/decorations/SpaceSky';
+import MainNav from '../../components/navs/MainNav';
+import ShadowHeadline from '../../components/paper/ShadowHeadline';
+import TextBold from '../../components/paper/TextBold';
+import { Sign } from '../../components/zodiac';
+import { daily } from '../../constants/daily';
+import months from '../../constants/months';
+import { SESSION_KEY } from '../../constants/session';
+import { useGlobals } from '../../contexts/Global';
+import { Language } from '../../utils';
+import registerForPushNotificationsAsync from '../../utils/Notifications';
+import Storer from '../../utils/Storer';
 
 /**
  * @param number {number}
@@ -45,8 +46,8 @@ const LuckyNumberStyles = StyleSheet.create({
     borderRadius: 50,
     height: 30,
     width: 30,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
@@ -88,7 +89,7 @@ function DailyScreen({ navigation }) {
   const { colors } = useTheme();
   const dataIndex = daily.findIndex(
     (item) =>
-      item.day.split("-")[2].toString() === new Date().getDate().toString() &&
+      item.day.split('-')[2].toString() === new Date().getDate().toString() &&
       item.sign === session.sign
   );
   const data = daily[dataIndex !== -1 ? dataIndex : 0];
@@ -97,7 +98,7 @@ function DailyScreen({ navigation }) {
     if (!session.notifications) {
       registerForPushNotificationsAsync(session).then((res) => {
         dispatch({
-          type: "setSession",
+          type: 'setSession',
           fields: { notifications: res },
         });
         Storer.set(SESSION_KEY, { ...session, notifications: res });
@@ -106,12 +107,12 @@ function DailyScreen({ navigation }) {
   }, []);
 
   if (!session?.sign) {
-    Storer.delete(SESSION_KEY).then(() => dispatch({ type: "setLogOut" }));
+    Storer.delete(SESSION_KEY).then(() => dispatch({ type: 'setLogOut' }));
   }
 
   const RightButton = (
     <MaterialCommunityIcons
-      onPress={() => navigation.navigate("Signs", { key: "Sign" })}
+      onPress={() => navigation.navigate('Signs', { key: 'Sign' })}
       name="swap-horizontal"
       color={colors.text}
       size={30}
@@ -133,7 +134,7 @@ function DailyScreen({ navigation }) {
           {i18n.t(session.sign)}
         </ShadowHeadline>
         <Subheading>
-          {i18n.t("date_daily", {
+          {i18n.t('date_daily', {
             day: d.getDate(),
             month: months[session.language][d.getMonth()],
             year: d.getFullYear(),
@@ -145,7 +146,7 @@ function DailyScreen({ navigation }) {
   );
 
   return (
-    <React.Fragment>
+    <>
       <SpaceSky />
       <SafeAreaView>
         <ScrollViewFadeFirst element={Header} height={200}>
@@ -156,14 +157,14 @@ function DailyScreen({ navigation }) {
               style={[
                 styles.defaultContainer,
                 {
-                  flexDirection: "row",
-                  alignItems: "center",
+                  flexDirection: 'row',
+                  alignItems: 'center',
                   marginTop: 10,
                 },
               ]}
             >
               <TextBold style={styles.textTitles}>
-                {i18n.t("Focus of the day")}:
+                {i18n.t('Focus of the day')}:
               </TextBold>
               <TextBold
                 style={{ fontSize: 16, marginLeft: 5, color: colors.primary }}
@@ -177,29 +178,29 @@ function DailyScreen({ navigation }) {
                 {
                   marginTop: 25,
                   marginBottom: 5,
-                  flexDirection: "row",
-                  justifyContent: "space-around",
+                  flexDirection: 'row',
+                  justifyContent: 'space-around',
                 },
               ]}
             >
               <ProgressItem
-                text={i18n.t("Love")}
+                text={i18n.t('Love')}
                 percent={data.contents.percents.love}
               />
               <ProgressItem
-                text={i18n.t("Career")}
+                text={i18n.t('Career')}
                 percent={data.contents.percents.work}
                 style={{ marginHorizontal: 5 }}
               />
               <ProgressItem
-                text={i18n.t("Health")}
+                text={i18n.t('Health')}
                 percent={data.contents.percents.health}
               />
             </View>
             <View style={[styles.defaultContainer]}>
               <View style={styles.horoscopeTodayContainer}>
                 <TextBold style={styles.textTitles}>
-                  {i18n.t("Your horoscope for today")}:
+                  {i18n.t('Your horoscope for today')}:
                 </TextBold>
                 <View style={styles.iconsHoroscopeToday}>
                   <MaterialCommunityIcons
@@ -228,14 +229,14 @@ function DailyScreen({ navigation }) {
             </View>
             <View style={styles.defaultContainer}>
               <TextBold style={styles.textTitles}>
-                {i18n.t("Today you love")}
+                {i18n.t('Today you love')}
               </TextBold>
             </View>
             <View
               style={[
                 styles.loveContainer,
                 {
-                  borderColor: colors.text + "0D",
+                  borderColor: colors.text + '0D',
                 },
               ]}
             >
@@ -243,7 +244,7 @@ function DailyScreen({ navigation }) {
                 style={[
                   styles.heartLoveContainer,
                   {
-                    backgroundColor: colors.text + "0D",
+                    backgroundColor: colors.text + '0D',
                   },
                 ]}
               >
@@ -268,15 +269,15 @@ function DailyScreen({ navigation }) {
             <Divider style={{ marginTop: 20 }} />
             <View style={styles.defaultContainer}>
               <TextBold style={styles.textTitles}>
-                {i18n.t("Lucky numbers")}
+                {i18n.t('Lucky numbers')}
               </TextBold>
             </View>
             <View
               style={[
                 styles.defaultContainer,
                 {
-                  flexDirection: "row",
-                  justifyContent: "space-evenly",
+                  flexDirection: 'row',
+                  justifyContent: 'space-evenly',
                 },
               ]}
             >
@@ -288,26 +289,26 @@ function DailyScreen({ navigation }) {
           </ShowFromTop>
         </ScrollViewFadeFirst>
       </SafeAreaView>
-    </React.Fragment>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   backgroundConstellation: {
     zIndex: 1,
-    position: "absolute",
+    position: 'absolute',
     top: 300,
     left: 20,
     opacity: 0.05,
   },
   headerContainer: {
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     marginHorizontal: 20,
     marginVertical: 20,
   },
   headerHeadline: {
-    fontWeight: "bold",
+    fontWeight: 'bold',
     fontSize: 30,
     lineHeight: 34,
     marginTop: 20,
@@ -320,19 +321,19 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   horoscopeTodayContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   iconsHoroscopeToday: {
-    flexDirection: "row",
-    justifyContent: "space-evenly",
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
   },
   loveContainer: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginTop: 15,
     marginHorizontal: 20,
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
     borderWidth: 2,
     borderRadius: 10,
   },
@@ -340,12 +341,12 @@ const styles = StyleSheet.create({
     flex: 0.2,
     borderTopLeftRadius: 8,
     borderBottomLeftRadius: 8,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   loveSignsContainer: {
-    flexDirection: "row",
-    justifyContent: "space-evenly",
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
     flex: 1,
     marginTop: 10,
   },

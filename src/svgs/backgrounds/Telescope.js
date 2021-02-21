@@ -1,6 +1,6 @@
-import * as React from "react";
-import Svg, { Path } from "react-native-svg";
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
+import * as React from 'react';
+import Svg, { Path } from 'react-native-svg';
 
 function Telescope({ color, height, width, style }) {
   return (
@@ -20,7 +20,7 @@ function Telescope({ color, height, width, style }) {
 Telescope.defaultProps = {
   height: 120,
   width: 120,
-  color: "white",
+  color: 'white',
 };
 
 Telescope.propTypes = {

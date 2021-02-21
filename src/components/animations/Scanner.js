@@ -1,6 +1,6 @@
-import React from "react";
-import { Animated, View } from "react-native";
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Animated, View } from 'react-native';
 
 /**
  * @param start {boolean}
@@ -22,7 +22,7 @@ function Scanner({ start, style }) {
   }, [increase]);
 
   return (
-    <View style={{ flex: 1, justifyContent: "center" }}>
+    <View style={{ flex: 1, justifyContent: 'center' }}>
       <Animated.View
         style={[
           {

@@ -1,6 +1,6 @@
-import React from "react";
-import { Animated, Easing } from "react-native";
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Animated, Easing } from 'react-native';
 
 /**
  * Fades a set of children to the top
@@ -15,7 +15,7 @@ function ShowFromTop({ children, duration }) {
   Animated.timing(fadeAnim, {
     toValue: 1,
     easing: Easing.linear,
-    duration: duration,
+    duration,
     useNativeDriver: true,
   }).start();
 

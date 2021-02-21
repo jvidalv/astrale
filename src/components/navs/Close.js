@@ -1,10 +1,11 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/core";
-import { useTheme } from "react-native-paper";
-import PropTypes from "prop-types";
-import PlatformUtils from "../../utils/Platform";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/core';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
+
+import PlatformUtils from '../../utils/Platform';
 
 /**
  * @param navigation
@@ -16,7 +17,7 @@ import PlatformUtils from "../../utils/Platform";
 function Close({ style, position }) {
   const navigation = useNavigation();
   const { colors } = useTheme();
-  const _position = position === "left" ? { left: 20 } : { right: 20 };
+  const _position = position === 'left' ? { left: 20 } : { right: 20 };
   return PlatformUtils.isAndroid ? (
     <MaterialCommunityIcons
       onPress={() => navigation.goBack()}
@@ -31,7 +32,7 @@ function Close({ style, position }) {
         style={[
           styles.iosBarContent,
           {
-            backgroundColor: colors.text + "3D",
+            backgroundColor: colors.text + '3D',
           },
         ]}
       />
@@ -41,24 +42,24 @@ function Close({ style, position }) {
 
 Close.propTypes = {
   style: PropTypes.object,
-  position: PropTypes.oneOf(["left", "right"]),
+  position: PropTypes.oneOf(['left', 'right']),
 };
 
 Close.defaultProps = {
-  position: "left",
+  position: 'left',
 };
 
 const styles = StyleSheet.create({
   container: {
-    position: "absolute",
+    position: 'absolute',
     top: 20,
     opacity: 0.5,
     zIndex: 10,
   },
   iosBarContainer: {
     height: 5,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   iosBarContent: {
     height: 5,

@@ -1,13 +1,13 @@
-import {Platform} from "react-native";
+import { Platform } from 'react-native';
 
 interface PlatformUtils {
-    isIos: boolean;
-    isAndroid: boolean;
+  isIos: boolean;
+  isAndroid: boolean;
 }
 
 const PlatformUtils: PlatformUtils = {
-    isIos: Platform.OS === "ios",
-    isAndroid: Platform.OS === "android",
+  isIos: Platform.OS === 'ios',
+  isAndroid: Platform.OS === 'android',
 };
 
 export default PlatformUtils;

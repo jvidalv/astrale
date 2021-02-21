@@ -1,6 +1,6 @@
-import * as React from "react";
-import Svg, { G, Path } from "react-native-svg";
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
+import * as React from 'react';
+import Svg, { G, Path } from 'react-native-svg';
 
 function Stars({ color, height, width, style }) {
   return (
@@ -63,7 +63,7 @@ function Stars({ color, height, width, style }) {
 Stars.defaultProps = {
   height: 120,
   width: 120,
-  color: "white",
+  color: 'white',
 };
 
 Stars.propTypes = {

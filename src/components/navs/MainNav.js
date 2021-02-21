@@ -1,9 +1,9 @@
-import React from "react";
-import { Dimensions, StyleSheet, View } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/core";
-import { useTheme } from "react-native-paper";
-import PropTypes from "prop-types";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/core';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Dimensions, StyleSheet, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 /**
  * @param children
@@ -19,7 +19,7 @@ function MainNav({ children, style, rightButton }) {
     <View style={[StyleSheet.absoluteFill, styles.container, style]}>
       <View style={styles.content}>
         <MaterialCommunityIcons
-          onPress={() => navigation.navigate("Profile", { key: 1 })}
+          onPress={() => navigation.navigate('Profile', { key: 1 })}
           name="account-circle-outline"
           color={colors.text}
           size={30}
@@ -36,13 +36,13 @@ const styles = StyleSheet.create({
     zIndex: 10,
     height: 50,
     marginHorizontal: 20,
-    width: Dimensions.get("window").width - 30,
+    width: Dimensions.get('window').width - 30,
   },
   content: {
     flex: 1,
-    justifyContent: "space-between",
-    alignItems: "center",
-    flexDirection: "row",
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
   },
 });
 

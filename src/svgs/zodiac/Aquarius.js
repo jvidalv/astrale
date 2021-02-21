@@ -1,6 +1,6 @@
-import * as React from "react";
-import Svg, { Circle, G, Path, Rect } from "react-native-svg";
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
+import * as React from 'react';
+import Svg, { Circle, G, Path, Rect } from 'react-native-svg';
 
 /**
  * @param color
@@ -75,7 +75,7 @@ function Aquarius({ color, height, width, style }) {
 Aquarius.defaultProps = {
   height: 120,
   width: 120,
-  color: "#FFFFFFFF",
+  color: '#FFFFFFFF',
 };
 
 Aquarius.propTypes = {

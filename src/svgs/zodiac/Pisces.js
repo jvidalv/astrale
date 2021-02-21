@@ -1,6 +1,6 @@
-import * as React from "react";
-import Svg, { Circle, G, Path } from "react-native-svg";
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
+import * as React from 'react';
+import Svg, { Circle, G, Path } from 'react-native-svg';
 
 function Pisces({ color, height, width, style }) {
   return (
@@ -96,7 +96,7 @@ function Pisces({ color, height, width, style }) {
 Pisces.defaultProps = {
   height: 120,
   width: 120,
-  color: "#FFFFFFFF",
+  color: '#FFFFFFFF',
 };
 
 Pisces.propTypes = {

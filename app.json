@@ -2,13 +2,12 @@
   "expo": {
     "name": "Astrale",
     "slug": "astrale",
-    "version": "1.0.3",
+    "version": "1.5.0",
     "description": "Discover what the future holds for you. Get an insight on what to expect for love, work, wellbeing and good fortune for today with Astrale app.",
     "privacy": "public",
     "platforms": [
       "ios",
-      "android",
-      "web"
+      "android"
     ],
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -22,6 +21,19 @@
       "**/*"
     ],
     "scheme": "astrale",
+    "ios": {
+      "bundleIdentifier": "josep.astrale",
+      "buildNumber": "1.0.2",
+      "supportsTablet": false,
+      "icon": "./assets/images/icon.png",
+      "infoPlist": {
+        "NSCameraUsageDescription": "This application uses the camera to scan your hand and read your lifelines"
+      }
+    },
+    "android": {
+      "package": "josep.astrale",
+      "versionCode": 4
+    },
     "androidStatusBar": {
       "hidden": false,
       "translucent": true,
