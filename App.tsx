@@ -6,9 +6,6 @@ import Main from './src/Main';
 import { initialState, reducer, StateProvider } from './src/contexts/Global';
 import Translations from './src/translations';
 
-/**
- * Language
- */
 i18n.translations = Translations;
 i18n.locale = Localization.locale;
 i18n.fallbacks = true;

@@ -22,25 +22,25 @@ function Main() {
   const [appState, setAppState] = React.useState(AppState.currentState);
   const _theme = themes[theme];
 
-  // Handles screen focus and case when user reopens app one day later (Date has to be updated)
-  const _handleAppStateChange = (nextAppState) => {
-    if (appState.match(/active/) && nextAppState === 'active') {
-      const nDate = DateUtils.toAmerican(new Date());
-      if (nDate !== day) {
-        dispatch({
-          type: 'setDay',
-          day: nDate,
-        });
-      }
-    }
-    setAppState(nextAppState);
-  };
-
   // Deal with background/active app
   React.useEffect(() => {
-    AppState.addEventListener('change', _handleAppStateChange);
+    // Handles screen focus and case when user reopens app one day later (Date has to be updated)
+    const handleAppStateChange = (nextAppState) => {
+      if (appState.match(/active/) && nextAppState === 'active') {
+        const nDate = DateUtils.toAmerican(new Date());
+        if (nDate !== day) {
+          dispatch({
+            type: 'setDay',
+            day: nDate,
+          });
+        }
+      }
+      setAppState(nextAppState);
+    };
+
+    AppState.addEventListener('change', handleAppStateChange);
     return () => {
-      AppState.removeEventListener('change', _handleAppStateChange);
+      AppState.removeEventListener('change', handleAppStateChange);
     };
   }, []);
 
