@@ -1,12 +1,12 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 
-import BirthDateScreen from '../screens/initials/BirthDateScreen';
-import LoadingScreen from '../screens/initials/LoadingScreen';
-import NameScreen from '../screens/initials/NameScreen';
-import NumberScreen from '../screens/initials/NumberScreen';
-import RelationshipScreen from '../screens/initials/RelationshipScreen';
-import SexScreen from '../screens/initials/SexScreen';
+import BirthDateScreen from '../screens/initials/birth-date.screen';
+import LoadingScreen from '../screens/initials/loading.screen';
+import NameScreen from '../screens/initials/name.screen';
+import NumberScreen from '../screens/initials/number.screen';
+import RelationshipScreen from '../screens/initials/relationship.screen';
+import SexScreen from '../screens/initials/sex.screen';
 
 const Stack = createStackNavigator();
 

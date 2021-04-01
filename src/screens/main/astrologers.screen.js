@@ -18,10 +18,10 @@ import {
   useTheme,
 } from 'react-native-paper';
 
-import SpaceSky from '../../components/decorations/SpaceSky';
-import MainNav from '../../components/navs/MainNav';
-import ShadowHeadline from '../../components/paper/ShadowHeadline';
-import PlatformUtils from '../../utils/Platform';
+import SpaceSky from '../../components/decorations/space-sky';
+import MainNav from '../../components/navs/main-nav';
+import ShadowHeadline from '../../components/paper/shadow-headline';
+import PlatformUtils from '../../utils/platform';
 
 /**
  * @param navigation

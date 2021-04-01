@@ -1,12 +1,12 @@
 import i18n from 'i18n-js';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Button, Headline, Text, useTheme } from 'react-native-paper';
+import { Button, Headline, Text } from 'react-native-paper';
 
 import { DefaultView } from '../../components/containers';
-import SpaceSky from '../../components/decorations/SpaceSky';
-import CustomInput from '../../components/paper/CustomInput';
-import { useGlobals } from '../../contexts/Global';
+import SpaceSky from '../../components/decorations/space-sky';
+import CustomInput from '../../components/paper/custom-input';
+import { useGlobals } from '../../contexts/global';
 import Aquarius from '../../svgs/Aquarius';
 import Dices from '../../svgs/Dices';
 

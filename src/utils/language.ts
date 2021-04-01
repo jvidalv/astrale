@@ -1,9 +1,9 @@
 import * as Localization from 'expo-localization';
 
 /**
- * Locales permitted
+ * Locales supported
  */
-const LANGS = ['es', 'en'];
+const LANGUAGES = ['es', 'en'];
 
 /**
  * Gets current locale, and if it is not one of the accepted it falls backs to english
@@ -11,7 +11,7 @@ const LANGS = ['es', 'en'];
 function getLocale(): string {
   const locale = Localization.locale.substr(0, 2);
   const customLocale = locale === 'ca' ? 'es' : locale;
-  return LANGS.includes(customLocale) ? customLocale : 'en';
+  return LANGUAGES.includes(customLocale) ? customLocale : 'en';
 }
 
 const Language = {

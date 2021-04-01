@@ -12,11 +12,11 @@ import {
   useTheme,
 } from 'react-native-paper';
 
-import ScrollViewFadeFirst from '../../components/containers/ScrollViewFadeFirst';
-import SpaceSky from '../../components/decorations/SpaceSky';
-import MainNav from '../../components/navs/MainNav';
-import ShadowHeadline from '../../components/paper/ShadowHeadline';
-import { useGlobals } from '../../contexts/Global';
+import ScrollViewFadeFirst from '../../components/containers/scroll-view-fade-first';
+import SpaceSky from '../../components/decorations/space-sky';
+import MainNav from '../../components/navs/main-nav';
+import ShadowHeadline from '../../components/paper/shadow-headline';
+import { useGlobals } from '../../contexts/global';
 import Leo from '../../svgs/Leo';
 import Constellation from '../../svgs/backgrounds/Constellation';
 import ConstellationSimple from '../../svgs/backgrounds/ConstellationSimple';
@@ -43,9 +43,9 @@ const SubHeading = () => {
  * @constructor
  */
 function LearnScreen({ navigation }) {
-  const [{}, dispatch] = useGlobals();
+  const dispatch = useGlobals()[1];
   const { colors } = useTheme();
-  const _handleViewLesson = async (lesson) => {
+  const handleViewLesson = async (lesson) => {
     try {
       dispatch({ type: 'toggleLoader' });
     } catch {
@@ -111,7 +111,7 @@ function LearnScreen({ navigation }) {
                     colors: { primary: colors.backdrop, text: '#FFFFFF' },
                   }}
                   labelStyle={{ fontSize: 9, letterSpacing: 0 }}
-                  onPress={() => _handleViewLesson('AboutZodiac')}
+                  onPress={() => handleViewLesson('AboutZodiac')}
                 >
                   {i18n.t('Watch an ad to unblock')}
                 </Button>
@@ -160,7 +160,7 @@ function LearnScreen({ navigation }) {
                     colors: { primary: colors.backdrop, text: '#FFFFFF' },
                   }}
                   labelStyle={{ fontSize: 9, letterSpacing: 0 }}
-                  onPress={() => _handleViewLesson('TheSigns')}
+                  onPress={() => handleViewLesson('TheSigns')}
                 >
                   {i18n.t('Watch an ad to unblock')}
                 </Button>
@@ -204,7 +204,7 @@ function LearnScreen({ navigation }) {
                   style={{ borderRadius: 25, marginTop: 5 }}
                   theme={{ colors: { primary: colors.backdrop } }}
                   labelStyle={{ fontSize: 9, letterSpacing: 0 }}
-                  onPress={() => _handleViewLesson('TheElements')}
+                  onPress={() => handleViewLesson('TheElements')}
                 >
                   {i18n.t('Watch an ad to unblock')}
                 </Button>

@@ -6,11 +6,11 @@ import { Provider as PaperProvider } from 'react-native-paper';
 
 import { SESSION_KEY } from './constants/session';
 import themes from './constants/themes';
-import { useGlobals } from './contexts/Global';
-import InitialStackNavigation from './navigation/InitialStackNavigation';
-import MainStackNavigation from './navigation/MainStackNavigation';
+import { useGlobals } from './contexts/global';
+import InitialStackNavigation from './navigation/initial-stack';
+import MainStackNavigation from './navigation/main-stack';
 import { DateUtils } from './utils';
-import Storer from './utils/Storer';
+import Storer from './utils/storer';
 
 /**
  * @returns {*}
@@ -42,7 +42,7 @@ function Main() {
     return () => {
       AppState.removeEventListener('change', handleAppStateChange);
     };
-  }, []);
+  }, [appState, day, dispatch]);
 
   // Backbones
   React.useEffect(() => {
@@ -59,7 +59,7 @@ function Main() {
         setIsReady(true);
       }
     })();
-  }, []);
+  }, [dispatch]);
 
   if (!isReady) {
     return <AppLoading />;

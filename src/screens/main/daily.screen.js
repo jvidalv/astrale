@@ -10,20 +10,20 @@ import {
   useTheme,
 } from 'react-native-paper';
 
-import ShowFromTop from '../../components/animations/ShowFromTop';
-import ScrollViewFadeFirst from '../../components/containers/ScrollViewFadeFirst';
-import SpaceSky from '../../components/decorations/SpaceSky';
-import MainNav from '../../components/navs/MainNav';
-import ShadowHeadline from '../../components/paper/ShadowHeadline';
-import TextBold from '../../components/paper/TextBold';
+import ShowFromTop from '../../components/animations/show-from-top';
+import ScrollViewFadeFirst from '../../components/containers/scroll-view-fade-first';
+import SpaceSky from '../../components/decorations/space-sky';
+import MainNav from '../../components/navs/main-nav';
+import ShadowHeadline from '../../components/paper/shadow-headline';
+import TextBold from '../../components/paper/text-bold';
 import { Sign } from '../../components/zodiac';
 import { daily } from '../../constants/daily';
 import months from '../../constants/months';
 import { SESSION_KEY } from '../../constants/session';
-import { useGlobals } from '../../contexts/Global';
+import { useGlobals } from '../../contexts/global';
 import { Language } from '../../utils';
-import registerForPushNotificationsAsync from '../../utils/Notifications';
-import Storer from '../../utils/Storer';
+import registerForPushNotificationsAsync from '../../utils/notifications';
+import Storer from '../../utils/storer';
 
 /**
  * @param number {number}
@@ -94,6 +94,7 @@ function DailyScreen({ navigation }) {
   );
   const data = daily[dataIndex !== -1 ? dataIndex : 0];
   const d = new Date();
+
   React.useEffect(() => {
     if (!session.notifications) {
       registerForPushNotificationsAsync(session).then((res) => {
@@ -104,25 +105,27 @@ function DailyScreen({ navigation }) {
         Storer.set(SESSION_KEY, { ...session, notifications: res });
       });
     }
-  }, []);
+  }, [dispatch, session]);
 
-  if (!session?.sign) {
-    Storer.delete(SESSION_KEY).then(() => dispatch({ type: 'setLogOut' }));
-  }
-
-  const RightButton = (
-    <MaterialCommunityIcons
-      onPress={() => navigation.navigate('Signs', { key: 'Sign' })}
-      name="swap-horizontal"
-      color={colors.text}
-      size={30}
-      style={{ opacity: 0.5 }}
-    />
-  );
+  React.useLayoutEffect(() => {
+    if (!session?.sign) {
+      Storer.delete(SESSION_KEY).then(() => dispatch({ type: 'setLogOut' }));
+    }
+  }, [dispatch, session?.sign]);
 
   const Header = (
     <View>
-      <MainNav rightButton={RightButton} />
+      <MainNav
+        rightButton={
+          <MaterialCommunityIcons
+            onPress={() => navigation.navigate('Signs', { key: 'Sign' })}
+            name="swap-horizontal"
+            color={colors.text}
+            size={30}
+            style={{ opacity: 0.5 }}
+          />
+        }
+      />
       <View style={[styles.headerContainer]}>
         <Sign
           sign={session.sign}
@@ -151,7 +154,6 @@ function DailyScreen({ navigation }) {
       <SafeAreaView>
         <ScrollViewFadeFirst element={Header} height={200}>
           <View style={{ height: 20 }} />
-
           <ShowFromTop>
             <View
               style={[

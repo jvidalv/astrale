@@ -5,14 +5,13 @@ import { StyleSheet, View } from 'react-native';
 import {
   Caption,
   Subheading,
-  TouchableRipple,
-  useTheme,
+  TouchableRipple
 } from 'react-native-paper';
 
 import { Zodiac } from '../../svgs';
-import PlatformUtils from '../../utils/Platform';
+import PlatformUtils from '../../utils/platform';
 
-const _signs = {
+const signs = {
   Aquarius: Zodiac.Aquarius,
   Aries: Zodiac.Aries,
   Cancer: Zodiac.Cancer,
@@ -53,7 +52,7 @@ function Sign({
   styleTitle,
   styleSubtitle,
 }) {
-  const ParsedSign = _signs[sign];
+  const ParsedSign = signs[sign];
   const isAndroid = PlatformUtils.isAndroid;
   return (
     <TouchableRipple

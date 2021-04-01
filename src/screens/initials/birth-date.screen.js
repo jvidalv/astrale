@@ -5,20 +5,20 @@ import { StyleSheet, View } from 'react-native';
 import { Button, Headline, Surface, Text, useTheme } from 'react-native-paper';
 
 import { DefaultView } from '../../components/containers';
-import SpaceSky from '../../components/decorations/SpaceSky';
-import Sign from '../../components/zodiac/Sign';
-import { useGlobals } from '../../contexts/Global';
+import SpaceSky from '../../components/decorations/space-sky';
+import Sign from '../../components/zodiac/sign';
+import { useGlobals } from '../../contexts/global';
 import { Backgrounds } from '../../svgs';
 import Scorpio from '../../svgs/Scorpio';
 import { DateUtils, Platform } from '../../utils';
-import ZodiacCalculator from '../../utils/ZodiacCalculator';
+import ZodiacCalculator from '../../utils/zodiac-calculator';
 
 /**
  * @param navigation
  * @returns {*}
  * @constructor
  */
-function BirthDateScreen({ navigation, theme }) {
+function BirthDateScreen({ navigation }) {
   const [{ session }, dispatch] = useGlobals();
   const { colors } = useTheme();
   const [date, setDate] = React.useState(new Date(642449499000));

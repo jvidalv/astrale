@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
-import { useTheme } from 'react-native-paper';
 
-import PlatformUtils from '../../utils/Platform';
+import PlatformUtils from '../../utils/platform';
 
 /**
  * @param children
@@ -22,8 +21,9 @@ function DefaultScrollView({
   onScrollCallback,
 }) {
   const isAndroid = PlatformUtils.isAndroid;
-  const _onScroll = (event) =>
+  const onScroll = (event) =>
     onScrollCallback ? onScrollCallback(event) : null;
+
   return (
     <View style={{ flex: 1 }}>
       <KeyboardAvoidingView
@@ -40,7 +40,7 @@ function DefaultScrollView({
             },
             styleScrollView,
           ]}
-          onScroll={_onScroll}
+          onScroll={onScroll}
         >
           {children}
           <View style={{ height: isAndroid ? 25 : 50 }} />

@@ -5,7 +5,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
-import PlatformUtils from '../../utils/Platform';
+import PlatformUtils from '../../utils/platform';
 
 /**
  * @param navigation
@@ -17,11 +17,11 @@ import PlatformUtils from '../../utils/Platform';
 function Close({ style, position }) {
   const navigation = useNavigation();
   const { colors } = useTheme();
-  const _position = position === 'left' ? { left: 20 } : { right: 20 };
+  const innerPosition = position === 'left' ? { left: 20 } : { right: 20 };
   return PlatformUtils.isAndroid ? (
     <MaterialCommunityIcons
       onPress={() => navigation.goBack()}
-      style={[styles.container, _position]}
+      style={[styles.container, innerPosition]}
       name="close"
       color={colors.text}
       size={30}

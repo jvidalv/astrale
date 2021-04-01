@@ -2,7 +2,6 @@ import { BlurView } from 'expo-blur';
 import i18n from 'i18n-js';
 import React from 'react';
 import {
-  Alert,
   Image,
   Keyboard,
   ScrollView,
@@ -19,12 +18,10 @@ import {
   TextInput,
 } from 'react-native-paper';
 
-import Close from '../../components/navs/Close';
-import api_calls from '../../constants/apis';
-import { useGlobals } from '../../contexts/Global';
-import { fetcher } from '../../hooks/useFetch';
-import { useIsDark } from '../../hooks/useTheme';
-import PlatformUtils from '../../utils/Platform';
+import Close from '../../components/navs/close';
+import { useGlobals } from '../../contexts/global';
+import { useIsDark } from '../../hooks/use-theme';
+import PlatformUtils from '../../utils/platform';
 
 /**
  * @param route
@@ -33,17 +30,16 @@ import PlatformUtils from '../../utils/Platform';
  * @constructor
  */
 function AstrologerQuestionScreen({ route, navigation }) {
-  const [{}, dispatch] = useGlobals();
+  const dispatch = useGlobals()[1];
   const astrologist = route.params.astrologist;
-  const [setData] = React.useState({
+  const setData = React.useState({
     message: null,
     email: null,
     astrologer: astrologist.name,
-  });
-  const [disabled] = React.useState(false);
+  })[1];
   const isDark = useIsDark();
   const isAndroid = PlatformUtils.isAndroid;
-  const _handleProceed = async () => {
+  const handleProceed = () => {
     try {
       dispatch({ type: 'toggleLoader' });
     } catch {
@@ -92,11 +88,10 @@ function AstrologerQuestionScreen({ route, navigation }) {
           </View>
           <View style={{ marginHorizontal: 20, marginBottom: 20 }}>
             <Button
-              onPress={_handleProceed}
+              onPress={handleProceed}
               mode="contained"
               style={{ borderRadius: 20 }}
               icon="send"
-              disabled={disabled}
             >
               {i18n.t('Proceed')}
             </Button>

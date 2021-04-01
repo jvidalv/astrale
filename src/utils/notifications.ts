@@ -1,8 +1,6 @@
 import { Notifications } from 'expo';
 import * as Permissions from 'expo-permissions';
 
-import api_calls from '../constants/apis';
-
 /**
  * Push notification request
  */

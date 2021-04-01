@@ -10,14 +10,14 @@ import {
   useTheme,
 } from 'react-native-paper';
 
-import ShowFromTop from '../../components/animations/ShowFromTop';
-import SpaceSky from '../../components/decorations/SpaceSky';
-import MainNav from '../../components/navs/MainNav';
-import ShadowHeadline from '../../components/paper/ShadowHeadline';
-import TextBold from '../../components/paper/TextBold';
+import ShowFromTop from '../../components/animations/show-from-top';
+import SpaceSky from '../../components/decorations/space-sky';
+import MainNav from '../../components/navs/main-nav';
+import ShadowHeadline from '../../components/paper/shadow-headline';
+import TextBold from '../../components/paper/text-bold';
 import { Sign } from '../../components/zodiac';
 import { stale } from '../../constants/stale';
-import HoroscopeSigns from '../../constants/zodiac_signs';
+import HoroscopeSigns from '../../constants/zodiac-signs';
 import { Language } from '../../utils';
 
 /**
@@ -125,10 +125,10 @@ function CompatibilityScreen({ navigation }) {
   const [scRef, setScRef] = React.useState();
   const [selectedSigns, setSelectedSigns] = React.useState([]);
   const [compDetailsShow, setCompDetailsShow] = React.useState(false);
-  const _handleSignPress = (sign) => {
+  const handleSignPress = (sign) => {
     setSelectedSigns((selectedSigns) => [...selectedSigns, sign]);
   };
-  const _handleSignTopPress = () =>
+  const handleSignTopPress = () =>
     setSelectedSigns([]) || setCompDetailsShow(false);
   React.useEffect(() => {
     if (selectedSigns.length === 2) {
@@ -136,6 +136,7 @@ function CompatibilityScreen({ navigation }) {
       scRef.scrollTo({ y: 0 });
     }
   }, [selectedSigns]);
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <SpaceSky />
@@ -149,7 +150,7 @@ function CompatibilityScreen({ navigation }) {
         {selectedSigns[0] ? (
           <Sign
             sign={selectedSigns[0]}
-            onPress={_handleSignTopPress}
+            onPress={handleSignTopPress}
             showTitle={false}
             signHeight={100}
             signWidth={100}
@@ -175,7 +176,7 @@ function CompatibilityScreen({ navigation }) {
         </View>
         {selectedSigns[1] ? (
           <Sign
-            onPress={_handleSignTopPress}
+            onPress={handleSignTopPress}
             sign={selectedSigns[1]}
             showTitle={false}
             signHeight={100}
@@ -204,7 +205,7 @@ function CompatibilityScreen({ navigation }) {
         {compDetailsShow ? (
           <MatchContent sign1={selectedSigns[0]} sign2={selectedSigns[1]} />
         ) : (
-          <SignsContent onPress={_handleSignPress} />
+          <SignsContent onPress={handleSignPress} />
         )}
       </ScrollView>
     </SafeAreaView>

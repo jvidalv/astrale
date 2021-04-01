@@ -20,7 +20,7 @@ function Rotation({ children, rotate, style }) {
       duration: 250000,
       useNativeDriver: true,
     }).start();
-  }, [rotate]);
+  }, [rotate, spinAnim]);
 
   const spinInterpolate = spinAnim.interpolate({
     inputRange: [0, 1],

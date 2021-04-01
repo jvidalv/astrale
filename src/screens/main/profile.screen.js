@@ -14,16 +14,16 @@ import {
   useTheme,
 } from 'react-native-paper';
 
-import Close from '../../components/navs/Close';
+import Close from '../../components/navs/close';
 import { SESSION_KEY } from '../../constants/session';
-import { useGlobals } from '../../contexts/Global';
-import useRate from '../../hooks/useRate';
-import useShare from '../../hooks/useShare';
-import { useIsDark } from '../../hooks/useTheme';
+import { useGlobals } from '../../contexts/global';
+import useRate from '../../hooks/use-rate';
+import useShare from '../../hooks/use-share';
+import { useIsDark } from '../../hooks/use-theme';
 import { Backgrounds } from '../../svgs';
 import { DateUtils } from '../../utils';
-import PlatformUtils from '../../utils/Platform';
-import Storer from '../../utils/Storer';
+import PlatformUtils from '../../utils/platform';
+import Storer from '../../utils/storer';
 
 /**
  * @param navigation

@@ -3,7 +3,7 @@ import React from 'react';
 import { Dimensions, Image, ScrollView, StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-paper';
 
-import SpaceSky from '../../../components/decorations/SpaceSky';
+import SpaceSky from '../../../components/decorations/space-sky';
 
 /**
  * @param navigation

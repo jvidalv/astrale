@@ -19,7 +19,7 @@ function Fade({ children, show }) {
       duration: 500,
       useNativeDriver: true,
     }).start();
-  }, [show]);
+  }, [fadeAnim, show]);
 
   return (
     <Animated.View

@@ -5,17 +5,17 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
-import Close from '../../components/navs/Close';
-import ShadowHeadline from '../../components/paper/ShadowHeadline';
+import Close from '../../components/navs/close';
+import ShadowHeadline from '../../components/paper/shadow-headline';
 import { Sign } from '../../components/zodiac';
 import { SESSION_KEY } from '../../constants/session';
-import HoroscopeSigns, { HoroscopeDates } from '../../constants/zodiac_signs';
-import { useGlobals } from '../../contexts/Global';
-import { useIsDark } from '../../hooks/useTheme';
+import HoroscopeSigns, { HoroscopeDates } from '../../constants/zodiac-signs';
+import { useGlobals } from '../../contexts/global';
+import { useIsDark } from '../../hooks/use-theme';
 import { Backgrounds } from '../../svgs';
-import PlatformUtils from '../../utils/Platform';
-import Sleep from '../../utils/Sleep';
-import Storer from '../../utils/Storer';
+import PlatformUtils from '../../utils/platform';
+import Sleep from '../../utils/sleep';
+import Storer from '../../utils/storer';
 
 /**
  * @param navigation
@@ -30,7 +30,7 @@ function ZodiacScreen({ navigation }) {
   const locales = ['es', 'en'];
   const cut_locale = Localization.locale.substring(0, 2);
   const locale = locales.includes(cut_locale) ? cut_locale : 'en';
-  const _handleSignPress = async (sign) => {
+  const handleSignPress = async (sign) => {
     dispatch({
       type: 'setSession',
       fields: { sign },
@@ -62,7 +62,7 @@ function ZodiacScreen({ navigation }) {
             sign={sign}
             signHeight={65}
             signWidth={65}
-            onPress={() => _handleSignPress(sign)}
+            onPress={() => handleSignPress(sign)}
             style={{ marginBottom: 7, padding: 3 }}
             styleTitle={{ marginTop: 5 }}
             subtitle={HoroscopeDates[sign][locale]}

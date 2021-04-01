@@ -19,7 +19,7 @@ function Scanner({ start, style }) {
     }).start(() => {
       setIncrease(!increase);
     });
-  }, [increase]);
+  }, [fadeAnim, increase]);
 
   return (
     <View style={{ flex: 1, justifyContent: 'center' }}>

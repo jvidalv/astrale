@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Dimensions, Image, StyleSheet, View } from 'react-native';
 
-import { useIsDark } from '../../hooks/useTheme';
+import { useIsDark } from '../../hooks/use-theme';
 
 /**
  * @param style {object}

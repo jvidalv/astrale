@@ -7,15 +7,15 @@ import React from 'react';
 import { StatusBar, StyleSheet, View } from 'react-native';
 import { ActivityIndicator, Portal, Text, useTheme } from 'react-native-paper';
 
-import { useGlobals } from '../contexts/Global';
-import { useIsDark } from '../hooks/useTheme';
-import AstrologerQuestionScreen from '../screens/main/AstrologerQuestionScreen';
-import AstrologersScreen from '../screens/main/AstrologersScreen';
-import CompatibilityScreen from '../screens/main/CompatibilityScreen';
-import DailyScreen from '../screens/main/DailyScreen';
-import ProfileScreen from '../screens/main/ProfileScreen';
-import ZodiacScreen from '../screens/main/ZodiacScreen';
-import LearnStackNavigation from './LearnStackNavigation';
+import { useGlobals } from '../contexts/global';
+import { useIsDark } from '../hooks/use-theme';
+import AstrologersScreen from '../screens/main/astrologers.screen';
+import AstrologerQuestionScreen from '../screens/main/astrologuers-question.screen';
+import CompatibilityScreen from '../screens/main/compatibility.screen';
+import DailyScreen from '../screens/main/daily.screen';
+import ProfileScreen from '../screens/main/profile.screen';
+import ZodiacScreen from '../screens/main/zodiac.screen';
+import LearnStackNavigation from './learn-stack';
 
 const BarIcon = ({ color, size, name }) => {
   return (

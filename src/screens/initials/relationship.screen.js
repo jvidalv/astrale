@@ -5,8 +5,8 @@ import { Button, Headline, Text } from 'react-native-paper';
 import TouchableRipple from 'react-native-paper/src/components/TouchableRipple/index';
 
 import { DefaultView } from '../../components/containers';
-import SpaceSky from '../../components/decorations/SpaceSky';
-import { useGlobals } from '../../contexts/Global';
+import SpaceSky from '../../components/decorations/space-sky';
+import { useGlobals } from '../../contexts/global';
 import Cool from '../../svgs/Cool';
 import InLove from '../../svgs/InLove';
 import ItsDifficult from '../../svgs/ItsDifficult';

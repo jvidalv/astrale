@@ -1,12 +1,12 @@
 import i18n from 'i18n-js';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Button, Headline, Text, useTheme } from 'react-native-paper';
+import { Button, Headline, Text } from 'react-native-paper';
 import TouchableRipple from 'react-native-paper/src/components/TouchableRipple/index';
 
 import { DefaultView } from '../../components/containers';
-import SpaceSky from '../../components/decorations/SpaceSky';
-import { useGlobals } from '../../contexts/Global';
+import SpaceSky from '../../components/decorations/space-sky';
+import { useGlobals } from '../../contexts/global';
 import Female from '../../svgs/Female';
 import Leo from '../../svgs/Leo';
 import Male from '../../svgs/Male';

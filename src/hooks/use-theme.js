@@ -1,4 +1,4 @@
-import { useGlobals } from '../contexts/Global';
+import { useGlobals } from '../contexts/global';
 
 const THEME_DARK = 'dark';
 

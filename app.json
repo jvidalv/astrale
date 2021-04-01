@@ -5,10 +5,7 @@
     "version": "1.5.0",
     "description": "Discover what the future holds for you. Get an insight on what to expect for love, work, wellbeing and good fortune for today with Astrale app.",
     "privacy": "public",
-    "platforms": [
-      "ios",
-      "android"
-    ],
+    "platforms": ["ios", "android"],
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "primaryColor": "#151515",
@@ -17,9 +14,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#151515"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "scheme": "astrale",
     "ios": {
       "bundleIdentifier": "josep.astrale",

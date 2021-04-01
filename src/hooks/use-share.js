@@ -1,7 +1,7 @@
 import React from 'react';
 import { Share } from 'react-native';
 
-import PlatformUtils from '../utils/Platform';
+import PlatformUtils from '../utils/platform';
 
 /**
  * @param message {string}

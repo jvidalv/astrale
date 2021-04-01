@@ -3,13 +3,13 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Subheading, useTheme } from 'react-native-paper';
 
-import Rotation from '../../components/animations/Rotation';
+import Rotation from '../../components/animations/rotation';
 import { DefaultView } from '../../components/containers';
-import SpaceSky from '../../components/decorations/SpaceSky';
+import SpaceSky from '../../components/decorations/space-sky';
 import { SESSION_KEY } from '../../constants/session';
-import { useGlobals } from '../../contexts/Global';
+import { useGlobals } from '../../contexts/global';
 import SolarSystem from '../../svgs/SolarSystem';
-import Storer from '../../utils/Storer';
+import Storer from '../../utils/storer';
 
 /**
  * @param navigation

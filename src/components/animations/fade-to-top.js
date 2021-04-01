@@ -21,7 +21,7 @@ function FadeToTop({ children, fadeToTop, initialHeight, finalHeight }) {
       duration: 500,
       useNativeDriver: true,
     }).start();
-  }, [fadeToTop]);
+  }, [fadeAnim, fadeToTop]);
 
   return (
     <Animated.View

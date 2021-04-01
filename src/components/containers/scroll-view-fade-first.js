@@ -3,15 +3,11 @@ import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 
 /**
- * @param children
- * @param background {string}
- * @param style {object}
- * @returns {*}
  * @constructor
  */
 function ScrollViewFadeFirst({ children, element, height, style }) {
   const [opacity, setOpacity] = React.useState(1);
-  const _handleScroll = (event) => {
+  const handleScroll = (event) => {
     const offsetY = event.nativeEvent.contentOffset.y;
     const controlledOffset = offsetY < 0 ? 0 : offsetY;
     const smallerHeight = controlledOffset ? height * 0.7 : height;
@@ -27,7 +23,7 @@ function ScrollViewFadeFirst({ children, element, height, style }) {
       style={style}
       stickyHeaderIndices={[0]}
       scrollEventThrottle={2}
-      onScroll={_handleScroll}
+      onScroll={handleScroll}
     >
       <View style={{ opacity }}>
         <View style={[StyleSheet.absoluteFill, { height, zIndex: 10 }]}>

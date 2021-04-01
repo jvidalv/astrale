@@ -1,5 +1,5 @@
-import CustomInput from './CustomInput';
-import ShadowHeadline from './ShadowHeadline';
-import TextBold from './TextBold';
+import CustomInput from './custom-input';
+import ShadowHeadline from './shadow-headline';
+import TextBold from './text-bold';
 
 export { ShadowHeadline, TextBold, CustomInput };
