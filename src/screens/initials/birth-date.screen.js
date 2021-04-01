@@ -86,7 +86,6 @@ function BirthDateScreen({ navigation }) {
             on
             minimumDate={new Date(1930, 0, 0)}
             maximumDate={new Date(2010, 0, 0)}
-            style={{ height: 50 }}
             textColor="#ffffff"
           />
         )}
@@ -146,7 +145,6 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 5,
     ...(Platform.isIos ? { paddingTop: 0 } : {}),
-    ...(Platform.isIos ? { backgroundColor: '#FFFFFFB3' } : {}),
   },
   buttonContainer: {
     flex: 1,
