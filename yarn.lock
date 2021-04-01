@@ -2542,10 +2542,22 @@
   resolved "https://registry.yarnpkg.com/@types/eslint-visitor-keys/-/eslint-visitor-keys-1.0.0.tgz#1ee30d79544ca84d68d4b3cdb0af4f205663dd2d"
   integrity sha512-OCutwjDZ4aFS6PB1UZ988C4YgwlBHJd6wCeQqaLdmadZ/7e+w79+hbMUFC1QXDNCmdyoRfAFdm0RypzwR+Qpag==
 
+"@types/expo-localization@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@types/expo-localization/-/expo-localization-3.0.0.tgz#43ca211954494064f25156e085f698b8bbd640c6"
+  integrity sha512-2VmGFUIixIeB4lrzqhCl2bDFvePglVZqtMQ8XAozItiTtGilQfQB6g7uls5hQxswmUgSz+z9gN/x57aixUDMsA==
+  dependencies:
+    expo-localization "*"
+
 "@types/hammerjs@^2.0.36":
   version "2.0.39"
   resolved "https://registry.yarnpkg.com/@types/hammerjs/-/hammerjs-2.0.39.tgz#4be64bbacf3813c79c0dab895c6b0fdc7d5e513f"
   integrity sha512-lYR2Y/tV2ujpk/WyUc7S0VLI0a9hrtVIN9EwnrNo5oSEJI2cK2/XrgwOQmXLL3eTulOESvh9qP6si9+DWM9cOA==
+
+"@types/i18n-js@^3.8.0":
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/@types/i18n-js/-/i18n-js-3.8.0.tgz#686d0a5c39fd6b6e45c4c5d1341fac8d52f1781f"
+  integrity sha512-0Hfr0sCpeP38C3xMqbaxgeJmFx99GCqKYyiKCtIIxa3tmFHwS94vcAwynLk+uDauRPPHMq/swA8z78fR8YIb+Q==
 
 "@types/istanbul-lib-coverage@*", "@types/istanbul-lib-coverage@^2.0.0":
   version "2.0.3"
@@ -2594,10 +2606,10 @@
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.3.tgz#2ab0d5da2e5815f94b0b9d4b95d1e5f243ab2ca7"
   integrity sha512-KfRL3PuHmqQLOG+2tGpRO26Ctg+Cq1E01D2DMriKEATHgWLfeNDmq9e29Q9WIky0dQ3NPkd1mzYH8Lm936Z9qw==
 
-"@types/react-native@~0.63.2":
-  version "0.63.50"
-  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.63.50.tgz#cea13fb272983ec585179807d0cb4f84db0952f6"
-  integrity sha512-jWxsHDG/AHEaOrqqcI0Cth0WdPsgyaJ1nel5pS0uCzpt2RjwtkvEUAfu39paPr4i+9oUUgbJq3vkVXaj7n8RdQ==
+"@types/react-native@^0.64.2":
+  version "0.64.2"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.64.2.tgz#2e344aeec0b4eb21fb9eaa0ed8973245c5601d56"
+  integrity sha512-w2y04h+GVLY+OMlFSmq4adPuS51XtEp1yUr83OvXf+moMQ4zDG1Q07HhyvYDXdc+BSS9ANHySBqVCz0hFxli9Q==
   dependencies:
     "@types/react" "*"
 
@@ -2609,13 +2621,19 @@
     "@types/prop-types" "*"
     csstype "^3.0.2"
 
-"@types/react@~16.9.35":
-  version "16.9.56"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.56.tgz#ea25847b53c5bec064933095fc366b1462e2adf0"
-  integrity sha512-gIkl4J44G/qxbuC6r2Xh+D3CGZpJ+NdWTItAPmZbR5mUS+JQ8Zvzpl0ea5qT/ZT3ZNTUcDKUVqV3xBE8wv/DyQ==
+"@types/react@^17.0.3":
+  version "17.0.3"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.3.tgz#ba6e215368501ac3826951eef2904574c262cc79"
+  integrity sha512-wYOUxIgs2HZZ0ACNiIayItyluADNbONl7kt8lkLjVK8IitMH5QMyAh75Fwhmo37r1m7L2JaFj03sIfxBVDvRAg==
   dependencies:
     "@types/prop-types" "*"
+    "@types/scheduler" "*"
     csstype "^3.0.2"
+
+"@types/scheduler@*":
+  version "0.16.1"
+  resolved "https://registry.yarnpkg.com/@types/scheduler/-/scheduler-0.16.1.tgz#18845205e86ff0038517aab7a18a62a6b9f71275"
+  integrity sha512-EaCxbanVeyxDRTQBkdLb3Bvl/HK7PBK6UJjsSixB0iHKoWxE5uu2Q/DgtpOhPIojN0Zl1whvOd7PoHs2P0s5eA==
 
 "@types/stack-utils@^1.0.1":
   version "1.0.1"
@@ -4340,6 +4358,13 @@ expo-local-authentication@~9.5.0:
   integrity sha512-d7T8cfXNig8rpyiw4u/2vHj2zhtThOTxrLUwx4GqFxDYqFyOJ5q5Q3lXFd10Tr5paMQvnskS0fAj70aG7Eb76g==
   dependencies:
     invariant "^2.2.4"
+
+expo-localization@*:
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/expo-localization/-/expo-localization-10.0.0.tgz#e819fb2d999a6d6e57bd8e85f1abd70c8f925833"
+  integrity sha512-xCLEwJ0TCrlIzzE/udji3zXWAwRR9CKc75u02Umzj0t9MLm1ALlrote+Tb3lPN5IsoLBCK/F8n56lpWwE9U0Tg==
+  dependencies:
+    rtl-detect "^1.0.2"
 
 expo-localization@~9.1.0:
   version "9.1.0"
