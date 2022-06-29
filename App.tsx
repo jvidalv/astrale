@@ -10,9 +10,6 @@ i18n.translations = Translations;
 i18n.locale = Localization.locale;
 i18n.fallbacks = true;
 
-/**
- * @constructor
- */
 function App() {
   return (
     <StateProvider initialState={initialState} reducer={reducer}>

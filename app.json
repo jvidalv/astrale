@@ -2,8 +2,8 @@
   "expo": {
     "name": "Astrale",
     "slug": "astrale",
-    "version": "1.5.0",
-    "description": "Discover what the future holds for you. Get an insight on what to expect for love, work, wellbeing and good fortune for today with Astrale app.",
+    "version": "1.0.0",
+    "description": "Discover what the future holds for you. Get an insight on what to expect for love, work, well-being and good fortune for today with Astrale app.",
     "privacy": "public",
     "platforms": ["ios", "android"],
     "orientation": "portrait",
@@ -17,8 +17,8 @@
     "assetBundlePatterns": ["**/*"],
     "scheme": "astrale",
     "ios": {
-      "bundleIdentifier": "josep.astrale",
-      "buildNumber": "1.0.2",
+      "bundleIdentifier": "x.astrale",
+      "buildNumber": "1.0.0",
       "supportsTablet": false,
       "icon": "./assets/images/icon.png",
       "infoPlist": {
@@ -26,7 +26,7 @@
       }
     },
     "android": {
-      "package": "josep.astrale",
+      "package": "x.astrale",
       "versionCode": 4
     },
     "androidStatusBar": {

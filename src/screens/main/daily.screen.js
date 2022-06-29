@@ -22,7 +22,6 @@ import months from '../../constants/months';
 import { SESSION_KEY } from '../../constants/session';
 import { useGlobals } from '../../contexts/global';
 import { Language } from '../../utils';
-import registerForPushNotificationsAsync from '../../utils/notifications';
 import Storer from '../../utils/storer';
 
 /**
@@ -63,7 +62,7 @@ const ProgressItem = ({ text, percent, style }) => {
   return (
     <View style={[{ flex: 1 }, style]}>
       <Text style={ProgressItemStyles.text}>{text}</Text>
-      <ProgressBar style={ProgressItemStyles.bar} progress={percent / 100} st />
+      <ProgressBar style={ProgressItemStyles.bar} progress={percent / 100} />
       <Text theme={{ colors: { text: colors.primary } }}>{percent}%</Text>
     </View>
   );
@@ -94,18 +93,6 @@ function DailyScreen({ navigation }) {
   );
   const data = daily[dataIndex !== -1 ? dataIndex : 0];
   const d = new Date();
-
-  React.useEffect(() => {
-    if (!session.notifications) {
-      registerForPushNotificationsAsync(session).then((res) => {
-        dispatch({
-          type: 'setSession',
-          fields: { notifications: res },
-        });
-        Storer.set(SESSION_KEY, { ...session, notifications: res });
-      });
-    }
-  }, [dispatch, session]);
 
   React.useLayoutEffect(() => {
     if (!session?.sign) {

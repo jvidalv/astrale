@@ -4,11 +4,15 @@
     "module": "commonjs",
     "allowSyntheticDefaultImports": true,
     "jsx": "react-native",
-    "lib": ["dom", "esnext"],
+    "lib": [
+      "dom",
+      "esnext"
+    ],
     "moduleResolution": "node",
     "noEmit": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "strict": false
-  }
+  },
+  "extends": "expo/tsconfig.base"
 }
